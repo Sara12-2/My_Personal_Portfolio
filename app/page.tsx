@@ -9,7 +9,8 @@ import Projects from './components/sections/Projects'
 import Experience from './components/sections/Experience'
 import Education from './components/sections/Education'
 import Achievements from './components/sections/Achievements'
-import Certifications from './components/sections/Certifications'  // ← ✅ Import
+import Certifications from './components/sections/Certifications'
+import Badges from './components/sections/Badges'           // ← ✅ Import Badges
 import GitHubActivity from './components/sections/GitHubActivity'
 import Testimonials from './components/sections/Testimonials'
 import Faq from './components/sections/Faq'
@@ -29,7 +30,8 @@ export default function Home() {
       <Experience />
       <Education />
       <Achievements />
-      <Certifications />        {/* ← ✅ Add this line */}
+      <Certifications />
+      <Badges />                    {/* ← ✅ Add Badges section */}
       <GitHubActivity />
       <Testimonials />
       <Faq />

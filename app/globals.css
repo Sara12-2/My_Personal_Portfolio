@@ -325,12 +325,12 @@ button[class*="text-dark"] {
   color: #FFFFFF !important;
 }
 
-/* Override default link colors */
-a {
+/* ✅ FIX: Only apply to normal links, not buttons */
+a:not([class*="bg-"]):not([class*="btn-"]) {
   color: #8B9A6B !important;
 }
 
-a:hover {
+a:not([class*="bg-"]):not([class*="btn-"]):hover {
   color: #6B8A4A !important;
 }
 
