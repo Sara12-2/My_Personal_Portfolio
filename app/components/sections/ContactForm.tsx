@@ -1,3 +1,4 @@
+// app/components/sections/ContactForm.tsx
 'use client'
 
 import { useState } from 'react'
@@ -29,22 +30,40 @@ export default function ContactForm() {
     message: '',
   })
 
+  // ✅ Formspree - No backend needed, just paste your Form ID
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    toast.success('Message sent successfully! I\'ll get back to you soon.')
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      projectType: '',
-      budget: '',
-      timeline: '',
-      message: '',
-    })
-    setLoading(false)
+
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        toast.success('Message sent successfully! I\'ll get back to you soon.')
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        })
+      } else {
+        toast.error('Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -119,7 +138,7 @@ export default function ContactForm() {
 
                   {/* Phone */}
                   <motion.a
-                    href="tel:+92 316 4764391"
+                    href="tel:+923164764391"
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
                   >
@@ -147,7 +166,7 @@ export default function ContactForm() {
                   </motion.div>
                 </div>
 
-                {/* Social Links - Using react-icons */}
+                {/* Social Links */}
                 <div className="mt-6 pt-6 border-t border-[#8B9A6B]/10">
                   <p className="text-xs text-[#4A4A4A]/60 mb-3">Connect with me</p>
                   <div className="flex gap-3">
