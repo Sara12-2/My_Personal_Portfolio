@@ -3,12 +3,13 @@
 import Navigation from './components/sections/Navigation'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
-import Services from './components/sections/Services'      // ← Import
+import Services from './components/sections/Services'
 import Skills from './components/sections/Skill'
 import Projects from './components/sections/Projects'
 import Experience from './components/sections/Experience'
 import Education from './components/sections/Education'
 import Achievements from './components/sections/Achievements'
+import Certifications from './components/sections/Certifications'  // ← ✅ Import
 import GitHubActivity from './components/sections/GitHubActivity'
 import Testimonials from './components/sections/Testimonials'
 import Faq from './components/sections/Faq'
@@ -22,12 +23,13 @@ export default function Home() {
       <Navigation />
       <Hero />
       <About />
-      <Services />           {/* ← Render */}
+      <Services />
       <Skills />
       <Projects />
       <Experience />
       <Education />
       <Achievements />
+      <Certifications />        {/* ← ✅ Add this line */}
       <GitHubActivity />
       <Testimonials />
       <Faq />

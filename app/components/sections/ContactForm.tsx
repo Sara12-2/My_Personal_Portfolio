@@ -2,7 +2,18 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Sparkles, Clock, Briefcase, User, Building } from 'lucide-react'
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Send, 
+  Sparkles, 
+  Clock, 
+  Briefcase, 
+  User, 
+  Building
+} from 'lucide-react'
+import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 export default function ContactForm() {
@@ -42,9 +53,10 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
-      {/* Decorative Elements */}
+      {/* Olive Theme Decorations */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#8B9A6B]/3 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -75,7 +87,7 @@ export default function ContactForm() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-12">
+          <div className="grid lg:grid-cols-5 gap-8">
             {/* LEFT - Contact Info */}
             <div className="lg:col-span-2 space-y-6">
               <motion.div
@@ -83,37 +95,81 @@ export default function ContactForm() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl hover:shadow-[#8B9A6B]/5 transition-all duration-300"
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-[#2C2C2C] mb-6 flex items-center gap-2">
                   <span className="text-[#8B9A6B]">✦</span>
                   Contact Info
                 </h3>
-                <div className="space-y-5">
-                  {[
-                    { icon: Mail, label: 'Email', value: 'sara@example.com', href: 'mailto:sara@example.com' },
-                    { icon: Phone, label: 'Phone', value: '+92 300 1234567', href: 'tel:+923001234567' },
-                    { icon: MapPin, label: 'Location', value: 'Karachi, Pakistan', href: '#' },
-                  ].map((item, index) => (
-                    <motion.a
-                      key={index}
-                      href={item.href}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ x: 5 }}
-                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
-                    >
-                      <div className="p-3 bg-[#8B9A6B]/10 rounded-xl group-hover:bg-[#8B9A6B] transition-all duration-300">
-                        <item.icon className="w-5 h-5 text-[#8B9A6B] group-hover:text-white transition-all duration-300" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-[#4A4A4A]/60">{item.label}</p>
-                        <p className="text-sm font-medium text-[#2C2C2C]">{item.value}</p>
-                      </div>
-                    </motion.a>
-                  ))}
+                <div className="space-y-4">
+                  {/* Email */}
+                  <motion.a
+                    href="mailto:saramanzoor76@gmail.com"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
+                  >
+                    <div className="p-3 bg-[#8B9A6B]/10 rounded-xl group-hover:bg-[#8B9A6B] transition-all duration-300">
+                      <Mail className="w-5 h-5 text-[#8B9A6B] group-hover:text-white transition-all duration-300" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#4A4A4A]/60">Email</p>
+                      <p className="text-sm font-medium text-[#2C2C2C]">saramanzoor76@gmail.com</p>
+                    </div>
+                  </motion.a>
+
+                  {/* Phone */}
+                  <motion.a
+                    href="tel:+92 316 4764391"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
+                  >
+                    <div className="p-3 bg-[#8B9A6B]/10 rounded-xl group-hover:bg-[#8B9A6B] transition-all duration-300">
+                      <Phone className="w-5 h-5 text-[#8B9A6B] group-hover:text-white transition-all duration-300" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#4A4A4A]/60">Phone</p>
+                      <p className="text-sm font-medium text-[#2C2C2C]">+92 316 4764391</p>
+                    </div>
+                  </motion.a>
+
+                  {/* Location */}
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
+                  >
+                    <div className="p-3 bg-[#8B9A6B]/10 rounded-xl group-hover:bg-[#8B9A6B] transition-all duration-300">
+                      <MapPin className="w-5 h-5 text-[#8B9A6B] group-hover:text-white transition-all duration-300" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#4A4A4A]/60">Location</p>
+                      <p className="text-sm font-medium text-[#2C2C2C]">Layyah, Punjab, Pakistan</p>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Social Links - Using react-icons */}
+                <div className="mt-6 pt-6 border-t border-[#8B9A6B]/10">
+                  <p className="text-xs text-[#4A4A4A]/60 mb-3">Connect with me</p>
+                  <div className="flex gap-3">
+                    {[
+                      { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub' },
+                      { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn' },
+                      { icon: FaTwitter, href: 'https://twitter.com/', label: 'Twitter' },
+                      { icon: FaInstagram, href: 'https://instagram.com/', label: 'Instagram' },
+                    ].map((social, i) => (
+                      <motion.a
+                        key={i}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -3, scale: 1.05 }}
+                        className="p-2.5 bg-[#8B9A6B]/10 rounded-xl hover:bg-[#8B9A6B] transition-all duration-300 group"
+                        aria-label={social.label}
+                      >
+                        <social.icon className="w-4 h-4 text-[#8B9A6B] group-hover:text-white transition-all duration-300" />
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
 
@@ -123,7 +179,7 @@ export default function ContactForm() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl hover:shadow-[#8B9A6B]/5 transition-all duration-300"
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-[#2C2C2C] mb-4 flex items-center gap-2">
                   <Clock className="w-5 h-5 text-[#8B9A6B]" />
@@ -154,7 +210,7 @@ export default function ContactForm() {
               viewport={{ once: true }}
               className="lg:col-span-3"
             >
-              <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl hover:shadow-[#8B9A6B]/5 transition-all duration-300">
+              <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />

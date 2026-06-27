@@ -1,53 +1,37 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { 
-  Star, 
-  GitFork, 
-  Users, 
-  Code2, 
-  TrendingUp,
-  Calendar,
-  Sparkles
-} from 'lucide-react'
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
+import { Sparkles, GitFork, Star, Users } from 'lucide-react';
 
-const githubStats = {
-  username: 'Sara12-2',
-  totalRepos: 25,
-  totalStars: 120,
-  totalForks: 45,
-  followers: 30,
-  contributions: 856,
-  topLanguages: [
-    { name: 'TypeScript', percentage: 40, color: '#3178C6' },
-    { name: 'Python', percentage: 30, color: '#3776AB' },
-    { name: 'JavaScript', percentage: 20, color: '#F7DF1E' },
-    { name: 'HTML/CSS', percentage: 10, color: '#E34F26' },
-  ],
-  contributionDays: [
-    { day: 'Mon', count: 8 },
-    { day: 'Tue', count: 12 },
-    { day: 'Wed', count: 7 },
-    { day: 'Thu', count: 15 },
-    { day: 'Fri', count: 10 },
-    { day: 'Sat', count: 4 },
-    { day: 'Sun', count: 3 },
-  ],
-  topRepos: [
-    { name: 'ai-chatbot', stars: 45, language: 'TypeScript', description: 'AI-powered chatbot with OpenAI' },
-    { name: 'portfolio-website', stars: 32, language: 'Next.js', description: 'Modern portfolio website' },
-    { name: 'ml-models', stars: 28, language: 'Python', description: 'Machine learning models collection' },
-  ],
-}
+// ✅ Dynamic import with SSR disabled
+const GitHubCalendar = dynamic(
+  () => import('react-github-calendar').then((mod) => mod.GitHubCalendar),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex justify-center items-center py-8">
+        <div className="w-8 h-8 border-4 border-[#8B9A6B] border-t-transparent rounded-full animate-spin" />
+      </div>
+    ),
+  }
+);
 
 export default function GitHubActivity() {
-  const maxContributions = Math.max(...githubStats.contributionDays.map(d => d.count))
+  const username = 'Sara12-2';
+
+  // ✅ Olive theme colors
+  const oliveTheme = {
+    light: ['#ebedf0', '#C5D4B5', '#A8B89A', '#8B9A6B', '#6B8A4A'],
+    dark: ['#2d333b', '#4A6B2A', '#5A7B3A', '#8B9A6B', '#6B8A4A'],
+  };
 
   return (
-    <section id="github" className="py-20 bg-[#F5F5F0] relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+    <section id="github" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
+      {/* Olive Theme Decorations */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -57,7 +41,7 @@ export default function GitHubActivity() {
           viewport={{ once: true }}
         >
           {/* Section Header */}
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -65,179 +49,106 @@ export default function GitHubActivity() {
               viewport={{ once: true }}
               className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full text-sm font-medium text-[#8B9A6B] mb-4"
             >
-              <Code2 className="w-4 h-4" />
-              Open Source
+              <Sparkles className="w-4 h-4" />
+              GitHub Activity
             </motion.span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2C2C2C]">
-              GitHub <span className="text-[#8B9A6B]">Activity</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#2C2C2C]">
+              Code <span className="text-[#8B9A6B]">Contributions</span>
             </h2>
-            <div className="w-16 h-1 bg-[#8B9A6B] mx-auto mt-3 rounded-full" />
-            <p className="text-[#4A4A4A] mt-3 max-w-2xl mx-auto text-sm">
-              My open source contributions and coding activity
-            </p>
+            <div className="w-20 h-1 bg-[#8B9A6B] mx-auto mt-4 rounded-full" />
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
-            {[
-              { label: 'Repos', value: githubStats.totalRepos, icon: Code2 },
-              { label: 'Stars', value: githubStats.totalStars, icon: Star },
-              { label: 'Forks', value: githubStats.totalForks, icon: GitFork },
-              { label: 'Followers', value: githubStats.followers, icon: Users },
-              { label: 'Contributions', value: githubStats.contributions, icon: TrendingUp },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.06 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -3 }}
-                className="bg-white rounded-xl p-4 text-center border border-[#8B9A6B]/10 shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <div className="inline-flex p-2 rounded-lg bg-[#8B9A6B]/10 mb-2">
-                  <stat.icon className="w-4 h-4 text-[#8B9A6B]" />
-                </div>
-                <div className="text-xl font-bold text-[#2C2C2C]">{stat.value}</div>
-                <div className="text-[10px] uppercase tracking-wide text-[#4A4A4A]/70">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Left Column - Top Languages */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-white rounded-xl p-6 border border-[#8B9A6B]/10 shadow-sm hover:shadow-md transition-all duration-300">
-                <h3 className="text-sm font-bold text-[#2C2C2C] mb-5 flex items-center gap-2">
-                  <Code2 className="w-4 h-4 text-[#8B9A6B]" />
-                  Top Languages
+          {/* Calendar */}
+          <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl transition-all duration-500">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-lg font-bold text-[#2C2C2C]">
+                  {username}
                 </h3>
-                <div className="space-y-3">
-                  {githubStats.topLanguages.map((lang) => (
-                    <div key={lang.name}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="text-[#2C2C2C]">{lang.name}</span>
-                        <span className="text-[#4A4A4A]">{lang.percentage}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-[#F5F5F0] rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${lang.percentage}%` }}
-                          transition={{ duration: 1, delay: 0.2 }}
-                          viewport={{ once: true }}
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: lang.color }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-sm text-[#4A4A4A]">
+                  Contribution Graph · {new Date().getFullYear()}
+                </p>
               </div>
-            </motion.div>
-
-            {/* Right Column */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Contribution Chart */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 border border-[#8B9A6B]/10 shadow-sm hover:shadow-md transition-all duration-300"
+              <a
+                href={`https://github.com/${username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[#8B9A6B] hover:text-[#6B7A5B] font-medium inline-flex items-center gap-1.5"
               >
-                <h3 className="text-sm font-bold text-[#2C2C2C] mb-5 flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-[#8B9A6B]" />
-                  Weekly Activity
-                </h3>
-                <div className="flex items-end justify-between gap-2 h-28">
-                  {githubStats.contributionDays.map((day) => (
-                    <div key={day.day} className="flex-1 flex flex-col items-center gap-1.5">
-                      <motion.div
-                        initial={{ height: 0 }}
-                        whileInView={{ height: `${(day.count / maxContributions) * 100}%` }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        viewport={{ once: true }}
-                        className="w-full max-w-8 bg-[#8B9A6B] rounded-md transition-all duration-300"
-                        style={{ height: `${(day.count / maxContributions) * 100}%` }}
-                      />
-                      <span className="text-[10px] text-[#4A4A4A]">{day.day}</span>
-                      <span className="text-[10px] font-medium text-[#8B9A6B]">{day.count}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                View Profile →
+              </a>
+            </div>
 
-              {/* Top Repositories */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 border border-[#8B9A6B]/10 shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <h3 className="text-sm font-bold text-[#2C2C2C] mb-4 flex items-center gap-2">
-                  <Star className="w-4 h-4 text-[#8B9A6B]" />
-                  Top Repositories
-                </h3>
-                <div className="space-y-2.5">
-                  {githubStats.topRepos.map((repo, index) => (
-                    <motion.div
-                      key={repo.name}
-                      initial={{ opacity: 0, x: 15 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.08 }}
-                      viewport={{ once: true }}
-                      className="flex items-center justify-between p-3 rounded-lg bg-[#F8F8F5] border border-[#8B9A6B]/5 hover:border-[#8B9A6B]/20 transition-all duration-300"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-[#2C2C2C] truncate">{repo.name}</span>
-                          <span className="text-[10px] px-2 py-0.5 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full flex-shrink-0">
-                            {repo.language}
-                          </span>
-                        </div>
-                        <p className="text-xs text-[#4A4A4A] truncate">{repo.description}</p>
-                      </div>
-                      <div className="flex items-center gap-1 text-xs text-yellow-500 flex-shrink-0 ml-2">
-                        <Star className="w-3.5 h-3.5 fill-yellow-400" />
-                        <span>{repo.stars}</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+            {/* GitHub Calendar - Only renders on client */}
+            <div className="flex justify-center overflow-x-auto">
+              <GitHubCalendar
+                username={username}
+                blockSize={12}
+                blockMargin={4}
+                fontSize={14}
+                theme={oliveTheme}
+                loading={false}
+              />
+            </div>
+
+            {/* Quick Stats */}
+            <div className="mt-6 pt-4 border-t border-[#8B9A6B]/10 grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-xl font-bold text-[#8B9A6B]">30+</div>
+                <div className="text-xs text-[#4A4A4A]">Public Repos</div>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-[#8B9A6B]">50+</div>
+                <div className="text-xs text-[#4A4A4A]">Total Contributions</div>
+              </div>
+              <div>
+                <a
+                  href="https://github.com/Sara12-2?tab=repositories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-[#8B9A6B] hover:text-[#6B7A5B] font-medium inline-flex items-center gap-1"
+                >
+                  Explore Repos →
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Bottom CTA */}
+          {/* GitHub Profile Card */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-center mt-10"
+            className="mt-8 max-w-4xl mx-auto"
           >
-            <a
-              href={`https://github.com/${githubStats.username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white rounded-lg transition-all duration-300 font-medium shadow-md shadow-[#8B9A6B]/20 hover:shadow-lg text-sm"
-            >
-              <Code2 className="w-4 h-4" />
-              View All on GitHub
-              <span className="text-xs opacity-70">→</span>
-            </a>
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#8B9A6B]/10 shadow-lg">
+              <div className="flex flex-wrap items-center gap-6">
+                <img
+                  src="/images/profile.jpg"
+                  alt="Sara Manzoor"
+                  className="w-20 h-20 rounded-full border-4 border-[#8B9A6B]/20 object-cover"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-[#2C2C2C]">Sara Manzoor</h3>
+                  <p className="text-sm text-[#4A4A4A]">COO @ DevHatch Labs | ML & Full Stack Developer</p>
+                  <div className="flex flex-wrap gap-3 mt-2 text-sm text-[#4A4A4A]">
+                    <span className="flex items-center gap-1">
+                      <GitFork className="w-4 h-4 text-[#8B9A6B]" /> 10+ forks
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-[#8B9A6B]" /> 15+ stars
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="w-4 h-4 text-[#8B9A6B]" /> 10+ followers
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

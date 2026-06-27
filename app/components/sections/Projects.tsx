@@ -26,12 +26,14 @@ import {
   Mail,
   Image,
   Server,
-  Eye
+  Eye,
+  Users,
+  TreePine
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 const projects = [
-  // ============ DASHBOARDS ============
+  // ============ WEB APPS (AFYNIX DIGITAL) ============
   {
     id: 1,
     title: 'AURUM Finance Dashboard',
@@ -56,8 +58,6 @@ const projects = [
     icon: Calendar,
     color: '#1E90FF',
   },
-
-  // ============ LANDING PAGES ============
   {
     id: 3,
     title: 'LuxEstate — Real Estate Landing Page',
@@ -106,8 +106,6 @@ const projects = [
     icon: ShoppingBag,
     color: '#8B5CF6',
   },
-
-  // ============ OTHER WEB APPS ============
   {
     id: 7,
     title: 'Nimbus Weather Dashboard',
@@ -171,10 +169,10 @@ const projects = [
     color: '#8B5CF6',
   },
 
-  // ============ AI/ML PROJECTS ============
+  // ============ AI/ML PROJECTS (ELEVVO PATHWAYS) ============
   {
     id: 12,
-    title: 'Softtec 2026 ML Competition – High-Cost Patient Prediction',
+    title: 'Softtec 2026 ML Competition — High-Cost Patient Prediction',
     description: 'Binary classification model predicting healthcare members with high medical costs (>$30,000) using historical administrative data and ensemble learning (LightGBM + XGBoost).',
     category: 'ai',
     tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn', 'Pandas'],
@@ -184,9 +182,8 @@ const projects = [
     icon: Brain,
     color: '#8B9A6B',
   },
-  // ============ AI/ML PROJECTS (Add this project) ============
   {
-    id: 26,
+    id: 13,
     title: 'House Price Prediction — Kaggle Competition',
     description: 'Advanced regression model predicting residential house sale prices using XGBoost. Achieved RMSLE 0.13710 and Global Rank #2,199 on Kaggle. Features 79 variables and engineered "TotalSF" feature.',
     category: 'ai',
@@ -198,7 +195,7 @@ const projects = [
     color: '#8B9A6B',
   },
   {
-    id: 13,
+    id: 14,
     title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
     description: 'Top 10 hackathon project — Bilingual AI assistant for University of Layyah with Groq Llama 3, Flask, MySQL, and voice support. Built for students, applicants, and visitors.',
     category: 'ai',
@@ -210,7 +207,7 @@ const projects = [
     color: '#8B5CF6',
   },
   {
-    id: 14,
+    id: 15,
     title: 'ASL Sign Language Recognition',
     description: 'Deep learning CNN model for American Sign Language (ASL) hand sign recognition. Includes data preprocessing, augmentation, model training, and Tkinter GUI for image upload predictions.',
     category: 'ai',
@@ -222,7 +219,7 @@ const projects = [
     color: '#1E90FF',
   },
   {
-    id: 15,
+    id: 16,
     title: 'AI-Powered Resume Screening System',
     description: 'NLP-based resume classification system using deep learning. Automatically categorizes resumes into job categories with TF-IDF vectorization, Keras model, and Streamlit dashboard.',
     category: 'ai',
@@ -234,7 +231,7 @@ const projects = [
     color: '#2ECC71',
   },
   {
-    id: 16,
+    id: 17,
     title: 'Smart Retail Shelf Monitoring with YOLOv8',
     description: 'Real-time retail shelf monitoring system using YOLOv8 object detection. Detects products in video feed, counts them, and provides low-stock alerts via Tkinter GUI.',
     category: 'ai',
@@ -246,7 +243,7 @@ const projects = [
     color: '#F97316',
   },
   {
-    id: 17,
+    id: 18,
     title: 'Handwritten Digit Classifier (CNN-based)',
     description: 'Real-time digit recognition system using Convolutional Neural Networks trained on MNIST dataset. Deployed with Streamlit for drawing and image upload predictions.',
     category: 'ai',
@@ -258,7 +255,7 @@ const projects = [
     color: '#8B5CF6',
   },
   {
-    id: 18,
+    id: 19,
     title: 'Sentiment Analysis with RNN (IMDB Reviews)',
     description: 'RNN-based sentiment analysis model classifying IMDB movie reviews as positive or negative. Built with TensorFlow/Keras using SimpleRNN layers with dropout and embedding.',
     category: 'ai',
@@ -270,7 +267,7 @@ const projects = [
     color: '#1E90FF',
   },
   {
-    id: 19,
+    id: 20,
     title: 'Market Basket Analysis by Apriori Algorithm',
     description: 'Interactive Streamlit dashboard for Market Basket Analysis using Apriori Algorithm and Association Rule Mining. Upload CSV/Excel transactions and generate frequent itemsets with support, confidence, and lift metrics.',
     category: 'ai',
@@ -282,7 +279,7 @@ const projects = [
     color: '#8B9A6B',
   },
   {
-    id: 20,
+    id: 21,
     title: 'Mountain Car Agent (Q-Learning with Gymnasium)',
     description: 'Reinforcement Learning agent using Q-Learning with epsilon-greedy exploration to solve MountainCar-v0 environment from OpenAI Gymnasium.',
     category: 'ai',
@@ -294,43 +291,7 @@ const projects = [
     color: '#F97316',
   },
   {
-    id: 21,
-    title: 'Credit Card Fraud Detection',
-    description: 'Machine learning model for detecting fraudulent credit card transactions using SMOTE oversampling, Logistic Regression, and Random Forest classifiers with comprehensive evaluation metrics.',
-    category: 'ai',
-    tech: ['Python', 'Scikit-learn', 'SMOTE', 'Pandas', 'Matplotlib'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Credit-Card-Fraud-Detection',
-    image: '/images/projects/fraud-detection.png',
-    icon: CreditCard,
-    color: '#22C55E',
-  },
-  {
     id: 22,
-    title: 'Sentiment Analysis (NLP - Twitter Airline Data)',
-    description: 'Machine learning model for sentiment analysis on Twitter airline reviews. Classifies tweets as Positive, Neutral, or Negative using TF-IDF and multiple classifiers.',
-    category: 'ai',
-    tech: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF', 'WordCloud'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Sentiment-Analysis-Twitter-Airline',
-    image: '/images/projects/sentiment-nlp.png',
-    icon: MessageSquare,
-    color: '#8B5CF6',
-  },
-  {
-    id: 23,
-    title: 'Spam SMS Detection',
-    description: 'Machine learning model to classify SMS messages as Spam or Legitimate (Ham) using TF-IDF vectorization, Naive Bayes, and Logistic Regression.',
-    category: 'ai',
-    tech: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF', 'Pandas'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Spam-SMS-Detection',
-    image: '/images/projects/spam-detection.png',
-    icon: Mail,
-    color: '#F97316',
-  },
-  {
-    id: 24,
     title: 'CIFAR-10 Image Classification using CNN',
     description: 'Convolutional Neural Network trained on CIFAR-10 dataset for image classification. Deployed with interactive Streamlit app for real-time predictions with confidence scores.',
     category: 'ai',
@@ -342,9 +303,109 @@ const projects = [
     color: '#06B6D4',
   },
 
-  // ============ COMPUTER NETWORKS ============
+  // ============ AI/ML PROJECTS (SAM AI TECHNOLOGIES) ============
+  {
+    id: 23,
+    title: 'Credit Card Fraud Detection',
+    description: 'Machine learning model for detecting fraudulent credit card transactions using SMOTE oversampling, Logistic Regression, and Random Forest classifiers with comprehensive evaluation metrics.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'SMOTE', 'Pandas', 'Matplotlib'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Credit-Card-Fraud-Detection',
+    image: '/images/projects/fraud-detection.png',
+    icon: CreditCard,
+    color: '#22C55E',
+  },
+  {
+    id: 24,
+    title: 'Sentiment Analysis (NLP - Twitter Airline Data)',
+    description: 'Machine learning model for sentiment analysis on Twitter airline reviews. Classifies tweets as Positive, Neutral, or Negative using TF-IDF and multiple classifiers.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF', 'WordCloud'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Sentiment-Analysis-Twitter-Airline',
+    image: '/images/projects/sentiment-nlp.png',
+    icon: MessageSquare,
+    color: '#8B5CF6',
+  },
   {
     id: 25,
+    title: 'Spam SMS Detection',
+    description: 'Machine learning model to classify SMS messages as Spam or Legitimate (Ham) using TF-IDF vectorization, Naive Bayes, and Logistic Regression.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF', 'Pandas'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Spam-SMS-Detection',
+    image: '/images/projects/spam-detection.png',
+    icon: Mail,
+    color: '#F97316',
+  },
+
+  // ============ AI/ML PROJECTS (ELEVVO PATHWAYS - ADDITIONAL) ============
+  {
+    id: 26,
+    title: 'Student Score Prediction — Regression Analysis',
+    description: 'Predict students\' exam scores based on study hours, sleep hours, and participation. Used Linear and Polynomial Regression with comprehensive EDA and feature engineering.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Student-Score-Prediction',
+    image: '/images/projects/student-score.png',
+    icon: Brain,
+    color: '#8B9A6B',
+  },
+  {
+    id: 27,
+    title: 'Mall Customer Segmentation — Clustering Analysis',
+    description: 'Segmented mall customers into meaningful groups based on annual income and spending behavior. Used K-Means with Elbow Method and DBSCAN clustering with Silhouette Score evaluation.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'Seaborn', 'Matplotlib'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Mall-Customer-Segmentation',
+    image: '/images/projects/mall-segmentation.png',
+    icon: Users,
+    color: '#8B5CF6',
+  },
+  {
+    id: 28,
+    title: 'Loan Approval Prediction — Classification with SMOTE',
+    description: 'Predict loan approval status using applicant information. Applied Logistic Regression, Decision Trees, and SMOTE to handle class imbalance for improved minority-class detection.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'SMOTE', 'Pandas', 'NumPy'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Loan-Approval-Prediction',
+    image: '/images/projects/loan-approval.png',
+    icon: Wallet,
+    color: '#22C55E',
+  },
+  {
+    id: 29,
+    title: 'Walmart Sales Forecasting — Time-Series Analysis',
+    description: 'Forecast future weekly sales using historical Walmart sales data. Applied time-series feature engineering, lag features, and Linear Regression with time-aware train-test split.',
+    category: 'ai',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Walmart-Sales-Forecasting',
+    image: '/images/projects/walmart-forecast.png',
+    icon: ShoppingBag,
+    color: '#06B6D4',
+  },
+  {
+    id: 30,
+    title: 'Forest Cover Type Classification — Ensemble Learning',
+    description: 'Multi-class classification (7 classes) of forest cover types using Random Forest and XGBoost with hyperparameter tuning, feature importance analysis, and comprehensive evaluation metrics.',
+    category: 'ai',
+    tech: ['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'NumPy'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Forest-Cover-Type-Classification',
+    image: '/images/projects/forest-cover.png',
+    icon: TreePine,
+    color: '#2ECC71',
+  },
+
+  // ============ COMPUTER NETWORKS ============
+  {
+    id: 31,
     title: 'Software House Network Design & Implementation',
     description: 'Enterprise-grade LAN design for a software house with 5 departments, VLAN segmentation, inter-VLAN routing (Router-on-a-Stick), and centralized server room. Simulated in Cisco Packet Tracer.',
     category: 'networks',

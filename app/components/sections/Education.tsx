@@ -1,35 +1,54 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, Calendar, Sparkles, BookOpen, Award } from 'lucide-react'
+import { 
+  GraduationCap, 
+  Calendar, 
+  Sparkles, 
+  BookOpen, 
+  Award, 
+  Brain, 
+  Code2, 
+  Database, 
+  Globe,
+  MapPin,        // ✅ Added
+  ExternalLink   // ✅ Added
+} from 'lucide-react'
 
 const education = [
   {
     id: 1,
-    degree: 'MS in Computer Science',
-    institution: 'Stanford University',
-    year: '2020 - 2022',
-    gpa: '3.9/4.0',
-    courses: ['Machine Learning', 'Advanced AI', 'Distributed Systems'],
-    icon: Award,
-  },
-  {
-    id: 2,
-    degree: 'BS in Software Engineering',
-    institution: 'MIT',
-    year: '2016 - 2020',
-    gpa: '3.8/4.0',
-    courses: ['Data Structures', 'Algorithms', 'Database Systems'],
-    icon: BookOpen,
+    degree: 'BS in Computer Science',
+    institution: 'University of Layyah',
+    institutionLink: 'https://www.linkedin.com/school/university-of-layyah/',
+    year: '2024 – 2028',
+    gpa: 'A Grade',
+    location: 'Layyah, Pakistan',
+    logo: '/images/companies/uol.png',
+    courses: [
+      'Programming Fundamentals',
+      'Data Structures & Algorithms',
+      'Database Management Systems',
+      'Machine Learning',
+      'Deep Learning',
+      'Natural Language Processing',
+      'Computer Vision',
+      'Software Engineering',
+      'Operating Systems',
+      'Computer Networks'
+    ],
+    icon: GraduationCap,
+    color: '#8B9A6B',
   },
 ]
 
 export default function Education() {
   return (
     <section id="education" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
-      {/* Decorative Elements */}
+      {/* Olive Theme Decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#8B9A6B]/3 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -48,7 +67,7 @@ export default function Education() {
               className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full text-sm font-medium text-[#8B9A6B] mb-4"
             >
               <Sparkles className="w-4 h-4" />
-              My Education
+              Education
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C2C2C]">
               Academic <span className="text-[#8B9A6B]">Background</span>
@@ -59,59 +78,87 @@ export default function Education() {
             </p>
           </div>
 
-          {/* Timeline */}
-          <div className="max-w-4xl mx-auto relative">
-            {/* Vertical Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-[#8B9A6B]/20 hidden md:block" />
-
+          {/* Education Cards */}
+          <div className="max-w-4xl mx-auto">
             {education.map((edu, index) => {
               const Icon = edu.icon
               return (
                 <motion.div
                   key={edu.id}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="relative pl-16 md:pl-24 pb-12 last:pb-0 group"
+                  className="group relative"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-0 top-2 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#8B9A6B] flex items-center justify-center shadow-lg shadow-[#8B9A6B]/30 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    {/* Connecting Line */}
-                    <div className="absolute left-1/2 top-full w-0.5 h-4 bg-[#8B9A6B]/20 md:hidden" />
-                  </div>
-
-                  {/* Card */}
-                  <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/10 transition-all duration-500 group-hover:border-[#8B9A6B]/30">
-                    <div className="flex flex-wrap justify-between items-start gap-4">
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-bold text-[#2C2C2C] group-hover:text-[#8B9A6B] transition-colors duration-300">
-                          {edu.degree}
-                        </h3>
-                        <p className="text-[#4A4A4A] font-medium mt-1">{edu.institution}</p>
+                  <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/10 transition-all duration-500 hover:-translate-y-1">
+                    <div className="flex flex-wrap items-start gap-6">
+                      {/* Logo */}
+                      <div className="relative w-20 h-20 rounded-2xl bg-white shadow-lg border-2 border-[#8B9A6B]/20 flex items-center justify-center overflow-hidden flex-shrink-0">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#8B9A6B]/10 to-[#8B9A6B]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {edu.logo ? (
+                          <img 
+                            src={edu.logo} 
+                            alt={edu.institution} 
+                            className="w-14 h-14 object-contain relative z-10" 
+                          />
+                        ) : (
+                          <Icon className="w-10 h-10 text-[#8B9A6B] relative z-10" />
+                        )}
+                        <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[#8B9A6B]/20" />
                       </div>
-                      <div className="flex items-center gap-2 px-4 py-2 bg-[#8B9A6B]/10 rounded-full">
-                        <Calendar className="w-4 h-4 text-[#8B9A6B]" />
-                        <span className="text-sm font-medium text-[#8B9A6B]">{edu.year}</span>
-                      </div>
-                    </div>
 
-                    <div className="mt-4 flex flex-wrap gap-3">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full text-sm border border-[#8B9A6B]/20">
-                        <Award className="w-3.5 h-3.5" />
-                        GPA: {edu.gpa}
-                      </span>
-                      {edu.courses.map((course) => (
-                        <span
-                          key={course}
-                          className="px-3 py-1.5 bg-white/50 text-[#4A4A4A] rounded-full text-sm border border-[#8B9A6B]/10 hover:border-[#8B9A6B]/30 hover:bg-[#8B9A6B]/5 transition-all duration-300"
-                        >
-                          {course}
-                        </span>
-                      ))}
+                      <div className="flex-1">
+                        <div className="flex flex-wrap justify-between items-start gap-4">
+                          <div>
+                            <h3 className="text-2xl font-bold text-[#2C2C2C] group-hover:text-[#8B9A6B] transition-colors duration-300">
+                              {edu.degree}
+                            </h3>
+                            <a
+                              href={edu.institutionLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium inline-flex items-center gap-1.5 text-sm group/link"
+                            >
+                              {edu.institution}
+                              <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 transition-opacity" />
+                            </a>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[#8B9A6B]/10 rounded-full text-sm font-medium text-[#8B9A6B] border border-[#8B9A6B]/20">
+                              <Calendar className="w-4 h-4" />
+                              {edu.year}
+                            </span>
+                            <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[#8B9A6B]/10 rounded-full text-sm font-medium text-[#8B9A6B] border border-[#8B9A6B]/20">
+                              <Award className="w-4 h-4" />
+                              {edu.gpa}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 mt-2 text-sm text-[#4A4A4A]">
+                          <MapPin className="w-4 h-4 text-[#8B9A6B]" />
+                          {edu.location}
+                        </div>
+
+                        {/* Courses */}
+                        <div className="mt-4">
+                          <h4 className="text-sm font-semibold text-[#2C2C2C] mb-2.5 flex items-center gap-2">
+                            <BookOpen className="w-4 h-4 text-[#8B9A6B]" />
+                            Key Courses
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {edu.courses.map((course) => (
+                              <span
+                                key={course}
+                                className="px-3 py-1.5 bg-white/50 text-[#4A4A4A] rounded-full text-xs border border-[#8B9A6B]/10 hover:border-[#8B9A6B]/30 hover:bg-[#8B9A6B]/5 transition-all duration-300"
+                              >
+                                {course}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Decorative Number */}
@@ -132,8 +179,10 @@ export default function Education() {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <p className="text-[#4A4A4A] text-sm">
-              Always learning, always growing 📚
+            <p className="text-[#4A4A4A] text-sm flex items-center justify-center gap-2">
+              <Brain className="w-4 h-4 text-[#8B9A6B]" />
+              Always learning, always growing
+              <Brain className="w-4 h-4 text-[#8B9A6B]" />
             </p>
           </motion.div>
         </motion.div>

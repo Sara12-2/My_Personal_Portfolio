@@ -1,56 +1,57 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Trophy, Star, Medal, Sparkles, ChevronRight } from 'lucide-react'
+import { Award, Sparkles, Trophy, Medal, Star, Calendar, ExternalLink } from 'lucide-react'
 
-const achievements = [
+const honors = [
   {
     id: 1,
-    title: 'Best AI Project Award',
-    description: 'Won first place in National AI Hackathon 2024',
-    icon: Trophy,
-    date: '2024',
-    color: '#F1C40F',
-    bgColor: 'rgba(241, 196, 15, 0.15)',
+    title: 'Finance Management Team – HELLO WORLD 2025',
+    issuer: 'University of Layyah',
+    date: 'Dec 2025',
+    type: 'Participation',
+    icon: Award,
+    color: '#8B9A6B',
+    logo: '/images/companies/uol.png',
   },
   {
     id: 2,
-    title: 'Published Research Paper',
-    description: 'Paper on "LLM Optimization" published in IEEE Conference',
-    icon: Award,
+    title: '2nd Position in ICS – DG Khan Board',
+    issuer: 'BISE DG Khan',
     date: '2023',
-    color: '#1E90FF',
-    bgColor: 'rgba(30, 144, 255, 0.15)',
+    type: 'Position Holder',
+    icon: Trophy,
+    color: '#8B9A6B',
+    logo: '/images/honors/bise-dg-khan.png',
   },
   {
     id: 3,
-    title: 'Top 10 Developer',
-    description: 'Ranked in top 10 developers on Stack Overflow (Pakistan)',
-    icon: Star,
+    title: 'Chief Minister Merit Award – Laptop Scheme',
+    issuer: 'Govt. of Punjab',
     date: '2023',
+    type: 'Merit Award',
+    icon: Star,
     color: '#8B9A6B',
-    bgColor: 'rgba(139, 154, 107, 0.2)',
+    logo: '/images/honors/cm-punjab.png',
   },
   {
     id: 4,
-    title: 'Open Source Contributor',
-    description: 'Contributed to 15+ open source projects including Next.js',
+    title: 'E-Scotte Award – Merit Scholarship',
+    issuer: 'BISE Multan',
+    date: '2023',
+    type: 'Scholarship',
     icon: Medal,
-    date: '2022-2024',
-    color: '#2ECC71',
-    bgColor: 'rgba(46, 204, 113, 0.15)',
+    color: '#8B9A6B',
+    logo: '/images/honors/bise-multan.png',
   },
 ]
 
-export default function Achievements() {
+export default function Honors() {
   return (
-    <section id="achievements" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
-      {/* Decorative Background */}
+    <section id="honors" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
+      {/* Background Decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
-      
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM4QjlBNkIiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -59,8 +60,8 @@ export default function Achievements() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Section Header */}
-          <div className="text-center mb-16">
+          {/* Header */}
+          <div className="text-center mb-12">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -69,91 +70,64 @@ export default function Achievements() {
               className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full text-sm font-medium text-[#8B9A6B] mb-4"
             >
               <Sparkles className="w-4 h-4" />
-              My Achievements
+              Honors & Awards
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C2C2C]">
-              Awards & <span className="text-[#8B9A6B]">Recognition</span>
+              Achievements & <span className="text-[#8B9A6B]">Recognitions</span>
             </h2>
             <div className="w-20 h-1 bg-[#8B9A6B] mx-auto mt-4 rounded-full" />
-            <p className="text-[#4A4A4A] mt-4 max-w-2xl mx-auto">
-              Milestones and recognition I've earned throughout my journey
-            </p>
           </div>
 
-          {/* Achievements Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {achievements.map((item, index) => {
-              const Icon = item.icon
+          {/* Cards Grid - 4 in a row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {honors.map((honor, index) => {
+              const Icon = honor.icon
               return (
                 <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={honor.id}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -8 }}
-                  className="group relative bg-white rounded-2xl p-8 border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/10 transition-all duration-500 overflow-hidden"
+                  className="group bg-white/90 backdrop-blur-sm p-5 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/10 transition-all duration-500 hover:-translate-y-2 text-center"
                 >
-                  {/* Gradient Background on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#8B9A6B]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Glow Effect */}
-                  <div 
-                    className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-                    style={{ background: item.color }}
-                  />
+                  {/* Icon/Logo */}
+                  <div className="relative w-16 h-16 rounded-2xl bg-white shadow-lg border-2 border-[#8B9A6B]/20 flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#8B9A6B]/10 to-[#8B9A6B]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {honor.logo ? (
+                      <img 
+                        src={honor.logo} 
+                        alt={honor.issuer} 
+                        className="w-10 h-10 object-contain relative z-10" 
+                      />
+                    ) : (
+                      <Icon className="w-7 h-7 text-[#8B9A6B] relative z-10" />
+                    )}
+                    <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[#8B9A6B]/20" />
+                  </div>
 
-                  {/* Icon Container */}
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                    className="relative inline-flex p-4 rounded-2xl mb-6"
-                    style={{ background: item.bgColor }}
-                  >
-                    <Icon className="w-8 h-8" style={{ color: item.color }} />
-                    
-                    {/* Pulsing Ring */}
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                      className="absolute inset-0 rounded-2xl border-2"
-                      style={{ borderColor: `${item.color}30` }}
-                    />
-                  </motion.div>
-
-                  {/* Content */}
-                  <h3 className="text-lg font-bold text-[#2C2C2C] mb-2 group-hover:text-[#8B9A6B] transition-colors duration-300">
-                    {item.title}
+                  {/* Title */}
+                  <h3 className="text-sm font-bold text-[#2C2C2C] group-hover:text-[#8B9A6B] transition-colors duration-300 line-clamp-2 min-h-[40px]">
+                    {honor.title}
                   </h3>
-                  <p className="text-[#4A4A4A] text-sm leading-relaxed">
-                    {item.description}
-                  </p>
 
-                  {/* Date Badge */}
-                  <div className="mt-4 flex items-center justify-between">
-                    <span 
-                      className="inline-block px-3 py-1 text-xs font-medium rounded-full"
-                      style={{ 
-                        background: item.bgColor,
-                        color: item.color
-                      }}
-                    >
-                      {item.date}
+                  {/* Issuer */}
+                  <p className="text-xs text-[#4A4A4A] mt-1">{honor.issuer}</p>
+
+                  {/* Meta */}
+                  <div className="flex items-center justify-center gap-3 mt-2 text-xs text-[#4A4A4A]/70">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-[#8B9A6B]" />
+                      {honor.date}
                     </span>
-                    
-                    {/* Hover Arrow */}
-                    <motion.span
-                      initial={{ x: -5, opacity: 0 }}
-                      whileHover={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-[#8B9A6B]"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </motion.span>
+                    <span className="w-1 h-1 rounded-full bg-[#4A4A4A]/30" />
+                    <span className="px-2 py-0.5 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full text-[10px] font-medium border border-[#8B9A6B]/20">
+                      {honor.type}
+                    </span>
                   </div>
 
                   {/* Decorative Number */}
-                  <div className="absolute bottom-2 right-4 text-6xl font-bold text-[#8B9A6B]/5 select-none">
+                  <div className="absolute bottom-2 right-3 text-4xl font-bold text-[#8B9A6B]/5 select-none pointer-events-none">
                     {String(index + 1).padStart(2, '0')}
                   </div>
                 </motion.div>
@@ -161,26 +135,35 @@ export default function Achievements() {
             })}
           </div>
 
-          {/* Bottom CTA */}
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-center mt-16"
+            className="mt-12 flex flex-wrap justify-center gap-8 max-w-2xl mx-auto"
           >
-            <p className="text-[#4A4A4A] mb-4">
-              And many more achievements along the way...
-            </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
-            >
-              Let's Create More
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+            {[
+              { label: 'Total Awards', value: honors.length, icon: Award },
+              { label: 'Position Holder', value: '1', icon: Trophy },
+              { label: 'Scholarships', value: '1', icon: Medal },
+            ].map((stat) => {
+              const StatIcon = stat.icon
+              return (
+                <div 
+                  key={stat.label} 
+                  className="flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-xl border border-[#8B9A6B]/10 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                >
+                  <div className="p-2 rounded-full bg-[#8B9A6B]/10">
+                    <StatIcon className="w-4 h-4 text-[#8B9A6B]" />
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold text-[#8B9A6B]">{stat.value}</div>
+                    <div className="text-xs text-[#4A4A4A]">{stat.label}</div>
+                  </div>
+                </div>
+              )
+            })}
           </motion.div>
         </motion.div>
       </div>

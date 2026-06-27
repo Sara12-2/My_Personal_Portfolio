@@ -1,63 +1,58 @@
 @import "tailwindcss";
 
-/* ---- Custom Colors - From Picture ---- */
-/* Direct Utility Classes */
+/* ---- Custom Colors - Olive Theme Only ---- */
 
 /* Backgrounds */
 .bg-olive { background-color: #8B9A6B; }
-.bg-emerald { background-color: #2ECC71; }
-.bg-royal { background-color: #1E90FF; }
-.bg-gold { background-color: #F1C40F; }
-.bg-teal { background-color: #008080; }
+.bg-olive-light { background-color: #C5D4B5; }
+.bg-olive-lighter { background-color: #A8B89A; }
+.bg-olive-dark { background-color: #6B8A4A; }
+.bg-olive-darker { background-color: #4A6B2A; }
 .bg-offwhite { background-color: #F5F5F0; }
 .bg-dark { background-color: #2C2C2C; }
+.bg-white { background-color: #FFFFFF; }
 
-/* Text */
+/* Text - Fixed for visibility */
 .text-olive { color: #8B9A6B; }
-.text-emerald { color: #2ECC71; }
-.text-royal { color: #1E90FF; }
-.text-gold { color: #F1C40F; }
-.text-teal { color: #008080; }
+.text-olive-light { color: #C5D4B5; }
+.text-olive-lighter { color: #A8B89A; }
+.text-olive-dark { color: #6B8A4A; }
+.text-olive-darker { color: #4A6B2A; }
 .text-offwhite { color: #F5F5F0; }
 .text-dark { color: #2C2C2C; }
+.text-white { color: #FFFFFF; }
+
+/* For better contrast */
+.text-olive-strong { color: #6B8A4A; }
+.text-olive-muted { color: #A8B89A; }
 
 /* Borders */
 .border-olive { border-color: #8B9A6B; }
-.border-emerald { border-color: #2ECC71; }
-.border-royal { border-color: #1E90FF; }
-.border-gold { border-color: #F1C40F; }
-.border-teal { border-color: #008080; }
+.border-olive-light { border-color: #C5D4B5; }
+.border-olive-dark { border-color: #6B8A4A; }
 .border-offwhite { border-color: #F5F5F0; }
 
-/* Hover States */
+/* Hover States - Olive Only */
 .hover\:bg-olive:hover { background-color: #8B9A6B; }
-.hover\:bg-emerald:hover { background-color: #2ECC71; }
-.hover\:bg-royal:hover { background-color: #1E90FF; }
-.hover\:bg-gold:hover { background-color: #F1C40F; }
-.hover\:bg-teal:hover { background-color: #008080; }
+.hover\:bg-olive-dark:hover { background-color: #6B8A4A; }
+.hover\:bg-olive-darker:hover { background-color: #4A6B2A; }
 .hover\:bg-offwhite:hover { background-color: #F5F5F0; }
 
 .hover\:text-olive:hover { color: #8B9A6B; }
-.hover\:text-emerald:hover { color: #2ECC71; }
-.hover\:text-royal:hover { color: #1E90FF; }
-.hover\:text-gold:hover { color: #F1C40F; }
-.hover\:text-teal:hover { color: #008080; }
+.hover\:text-olive-dark:hover { color: #6B8A4A; }
 .hover\:text-offwhite:hover { color: #F5F5F0; }
 
-/* Gradients */
+/* Gradients - Olive Only */
 .from-olive { --tw-gradient-from: #8B9A6B; }
-.from-emerald { --tw-gradient-from: #2ECC71; }
-.from-royal { --tw-gradient-from: #1E90FF; }
-.from-gold { --tw-gradient-from: #F1C40F; }
-.from-teal { --tw-gradient-from: #008080; }
+.from-olive-dark { --tw-gradient-from: #6B8A4A; }
 .from-offwhite { --tw-gradient-from: #F5F5F0; }
+.to-olive { --tw-gradient-to: #8B9A6B; }
+.to-olive-dark { --tw-gradient-to: #6B8A4A; }
 
-/* Shadows */
+/* Shadows - Olive Only */
+.shadow-olive { box-shadow: 0 4px 20px rgba(139, 154, 107, 0.3); }
 .shadow-olive\/20 { box-shadow: 0 4px 20px rgba(139, 154, 107, 0.2); }
-.shadow-emerald\/20 { box-shadow: 0 4px 20px rgba(46, 204, 113, 0.2); }
-.shadow-royal\/20 { box-shadow: 0 4px 20px rgba(30, 144, 255, 0.2); }
-.shadow-gold\/20 { box-shadow: 0 4px 20px rgba(241, 196, 15, 0.2); }
-.shadow-teal\/20 { box-shadow: 0 4px 20px rgba(0, 128, 128, 0.2); }
+.shadow-olive\/10 { box-shadow: 0 4px 20px rgba(139, 154, 107, 0.1); }
 
 /* Base Styles */
 body {
@@ -66,11 +61,290 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar */
+/* Scrollbar - Olive Only */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #F5F5F0; }
-::-webkit-scrollbar-thumb { background: #2ECC71; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #8B9A6B; }
+::-webkit-scrollbar-thumb { background: #8B9A6B; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #6B8A4A; }
 
-::selection { background: #2ECC71; color: #FFFFFF; }
+::selection { background: #8B9A6B; color: #FFFFFF; }
 html { scroll-behavior: smooth; }
+
+/* ============================================ */
+/* FIX: Override Default Tailwind Green -> Olive */
+/* ============================================ */
+
+.bg-green-50 { background-color: #F5F5F0 !important; }
+.bg-green-100 { background-color: #C5D4B5 !important; }
+.bg-green-200 { background-color: #A8B89A !important; }
+.bg-green-300 { background-color: #8B9A6B !important; }
+.bg-green-400 { background-color: #6B8A4A !important; }
+.bg-green-500 { background-color: #8B9A6B !important; }
+.bg-green-600 { background-color: #6B8A4A !important; }
+.bg-green-700 { background-color: #4A6B2A !important; }
+.bg-green-800 { background-color: #2A4B1A !important; }
+.bg-green-900 { background-color: #1A2B0A !important; }
+
+.text-green-50 { color: #F5F5F0 !important; }
+.text-green-100 { color: #C5D4B5 !important; }
+.text-green-200 { color: #A8B89A !important; }
+.text-green-300 { color: #8B9A6B !important; }
+.text-green-400 { color: #6B8A4A !important; }
+.text-green-500 { color: #8B9A6B !important; }
+.text-green-600 { color: #6B8A4A !important; }
+.text-green-700 { color: #4A6B2A !important; }
+.text-green-800 { color: #2A4B1A !important; }
+.text-green-900 { color: #1A2B0A !important; }
+
+.border-green-500 { border-color: #8B9A6B !important; }
+.border-green-600 { border-color: #6B8A4A !important; }
+
+.hover\:bg-green-500:hover { background-color: #6B8A4A !important; }
+.hover\:bg-green-600:hover { background-color: #4A6B2A !important; }
+.hover\:text-green-500:hover { color: #6B8A4A !important; }
+.hover\:text-green-600:hover { color: #4A6B2A !important; }
+
+/* ============================================ */
+/* FIX: Button Text Visibility */
+/* ============================================ */
+
+/* All buttons - ensure text is visible */
+button {
+  color: #2C2C2C !important;
+}
+
+button:hover {
+  color: #8B9A6B !important;
+}
+
+/* Primary buttons - olive background with white text */
+.btn-primary, 
+button.bg-olive,
+a.bg-olive,
+[class*="bg-olive"] {
+  color: #FFFFFF !important;
+  background-color: #8B9A6B !important;
+}
+
+.btn-primary:hover,
+button.bg-olive:hover,
+a.bg-olive:hover,
+[class*="bg-olive"]:hover {
+  background-color: #6B8A4A !important;
+  color: #FFFFFF !important;
+}
+
+/* Force: Any text inside olive button should be white */
+.bg-olive *,
+button.bg-olive *,
+a.bg-olive *,
+[class*="bg-olive"] * {
+  color: #FFFFFF !important;
+}
+
+.bg-olive span,
+button.bg-olive span,
+a.bg-olive span,
+.bg-olive svg,
+button.bg-olive svg,
+a.bg-olive svg {
+  color: #FFFFFF !important;
+}
+
+/* Force: Olive button hover - all children white */
+.bg-olive:hover *,
+button.bg-olive:hover *,
+a.bg-olive:hover *,
+[class*="bg-olive"]:hover * {
+  color: #FFFFFF !important;
+}
+
+/* Kill: Any green text on olive background */
+.bg-olive .text-green-500,
+.bg-olive .text-green-600,
+.bg-olive .text-green-700,
+button.bg-olive .text-green-500,
+button.bg-olive .text-green-600,
+button.bg-olive .text-green-700 {
+  color: #FFFFFF !important;
+}
+
+/* Secondary buttons - white background with olive text */
+.btn-secondary,
+button.bg-white,
+button[class*="bg-white"] {
+  color: #8B9A6B !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid #8B9A6B !important;
+}
+
+.btn-secondary:hover,
+button.bg-white:hover,
+button[class*="bg-white"]:hover {
+  background-color: #F5F5F0 !important;
+  color: #6B8A4A !important;
+}
+
+/* Ghost buttons - no background with olive text */
+.btn-ghost,
+button[class*="bg-transparent"] {
+  color: #8B9A6B !important;
+  background-color: transparent !important;
+}
+
+.btn-ghost:hover,
+button[class*="bg-transparent"]:hover {
+  color: #6B8A4A !important;
+  background-color: rgba(139, 154, 107, 0.1) !important;
+}
+
+/* Dark buttons - dark background with white text */
+.btn-dark,
+button.bg-dark,
+button[class*="bg-dark"] {
+  color: #FFFFFF !important;
+  background-color: #2C2C2C !important;
+}
+
+.btn-dark:hover,
+button.bg-dark:hover,
+button[class*="bg-dark"]:hover {
+  background-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+}
+
+/* Override any conflicting styles */
+button[class*="text-white"] {
+  color: #FFFFFF !important;
+}
+
+button[class*="text-olive"] {
+  color: #8B9A6B !important;
+}
+
+button[class*="text-dark"] {
+  color: #2C2C2C !important;
+}
+
+/* ============================================ */
+/* FIX: Sidebar Specific - Olive Only */
+/* ============================================ */
+
+.sidebar, aside, [role="complementary"] {
+  --tw-bg-opacity: 1 !important;
+  background-color: #F5F5F0 !important;
+  border-color: #8B9A6B !important;
+}
+
+.sidebar a, .sidebar .link {
+  color: #2C2C2C !important;
+}
+
+.sidebar a:hover, .sidebar .link:hover {
+  color: #8B9A6B !important;
+}
+
+.sidebar .active, .sidebar [aria-current="page"] {
+  color: #8B9A6B !important;
+  background-color: rgba(139, 154, 107, 0.1) !important;
+  border-color: #8B9A6B !important;
+}
+
+.sidebar svg {
+  color: #8B9A6B !important;
+}
+
+.sidebar h2, .sidebar h3 {
+  color: #2C2C2C !important;
+}
+
+/* ============================================ */
+/* FIX: GitHub Calendar */
+/* ============================================ */
+
+/* Loading Indicator */
+.react-github-calendar .loading {
+  color: #8B9A6B !important;
+  border-color: #8B9A6B !important;
+}
+
+.react-github-calendar .loading::after {
+  border-color: #8B9A6B !important;
+  border-top-color: #6B8A4A !important;
+}
+
+/* Hover - Olive Only */
+.react-github-calendar .ContributionCalendar-day[data-level="0"]:hover {
+  background-color: #C5D4B5 !important;
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #8B9A6B !important;
+  z-index: 10 !important;
+}
+
+.react-github-calendar .ContributionCalendar-day[data-level="1"]:hover {
+  background-color: #A8B89A !important;
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #8B9A6B !important;
+  z-index: 10 !important;
+}
+
+.react-github-calendar .ContributionCalendar-day[data-level="2"]:hover {
+  background-color: #8B9A6B !important;
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #6B8A4A !important;
+  z-index: 10 !important;
+}
+
+.react-github-calendar .ContributionCalendar-day[data-level="3"]:hover {
+  background-color: #6B8A4A !important;
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #4A6B2A !important;
+  z-index: 10 !important;
+}
+
+.react-github-calendar .ContributionCalendar-day[data-level="4"]:hover {
+  background-color: #4A6B2A !important;
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #2A4B1A !important;
+  z-index: 10 !important;
+}
+
+/* ============================================ */
+/* FIX: Any Other Elements */
+/* ============================================ */
+
+/* Override default focus rings */
+*:focus-visible {
+  outline-color: #8B9A6B !important;
+  outline-offset: 2px;
+}
+
+/* Override default selection */
+::selection {
+  background: #8B9A6B !important;
+  color: #FFFFFF !important;
+}
+
+/* Override default link colors */
+a {
+  color: #8B9A6B !important;
+}
+
+a:hover {
+  color: #6B8A4A !important;
+}
+
+/* ============================================ */
+/* Olive Theme Color Variables */
+/* ============================================ */
+
+:root {
+  --olive: #8B9A6B;
+  --olive-light: #C5D4B5;
+  --olive-lighter: #A8B89A;
+  --olive-dark: #6B8A4A;
+  --olive-darker: #4A6B2A;
+  --offwhite: #F5F5F0;
+  --dark: #2C2C2C;
+  --white: #FFFFFF;
+}

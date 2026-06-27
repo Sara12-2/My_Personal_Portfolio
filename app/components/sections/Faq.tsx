@@ -166,12 +166,13 @@ export default function Faq() {
               Still have questions? <span className="text-[#8B9A6B] font-medium">I'm here to help!</span>
             </p>
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Ask Me Anything
-            </a>
+  href="#contact"
+  className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#8B9A6B] hover:bg-[#6B7A5B] rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
+  style={{ color: '#FFFFFF' }}
+>
+  <MessageCircle className="w-4 h-4" style={{ color: '#FFFFFF' }} />
+  <span style={{ color: '#FFFFFF' }}>Ask Me Anything</span>
+</a>
           </motion.div>
         </motion.div>
       </div>
