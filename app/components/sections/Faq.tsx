@@ -2,38 +2,33 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, ChevronUp, Sparkles, HelpCircle, MessageCircle } from 'lucide-react'
+import { ChevronDown, HelpCircle, MessageCircle, Sparkles } from 'lucide-react'
 
 const faqs = [
   {
     id: 1,
-    question: 'What technologies do you specialize in?',
-    answer: 'I specialize in React, Next.js, TypeScript, Node.js, Python, and AI/ML technologies including OpenAI, LangChain, and TensorFlow.',
+    question: 'What technologies do you work with?',
+    answer: 'I specialize in React, Next.js, Python, Flask, and AI/ML technologies including NLP, Computer Vision, and Deep Learning. I also work with MySQL, Tailwind CSS, and modern deployment platforms like Vercel and Netlify.',
   },
   {
     id: 2,
-    question: 'How much experience do you have?',
-    answer: 'I have 3+ years of professional experience as a Full Stack Developer & AI Engineer.',
+    question: 'What services do you offer?',
+    answer: 'I offer Portfolio & UI/UX Design, Dashboard & Admin Panels, Full Stack Web Apps (Flask), React.js & Next.js Websites, AI Chatbots, Landing Pages, and custom AI/ML Solutions.',
   },
   {
     id: 3,
-    question: 'Do you take freelance projects?',
-    answer: 'Yes! I am available for freelance projects. Feel free to reach out through the contact form.',
+    question: 'How long does it take to complete a project?',
+    answer: 'Timeline depends on complexity — 1-2 weeks for a portfolio/landing page, 3-4 weeks for a full web application, and 1-2 months for AI/ML solutions. I deliver quality work within agreed deadlines.',
   },
   {
     id: 4,
-    question: 'What is your typical project timeline?',
-    answer: 'Project timelines vary depending on complexity. A simple website can take 2-4 weeks, while a complex AI-powered application might take 2-3 months.',
+    question: 'How do you work with clients?',
+    answer: 'I start with understanding your requirements, then design and develop the solution with regular updates. I communicate through email, WhatsApp, or Zoom — keeping you involved at every step.',
   },
   {
     id: 5,
-    question: 'How do you handle project communication?',
-    answer: 'I maintain regular communication through email, Zoom, or Slack. I provide weekly progress updates.',
-  },
-  {
-    id: 6,
-    question: 'Can you help with AI integration in existing projects?',
-    answer: 'Absolutely! I specialize in integrating AI capabilities into existing applications.',
+    question: 'Do you do freelance & remote work?',
+    answer: 'Yes! I\'m available for freelance, remote work, and hackathon collaborations. Feel free to reach out through the contact form or directly at saramanzoor76@gmail.com.',
   },
 ]
 
@@ -45,10 +40,11 @@ export default function Faq() {
   }
 
   return (
-    <section id="faq" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
-      {/* Decorative Elements */}
+    <section id="faq" className="py-24 bg-[#FAF8F5] relative overflow-hidden">
+      {/* Olive Theme Decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#8B9A6B]/3 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
         <motion.div
@@ -166,13 +162,12 @@ export default function Faq() {
               Still have questions? <span className="text-[#8B9A6B] font-medium">I'm here to help!</span>
             </p>
             <a
-  href="#contact"
-  className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#8B9A6B] hover:bg-[#6B7A5B] rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
-  style={{ color: '#FFFFFF' }}
->
-  <MessageCircle className="w-4 h-4" style={{ color: '#FFFFFF' }} />
-  <span style={{ color: '#FFFFFF' }}>Ask Me Anything</span>
-</a>
+              href="#contact"
+              className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Ask Me Anything
+            </a>
           </motion.div>
         </motion.div>
       </div>

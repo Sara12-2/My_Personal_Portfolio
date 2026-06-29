@@ -23,13 +23,15 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [textIndex, setTextIndex] = useState(0)
 
+  // ✅ REAL roles based on your actual skills
   const roles = [
     'Full Stack Developer',
+    'AI/ML Engineer',
     'React.js Developer',
     'Next.js Developer',
-    'AI/ML Engineer',
     'Python Developer',
-    'TypeScript Developer',
+    'Computer Vision Engineer',
+    'NLP Engineer',
   ]
 
   useEffect(() => {
@@ -90,6 +92,7 @@ export default function Hero() {
       }))
     : []
 
+  // ✅ REAL SOCIAL LINKS
   const socialIcons = [
     {
       icon: FaGithub,
@@ -104,28 +107,28 @@ export default function Hero() {
       color: '#0A66C2',
     },
     {
-      icon: Mail,
-      href: 'mailto:saramanzoorofficial@gmail.com',
-      label: 'Email',
-      color: '#8B9A6B',
-    },
-    {
       icon: SiLeetcode,
-      href: 'https://leetcode.com/',
+      href: 'https://leetcode.com/u/sara12-2/',
       label: 'LeetCode',
       color: '#FFA116',
     },
     {
       icon: FaHackerrank,
-      href: 'https://www.hackerrank.com/',
+      href: 'https://www.hackerrank.com/profile/saramanzoor76',
       label: 'HackerRank',
       color: '#2EC866',
     },
     {
       icon: FaKaggle,
-      href: 'https://www.kaggle.com/',
+      href: 'https://www.kaggle.com/saramanzoor',
       label: 'Kaggle',
       color: '#20BEFF',
+    },
+    {
+      icon: Mail,
+      href: 'mailto:saramanzoor76@gmail.com',
+      label: 'Email',
+      color: '#8B9A6B',
     },
     {
       icon: FaAward,
@@ -211,15 +214,10 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* About - 2 Lines */}
-            <div className="mt-6 space-y-2">
-              <p className="text-base sm:text-lg text-[#4A4A4A] leading-relaxed">
-                COO at DevHatch Labs • Building intelligent, scalable digital products
-              </p>
-              <p className="text-base sm:text-lg text-[#4A4A4A] leading-relaxed">
-                Passionate Full Stack Developer & AI Engineer solving real-world problems
-              </p>
-            </div>
+            {/* ✅ SINGLE LINE - Professional About You */}
+            <p className="mt-6 text-base sm:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
+              COO at DevHatch Labs — building AI-powered solutions and scalable web applications with modern technologies.
+            </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">

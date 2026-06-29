@@ -58,6 +58,14 @@ export const metadata: Metadata = {
     description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast',
     images: ['/images/og-image.png'],
   },
+  // ✅ Added: Verification for Google Search Console
+  verification: {
+    google: 'your-google-site-verification-code',
+  },
+  // ✅ Added: Alternates for canonical URL
+  alternates: {
+    canonical: 'https://sara-portfolio.vercel.app',
+  },
 }
 
 export default function RootLayout({
@@ -69,20 +77,29 @@ export default function RootLayout({
     <html lang="en" className="light" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         {children}
+        
+        {/* ✅ Toaster with Olive Theme */}
         <Toaster 
           position="bottom-right"
           toastOptions={{
+            duration: 4000,
             style: {
-              background: '#8B9A6B',
+              background: '#2C2C2C',
               color: '#FFFFFF',
               borderRadius: '12px',
               padding: '14px 24px',
               fontSize: '14px',
               fontWeight: '500',
-              boxShadow: '0 8px 30px rgba(139, 154, 107, 0.3)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.2)',
+              border: '1px solid rgba(139, 154, 107, 0.2)',
             },
             success: {
+              style: {
+                background: '#8B9A6B',
+                color: '#FFFFFF',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 8px 30px rgba(139, 154, 107, 0.3)',
+              },
               iconTheme: {
                 primary: '#FFFFFF',
                 secondary: '#8B9A6B',
@@ -94,6 +111,7 @@ export default function RootLayout({
                 background: '#e74c3c',
                 color: '#FFFFFF',
                 boxShadow: '0 8px 30px rgba(231, 76, 60, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
               },
               duration: 5000,
             },
@@ -101,6 +119,7 @@ export default function RootLayout({
               style: {
                 background: '#2C2C2C',
                 color: '#FFFFFF',
+                border: '1px solid rgba(139, 154, 107, 0.2)',
               },
             },
           }}

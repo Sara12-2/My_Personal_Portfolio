@@ -29,10 +29,7 @@ const education = [
       'Programming Fundamentals',
       'Data Structures & Algorithms',
       'Database Management Systems',
-      'Machine Learning',
-      'Deep Learning',
-      'Natural Language Processing',
-      'Computer Vision',
+        
       'Software Engineering',
       'Operating Systems',
       'Computer Networks'

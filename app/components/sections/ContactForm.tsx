@@ -1,4 +1,3 @@
-// app/components/sections/ContactForm.tsx
 'use client'
 
 import { useState } from 'react'
@@ -10,11 +9,14 @@ import {
   Send, 
   Sparkles, 
   Clock, 
-  Briefcase, 
   User, 
-  Building
+  Building,
+  Loader2,
+  Calendar,
+  DollarSign,
+  MessageSquare
 } from 'lucide-react'
-import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { FaGithub, FaLinkedin} from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 export default function ContactForm() {
@@ -30,22 +32,33 @@ export default function ContactForm() {
     message: '',
   })
 
-  // ✅ Formspree - No backend needed, just paste your Form ID
+  const FORMSPREE_ID = 'xgojzedd'
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          projectType: formData.projectType,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          message: formData.message,
+        }),
       })
 
       if (response.ok) {
-        toast.success('Message sent successfully! I\'ll get back to you soon.')
+        toast.success('✅ Message sent successfully!')
         setFormData({
           name: '',
           email: '',
@@ -57,10 +70,10 @@ export default function ContactForm() {
           message: '',
         })
       } else {
-        toast.error('Something went wrong. Please try again.')
+        toast.error('❌ Something went wrong. Please try again.')
       }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.')
+      toast.error('❌ Failed to send message. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -121,7 +134,6 @@ export default function ContactForm() {
                   Contact Info
                 </h3>
                 <div className="space-y-4">
-                  {/* Email */}
                   <motion.a
                     href="mailto:saramanzoor76@gmail.com"
                     whileHover={{ x: 5 }}
@@ -136,7 +148,6 @@ export default function ContactForm() {
                     </div>
                   </motion.a>
 
-                  {/* Phone */}
                   <motion.a
                     href="tel:+923164764391"
                     whileHover={{ x: 5 }}
@@ -151,7 +162,6 @@ export default function ContactForm() {
                     </div>
                   </motion.a>
 
-                  {/* Location */}
                   <motion.div
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#8B9A6B]/5 transition-all duration-300 group"
@@ -166,15 +176,14 @@ export default function ContactForm() {
                   </motion.div>
                 </div>
 
-                {/* Social Links */}
+                {/* ✅ Social Links with react-icons */}
                 <div className="mt-6 pt-6 border-t border-[#8B9A6B]/10">
                   <p className="text-xs text-[#4A4A4A]/60 mb-3">Connect with me</p>
                   <div className="flex gap-3">
                     {[
                       { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub' },
                       { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn' },
-                      { icon: FaTwitter, href: 'https://twitter.com/', label: 'Twitter' },
-                      { icon: FaInstagram, href: 'https://instagram.com/', label: 'Instagram' },
+                     
                     ].map((social, i) => (
                       <motion.a
                         key={i}
@@ -230,13 +239,14 @@ export default function ContactForm() {
               className="lg:col-span-3"
             >
               <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl transition-all duration-300">
+                {/* Name & Email */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
                     <input
                       type="text"
                       name="name"
-                      placeholder="Your Name *"
+                      placeholder="Full Name *"
                       required
                       value={formData.name}
                       onChange={handleChange}
@@ -248,7 +258,7 @@ export default function ContactForm() {
                     <input
                       type="email"
                       name="email"
-                      placeholder="Your Email *"
+                      placeholder="Email Address *"
                       required
                       value={formData.email}
                       onChange={handleChange}
@@ -257,13 +267,14 @@ export default function ContactForm() {
                   </div>
                 </div>
 
+                {/* Company & Phone */}
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
                   <div className="relative">
                     <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
                     <input
                       type="text"
                       name="company"
-                      placeholder="Company"
+                      placeholder="Company / Organization"
                       value={formData.company}
                       onChange={handleChange}
                       className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] placeholder-[#4A4A4A]/50 transition-all duration-300"
@@ -274,7 +285,7 @@ export default function ContactForm() {
                     <input
                       type="text"
                       name="phone"
-                      placeholder="Phone"
+                      placeholder="Phone Number"
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] placeholder-[#4A4A4A]/50 transition-all duration-300"
@@ -282,6 +293,7 @@ export default function ContactForm() {
                   </div>
                 </div>
 
+                {/* Project Type */}
                 <div className="mt-4">
                   <select
                     name="projectType"
@@ -289,64 +301,82 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
                   >
-                    <option value="">Select Project Type</option>
-                    <option value="fullstack">Full Stack Development</option>
-                    <option value="ai">AI/ML Solutions</option>
-                    <option value="frontend">Frontend Development</option>
-                    <option value="backend">Backend Development</option>
-                    <option value="consulting">Consulting</option>
+                    <option value="">Select Service Type</option>
+                    <option value="fullstack"> Full Stack Development</option>
+                    <option value="ai"> AI / Machine Learning</option>
+                    <option value="frontend"> Frontend Development</option>
+                    <option value="backend"> Backend Development</option>
+                    <option value="consulting"> Technical Consulting</option>
                   </select>
                 </div>
 
+                {/* Budget & Timeline */}
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                  <select
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="px-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
-                  >
-                    <option value="">Budget Range</option>
-                    <option value="1000-5000">$1,000 - $5,000</option>
-                    <option value="5000-10000">$5,000 - $10,000</option>
-                    <option value="10000-25000">$10,000 - $25,000</option>
-                    <option value="25000+">$25,000+</option>
-                  </select>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    className="px-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
-                  >
-                    <option value="">Timeline</option>
-                    <option value="1-2">ASAP (1-2 weeks)</option>
-                    <option value="1month">1 Month</option>
-                    <option value="2-3">2-3 Months</option>
-                    <option value="3-6">3-6 Months</option>
-                  </select>
+                  <div className="relative">
+                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
+                    >
+                      <option value="">Budget Range (PKR)</option>
+                      <option value="5000-15000">₨ 5,000 – ₨ 15,000</option>
+                      <option value="15000-30000">₨ 15,000 – ₨ 30,000</option>
+                      <option value="30000-50000">₨ 30,000 – ₨ 50,000</option>
+                      <option value="50000-100000">₨ 50,000 – ₨ 100,000</option>
+                      <option value="100000-250000">₨ 100,000 – ₨ 250,000</option>
+                      <option value="250000+">₨ 250,000+</option>
+                      <option value="negotiable"> Negotiable</option>
+                    </select>
+                  </div>
+
+                  <div className="relative">
+                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
+                    <select
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
+                    >
+                      <option value="">Project Timeline</option>
+                      <option value="1week"> 1 Week (Urgent)</option>
+                      <option value="2weeks"> 2 Weeks</option>
+                      <option value="1month"> 1 Month</option>
+                      <option value="2-3months"> 2-3 Months</option>
+                      <option value="3-6months"> 3-6 Months</option>
+                      <option value="flexible"> Flexible</option>
+                    </select>
+                  </div>
                 </div>
 
+                {/* Message */}
                 <div className="mt-4">
-                  <textarea
-                    name="message"
-                    placeholder="Tell me about your project *"
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] placeholder-[#4A4A4A]/50 resize-none transition-all duration-300"
-                  />
+                  <div className="relative">
+                    <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-[#8B9A6B]" />
+                    <textarea
+                      name="message"
+                      placeholder="Tell me about your project *"
+                      required
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] placeholder-[#4A4A4A]/50 resize-none transition-all duration-300"
+                    />
+                  </div>
                 </div>
 
+                {/* Submit Button */}
                 <motion.button
                   type="submit"
                   disabled={loading}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: loading ? 1 : 1.02 }}
+                  whileTap={{ scale: loading ? 1 : 0.98 }}
                   className="w-full mt-6 bg-gradient-to-r from-[#8B9A6B] to-[#6B7A5B] hover:from-[#6B7A5B] hover:to-[#5A6A4B] text-white px-8 py-3.5 rounded-xl transition-all duration-300 text-lg font-semibold shadow-lg shadow-[#8B9A6B]/30 hover:shadow-[#8B9A6B]/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <Loader2 className="w-5 h-5 animate-spin" />
                       Sending...
                     </div>
                   ) : (

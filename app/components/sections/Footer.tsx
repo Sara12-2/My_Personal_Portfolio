@@ -25,9 +25,21 @@ import {
   Monitor,
   Server,
   Wrench,
-  Home
+  Home,
+  Link,
+  MapPin,
+  Phone,
+  Send
 } from 'lucide-react'
-import { FaGithub, FaLinkedin, FaKaggle } from 'react-icons/fa'
+import { 
+  FaGithub, 
+  FaLinkedin, 
+  FaKaggle, 
+  FaHackerrank,
+  FaDiscord,
+  FaWhatsapp
+} from 'react-icons/fa'
+import { SiLeetcode } from 'react-icons/si'
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -44,6 +56,18 @@ export default function Footer() {
     { icon: Trophy, label: 'Hackathons', color: '#F1C40F' },
     { icon: Rocket, label: 'Innovation', color: '#1E90FF' },
     { icon: Globe, label: 'Remote Work', color: '#8B9A6B' },
+  ]
+
+  // ✅ REQUIRED SOCIAL LINKS
+  const socialLinks = [
+    { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
+    { icon: FaLinkedin, href: 'https://linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
+    { icon: FaKaggle, href: 'https://www.kaggle.com/saramanzoor', label: 'Kaggle', color: '#20BEFF' },
+    { icon: SiLeetcode, href: 'https://leetcode.com/u/sara12-2/', label: 'LeetCode', color: '#FFA116' },
+    { icon: FaHackerrank, href: 'https://www.hackerrank.com/profile/saramanzoor76', label: 'HackerRank', color: '#2EC866' },
+    { icon: FaDiscord, href: 'https://discord.com/', label: 'Discord', color: '#5865F2' },
+    { icon: FaWhatsapp, href: 'https://wa.me/923164764391', label: 'WhatsApp', color: '#25D366' },
+    { icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
   ]
 
   return (
@@ -152,7 +176,7 @@ export default function Footer() {
               </div>
             </motion.div>
 
-            {/* Connect & Availability */}
+            {/* Connect & Social */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -177,14 +201,9 @@ export default function Footer() {
                   Available for remote collaborations, hackathons, and innovative projects.
                 </p>
 
-                {/* Social Icons - Using react-icons */}
-                <div className="flex gap-3 pt-2 flex-wrap">
-                  {[
-                    { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
-                    { icon: FaLinkedin, href: 'https://linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
-                    { icon: FaKaggle, href: 'https://www.kaggle.com/', label: 'Kaggle', color: '#20BEFF' },
-                    { icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
-                  ].map((social, index) => (
+                {/* ✅ SOCIAL ICONS (Only Required) */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {socialLinks.map((social, index) => (
                     <motion.a
                       key={social.label}
                       href={social.href}

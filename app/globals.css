@@ -348,3 +348,20 @@ a:not([class*="bg-"]):not([class*="btn-"]):hover {
   --dark: #2C2C2C;
   --white: #FFFFFF;
 }
+/* GitHub Card - Dark Theme */
+.github-card { 
+    background: rgba(30, 59, 41, 0.4); 
+    border-radius: 16px; 
+    padding: 25px; 
+    border: 1px solid rgba(76,175,80,0.12); 
+    text-align: center; 
+    transition: 0.3s; 
+}
+.github-card:hover { 
+    border-color: rgba(76,175,80,0.35); 
+    transform: translateY(-3px); 
+}
+.github-card img { 
+    max-width: 100%; 
+    border-radius: 10px; 
+}
