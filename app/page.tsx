@@ -4,7 +4,8 @@ import Navigation from './components/sections/Navigation'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
 import Services from './components/sections/Services'
-import WorkWhyResume from './components/sections/WorkWhyResume'  // ← ✅ NEW
+import WorkWhyResume from './components/sections/WorkWhyResume'
+// import DevHatch from './components/sections/DevHatch'  // ← DELETE THIS LINE
 import Skills from './components/sections/Skill'
 import Projects from './components/sections/Projects'
 import Experience from './components/sections/Experience'
@@ -26,7 +27,8 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
-      <WorkWhyResume />              {/* ← ✅ NEW SECTION */}
+      <WorkWhyResume />
+      {/* <DevHatch /> */}  {/* ← DELETE THIS LINE */}
       <Skills />
       <Projects />
       <Experience />
