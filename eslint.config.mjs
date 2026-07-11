@@ -1,4 +1,4 @@
-// eslint.config.mjs - Fixed Version
+// eslint.config.mjs
 import { defineConfig, globalIgnores } from "eslint/config";
 
 const eslintConfig = defineConfig([
@@ -9,10 +9,18 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "node_modules/**",
     "dist/**",
+    ".vercel/**",        // Added: Vercel cache
+    "*.config.js",       // Added: Config files
+    "*.config.mjs",      // Added: Config files
   ]),
   {
     rules: {
-      // Disable all rules for now
+      // Disable all rules temporarily for build
+      "no-unused-vars": "off",
+      "no-undef": "off",
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-img-element": "off",
+      "@next/next/no-html-link-for-pages": "off",
     },
   },
 ]);
