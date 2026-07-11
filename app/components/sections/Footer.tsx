@@ -12,31 +12,19 @@ import {
   Trophy,
   Rocket,
   Globe,
-  Coffee,
   Sparkles,
   MessageCircle,
   Zap,
   Award,
-  Calendar,
   Layers,
   Terminal,
-  Database,
-  Cloud,
-  Monitor,
-  Server,
-  Wrench,
-  Home,
-  Link,
-  MapPin,
-  Phone,
-  Send
+  Home
 } from 'lucide-react'
 import { 
   FaGithub, 
   FaLinkedin, 
   FaKaggle, 
   FaHackerrank,
-  FaDiscord,
   FaWhatsapp
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
@@ -48,7 +36,7 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear()
 
-  // Quick links for what I do
+  // Services
   const services = [
     { icon: Code2, label: 'Web Development', color: '#8B9A6B' },
     { icon: Brain, label: 'AI/ML Solutions', color: '#8B5CF6' },
@@ -58,16 +46,50 @@ export default function Footer() {
     { icon: Globe, label: 'Remote Work', color: '#8B9A6B' },
   ]
 
-  // ✅ REQUIRED SOCIAL LINKS
+  // ✅ SOCIAL LINKS - Discord Removed
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
-    { icon: FaLinkedin, href: 'https://linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
-    { icon: FaKaggle, href: 'https://www.kaggle.com/saramanzoor', label: 'Kaggle', color: '#20BEFF' },
-    { icon: SiLeetcode, href: 'https://leetcode.com/u/sara12-2/', label: 'LeetCode', color: '#FFA116' },
-    { icon: FaHackerrank, href: 'https://www.hackerrank.com/profile/saramanzoor76', label: 'HackerRank', color: '#2EC866' },
-    { icon: FaDiscord, href: 'https://discord.com/', label: 'Discord', color: '#5865F2' },
-    { icon: FaWhatsapp, href: 'https://wa.me/923164764391', label: 'WhatsApp', color: '#25D366' },
-    { icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
+    { 
+      icon: FaGithub, 
+      href: 'https://github.com/Sara12-2', 
+      label: 'GitHub', 
+      color: '#2C2C2C' 
+    },
+    { 
+      icon: FaLinkedin, 
+      href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', 
+      label: 'LinkedIn', 
+      color: '#0A66C2' 
+    },
+    { 
+      icon: FaKaggle, 
+      href: 'https://www.kaggle.com/sara765', 
+      label: 'Kaggle', 
+      color: '#20BEFF' 
+    },
+    { 
+      icon: SiLeetcode, 
+      href: 'https://leetcode.com/u/Sara_34/', 
+      label: 'LeetCode', 
+      color: '#FFA116' 
+    },
+    { 
+      icon: FaHackerrank, 
+      href: 'https://www.hackerrank.com/profile/saramanzoor342', 
+      label: 'HackerRank', 
+      color: '#2EC866' 
+    },
+    { 
+      icon: FaWhatsapp, 
+      href: 'https://wa.me/923164764391', 
+      label: 'WhatsApp', 
+      color: '#25D366' 
+    },
+    { 
+      icon: Mail, 
+      href: 'mailto:saramanzoor76@gmail.com', 
+      label: 'Email', 
+      color: '#8B9A6B' 
+    },
   ]
 
   return (
@@ -153,11 +175,9 @@ export default function Footer() {
               </h4>
               <div className="flex flex-col gap-2.5">
                 {[
-                  { label: 'Home', href: '#', icon: Home },
+                  { label: 'Home', href: '/', icon: Home },
                   { label: 'Projects', href: '#projects', icon: Layers },
-                  { label: 'Skills', href: '#skills', icon: Terminal },
                   { label: 'Experience', href: '#experience', icon: Briefcase },
-                  { label: 'Certifications', href: '#certifications', icon: Award },
                   { label: 'Contact', href: '#contact', icon: MessageCircle },
                 ].map((link) => {
                   const Icon = link.icon
@@ -201,7 +221,7 @@ export default function Footer() {
                   Available for remote collaborations, hackathons, and innovative projects.
                 </p>
 
-                {/* ✅ SOCIAL ICONS (Only Required) */}
+                {/* SOCIAL ICONS - No Discord */}
                 <div className="flex flex-wrap gap-2 pt-2">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -250,7 +270,6 @@ export default function Footer() {
               </span>
               <span className="w-px h-3 bg-[#4A4A4A]/10" />
               <span className="flex items-center gap-1">
-                <Database className="w-3 h-3" />
                 Tailwind
               </span>
               <span className="w-px h-3 bg-[#4A4A4A]/10" />
