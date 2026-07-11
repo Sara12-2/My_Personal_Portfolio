@@ -221,7 +221,7 @@ export default function ContactForm() {
                   <span className="text-sm font-medium text-[#2ECC71]">Open to Work</span>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {['Remote', 'Hybrid', 'On-site'].map((type) => (
+                  {['Remote'].map((type) => (
                     <span key={type} className="px-3 py-1 bg-[#8B9A6B]/10 text-[#8B9A6B] text-xs rounded-full border border-[#8B9A6B]/20">
                       {type}
                     </span>
