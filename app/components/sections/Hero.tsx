@@ -1,51 +1,102 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Mail } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import Image from 'next/image'
 import {
   FaGithub,
   FaLinkedin,
   FaHackerrank,
   FaKaggle,
   FaAward,
-  FaBuilding,
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
+import devhatchLogo from '@/public/images/Companies/devhatch.png'
 
-export default function Hero() {
-  const cardRef = useRef<HTMLDivElement>(null)
+// ============================================
+// CONSTANTS
+// ============================================
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isClient, setIsClient] = useState(false)
-  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null)
+const ROLES = [
+  'Full Stack Developer',
+  'AI/ML Engineer',
+  'Computer Vision Engineer',
+  'NLP Engineer',
+]
+
+const SOCIAL_ICONS = [
+  {
+    icon: FaGithub,
+    href: 'https://github.com/Sara12-2',
+    label: 'GitHub',
+    color: '#2C2C2C',
+    type: 'icon',
+  },
+  {
+    icon: FaLinkedin,
+    href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/',
+    label: 'LinkedIn',
+    color: '#0A66C2',
+    type: 'icon',
+  },
+  {
+    icon: SiLeetcode,
+    href: 'https://leetcode.com/u/Sara_34/',
+    label: 'LeetCode',
+    color: '#FFA116',
+    type: 'icon',
+  },
+  {
+    icon: FaHackerrank,
+    href: 'https://www.hackerrank.com/profile/saramanzoor342',
+    label: 'HackerRank',
+    color: '#2EC866',
+    type: 'icon',
+  },
+  {
+    icon: FaKaggle,
+    href: 'https://www.kaggle.com/sara765',
+    label: 'Kaggle',
+    color: '#20BEFF',
+    type: 'icon',
+  },
+  {
+    icon: Mail,
+    href: 'mailto:saramanzoor76@gmail.com',
+    label: 'Email',
+    color: '#8B9A6B',
+    type: 'icon',
+  },
+  {
+    icon: FaAward,
+    href: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
+    label: 'GSSoC',
+    color: '#8B5CF6',
+    type: 'icon',
+  },
+  {
+    icon: devhatchLogo,
+    href: 'https://devhatchlabs.com',
+    label: 'DevHatch',
+    color: '#8B9A6B',
+    type: 'image',
+  },
+]
+
+// ============================================
+// CUSTOM HOOK: Typing Effect
+// ============================================
+
+const useTypingEffect = (roles: string[]) => {
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [textIndex, setTextIndex] = useState(0)
 
-  // ✅ REAL roles based on your actual skills
-  const roles = [
-    'Full Stack Developer',
-    'AI/ML Engineer',
-    'React.js Developer',
-    'Next.js Developer',
-    'Python Developer',
-    'Computer Vision Engineer',
-    'NLP Engineer',
-  ]
-
   useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  // Typing Effect - Smooth
-  useEffect(() => {
-    if (!isClient) return
-
     const currentRole = roles[textIndex % roles.length]
     const typingSpeed = isDeleting ? 30 : 80
     const pauseBeforeDelete = 2500
-    const pauseBeforeType = 500
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
@@ -58,91 +109,127 @@ export default function Hero() {
         if (displayText.length === 0) {
           setIsDeleting(false)
           setTextIndex((prev) => prev + 1)
-          setTimeout(() => {}, pauseBeforeType)
         }
       }
     }, typingSpeed)
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, textIndex, roles, isClient])
+  }, [displayText, isDeleting, textIndex, roles])
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  return { displayText }
+}
+
+// ============================================
+// CUSTOM HOOK: Orbit Radius (Responsive)
+// ============================================
+
+const useOrbitRadius = () => {
+  const [radius, setRadius] = useState(180)
+
+  useEffect(() => {
+    const updateRadius = () => {
+      const width = window.innerWidth
+      if (width < 480) setRadius(110)
+      else if (width < 640) setRadius(140)
+      else if (width < 768) setRadius(165)
+      else if (width < 1024) setRadius(190)
+      else setRadius(220)
+    }
+
+    updateRadius()
+    window.addEventListener('resize', updateRadius)
+    return () => window.removeEventListener('resize', updateRadius)
+  }, [])
+
+  return radius
+}
+
+// ============================================
+// CUSTOM HOOK: Particles (Responsive)
+// ============================================
+
+const useParticles = () => {
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: string; y: string; size: number; duration: number }>
+  >([])
+
+  useEffect(() => {
+    const count = window.innerWidth < 480 ? 6 : window.innerWidth < 768 ? 10 : 18
+    const newParticles = Array.from({ length: count }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100 + '%',
+      y: Math.random() * 100 + '%',
+      size: Math.random() * 5 + 2,
+      duration: Math.random() * 15 + 15,
+    }))
+    setParticles(newParticles)
+  }, [])
+
+  return particles
+}
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
+
+export default function Hero() {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  const { displayText } = useTypingEffect(ROLES)
+  const orbitRadius = useOrbitRadius()
+  const particles = useParticles()
+
+  // Fix hydration mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!cardRef.current) return
 
     const rect = cardRef.current.getBoundingClientRect()
-
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
 
     setMousePosition({ x, y })
-  }
+  }, [])
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setMousePosition({ x: 0, y: 0 })
     setHoveredIcon(null)
+  }, [])
+
+  const scrollToAbout = useCallback(() => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+
+  // Don't render on server to avoid hydration issues
+  if (!mounted) {
+    return (
+      <section className="relative overflow-hidden min-h-screen flex items-center justify-center pt-20">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <div className="h-8 w-32 bg-gray-200 rounded-full animate-pulse mx-auto lg:mx-0" />
+              <div className="h-12 w-64 bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
+              <div className="h-6 w-48 bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
+              <div className="h-16 w-full max-w-xl bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
+              <div className="flex gap-4 mt-6 justify-center lg:justify-start">
+                <div className="h-12 w-32 bg-gray-200 rounded-xl animate-pulse" />
+                <div className="h-12 w-32 bg-gray-200 rounded-xl animate-pulse" />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-[280px] h-[280px] rounded-full bg-gray-200 animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   }
-
-  const floatingParticles = isClient
-    ? [...Array(18)].map((_, i) => ({
-        id: i,
-        x: Math.random() * 100 + '%',
-        y: Math.random() * 100 + '%',
-        size: Math.random() * 5 + 2,
-        duration: Math.random() * 15 + 15,
-      }))
-    : []
-
-  // ✅ REAL SOCIAL LINKS
-  const socialIcons = [
-    {
-      icon: FaGithub,
-      href: 'https://github.com/Sara12-2',
-      label: 'GitHub',
-      color: '#2C2C2C',
-    },
-    {
-      icon: FaLinkedin,
-      href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/',
-      label: 'LinkedIn',
-      color: '#0A66C2',
-    },
-    {
-      icon: SiLeetcode,
-      href: 'https://leetcode.com/u/sara12-2/',
-      label: 'LeetCode',
-      color: '#FFA116',
-    },
-    {
-      icon: FaHackerrank,
-      href: 'https://www.hackerrank.com/profile/saramanzoor76',
-      label: 'HackerRank',
-      color: '#2EC866',
-    },
-    {
-      icon: FaKaggle,
-      href: 'https://www.kaggle.com/saramanzoor',
-      label: 'Kaggle',
-      color: '#20BEFF',
-    },
-    {
-      icon: Mail,
-      href: 'mailto:saramanzoor76@gmail.com',
-      label: 'Email',
-      color: '#8B9A6B',
-    },
-    {
-      icon: FaAward,
-      href: 'https://gssoc.girlscript.tech/',
-      label: 'GSSoC',
-      color: '#8B5CF6',
-    },
-    {
-      icon: FaBuilding,
-      href: 'https://devhatch.vercel.app/',
-      label: 'DevHatch',
-      color: '#8B9A6B',
-    },
-  ]
 
   return (
     <section
@@ -150,43 +237,51 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FAF8F5] via-[#F5F5F0] to-[#F8F6F0]" />
+      {/* ===== BACKGROUND ===== */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FAF8F5] via-[#F5F5F0] to-[#F8F6F0]" aria-hidden="true" />
 
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]" />
-      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#8B9A6B]/5 blur-[160px]" />
+      <div
+        className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#8B9A6B]/5 blur-[160px]"
+        aria-hidden="true"
+      />
 
-      {/* Floating particles */}
-      {isClient && (
-        <div className="absolute inset-0 overflow-hidden">
-          {floatingParticles.map((particle) => (
-            <motion.div
-              key={particle.id}
-              className="absolute rounded-full bg-[#8B9A6B]/20"
-              style={{
-                width: particle.size,
-                height: particle.size,
-                left: particle.x,
-                top: particle.y,
-              }}
-              animate={{
-                y: [-30, 30, -30],
-                opacity: [0.2, 0.8, 0.2],
-              }}
-              transition={{
-                duration: particle.duration,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* ===== FLOATING PARTICLES ===== */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-[#8B9A6B]/20"
+            style={{
+              width: particle.size,
+              height: particle.size,
+              left: particle.x,
+              top: particle.y,
+            }}
+            animate={{
+              y: [-30, 30, -30],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT CONTENT */}
+      {/* ===== MAIN CONTENT ===== */}
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* ===== LEFT CONTENT ===== */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
@@ -194,38 +289,40 @@ export default function Hero() {
             className="text-center lg:text-left"
           >
             {/* Open to Work Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full px-5 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-6">
               <span className="w-2 h-2 rounded-full bg-[#8B9A6B] animate-pulse" />
-              <span className="text-[#8B9A6B] font-semibold text-sm tracking-wide">
+              <span className="text-[#8B9A6B] font-semibold text-xs sm:text-sm tracking-wide">
                 Open To Work
               </span>
             </div>
 
-            {/* Name - One Line */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2C2C2C] leading-tight tracking-tight">
-              Sara <span className="text-[#8B9A6B] font-extrabold">Manzoor</span>
+            {/* Name */}
+            <h1 className="flex flex-wrap justify-center lg:justify-start gap-1 text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2C2C2C] leading-tight tracking-tight">
+              <span>Sara</span>
+              <span className="text-[#8B9A6B] font-extrabold">Manzoor</span>
             </h1>
 
-            {/* Typing Effect - Clean & Smooth */}
-            <div className="h-12 mt-4 flex items-center justify-center lg:justify-start">
-              <span className="text-xl sm:text-2xl font-semibold text-[#4A4A4A]">
-                {displayText}
-                <span className="inline-block w-0.5 h-7 ml-0.5 bg-[#8B9A6B] animate-pulse" />
+            {/* Typing Effect */}
+            <div className="min-h-[48px] sm:min-h-[56px] mt-3 sm:mt-4 flex items-center justify-center lg:justify-start">
+              <span className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#4A4A4A]">
+                {displayText || 'Full Stack Developer'}
+                <span className="inline-block w-0.5 h-5 sm:h-6 ml-0.5 bg-[#8B9A6B] animate-pulse" />
               </span>
             </div>
 
-            {/* ✅ SINGLE LINE - Professional About You */}
-            <p className="mt-6 text-base sm:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              COO at DevHatch Labs — building AI-powered solutions and scalable web applications with modern technologies.
+            {/* Subtitle */}
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Building intelligent web applications that combine cutting-edge AI
+              with seamless user experiences.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
+            {/* ===== CTAs ===== */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center lg:justify-start">
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#contact"
-                className="px-8 py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300"
+                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap"
               >
                 Hire Me
               </motion.a>
@@ -234,34 +331,25 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#projects"
-                className="px-8 py-3.5 rounded-xl border-2 border-[#8B9A6B] text-[#8B9A6B] hover:bg-[#8B9A6B]/10 font-semibold transition-all duration-300"
+                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl border-2 border-[#8B9A6B] text-[#8B9A6B] hover:bg-[#8B9A6B]/10 font-semibold text-sm sm:text-base transition-all duration-300 text-center whitespace-nowrap"
               >
                 View Projects
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="#about"
-                className="px-8 py-3.5 rounded-xl bg-[#6B7A5B] hover:bg-[#5A6A4B] text-white font-semibold shadow-lg shadow-[#8B9A6B]/20 transition-all duration-300"
-              >
-                About Me
               </motion.a>
             </div>
           </motion.div>
 
-          {/* RIGHT CONTENT - Image with Orbit Icons */}
+          {/* ===== RIGHT CONTENT - Image with Orbit Icons ===== */}
           <motion.div
             ref={cardRef}
             style={{
               transform: `perspective(1200px)
-              rotateX(${mousePosition.y * 10}deg)
-              rotateY(${mousePosition.x * 10}deg)`,
+                rotateX(${mousePosition.y * 10}deg)
+                rotateY(${mousePosition.x * 10}deg)`,
               transition: '0.25s',
             }}
             className="relative flex justify-center items-center"
           >
-            <div className="relative w-[380px] h-[380px] md:w-[420px] md:h-[420px] lg:w-[500px] lg:h-[500px]">
+            <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px]">
               {/* Outer Glow */}
               <motion.div
                 animate={{
@@ -277,7 +365,7 @@ export default function Hero() {
               />
 
               {/* Decorative Rings */}
-              <div className="absolute inset-8 rounded-full border border-[#8B9A6B]/15" />
+              <div className="absolute inset-6 sm:inset-8 rounded-full border border-[#8B9A6B]/15" />
 
               <motion.div
                 animate={{ rotate: 360 }}
@@ -286,7 +374,7 @@ export default function Hero() {
                   repeat: Infinity,
                   ease: 'linear',
                 }}
-                className="absolute inset-3 rounded-full border border-dashed border-[#8B9A6B]/20"
+                className="absolute inset-3 sm:inset-4 rounded-full border border-dashed border-[#8B9A6B]/20"
               />
 
               <motion.div
@@ -296,22 +384,23 @@ export default function Hero() {
                   repeat: Infinity,
                   ease: 'linear',
                 }}
-                className="absolute inset-[-25px] rounded-full border border-[#8B9A6B]/10"
+                className="absolute inset-[-15px] sm:inset-[-25px] rounded-full border border-[#8B9A6B]/10"
               />
 
-              {/* Profile Image */}
+              {/* ===== PROFILE IMAGE ===== */}
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 transition={{
                   type: 'spring',
                   stiffness: 200,
                 }}
-                className="absolute inset-14 rounded-full overflow-hidden border-[5px] border-[#8B9A6B] bg-white shadow-[0_25px_80px_rgba(139,154,107,.25)]"
+                className="absolute inset-10 sm:inset-14 rounded-full overflow-hidden border-[4px] sm:border-[5px] border-[#8B9A6B] bg-white shadow-[0_25px_80px_rgba(139,154,107,.25)]"
               >
                 <img
                   src="/images/profile.jpg"
-                  alt="Sara Manzoor"
+                  alt="Sara Manzoor - Full Stack Developer"
                   className="w-full h-full object-cover"
+                  loading="eager"
                   onError={(e: any) => {
                     e.target.src =
                       'https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=600'
@@ -319,7 +408,7 @@ export default function Hero() {
                 />
               </motion.div>
 
-              {/* Orbit Icons */}
+              {/* ===== ORBIT ICONS ===== */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{
@@ -329,10 +418,9 @@ export default function Hero() {
                 }}
                 className="absolute inset-0"
               >
-                {socialIcons.map((social, index) => {
+                {SOCIAL_ICONS.map((social, index) => {
                   const Icon = social.icon
-                  const angle = (360 / socialIcons.length) * index
-                  const radius = 220
+                  const angle = (360 / SOCIAL_ICONS.length) * index
 
                   return (
                     <div
@@ -341,7 +429,7 @@ export default function Hero() {
                       style={{
                         transform: `
                           rotate(${angle}deg)
-                          translate(${radius}px)
+                          translate(${orbitRadius}px)
                           rotate(-${angle}deg)
                         `,
                         transformOrigin: 'center',
@@ -363,40 +451,63 @@ export default function Hero() {
                           onHoverStart={() => setHoveredIcon(social.label)}
                           onHoverEnd={() => setHoveredIcon(null)}
                           className="group relative flex items-center justify-center"
+                          aria-label={social.label}
                         >
                           <div
                             className="
-                              w-12 h-12 md:w-14 md:h-14 rounded-full backdrop-blur-xl bg-white/85
+                              w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14
+                              rounded-full backdrop-blur-xl bg-white/85
                               border border-white shadow-xl flex items-center justify-center
                               transition-all duration-300
                             "
                             style={{
-                              boxShadow: `0 12px 35px ${social.color}25`,
+                              boxShadow: `0 8px 30px ${social.color}25`,
                             }}
                           >
-                            <Icon size={22} style={{ color: social.color }} />
+                            {social.type === 'image' ? (
+                              <Image
+                                src={Icon}
+                                alt={social.label}
+                                width={20}
+                                height={20}
+                                className="rounded-full object-contain w-5 h-5 sm:w-6 sm:h-6"
+                              />
+                            ) : (
+                              <Icon
+                                size={18}
+                                className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]"
+                                style={{ color: social.color }}
+                              />
+                            )}
                           </div>
 
                           {/* Glow Effect */}
                           <div
-                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition duration-300"
+                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition duration-300 pointer-events-none"
                             style={{ background: social.color }}
                           />
 
-                          {/* Olive Theme Tooltip */}
-                          <span
-                            className={`
-                              absolute top-14 md:top-16 whitespace-nowrap rounded-full
-                              px-3 py-1 text-xs font-medium
-                              transition-all duration-300
-                              ${hoveredIcon === social.label
-                                ? 'opacity-100 scale-100 bg-[#8B9A6B] text-white shadow-lg shadow-[#8B9A6B]/30'
-                                : 'opacity-0 scale-90 bg-[#2C2C2C] text-white'
-                              }
-                            `}
-                          >
-                            {social.label}
-                          </span>
+                          {/* Tooltip */}
+                          <AnimatePresence>
+                            {hoveredIcon === social.label && (
+                              <motion.span
+                                initial={{ opacity: 0, scale: 0.9, y: 0 }}
+                                animate={{ opacity: 1, scale: 1, y: -4 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 0 }}
+                                className={`
+                                  absolute top-12 xs:top-13 sm:top-14 md:top-16
+                                  whitespace-nowrap rounded-full
+                                  px-2.5 sm:px-3 py-0.5 sm:py-1
+                                  text-[10px] sm:text-xs font-medium
+                                  bg-[#8B9A6B] text-white
+                                  shadow-lg shadow-[#8B9A6B]/30
+                                  pointer-events-none
+                                `}
+                              >
+                                {social.label}
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
                         </motion.a>
                       </motion.div>
                     </div>
@@ -404,7 +515,7 @@ export default function Hero() {
                 })}
               </motion.div>
 
-              {/* Floating Dots */}
+              {/* ===== FLOATING DOTS ===== */}
               <motion.div
                 animate={{
                   y: [0, -12, 0],
@@ -414,7 +525,7 @@ export default function Hero() {
                   duration: 3,
                   repeat: Infinity,
                 }}
-                className="absolute top-10 right-16 w-4 h-4 rounded-full bg-[#8B9A6B] shadow-lg shadow-[#8B9A6B]/40"
+                className="absolute top-8 sm:top-10 right-12 sm:right-16 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#8B9A6B] shadow-lg shadow-[#8B9A6B]/40"
               />
 
               <motion.div
@@ -426,7 +537,7 @@ export default function Hero() {
                   duration: 2.8,
                   repeat: Infinity,
                 }}
-                className="absolute bottom-16 left-10 w-3 h-3 rounded-full bg-[#8B9A6B]/70"
+                className="absolute bottom-12 sm:bottom-16 left-8 sm:left-10 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#8B9A6B]/70"
               />
 
               <motion.div
@@ -438,7 +549,7 @@ export default function Hero() {
                   duration: 4,
                   repeat: Infinity,
                 }}
-                className="absolute top-1/2 left-0 w-2 h-2 rounded-full bg-[#8B9A6B]"
+                className="absolute top-1/2 -left-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#8B9A6B]"
               />
 
               <motion.div
@@ -450,22 +561,21 @@ export default function Hero() {
                   duration: 5,
                   repeat: Infinity,
                 }}
-                className="absolute right-0 top-1/2 w-2 h-2 rounded-full bg-[#8B9A6B]"
+                className="absolute top-1/2 -right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#8B9A6B]"
               />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* ===== SCROLL INDICATOR ===== */}
       <motion.button
-        onClick={() =>
-          document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-        }
+        onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center group"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center group cursor-pointer"
+        aria-label="Scroll to About section"
       >
         <motion.span
           animate={{
@@ -475,7 +585,7 @@ export default function Hero() {
             duration: 2,
             repeat: Infinity,
           }}
-          className="text-xs tracking-[0.35em] uppercase text-[#8B9A6B] mb-2"
+          className="text-[10px] sm:text-xs tracking-[0.35em] uppercase text-[#8B9A6B] mb-1.5 sm:mb-2"
         >
           Explore
         </motion.span>
@@ -489,12 +599,12 @@ export default function Hero() {
             repeat: Infinity,
           }}
           className="
-            w-12 h-12 rounded-full bg-white/80 backdrop-blur-lg
+            w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-lg
             border border-[#8B9A6B]/20 shadow-xl flex items-center justify-center
             group-hover:bg-[#8B9A6B] transition-all duration-300
           "
         >
-          <ChevronDown className="w-6 h-6 text-[#8B9A6B] group-hover:text-white transition-colors" />
+          <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-[#8B9A6B] group-hover:text-white transition-colors" />
         </motion.div>
       </motion.button>
     </section>
