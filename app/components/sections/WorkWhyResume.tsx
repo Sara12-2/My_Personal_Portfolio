@@ -20,7 +20,9 @@ import {
   Code2,
   Brain,
   Globe,
-  Coffee
+  Coffee,
+  GraduationCap,
+  Laptop
 } from 'lucide-react'
 
 // ============================================
@@ -60,21 +62,21 @@ const workProcess = [
 
 const whyHireMe = [
   { 
-    title: '3+ Years Experience',
-    description: 'Full Stack & AI/ML development with real-world project delivery.',
+    title: '1+ Year Experience',
+    description: 'Hands-on experience with React, Next.js, Flask, and AI/ML projects.',
     icon: Briefcase,
     color: '#8B9A6B',
   },
   { 
-    title: '30+ Projects Delivered',
-    description: 'Proven track record across web development, AI/ML, and full stack.',
-    icon: Award,
+    title: 'University Projects',
+    description: '10+ academic projects including web apps, dashboards, and ML models.',
+    icon: GraduationCap,
     color: '#8B5CF6',
   },
   { 
-    title: 'Remote Ready',
-    description: 'Experienced in remote collaboration with global teams and clients.',
-    icon: Globe,
+    title: 'Freelance Ready',
+    description: 'Starting freelancing journey with a strong portfolio and technical skills.',
+    icon: Laptop,
     color: '#22C55E',
   },
   { 
@@ -262,7 +264,7 @@ export default function WorkWhyResume() {
               </motion.a>
             </div>
 
-            {/* Quick Resume Stats */}
+            {/* ✅ Updated Resume Stats — Realistic */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -271,8 +273,8 @@ export default function WorkWhyResume() {
               className="mt-10 flex flex-wrap justify-center gap-6"
             >
               {[
-                { label: 'Experience', value: '3+ Years', icon: Briefcase },
-                { label: 'Projects', value: '30+', icon: Code2 },
+                { label: 'Experience', value: '1+ Year', icon: Briefcase },
+                { label: 'Projects', value: '15+', icon: Code2 },
                 { label: 'Certifications', value: '30+', icon: Award },
                 { label: 'Internships', value: '3', icon: Users },
               ].map((stat) => (
@@ -296,7 +298,7 @@ export default function WorkWhyResume() {
             >
               <p className="text-xs text-[#4A4A4A]/40 flex items-center justify-center gap-2">
                 <Coffee className="w-3 h-3" />
-                Open to opportunities • Available for remote work
+                Open to freelancing • Available for remote work
               </p>
             </motion.div>
           </div>
