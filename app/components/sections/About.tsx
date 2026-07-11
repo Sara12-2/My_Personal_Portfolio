@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, Variants } from 'framer-motion'  // ← Variants import
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
@@ -92,7 +92,7 @@ export default function About() {
 
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -103,7 +103,8 @@ export default function About() {
     },
   }
 
-  const itemVariants = {
+  // ✅ FIXED: Variants type added
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
@@ -116,7 +117,8 @@ export default function About() {
     },
   }
 
-  const imageVariants = {
+  // ✅ FIXED: Variants type added
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,

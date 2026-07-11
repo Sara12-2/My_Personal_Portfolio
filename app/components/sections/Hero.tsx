@@ -25,65 +25,6 @@ const ROLES = [
   'NLP Engineer',
 ]
 
-const SOCIAL_ICONS = [
-  {
-    icon: FaGithub,
-    href: 'https://github.com/Sara12-2',
-    label: 'GitHub',
-    color: '#2C2C2C',
-    type: 'icon',
-  },
-  {
-    icon: FaLinkedin,
-    href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/',
-    label: 'LinkedIn',
-    color: '#0A66C2',
-    type: 'icon',
-  },
-  {
-    icon: SiLeetcode,
-    href: 'https://leetcode.com/u/Sara_34/',
-    label: 'LeetCode',
-    color: '#FFA116',
-    type: 'icon',
-  },
-  {
-    icon: FaHackerrank,
-    href: 'https://www.hackerrank.com/profile/saramanzoor342',
-    label: 'HackerRank',
-    color: '#2EC866',
-    type: 'icon',
-  },
-  {
-    icon: FaKaggle,
-    href: 'https://www.kaggle.com/sara765',
-    label: 'Kaggle',
-    color: '#20BEFF',
-    type: 'icon',
-  },
-  {
-    icon: Mail,
-    href: 'mailto:saramanzoor76@gmail.com',
-    label: 'Email',
-    color: '#8B9A6B',
-    type: 'icon',
-  },
-  {
-    icon: FaAward,
-    href: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
-    label: 'GSSoC',
-    color: '#8B5CF6',
-    type: 'icon',
-  },
-  {
-    icon: devhatchLogo,
-    href: 'https://devhatchlabs.com',
-    label: 'DevHatch',
-    color: '#8B9A6B',
-    type: 'image',
-  },
-]
-
 // ============================================
 // CUSTOM HOOK: Typing Effect
 // ============================================
@@ -205,6 +146,66 @@ export default function Hero() {
   const scrollToAbout = useCallback(() => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
   }, [])
+
+  // SOCIAL ICONS - Inside component so we can use mounted state
+  const SOCIAL_ICONS = [
+    {
+      icon: FaGithub,
+      href: 'https://github.com/Sara12-2',
+      label: 'GitHub',
+      color: '#2C2C2C',
+      type: 'icon' as const,
+    },
+    {
+      icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/',
+      label: 'LinkedIn',
+      color: '#0A66C2',
+      type: 'icon' as const,
+    },
+    {
+      icon: SiLeetcode,
+      href: 'https://leetcode.com/u/Sara_34/',
+      label: 'LeetCode',
+      color: '#FFA116',
+      type: 'icon' as const,
+    },
+    {
+      icon: FaHackerrank,
+      href: 'https://www.hackerrank.com/profile/saramanzoor342',
+      label: 'HackerRank',
+      color: '#2EC866',
+      type: 'icon' as const,
+    },
+    {
+      icon: FaKaggle,
+      href: 'https://www.kaggle.com/sara765',
+      label: 'Kaggle',
+      color: '#20BEFF',
+      type: 'icon' as const,
+    },
+    {
+      icon: Mail,
+      href: 'mailto:saramanzoor76@gmail.com',
+      label: 'Email',
+      color: '#8B9A6B',
+      type: 'icon' as const,
+    },
+    {
+      icon: FaAward,
+      href: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
+      label: 'GSSoC',
+      color: '#8B5CF6',
+      type: 'icon' as const,
+    },
+    {
+      icon: devhatchLogo,
+      href: 'https://devhatchlabs.com',
+      label: 'DevHatch',
+      color: '#8B9A6B',
+      type: 'image' as const,
+    },
+  ]
 
   // Don't render on server to avoid hydration issues
   if (!mounted) {
@@ -464,20 +465,29 @@ export default function Hero() {
                               boxShadow: `0 8px 30px ${social.color}25`,
                             }}
                           >
+                            {/* ✅ FIXED: Proper type checking */}
                             {social.type === 'image' ? (
-                              <Image
-                                src={Icon}
+                              // For images (devhatchLogo)
+                              <img
+                                src={typeof Icon === 'object' && 'src' in Icon ? (Icon as any).src : '/images/Companies/devhatch.png'}
                                 alt={social.label}
-                                width={20}
-                                height={20}
-                                className="rounded-full object-contain w-5 h-5 sm:w-6 sm:h-6"
+                                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=DevHatch&background=8B9A6B&color=fff&size=100'
+                                }}
                               />
                             ) : (
-                              <Icon
-                                size={18}
-                                className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]"
-                                style={{ color: social.color }}
-                              />
+                              // For Lucide and React Icons - Render as component
+                              (() => {
+                                const IconComponent = Icon as any
+                                return (
+                                  <IconComponent
+                                    size={18}
+                                    className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]"
+                                    style={{ color: social.color }}
+                                  />
+                                )
+                              })()
                             )}
                           </div>
 
