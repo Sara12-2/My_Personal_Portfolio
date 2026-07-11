@@ -259,8 +259,97 @@ button[class*="text-dark"] {
 }
 
 /* ============================================ */
-/* FIX: GitHub Calendar */
+/* ✅ FIX: GitHub Calendar - Olive Theme */
 /* ============================================ */
+
+/* Force GitHub Calendar to use Olive Theme */
+.react-github-calendar {
+  font-family: inherit !important;
+}
+
+/* Calendar Container */
+.react-github-calendar .calendar {
+  background: transparent !important;
+}
+
+/* All Calendar Days - Override Default Colors */
+.react-github-calendar .ContributionCalendar-day {
+  border-radius: 3px !important;
+  transition: all 0.2s ease !important;
+  border: 1px solid transparent !important;
+}
+
+/* Level 0 - No contributions */
+.react-github-calendar .ContributionCalendar-day[data-level="0"] {
+  background-color: #e8ece8 !important;
+  border-color: #d5dcd5 !important;
+}
+
+/* Level 1 - Low contribution */
+.react-github-calendar .ContributionCalendar-day[data-level="1"] {
+  background-color: #C5D4B5 !important;
+  border-color: #b8c9a8 !important;
+}
+
+/* Level 2 - Medium contribution */
+.react-github-calendar .ContributionCalendar-day[data-level="2"] {
+  background-color: #A8B89A !important;
+  border-color: #9aab8c !important;
+}
+
+/* Level 3 - High contribution */
+.react-github-calendar .ContributionCalendar-day[data-level="3"] {
+  background-color: #8B9A6B !important;
+  border-color: #7d8c5e !important;
+}
+
+/* Level 4 - Very high contribution */
+.react-github-calendar .ContributionCalendar-day[data-level="4"] {
+  background-color: #6B8A4A !important;
+  border-color: #5d7a3e !important;
+}
+
+/* Calendar Day Hover - Olive Only */
+.react-github-calendar .ContributionCalendar-day:hover {
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px #8B9A6B !important;
+  z-index: 10 !important;
+  border-radius: 3px !important;
+}
+
+/* Tooltip on hover */
+.react-github-calendar .ContributionCalendar-day .tooltip {
+  background: #2C2C2C !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  padding: 4px 8px !important;
+  border: 1px solid #8B9A6B !important;
+}
+
+/* Month Labels */
+.react-github-calendar .calendar .month-label {
+  color: #2C2C2C !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+
+/* Day Labels (Mon, Wed, Fri) */
+.react-github-calendar .calendar .day-label {
+  color: #4A4A4A !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+}
+
+/* Legend */
+.react-github-calendar .legend {
+  color: #4A4A4A !important;
+  font-size: 11px !important;
+}
+
+.react-github-calendar .legend .legend-item {
+  color: #4A4A4A !important;
+}
 
 /* Loading Indicator */
 .react-github-calendar .loading {
@@ -273,40 +362,9 @@ button[class*="text-dark"] {
   border-top-color: #6B8A4A !important;
 }
 
-/* Hover - Olive Only */
-.react-github-calendar .ContributionCalendar-day[data-level="0"]:hover {
-  background-color: #C5D4B5 !important;
-  transform: scale(1.25) !important;
-  box-shadow: 0 0 0 2px #8B9A6B !important;
-  z-index: 10 !important;
-}
-
-.react-github-calendar .ContributionCalendar-day[data-level="1"]:hover {
-  background-color: #A8B89A !important;
-  transform: scale(1.25) !important;
-  box-shadow: 0 0 0 2px #8B9A6B !important;
-  z-index: 10 !important;
-}
-
-.react-github-calendar .ContributionCalendar-day[data-level="2"]:hover {
-  background-color: #8B9A6B !important;
-  transform: scale(1.25) !important;
-  box-shadow: 0 0 0 2px #6B8A4A !important;
-  z-index: 10 !important;
-}
-
-.react-github-calendar .ContributionCalendar-day[data-level="3"]:hover {
-  background-color: #6B8A4A !important;
-  transform: scale(1.25) !important;
-  box-shadow: 0 0 0 2px #4A6B2A !important;
-  z-index: 10 !important;
-}
-
-.react-github-calendar .ContributionCalendar-day[data-level="4"]:hover {
-  background-color: #4A6B2A !important;
-  transform: scale(1.25) !important;
-  box-shadow: 0 0 0 2px #2A4B1A !important;
-  z-index: 10 !important;
+/* Error message */
+.react-github-calendar .error {
+  color: #8B9A6B !important;
 }
 
 /* ============================================ */
@@ -348,20 +406,38 @@ a:not([class*="bg-"]):not([class*="btn-"]):hover {
   --dark: #2C2C2C;
   --white: #FFFFFF;
 }
-/* GitHub Card - Dark Theme */
+
+/* ✅ GitHub Card - Olive Theme */
 .github-card { 
-    background: rgba(30, 59, 41, 0.4); 
-    border-radius: 16px; 
-    padding: 25px; 
-    border: 1px solid rgba(76,175,80,0.12); 
-    text-align: center; 
-    transition: 0.3s; 
+  background: rgba(30, 59, 41, 0.4); 
+  border-radius: 16px; 
+  padding: 25px; 
+  border: 1px solid rgba(139, 154, 107, 0.2); 
+  text-align: center; 
+  transition: 0.3s; 
 }
 .github-card:hover { 
-    border-color: rgba(76,175,80,0.35); 
-    transform: translateY(-3px); 
+  border-color: rgba(139, 154, 107, 0.5); 
+  transform: translateY(-3px); 
 }
 .github-card img { 
-    max-width: 100%; 
-    border-radius: 10px; 
+  max-width: 100%; 
+  border-radius: 10px; 
+}
+
+/* ✅ GitHub Activity Component Override */
+#github .react-github-calendar .ContributionCalendar-day[data-level="0"] {
+  background-color: #e8ece8 !important;
+}
+#github .react-github-calendar .ContributionCalendar-day[data-level="1"] {
+  background-color: #C5D4B5 !important;
+}
+#github .react-github-calendar .ContributionCalendar-day[data-level="2"] {
+  background-color: #A8B89A !important;
+}
+#github .react-github-calendar .ContributionCalendar-day[data-level="3"] {
+  background-color: #8B9A6B !important;
+}
+#github .react-github-calendar .ContributionCalendar-day[data-level="4"] {
+  background-color: #6B8A4A !important;
 }
