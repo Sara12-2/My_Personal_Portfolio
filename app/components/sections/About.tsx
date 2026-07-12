@@ -8,9 +8,7 @@ import {
   Briefcase, 
   Code2, 
   Award, 
-  GraduationCap, 
   MapPin, 
-  Calendar, 
   Sparkles, 
   ArrowRight 
 } from 'lucide-react'
@@ -103,7 +101,6 @@ export default function About() {
     },
   }
 
-  // ✅ FIXED: Variants type added
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 25 },
     visible: {
@@ -117,7 +114,6 @@ export default function About() {
     },
   }
 
-  // ✅ FIXED: Variants type added
   const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: {
@@ -336,47 +332,41 @@ export default function About() {
                   <span className="text-[#8B9A6B]">Sara Manzoor</span>
                 </h3>
               </motion.div>
-              
+
               <motion.p
                 variants={itemVariants}
                 className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
               >
-                Full Stack Developer & AI Engineer with{' '}
-                <span className="text-[#8B9A6B] font-semibold">1+ year</span> of experience. 
-                Currently <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>.
+                I'm a <span className="text-[#8B9A6B] font-semibold">Full Stack Developer</span> and{' '}
+                <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> passionate about
+                building intelligent, scalable, and user-centric digital solutions. Currently serving as{' '}
+                <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, where I
+                develop innovative software and explore how AI can solve real-world challenges.
               </motion.p>
-              
+
               <motion.p
                 variants={itemVariants}
                 className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
               >
-                Building scalable web apps with{' '}
-                <span className="text-[#8B9A6B] font-medium">React, Next.js, Python</span>
-                {' '}and AI solutions with{' '}
-                <span className="text-[#8B9A6B] font-medium">ML, NLP & Computer Vision</span>.
+                My expertise spans full-stack development —{' '}
+                <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, MySQL</span>
+                {' '}— alongside{' '}
+                <span className="text-[#8B9A6B] font-medium">Machine Learning, NLP &amp; Computer Vision</span>,
+                with a growing focus on <span className="text-[#8B9A6B] font-medium">RAG and LLMs</span>.
               </motion.p>
 
-              {/* ===== EDUCATION ===== */}
-
-              <motion.div
+              <motion.p
                 variants={itemVariants}
-                className="bg-white/50 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-[#8B9A6B]/10"
+                className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
               >
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-[#8B9A6B]" />
-                    <span className="text-xs sm:text-sm font-medium text-[#2C2C2C]">BS Computer Science</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-[#8B9A6B]" />
-                    <span className="text-[10px] sm:text-xs text-[#4A4A4A]/70">2024 – 2028</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-[#8B9A6B]" />
-                    <span className="text-[10px] sm:text-xs text-[#4A4A4A]/70">Layyah, Pakistan</span>
-                  </div>
-                </div>
-              </motion.div>
+                I enjoy turning ideas into practical products — from business systems to AI-powered
+                applications — writing clean code, crafting meaningful experiences, and constantly
+                learning. Let's build something innovative together.
+              </motion.p>
+
+              {/* ===== LOCATION ===== */}
+
+        
 
               {/* ===== STATS ===== */}
 

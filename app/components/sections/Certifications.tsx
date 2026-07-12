@@ -276,6 +276,50 @@ const certifications = [
     logo: '/images/honors/bise-multan.png',
     credentialLink: '#',
   },
+
+  // ============ SKILL BADGES (2) ============
+  {
+    id: 27,
+    title: 'Python (Basic)',
+    issuer: 'HackerRank',
+    date: 'Jun 2026',
+    skills: ['Python', 'Problem Solving', 'Programming Basics'],
+    icon: Code2,
+    logo: '/images/certificates/hackerrank.png',
+    credentialLink: '#',
+  },
+  {
+    id: 28,
+    title: 'Python',
+    issuer: 'Kaggle',
+    date: 'Jul 2026',
+    skills: ['Python', 'Programming Basics', 'Data Types'],
+    icon: Code2,
+    logo: '/images/certificates/kaggle.png',
+    credentialLink: '#',
+  },
+
+  // ============ INTERNSHIP COMPLETION CERTIFICATES (2) ============
+  {
+    id: 29,
+    title: 'Internship Completion Certificate — Web Development',
+    issuer: 'Afynix Digital',
+    date: 'Jun 2026',
+    skills: ['React.js', 'Web Development', 'Internship'],
+    icon: Briefcase,
+    logo: '/images/companies/afynix.png',
+    credentialLink: '#',
+  },
+  {
+    id: 30,
+    title: 'Internship Completion Certificate — Machine Learning',
+    issuer: 'SAM AI Technologies',
+    date: 'May 2026',
+    skills: ['Machine Learning', 'Python', 'Internship'],
+    icon: Brain,
+    logo: '/images/companies/sam-ai.png',
+    credentialLink: '/certificates/sam-ai-certificate.pdf',
+  },
 ]
 
 export default function Certifications() {

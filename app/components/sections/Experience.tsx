@@ -9,16 +9,14 @@ import {
   Sparkles,
   Code2,
   Brain,
-  Monitor,
   Award,
-  Clock,
   Users,
   FolderGit2,
   Rocket,
   Eye,
   FileCheck,
   FileBadge,
-  Server
+  GitBranch
 } from 'lucide-react'
 
 const experiences = [
@@ -32,10 +30,8 @@ const experiences = [
     period: 'Jun 2026 – Present · 1 mo',
     type: 'Self-employed',
     description: [
-      'Overseeing daily operations and strategic planning for DevHatch Labs',
-      'Managing project delivery, resource allocation, and team coordination',
-      'Implementing operational workflows and process optimization',
-      'Leading cross-functional teams to deliver high-quality software solutions'
+      'Leading development teams and overseeing full project lifecycle from planning to deployment',
+      'Managing operations, resource allocation, and cross-functional collaboration'
     ],
     skills: ['Operations Management', 'Project Management', 'Strategic Planning', 'Team Leadership'],
     icon: Briefcase,
@@ -45,21 +41,58 @@ const experiences = [
     live: 'https://devhatch.vercel.app',
   },
 
-  // ============ AFYNIX DIGITAL ============
+  // ============ GIRLSCRIPT SUMMER OF CODE ============
   {
     id: 2,
+    title: 'Open Source Contributor',
+    company: 'GirlScript Summer of Code (GSSoC) 2026',
+    companyLink: 'https://gssoc.girlscript.tech/',
+    location: 'Remote',
+    period: 'May 2026 – Aug 2026 · 3 mos',
+    type: 'Open Source',
+    description: [
+      'Contributed to open-source projects as part of GirlScript Summer of Code 2026',
+      'Resolved issues, submitted pull requests, and collaborated with maintainers and fellow contributors'
+    ],
+    skills: ['Open Source', 'Git', 'GitHub', 'Collaboration', 'Code Review'],
+    icon: GitBranch,
+    color: '#8B9A6B',
+    logo: '/images/companies/gssoc.png',
+    github: 'https://github.com/Sara12-2',
+  },
+
+  // ============ SOFTTEC 2026 ML COMPETITION ============
+  {
+    id: 3,
+    title: 'Project Lead',
+    company: 'Softtec 2026 — FAST NUCES Lahore',
+    companyLink: 'https://nu.edu.pk/Campus/Lahore',
+    location: 'Lahore, Pakistan',
+    period: '2026 · ML Competition',
+    type: 'Competition',
+    description: [
+      'Led a team in the Softtec 2026 Machine Learning Competition at FAST NUCES Lahore',
+      'Built an ensemble model (XGBoost + LightGBM) for high-cost patient prediction, achieving 0.825 recall'
+    ],
+    skills: ['XGBoost', 'LightGBM', 'Team Leadership', 'Feature Engineering'],
+    icon: Award,
+    color: '#8B9A6B',
+    logo: '/images/companies/fast-nuces.png',
+    github: 'https://github.com/Sara12-2/High_Cost_Patient_prediction_Softtec_Competition_Project',
+  },
+
+  // ============ AFYNIX DIGITAL ============
+  {
+    id: 4,
     title: 'Web Developer Intern',
     company: 'Afynix Digital',
     companyLink: 'https://www.linkedin.com/company/111725218/',
     location: 'Remote',
-    period: 'May 2026 – Present · 2 mos',
+    period: 'May 2026 – Jun 2026 · 2 mos',
     type: 'Internship',
     description: [
-      'Built responsive web applications using React.js and modern JavaScript',
-      'Developed a Weather Dashboard with real-time API integration and 5-day forecast',
-      'Created QuizAura Pro — an interactive quiz app with timer, keyboard shortcuts, and confetti celebrations',
-      'Designed ARCWATCH — a premium smartwatch landing page with glassmorphism UI, dynamic product rendering, shopping cart, and wishlist system',
-      'Implemented dark/light mode, LocalStorage persistence, and toast notifications'
+      'Built responsive React apps including TechNest e-commerce, Nimbus Weather dashboard, and ARCWATCH landing page',
+      'Implemented cart/wishlist systems, dark/light mode, and real-time API integrations'
     ],
     skills: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'REST APIs', 'LocalStorage'],
     icon: Code2,
@@ -77,7 +110,7 @@ const experiences = [
 
   // ============ SAM AI TECHNOLOGIES ============
   {
-    id: 3,
+    id: 5,
     title: 'Machine Learning Intern',
     company: 'SAM AI Technologies',
     companyLink: 'https://www.linkedin.com/company/112771912/',
@@ -85,11 +118,8 @@ const experiences = [
     period: 'May 2026 · 1 mo',
     type: 'Internship',
     description: [
-      'Built machine learning models for real-world applications including fraud detection and sentiment analysis',
-      'Developed a Credit Card Fraud Detection system using SMOTE oversampling and Random Forest/XGBoost',
-      'Created a Twitter Sentiment Analysis model for multi-class classification (Positive/Neutral/Negative) using TF-IDF and multiple classifiers',
-      'Built a Spam SMS Detection model using Naive Bayes and Logistic Regression with text preprocessing',
-      'Applied comprehensive model evaluation techniques including precision, recall, F1-score, and ROC-AUC'
+      'Built and evaluated ML models for fraud detection, sentiment analysis, and spam classification',
+      'Applied SMOTE, XGBoost, and NLP preprocessing with full precision/recall/F1 evaluation'
     ],
     skills: ['Python', 'Scikit-learn', 'SMOTE', 'NLTK', 'XGBoost', 'TF-IDF', 'Pandas'],
     icon: Brain,
@@ -107,7 +137,7 @@ const experiences = [
 
   // ============ ELEVVO PATHWAYS ============
   {
-    id: 4,
+    id: 6,
     title: 'Machine Learning Intern',
     company: 'Elevvo Pathways',
     companyLink: 'https://www.linkedin.com/company/107009063/',
@@ -115,12 +145,8 @@ const experiences = [
     period: 'Aug 2025 – Sep 2025 · 2 mos',
     type: 'Internship',
     description: [
-      'Completed comprehensive ML projects covering regression, classification, clustering, time-series forecasting, and ensemble learning',
-      'Built a Student Score Prediction model using Linear and Polynomial Regression with comprehensive EDA',
-      'Created Mall Customer Segmentation using K-Means and DBSCAN clustering with Silhouette Score evaluation',
-      'Developed a Loan Approval Prediction system using Logistic Regression, Decision Trees, and SMOTE',
-      'Built Walmart Sales Forecasting using time-series feature engineering and lag features',
-      'Created a Forest Cover Type Classification model using Random Forest and XGBoost with hyperparameter tuning'
+      'Delivered 7 ML projects spanning regression, classification, clustering, and time-series forecasting',
+      'Achieved 90%+ accuracy using Scikit-learn, XGBoost, and feature engineering pipelines'
     ],
     skills: ['Python', 'Scikit-learn', 'XGBoost', 'SMOTE', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
     icon: Brain,
@@ -137,40 +163,28 @@ const experiences = [
       { name: 'Softtec 2026 Competition', link: 'https://github.com/Sara12-2/Softtec-2026-ML-Competition' },
     ]
   },
-
-  // ============ FULL STACK PROJECTS (UNIVERSITY) ============
-  {
-    id: 5,
-    title: 'Full-Stack Developer (Academic Projects)',
-    company: 'University of Layyah',
-    companyLink: 'https://www.linkedin.com/school/university-of-layyah/',
-    location: 'Layyah, Pakistan',
-    period: 'Sep 2024 – Present',
-    type: 'Academic',
-    description: [
-      'Developed a Grocery Store Website — full-stack e-commerce with 42+ products, user authentication, admin dashboard, and delivery slot selection',
-      'Designed an enterprise-grade Software House Network with 5 departments, VLAN segmentation, inter-VLAN routing (Router-on-a-Stick), and centralized server room in Cisco Packet Tracer',
-      'Created a Digital Debate Judge web app with participant registration, scoring panel, and results leaderboard'
-    ],
-    skills: ['Python', 'Flask', 'MySQL', 'Cisco Packet Tracer', 'VLAN', 'Inter-VLAN Routing', 'Bootstrap', 'Chart.js', 'JavaScript'],
-    icon: Monitor,
-    color: '#8B9A6B',
-    logo: '/images/companies/uol.png',
-    github: 'https://github.com/Sara12-2',
-    projects: [
-      { name: 'Grocery Store', link: 'https://github.com/Sara12-2/Grocery_Store_Website-' },
-      { name: 'Software House Network Design', link: 'https://github.com/Sara12-2/Software-House-Network-Design' },
-      { name: 'Digital Debate Judge', link: 'https://github.com/Sara12-2/Digital_Debate_judge_web_development_project' },
-    ]
-  },
 ]
+
+const TYPE_STYLES: Record<string, { icon: any; bg: string; text: string; border: string }> = {
+  'Self-employed': { icon: Briefcase, bg: 'bg-[#8B9A6B]/10', text: 'text-[#8B9A6B]', border: 'border-[#8B9A6B]/30' },
+  'Internship': { icon: Award, bg: 'bg-[#6B8E9A]/10', text: 'text-[#5A7A85]', border: 'border-[#6B8E9A]/30' },
+  'Open Source': { icon: GitBranch, bg: 'bg-[#9A7B6B]/10', text: 'text-[#8A6B57]', border: 'border-[#9A7B6B]/30' },
+  'Competition': { icon: Award, bg: 'bg-[#B8952E]/10', text: 'text-[#9A7A1E]', border: 'border-[#B8952E]/30' },
+}
 
 export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
       {/* Olive Theme Background Decorations */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/15 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/15 rounded-full blur-3xl" />
+      <div 
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #8B9A6B 1px, transparent 1px)',
+          backgroundSize: '28px 28px'
+        }}
+      />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8B9A6B]/3 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -201,209 +215,200 @@ export default function Experience() {
             </p>
           </div>
 
-          {/* Timeline */}
-          <div className="max-w-4xl mx-auto">
+          {/* Experience Grid - 2 per row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {experiences.map((exp, index) => {
               const Icon = exp.icon
-              const isEven = index % 2 === 0
 
               return (
                 <motion.div
                   key={exp.id}
-                  initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="relative pl-8 md:pl-0 mb-16 last:mb-0"
+                  className="relative"
                 >
-                  {/* Timeline Line */}
-                  <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#8B9A6B]/40 via-[#8B9A6B]/20 to-transparent -translate-x-1/2" />
+                  <div className="group relative bg-white/40 backdrop-blur-xl p-6 rounded-3xl border border-white/50 ring-1 ring-[#8B9A6B]/5 shadow-[0_8px_32px_rgba(139,154,107,0.15)] hover:shadow-[0_20px_50px_rgba(139,154,107,0.28)] transition-all duration-500 hover:-translate-y-1.5 overflow-hidden h-full flex flex-col">
+                    {/* Glass Shine Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent pointer-events-none" />
+                    {/* Gradient Top Border */}
+                    <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl transition-all duration-500 group-hover:h-1.5 bg-gradient-to-r from-[#8B9A6B]/40 via-[#8B9A6B] to-[#8B9A6B]/40" />
 
-                  {/* Timeline Dot */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-6 w-5 h-5 rounded-full bg-[#8B9A6B] border-4 border-white shadow-lg shadow-[#8B9A6B]/20 z-10">
-                    <div className="absolute inset-1 rounded-full bg-white/20 animate-pulse" />
-                  </div>
+                    {/* Header: Neuron Logo + Title + Badge */}
+                    <div className="flex items-start justify-between gap-3 pt-1">
+                      <div className="flex items-start gap-3">
+                        {/* Neuron-style Logo */}
+                        <div className="relative flex-shrink-0">
+                          <motion.div
+                            className="absolute -inset-1.5 rounded-full border border-[#8B9A6B]/40"
+                            animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
+                            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut', delay: index * 0.3 }}
+                          />
+                          <div className="relative w-14 h-14 rounded-full bg-white/40 backdrop-blur-xl shadow-[0_6px_18px_rgba(139,154,107,0.2)] border border-white/50 ring-1 ring-[#8B9A6B]/10 flex items-center justify-center overflow-hidden">
+                            {exp.logo ? (
+                              <img src={exp.logo} alt={exp.company} className="w-9 h-9 object-contain relative z-10" />
+                            ) : (
+                              <Icon className="w-7 h-7 text-[#8B9A6B] relative z-10" />
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-[#2C2C2C] transition-colors duration-300 group-hover:text-[#8B9A6B]">
+                            {exp.title}
+                          </h3>
+                          <a
+                            href={exp.companyLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium inline-flex items-center gap-1.5 text-sm group/link"
+                          >
+                            {exp.company}
+                            <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 transition-opacity" />
+                          </a>
+                        </div>
+                      </div>
+                      <span className={`inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full border backdrop-blur-md font-medium whitespace-nowrap shadow-sm flex-shrink-0 ${TYPE_STYLES[exp.type]?.bg ?? 'bg-[#8B9A6B]/10'} ${TYPE_STYLES[exp.type]?.text ?? 'text-[#8B9A6B]'} ${TYPE_STYLES[exp.type]?.border ?? 'border-[#8B9A6B]/30'}`}>
+                        {(() => {
+                          const TypeIcon = TYPE_STYLES[exp.type]?.icon ?? Briefcase
+                          return <TypeIcon className="w-3.5 h-3.5" />
+                        })()}
+                        {exp.type}
+                      </span>
+                    </div>
 
-                  <div className={`md:flex md:items-start md:gap-10 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    {/* Logo Section */}
-                    <div className="hidden md:block md:w-1/3">
-                      <div className={`flex ${isEven ? 'justify-end' : 'justify-start'}`}>
-                        <div 
-                          className="relative w-24 h-24 rounded-2xl bg-white shadow-xl border-2 border-[#8B9A6B]/20 flex items-center justify-center overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                    {/* Meta Info */}
+                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-[#4A4A4A]">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4 text-[#8B9A6B]" />
+                        {exp.period}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-[#4A4A4A]/30" />
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4 text-[#8B9A6B]" />
+                        {exp.location}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <ul className="mt-4 space-y-2.5 text-[#4A4A4A] text-sm">
+                      {exp.description.map((item, i) => (
+                        <motion.li 
+                          key={i} 
+                          className="flex items-start gap-3"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: i * 0.05 }}
+                          viewport={{ once: true }}
                         >
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#8B9A6B]/10 to-[#8B9A6B]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          {exp.logo ? (
-                            <img 
-                              src={exp.logo} 
-                              alt={exp.company} 
-                              className="w-14 h-14 object-contain relative z-10" 
-                            />
-                          ) : (
-                            <Icon className="w-12 h-12 text-[#8B9A6B] relative z-10" />
-                          )}
-                          <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[#8B9A6B]/20" />
-                        </div>
-                      </div>
+                          <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 shadow-sm bg-[#8B9A6B]" />
+                          {item}
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    {/* Quick Action Icons - GitHub, Live, Certificate, LOR */}
+                    <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-[#8B9A6B]/10">
+                      {exp.github && (
+                        <a
+                          href={exp.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                        >
+                          <FolderGit2 className="w-4 h-4 text-[#8B9A6B]" />
+                          <span className="group-hover/btn:underline">GitHub</span>
+                        </a>
+                      )}
+
+                      {exp.live && (
+                        <a
+                          href={exp.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                        >
+                          <Rocket className="w-4 h-4 text-[#8B9A6B]" />
+                          <span className="group-hover/btn:underline">Live</span>
+                        </a>
+                      )}
+
+                      {exp.certificate && (
+                        <a
+                          href={exp.certificate}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                        >
+                          <FileCheck className="w-4 h-4 text-[#8B9A6B]" />
+                          <span className="group-hover/btn:underline">Certificate</span>
+                        </a>
+                      )}
+
+                      {exp.lor && (
+                        <a
+                          href={exp.lor}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                        >
+                          <FileBadge className="w-4 h-4 text-[#8B9A6B]" />
+                          <span className="group-hover/btn:underline">LOR</span>
+                        </a>
+                      )}
+
+                      {exp.projects && exp.projects.length > 0 && (
+                        <a
+                          href={exp.projects[0].link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                        >
+                          <Eye className="w-4 h-4 text-[#8B9A6B]" />
+                          <span className="group-hover/btn:underline">{exp.projects.length} Projects</span>
+                        </a>
+                      )}
                     </div>
 
-                    {/* Content Section */}
-                    <div className={`md:w-2/3 ${isEven ? 'md:pr-6' : 'md:pl-6'}`}>
-                      <div className="group relative bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-                        {/* Gradient Top Border */}
-                        <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl transition-all duration-500 group-hover:h-1.5 bg-gradient-to-r from-[#8B9A6B]/40 via-[#8B9A6B] to-[#8B9A6B]/40" />
-
-                        {/* Header */}
-                        <div className="flex flex-wrap items-start justify-between gap-4 pt-1">
-                          <div>
-                            <h3 className="text-xl font-bold text-[#2C2C2C] transition-colors duration-300 group-hover:text-[#8B9A6B]">
-                              {exp.title}
-                            </h3>
-                            <a
-                              href={exp.companyLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium inline-flex items-center gap-1.5 text-sm group/link"
-                            >
-                              {exp.company}
-                              <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 transition-opacity" />
-                            </a>
-                          </div>
-                          <span className="text-xs px-3 py-1 rounded-full border font-medium whitespace-nowrap shadow-sm bg-[#8B9A6B]/10 text-[#8B9A6B] border-[#8B9A6B]/30">
-                            {exp.type}
-                          </span>
-                        </div>
-
-                        {/* Meta Info */}
-                        <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-[#4A4A4A]">
-                          <span className="flex items-center gap-1.5">
-                            <Calendar className="w-4 h-4 text-[#8B9A6B]" />
-                            {exp.period}
-                          </span>
-                          <span className="w-1 h-1 rounded-full bg-[#4A4A4A]/30" />
-                          <span className="flex items-center gap-1.5">
-                            <MapPin className="w-4 h-4 text-[#8B9A6B]" />
-                            {exp.location}
-                          </span>
-                        </div>
-
-                        {/* Description */}
-                        <ul className="mt-4 space-y-2.5 text-[#4A4A4A] text-sm">
-                          {exp.description.map((item, i) => (
-                            <motion.li 
-                              key={i} 
-                              className="flex items-start gap-3"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3, delay: i * 0.05 }}
-                              viewport={{ once: true }}
-                            >
-                              <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 shadow-sm bg-[#8B9A6B]" />
-                              {item}
-                            </motion.li>
-                          ))}
-                        </ul>
-
-                        {/* Quick Action Icons - GitHub, Live, Certificate, LOR */}
-                        <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-[#8B9A6B]/10">
-                          {/* GitHub */}
-                          {exp.github && (
-                            <a
-                              href={exp.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
-                            >
-                              <FolderGit2 className="w-4 h-4 text-[#8B9A6B]" />
-                              <span className="group-hover/btn:underline">GitHub</span>
-                            </a>
-                          )}
-
-                          {/* Live Demo */}
-                          {exp.live && (
-                            <a
-                              href={exp.live}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
-                            >
-                              <Rocket className="w-4 h-4 text-[#8B9A6B]" />
-                              <span className="group-hover/btn:underline">Live</span>
-                            </a>
-                          )}
-
-                          {/* Certificate */}
-                          {exp.certificate && (
-                            <a
-                              href={exp.certificate}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
-                            >
-                              <FileCheck className="w-4 h-4 text-[#8B9A6B]" />
-                              <span className="group-hover/btn:underline">Certificate</span>
-                            </a>
-                          )}
-
-                          {/* LOR */}
-                          {exp.lor && (
-                            <a
-                              href={exp.lor}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
-                            >
-                              <FileBadge className="w-4 h-4 text-[#8B9A6B]" />
-                              <span className="group-hover/btn:underline">LOR</span>
-                            </a>
-                          )}
-
-                          {/* View All Projects */}
-                          {exp.projects && exp.projects.length > 0 && (
-                            <a
-                              href={exp.projects[0].link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
-                            >
-                              <Eye className="w-4 h-4 text-[#8B9A6B]" />
-                              <span className="group-hover/btn:underline">{exp.projects.length} Projects</span>
-                            </a>
-                          )}
-                        </div>
-
-                        {/* Project Repo Links (Quick Access) */}
-                        {exp.projects && exp.projects.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mt-3">
-                            {exp.projects.map((project, idx) => (
-                              <a
-                                key={idx}
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-[10px] px-2 py-1 bg-[#8B9A6B]/5 hover:bg-[#8B9A6B]/15 border border-[#8B9A6B]/10 rounded-full text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
-                              >
-                                {project.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Skills */}
-                        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#8B9A6B]/10">
-                          {exp.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="text-xs px-3 py-1.5 bg-white rounded-full border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md bg-[#8B9A6B]/10 text-[#8B9A6B] border-[#8B9A6B]/20"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Decorative Corner Accent */}
-                        <div className="absolute bottom-3 right-3 w-12 h-12 rounded-full opacity-5 pointer-events-none bg-[#8B9A6B]" />
+                    {/* Project Repo Links (Quick Access) */}
+                    {exp.projects && exp.projects.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {exp.projects.map((project, idx) => (
+                          <a
+                            key={idx}
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[10px] px-2 py-1 bg-white/30 backdrop-blur-md hover:bg-[#8B9A6B]/15 border border-white/40 rounded-full text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
+                          >
+                            {project.name}
+                          </a>
+                        ))}
                       </div>
+                    )}
+
+                    {/* Skills */}
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#8B9A6B]/10 mt-auto">
+                      {exp.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-xs px-3 py-1.5 backdrop-blur-md rounded-full border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
+
+                    {/* Decorative Corner Accent - Mini Node Graph */}
+                    <svg className="absolute bottom-3 right-3 w-16 h-16 opacity-[0.18] pointer-events-none" viewBox="0 0 64 64" fill="none">
+                      <line x1="10" y1="50" x2="30" y2="34" stroke="#8B9A6B" strokeWidth="1" />
+                      <line x1="30" y1="34" x2="50" y2="16" stroke="#8B9A6B" strokeWidth="1" />
+                      <line x1="30" y1="34" x2="46" y2="46" stroke="#8B9A6B" strokeWidth="1" />
+                      <circle cx="10" cy="50" r="2.5" fill="#8B9A6B" />
+                      <circle cx="30" cy="34" r="3" fill="#8B9A6B" />
+                      <circle cx="50" cy="16" r="2.5" fill="#8B9A6B" />
+                      <circle cx="46" cy="46" r="2" fill="#8B9A6B" />
+                    </svg>
                   </div>
                 </motion.div>
               )
@@ -420,9 +425,9 @@ export default function Experience() {
           >
             {[
               { label: 'Total Roles', value: experiences.length, icon: Briefcase },
-              { label: 'Companies', value: '4', icon: Users },
+              { label: 'Companies', value: '6', icon: Users },
               { label: 'Internships', value: '3', icon: Award },
-              { label: 'Projects', value: '18+', icon: FolderGit2 },
+              { label: 'Projects', value: '15+', icon: FolderGit2 },
             ].map((stat) => {
               const StatIcon = stat.icon
               return (
