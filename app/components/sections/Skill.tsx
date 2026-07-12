@@ -11,12 +11,14 @@ import {
   SiNextdotjs, SiTypescript, SiTailwindcss,
   SiTensorflow, SiPandas, SiNumpy,
   SiScikitlearn, SiVercel, SiNetlify,
-  SiJupyter, SiGooglecolab
+  SiJupyter, SiGooglecolab, SiFlask,
+  SiBootstrap, SiSqlite, SiPytorch,
+  SiLangchain
 } from 'react-icons/si'
 import { 
-  Brain, Monitor, Server, Wrench, Sparkles, 
+  Brain, Server, Sparkles, 
   Cpu, Layout, Database, Terminal, Grid3x3,
-  Cloud, Code2, Layers, Zap
+  Cloud, Layers, Zap, MessageSquare
 } from 'lucide-react'
 
 // ============================================
@@ -32,33 +34,38 @@ const allSkills = [
   { id: 5, name: 'JavaScript', icon: FaJs, category: 'frontend', color: '#F7DF1E' },
   { id: 6, name: 'HTML5', icon: FaHtml5, category: 'frontend', color: '#E34F26' },
   { id: 7, name: 'CSS3', icon: FaCss3Alt, category: 'frontend', color: '#1572B6' },
-  { id: 8, name: 'Bootstrap', icon: FaCss3Alt, category: 'frontend', color: '#7952B3' },
+  { id: 8, name: 'Bootstrap', icon: SiBootstrap, category: 'frontend', color: '#7952B3' },
 
-  // ============ BACKEND (5) ============
+  // ============ BACKEND (7) ============
   { id: 9, name: 'Python', icon: FaPython, category: 'backend', color: '#3776AB' },
-  { id: 10, name: 'Flask', icon: FaPython, category: 'backend', color: '#000000' },
+  { id: 10, name: 'Flask', icon: SiFlask, category: 'backend', color: '#000000' },
   { id: 11, name: 'MySQL', icon: FaDatabase, category: 'backend', color: '#4479A1' },
-  { id: 12, name: 'SQLite', icon: FaDatabase, category: 'backend', color: '#003B57' },
+  { id: 12, name: 'SQLite', icon: SiSqlite, category: 'backend', color: '#003B57' },
   { id: 13, name: 'REST APIs', icon: FaDatabase, category: 'backend', color: '#8B9A6B' },
+  { id: 38, name: 'SQL', icon: Database, category: 'backend', color: '#4479A1' },
+  { id: 39, name: 'LangChain', icon: SiLangchain, category: 'backend', color: '#1C3C3C' },
 
-  // ============ AI / ML (14) ============
-  { id: 14, name: 'Python', icon: FaPython, category: 'ai', color: '#3776AB' },
+  // ============ AI / ML (18) ============
   { id: 15, name: 'Scikit-learn', icon: SiScikitlearn, category: 'ai', color: '#F7931E' },
   { id: 16, name: 'Pandas', icon: SiPandas, category: 'ai', color: '#150458' },
   { id: 17, name: 'NumPy', icon: SiNumpy, category: 'ai', color: '#013243' },
-  { id: 18, name: 'XGBoost', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
-  { id: 19, name: 'LightGBM', icon: SiTensorflow, category: 'ai', color: '#2ECC71' },
+  { id: 18, name: 'XGBoost', icon: Cpu, category: 'ai', color: '#8B9A6B' },
+  { id: 19, name: 'LightGBM', icon: Cpu, category: 'ai', color: '#8B9A6B' },
   { id: 20, name: 'SMOTE', icon: Brain, category: 'ai', color: '#8B9A6B' },
   { id: 21, name: 'NLP', icon: Brain, category: 'ai', color: '#8B9A6B' },
+  { id: 40, name: 'NLTK', icon: Brain, category: 'ai', color: '#8B9A6B' },
   { id: 22, name: 'Computer Vision', icon: Cpu, category: 'ai', color: '#8B9A6B' },
   { id: 23, name: 'OpenCV', icon: Cpu, category: 'ai', color: '#5C3EE8' },
   { id: 24, name: 'YOLOv8', icon: Cpu, category: 'ai', color: '#00BFFF' },
   { id: 25, name: 'Deep Learning', icon: Brain, category: 'ai', color: '#8B5CF6' },
   { id: 26, name: 'TensorFlow/Keras', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
+  { id: 41, name: 'PyTorch', icon: SiPytorch, category: 'ai', color: '#EE4C2C' },
   { id: 27, name: 'Matplotlib/Seaborn', icon: Brain, category: 'ai', color: '#8B9A6B' },
   { id: 28, name: 'EDA', icon: Brain, category: 'ai', color: '#8B9A6B' },
+  { id: 42, name: 'Groq AI', icon: Zap, category: 'ai', color: '#F55036' },
+  { id: 43, name: 'ChromaDB', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
 
-  // ============ TOOLS (10) ============
+  // ============ TOOLS (11) ============
   { id: 29, name: 'Git', icon: FaGit, category: 'tools', color: '#F05032' },
   { id: 30, name: 'GitHub', icon: FaGithub, category: 'tools', color: '#181717' },
   { id: 31, name: 'Vercel', icon: SiVercel, category: 'tools', color: '#000000' },
@@ -68,6 +75,8 @@ const allSkills = [
   { id: 35, name: 'Cisco Packet Tracer', icon: Server, category: 'tools', color: '#1E90FF' },
   { id: 36, name: 'Jupyter Notebook', icon: SiJupyter, category: 'tools', color: '#F37626' },
   { id: 37, name: 'Google Colab', icon: SiGooglecolab, category: 'tools', color: '#F9AB00' },
+  { id: 44, name: 'AWS', icon: Cloud, category: 'tools', color: '#FF9900' },
+  { id: 45, name: 'Framer Motion', icon: Layers, category: 'tools', color: '#8B9A6B' },
 ]
 
 // ============================================
