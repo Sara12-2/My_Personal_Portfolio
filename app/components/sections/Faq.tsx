@@ -7,28 +7,28 @@ import { ChevronDown, HelpCircle, MessageCircle, Sparkles } from 'lucide-react'
 const faqs = [
   {
     id: 1,
-    question: 'What technologies do you work with?',
-    answer: 'I specialize in React, Next.js, Python, Flask, and AI/ML technologies including NLP, Computer Vision, and Deep Learning. I also work with MySQL, Tailwind CSS, and modern deployment platforms like Vercel and Netlify.',
+    question: 'What makes your AI/ML solutions different from others?',
+    answer: 'I build custom AI solutions tailored to your specific needs—not just off-the-shelf models. From fraud detection to sentiment analysis, I focus on real-world performance, accuracy, and business impact. Plus, I explain complex AI concepts in simple terms so you stay in control.',
   },
   {
     id: 2,
-    question: 'What services do you offer?',
-    answer: 'I offer Portfolio & UI/UX Design, Dashboard & Admin Panels, Full Stack Web Apps (Flask), React.js & Next.js Websites, AI Chatbots, Landing Pages, and custom AI/ML Solutions.',
+    question: 'Can you build a complete web app from scratch?',
+    answer: 'Absolutely! I specialize in full-stack development with React/Next.js for the frontend and Flask/Python for the backend. I also handle database design, authentication, API integration, and deployment—everything you need for a production-ready application.',
   },
   {
     id: 3,
-    question: 'How long does it take to complete a project?',
-    answer: 'Timeline depends on complexity — 1-2 weeks for a portfolio/landing page, 3-4 weeks for a full web application, and 1-2 months for AI/ML solutions. I deliver quality work within agreed deadlines.',
+    question: 'How do you ensure project quality and timely delivery?',
+    answer: 'I follow an agile development process with regular updates, code reviews, and testing at every stage. I provide clear timelines, milestone checkpoints, and maintain transparent communication—so there are no surprises and you get exactly what you expected.',
   },
   {
     id: 4,
-    question: 'How do you work with clients?',
-    answer: 'I start with understanding your requirements, then design and develop the solution with regular updates. I communicate through email, WhatsApp, or Zoom — keeping you involved at every step.',
+    question: 'Do you work on open-source or hackathon projects?',
+    answer: 'Yes! I\'m an active open-source contributor (GSSoC 2026) and hackathon participant. I enjoy collaborating on innovative ideas and building impactful projects. Feel free to reach out if you have an exciting project in mind!',
   },
   {
     id: 5,
-    question: 'Do you do freelance & remote work?',
-    answer: 'Yes! I\'m available for freelance, remote work, and hackathon collaborations. Feel free to reach out through the contact form or directly at saramanzoor76@gmail.com.',
+    question: 'What\'s the best way to get started working with you?',
+    answer: 'Simply reach out through my contact form or email me at saramanzoor76@gmail.com. I\'ll schedule a quick call to understand your requirements, share my portfolio, and provide a timeline and cost estimate. Let\'s bring your idea to life!',
   },
 ]
 

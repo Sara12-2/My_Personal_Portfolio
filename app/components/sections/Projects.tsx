@@ -11,22 +11,16 @@ import {
   Code2, 
   Wallet,
   Home,
-  Cloud,
   Coffee,
-  MessageSquare,
-  Server,
-  Eye,
   ShoppingBag,
   Calendar,
   Utensils,
   Watch,
-  Award,
   BookOpen
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 const projects = [
-  // ============ WEB APPS ============
   {
     id: 1,
     title: 'AURUM Finance Dashboard',
@@ -38,6 +32,30 @@ const projects = [
     image: '/images/projects/aurum-dashboard.png',
     icon: Wallet,
     color: '#8B9A6B',
+  },
+  {
+    id: 8,
+    title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
+    description: '🏆 Top 10 out of 23+ teams. Bilingual (English/Urdu) AI assistant for University of Layyah with role-based responses, voice I/O, and offline fallback across 16+ topics. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization).',
+    category: 'ai',
+    tech: ['Python', 'Flask', 'Groq API (Llama 3 70B)', 'MySQL', 'BeautifulSoup4', 'JavaScript'],
+    live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
+    github: 'https://github.com/Sara12-2/UoL-AI-Assistant-Hackathon-2026',
+    image: '/images/projects/uol-ai-assistant.png',
+    icon: Brain,
+    color: '#8B5CF6',
+  },
+  {
+    id: 5,
+    title: 'Grocery Store Website — Full-Stack E-commerce',
+    description: 'Complete full-stack grocery delivery platform with 42+ products, user authentication, admin dashboard, smart analytics, and delivery slot selection.',
+    category: 'fullstack',
+    tech: ['Python', 'Flask', 'MySQL', 'JavaScript', 'Chart.js'],
+    live: '',
+    github: 'https://github.com/Sara12-2/Grocery_Store_Website-',
+    image: '/images/projects/grocery.png',
+    icon: ShoppingBag,
+    color: '#22C55E',
   },
   {
     id: 22,
@@ -52,6 +70,18 @@ const projects = [
     color: '#1E90FF',
   },
   {
+    id: 9,
+    title: 'Softtec 2026 ML Competition — High-Cost Patient Prediction',
+    description: 'Binary classification model predicting healthcare members with high medical costs (>$30,000) using historical administrative data and ensemble learning (LightGBM + XGBoost).',
+    category: 'ai',
+    tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn', 'Pandas'],
+    live: '',
+    github: 'https://github.com/Sara12-2/High_Cost_Patient_prediction_Softtec_Competition_Project',
+    image: '/images/projects/softtec.png',
+    icon: Brain,
+    color: '#8B9A6B',
+  },
+  {
     id: 23,
     title: 'LuxEstate — Real Estate Landing Page',
     description: 'Premium luxury real estate landing page with interactive property listings, multi-currency support, mortgage calculator, wishlist, and animated statistics.',
@@ -62,92 +92,6 @@ const projects = [
     image: '/images/projects/luxestate.png',
     icon: Home,
     color: '#d4af37',
-  },
-  {
-    id: 24,
-    title: 'SwiftEats — Food Delivery Landing Page',
-    description: 'Modern, interactive food delivery landing page with menu filtering, FAQ accordion, cart simulation, toast notifications, and smooth animations.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Lucide Icons', 'Google Fonts'],
-    live: 'https://restaurant-food-delivery-website-la.vercel.app/',
-    github: 'https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page',
-    image: '/images/projects/swifteats.png',
-    icon: Utensils,
-    color: '#F97316',
-  },
-  {
-    id: 25,
-    title: 'ARCWATCH — Premium Smartwatch Landing Page',
-    description: 'Modern smartwatch e-commerce landing page with glassmorphism, dynamic product rendering, shopping cart, wishlist, and dark/light themes.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Font Awesome', 'Google Fonts'],
-    live: 'https://smart-watch-landing-page-gules.vercel.app/',
-    github: 'https://github.com/Sara12-2/Smart_Watch_Landing_Page',
-    image: '/images/projects/arcwatch.png',
-    icon: Watch,
-    color: '#6366F1',
-  },
-  {
-    id: 26,
-    title: 'QuizAura Pro',
-    description: 'Interactive quiz application with glassmorphism UI, timer-based questions, keyboard shortcuts, instant feedback, score tracking, and confetti celebrations.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Font Awesome'],
-    live: 'https://quizaura-pro.vercel.app/',
-    github: 'https://github.com/Sara12-2/Interactive-Quizz-App',
-    image: '/images/projects/quizaura.png',
-    icon: Award,
-    color: '#8B5CF6',
-  },
-  {
-    id: 2,
-    title: 'TechNest — Premium React E-Commerce Website',
-    description: 'Modern e-commerce web application built with React and Vite. Features glassmorphism UI, dark/light mode, shopping cart, wishlist, and seamless checkout flow.',
-    category: 'web',
-    tech: ['React', 'Vite', 'JavaScript', 'CSS3', 'LocalStorage'],
-    live: 'https://tech-nest-ecommerce.vercel.app/',
-    github: 'https://github.com/Sara12-2/TechNest_Ecommerce_Website',
-    image: '/images/projects/technest.png',
-    icon: ShoppingBag,
-    color: '#8B5CF6',
-  },
-  {
-    id: 3,
-    title: 'Nimbus Weather Dashboard',
-    description: 'Modern weather dashboard with real-time data, 5-day forecast, air quality index, search system, and dark/light mode with glassmorphism UI.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'OpenWeatherMap API', 'LocalStorage'],
-    live: 'https://nimbus-weather-dashboard.vercel.app/',
-    github: 'https://github.com/Sara12-2/Weather_app_Frontend_project',
-    image: '/images/projects/nimbus.png',
-    icon: Cloud,
-    color: '#06B6D4',
-  },
-  {
-    id: 4,
-    title: 'BuddyInHills — Trip Discovery App',
-    description: 'A modern, responsive trip discovery web application built with React.js that allows users to explore, search, filter, and save travel packages. Features dynamic trip cards, debounced search, category filtering, detailed trip pages, and wishlist persistence.',
-    category: 'web',
-    tech: ['React.js', 'React Router', 'Tailwind CSS', 'Axios', 'Vite', 'LocalStorage'],
-    live: 'https://trip-discovery-app-e4qv.vercel.app/',
-    github: 'https://github.com/Sara12-2/Trip-discovery-app',
-    image: '/images/projects/app.png',
-    icon: Globe,
-    color: '#8B9A6B',
-  },
-
-  // ============ FULL STACK PROJECTS ============
-  {
-    id: 5,
-    title: 'Grocery Store Website — Full-Stack E-commerce',
-    description: 'Complete full-stack grocery delivery platform with 42+ products, user authentication, admin dashboard, smart analytics, and delivery slot selection.',
-    category: 'fullstack',
-    tech: ['Python', 'Flask', 'MySQL', 'JavaScript', 'Chart.js'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Grocery_Store_Website-',
-    image: '/images/projects/grocery.png',
-    icon: ShoppingBag,
-    color: '#22C55E',
   },
   {
     id: 6,
@@ -162,44 +106,6 @@ const projects = [
     color: '#8B6B4D',
   },
   {
-    id: 7,
-    title: 'Digital Debate Judge',
-    description: 'Modern web application for organizing and judging debates with participant registration, judge panel with scoring, and results leaderboard.',
-    category: 'fullstack',
-    tech: ['Python', 'Flask', 'SQLite', 'Bootstrap', 'Typed.js'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Digital_Debate_judge_web_development_project',
-    image: '/images/projects/debate.png',
-    icon: MessageSquare,
-    color: '#8B5CF6',
-  },
-
-  // ============ AI/ML PROJECTS ============
-  {
-    id: 8,
-    title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
-    description: '🏆 Top 10 out of 23+ teams. Bilingual (English/Urdu) AI assistant for University of Layyah with role-based responses, voice I/O, and offline fallback across 16+ topics. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization).',
-    category: 'ai',
-    tech: ['Python', 'Flask', 'Groq API (Llama 3 70B)', 'MySQL', 'BeautifulSoup4', 'JavaScript'],
-    live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
-    github: 'https://github.com/Sara12-2/UoL-AI-Assistant-Hackathon-2026',
-    image: '/images/projects/uol-ai-assistant.png',
-    icon: Brain,
-    color: '#8B5CF6',
-  },
-  {
-    id: 9,
-    title: 'Softtec 2026 ML Competition — High-Cost Patient Prediction',
-    description: 'Binary classification model predicting healthcare members with high medical costs (>$30,000) using historical administrative data and ensemble learning (LightGBM + XGBoost).',
-    category: 'ai',
-    tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn', 'Pandas'],
-    live: '',
-    github: 'https://github.com/Sara12-2/High_Cost_Patient_prediction_Softtec_Competition_Project',
-    image: '/images/projects/softtec.png',
-    icon: Brain,
-    color: '#8B9A6B',
-  },
-  {
     id: 11,
     title: 'ASL Sign Language Recognition',
     description: 'Deep learning CNN model for American Sign Language (ASL) hand sign recognition. Includes data preprocessing, augmentation, model training, and Tkinter GUI for image upload predictions.',
@@ -212,6 +118,18 @@ const projects = [
     color: '#1E90FF',
   },
   {
+    id: 24,
+    title: 'SwiftEats — Food Delivery Landing Page',
+    description: 'Modern, interactive food delivery landing page with menu filtering, FAQ accordion, cart simulation, toast notifications, and smooth animations.',
+    category: 'web',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Lucide Icons', 'Google Fonts'],
+    live: 'https://restaurant-food-delivery-website-la.vercel.app/',
+    github: 'https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page',
+    image: '/images/projects/swifteats.png',
+    icon: Utensils,
+    color: '#F97316',
+  },
+  {
     id: 12,
     title: 'AI-Powered Resume Screening System',
     description: 'NLP-based resume classification system using deep learning. Automatically categorizes resumes into job categories with TF-IDF vectorization, Keras model, and Streamlit dashboard.',
@@ -222,6 +140,18 @@ const projects = [
     image: '/images/projects/resume-screening.png',
     icon: Brain,
     color: '#2ECC71',
+  },
+  {
+    id: 25,
+    title: 'ARCWATCH — Premium Smartwatch Landing Page',
+    description: 'Modern smartwatch e-commerce landing page with glassmorphism, dynamic product rendering, shopping cart, wishlist, and dark/light themes.',
+    category: 'web',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Font Awesome', 'Google Fonts'],
+    live: 'https://smart-watch-landing-page-gules.vercel.app/',
+    github: 'https://github.com/Sara12-2/Smart_Watch_Landing_Page',
+    image: '/images/projects/arcwatch.png',
+    icon: Watch,
+    color: '#6366F1',
   },
   {
     id: 13,
@@ -248,6 +178,18 @@ const projects = [
     color: '#F97316',
   },
   {
+    id: 2,
+    title: 'TechNest — Premium React E-Commerce Website',
+    description: 'Modern e-commerce web application built with React and Vite. Features glassmorphism UI, dark/light mode, shopping cart, wishlist, and seamless checkout flow.',
+    category: 'web',
+    tech: ['React', 'Vite', 'JavaScript', 'CSS3', 'LocalStorage'],
+    live: 'https://tech-nest-ecommerce.vercel.app/',
+    github: 'https://github.com/Sara12-2/TechNest_Ecommerce_Website',
+    image: '/images/projects/technest.png',
+    icon: ShoppingBag,
+    color: '#8B5CF6',
+  },
+  {
     id: 17,
     title: 'StudySmart AI — Intelligent Study Tracking System',
     description: 'AI-powered study tracker that analyzes productivity patterns, detects optimal study hours, and delivers personalized recommendations. Includes pattern analysis, productivity predictions with confidence scoring, streak tracking, dark mode, multi-language support (EN/UR/HI), and SQLite + auto-backup data storage.',
@@ -259,20 +201,6 @@ const projects = [
     icon: BookOpen,
     color: '#4F8A5B',
   },
-
-  // ============ COMPUTER NETWORKS ============
-  {
-    id: 21,
-    title: 'Software House Network Design & Implementation',
-    description: 'Enterprise-grade LAN design for a software house with 5 departments, VLAN segmentation, inter-VLAN routing (Router-on-a-Stick), and centralized server room. Simulated in Cisco Packet Tracer.',
-    category: 'networks',
-    tech: ['Cisco Packet Tracer', 'VLAN', 'Inter-VLAN Routing', '802.1Q Trunking', 'Static IP'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Software_house_network-_design',
-    image: '/images/projects/network-design.png',
-    icon: Server,
-    color: '#1E90FF',
-  },
 ]
 
 const categories = [
@@ -280,12 +208,10 @@ const categories = [
   { id: 'web', label: 'Web Apps', icon: Globe },
   { id: 'fullstack', label: 'Full Stack', icon: Code2 },
   { id: 'ai', label: 'AI/ML', icon: Brain },
-  { id: 'networks', label: 'Networks', icon: Server },
 ]
 
 export default function Projects() {
   const [filter, setFilter] = useState('all')
-  const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   const filteredProjects = filter === 'all' 
     ? projects 
@@ -319,7 +245,7 @@ export default function Projects() {
             </h2>
             <div className="w-20 h-1 bg-[#8B9A6B] mx-auto mt-4 rounded-full" />
             <p className="text-[#4A4A4A] mt-4 max-w-2xl mx-auto">
-              A showcase of my work across Web Development, Full Stack, AI/ML, and Computer Networks
+              A showcase of my work across Web Development, Full Stack, and AI/ML
             </p>
           </div>
 
@@ -331,8 +257,9 @@ export default function Projects() {
                 <motion.button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  suppressHydrationWarning
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 ${
                     isActive
                       ? 'bg-[#8B9A6B] text-white shadow-lg shadow-[#8B9A6B]/30'
@@ -347,108 +274,125 @@ export default function Projects() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project, index) => {
+            {filteredProjects.map((project) => {
               const Icon = project.icon
               const hasLive = project.live && project.live !== ''
-              const isHovered = hoveredId === project.id
               
               return (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  transition={{ duration: 0.4 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -8 }}
-                  onMouseEnter={() => setHoveredId(project.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/10 transition-all duration-500"
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="group relative bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/50 ring-1 ring-[#8B9A6B]/10 shadow-[0_8px_32px_rgba(139,154,107,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(139,154,107,0.3)] hover:ring-[#8B9A6B]/30 h-full flex flex-col cursor-pointer"
                 >
-                  <div className="relative w-full h-56 bg-[#F5F5F0] overflow-hidden">
+                  {/* Glass Shine Overlay - Enhanced on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent pointer-events-none z-10 group-hover:opacity-75 transition-opacity duration-500" />
+                  
+                  {/* Gradient Top Border — tinted per project with animation */}
+                  <div 
+                    className="absolute top-0 left-0 right-0 h-1.5 z-20 transition-all duration-500 group-hover:h-2"
+                    style={{ background: `linear-gradient(90deg, ${project.color}40, ${project.color}, ${project.color}40)` }}
+                  />
+
+                  <div className="relative w-full h-52 bg-[#F5F5F0] overflow-hidden">
+                    {/* Image with zoom effect on hover */}
                     {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                      />
+                      <div className="w-full h-full overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      </div>
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#8B9A6B]/10 to-[#8B9A6B]/5">
-                        <Icon className="w-16 h-16 text-[#8B9A6B]/20" />
+                      <div 
+                        className="w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-105"
+                        style={{ background: `linear-gradient(135deg, ${project.color}18, ${project.color}08)` }}
+                      >
+                        <Icon className="w-16 h-16 transition-all duration-500 group-hover:scale-110" style={{ color: `${project.color}40` }} />
                       </div>
                     )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Permanent subtle bottom gradient for legibility */}
+                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
 
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="bg-white/20 backdrop-blur-md rounded-full p-4 transform scale-90 group-hover:scale-100 transition-transform duration-500">
-                        <Eye className="w-8 h-8 text-white" />
-                      </div>
-                    </div>
+                    {/* Colored icon badge — with hover animation */}
+                    <motion.div 
+                      className="absolute top-3 left-3 w-9 h-9 rounded-xl backdrop-blur-md border border-white/50 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+                      style={{ backgroundColor: `${project.color}25` }}
+                      whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Icon className="w-4.5 h-4.5 transition-all duration-300" style={{ color: project.color }} />
+                    </motion.div>
 
-                    <div className="absolute inset-3 border border-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#8B9A6B] via-[#A8B89A] to-[#8B9A6B] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    <div className="absolute top-4 right-4">
-                      <span className="text-xs px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#8B9A6B] rounded-full border border-[#8B9A6B]/20 shadow-sm font-medium">
+                    <div className="absolute top-3 right-3">
+                      <span className="text-xs px-3 py-1.5 bg-white/80 backdrop-blur-md text-[#8B9A6B] rounded-full border border-white/50 shadow-sm font-medium transition-all duration-300 group-hover:bg-[#8B9A6B] group-hover:text-white group-hover:border-[#8B9A6B]">
                         {categories.find(c => c.id === project.category)?.label || project.category}
                       </span>
                     </div>
-
-                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="flex flex-wrap gap-1.5 justify-end">
-                        {project.tech.slice(0, 3).map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-[10px] px-2 py-1 bg-black/50 backdrop-blur-sm text-white/90 rounded-full"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                          <span className="text-[10px] px-2 py-1 bg-black/50 backdrop-blur-sm text-white/90 rounded-full">
-                            +{project.tech.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    </div>
                   </div>
 
-                  <div className="p-6 space-y-3">
-                    <h3 className="text-xl font-bold text-[#2C2C2C] group-hover:text-[#8B9A6B] transition-colors duration-300">
+                  <div className="relative p-6 flex flex-col flex-1">
+                    <h3 className="text-lg font-bold text-[#2C2C2C] transition-all duration-300 group-hover:text-[#8B9A6B] group-hover:translate-x-1">
                       {project.title}
                     </h3>
-                    <p className="text-[#4A4A4A] text-sm leading-relaxed line-clamp-2">
+                    <p className="text-[#4A4A4A] text-sm leading-relaxed mt-2 line-clamp-3 transition-all duration-300 group-hover:text-[#2C2C2C]">
                       {project.description}
                     </p>
 
-                    <div className="flex items-center gap-4 pt-2">
+                    {/* Tech Stack - With hover animation */}
+                    <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-[#8B9A6B]/10 transition-all duration-300 group-hover:border-[#8B9A6B]/30">
+                      {project.tech.map((tech, index) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="text-[10px] px-2.5 py-1 backdrop-blur-md rounded-full border shadow-sm bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10 transition-all duration-300 hover:bg-[#8B9A6B] hover:text-white hover:scale-105 hover:ring-[#8B9A6B]/30 cursor-default"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-4 pt-4 mt-auto">
                       {hasLive ? (
-                        <a
+                        <motion.a
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-sm text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors font-medium group/link"
+                          whileHover={{ x: 5 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center gap-1.5 text-sm text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors font-medium group/link relative"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover/link:rotate-[-10deg]" />
                           Live Demo
-                          <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">→</span>
-                        </a>
+                          <span className="inline-block transition-all duration-300 group-hover/link:translate-x-1 group-hover/link:opacity-100">→</span>
+                        </motion.a>
                       ) : (
                         <span className="flex items-center gap-1.5 text-sm text-[#4A4A4A]/50 font-medium">
                           <ExternalLink className="w-4 h-4" />
                           Live Demo
                         </span>
                       )}
-                      <a
+                      <motion.a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium"
+                        whileHover={{ x: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-1.5 text-sm text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium group/github"
                       >
-                        <FaGithub className="w-4 h-4" />
+                        <FaGithub className="w-4 h-4 transition-transform duration-300 group-hover/github:rotate-[-10deg]" />
                         <span>GitHub</span>
-                      </a>
+                      </motion.a>
                     </div>
                   </div>
                 </motion.div>
@@ -468,11 +412,20 @@ export default function Projects() {
               { label: 'Web Apps', value: projects.filter(p => p.category === 'web').length },
               { label: 'AI/ML', value: projects.filter(p => p.category === 'ai').length },
               { label: 'Full Stack', value: projects.filter(p => p.category === 'fullstack').length },
-            ].map((stat) => (
-              <div key={stat.label} className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center">
-                <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
+            ].map((stat, index) => (
+              <motion.div 
+                key={stat.label} 
+                className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/80 hover:shadow-lg hover:border-[#8B9A6B]/30 hover:scale-105"
+                whileHover={{ y: -3 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="text-2xl font-bold text-[#8B9A6B] transition-all duration-300 group-hover:scale-110">
+                  {stat.value}
+                </div>
                 <div className="text-sm text-[#4A4A4A]">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>

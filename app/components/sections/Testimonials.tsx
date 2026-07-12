@@ -53,17 +53,7 @@ const testimonials = [
     verified: true,
     relationship: 'Project Manager',
   },
-  {
-    id: 5,
-    name: 'Prof. Hassan Raza',
-    title: 'Head of CS Department',
-    company: 'University of Layyah',
-    quote: 'Sara has been an outstanding student and developer in our department. Her academic projects, including the Grocery Store full-stack application and Software House Network Design, demonstrate her exceptional skills in both web development and networking.',
-    rating: 5,
-    initials: 'HR',
-    verified: true,
-    relationship: 'Professor',
-  },
+  
 ]
 
 // Duplicate for seamless loop

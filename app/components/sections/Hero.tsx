@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ChevronDown, Mail } from 'lucide-react'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
@@ -13,6 +13,26 @@ import {
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
 import devhatchLogo from '@/public/images/Companies/devhatch.png'
+
+// ============================================
+// TYPES
+// ============================================
+
+type SocialIcon =
+  | {
+      type: 'icon'
+      icon: React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>
+      href: string
+      label: string
+      color: string
+    }
+  | {
+      type: 'image'
+      src: string
+      href: string
+      label: string
+      color: string
+    }
 
 // ============================================
 // CONSTANTS
@@ -86,16 +106,20 @@ const useOrbitRadius = () => {
 }
 
 // ============================================
-// CUSTOM HOOK: Particles (Responsive)
+// CUSTOM HOOK: Particles (Responsive, reduced-motion aware)
 // ============================================
 
-const useParticles = () => {
+const useParticles = (reduceMotion: boolean) => {
   const [particles, setParticles] = useState<
     Array<{ id: number; x: string; y: string; size: number; duration: number }>
   >([])
 
   useEffect(() => {
-    const count = window.innerWidth < 480 ? 6 : window.innerWidth < 768 ? 10 : 18
+    if (reduceMotion) {
+      setParticles([])
+      return
+    }
+    const count = window.innerWidth < 480 ? 4 : window.innerWidth < 768 ? 8 : 14
     const newParticles = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100 + '%',
@@ -104,10 +128,25 @@ const useParticles = () => {
       duration: Math.random() * 15 + 15,
     }))
     setParticles(newParticles)
-  }, [])
+  }, [reduceMotion])
 
   return particles
 }
+
+// ============================================
+// SOCIAL ICONS DATA
+// ============================================
+
+const SOCIAL_ICONS: SocialIcon[] = [
+  { type: 'icon', icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
+  { type: 'icon', icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
+  { type: 'icon', icon: SiLeetcode, href: 'https://leetcode.com/u/Sara_34/', label: 'LeetCode', color: '#FFA116' },
+  { type: 'icon', icon: FaHackerrank, href: 'https://www.hackerrank.com/profile/saramanzoor342', label: 'HackerRank', color: '#2EC866' },
+  { type: 'icon', icon: FaKaggle, href: 'https://www.kaggle.com/sara765', label: 'Kaggle', color: '#20BEFF' },
+  { type: 'icon', icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
+  { type: 'icon', icon: FaAward, href: 'https://gssoc.girlscript.tech/', label: 'GSSoC', color: '#8B5CF6' },
+  { type: 'image', src: '/images/Companies/devhatch.png', href: 'https://devhatchlabs.com', label: 'DevHatch', color: '#8B9A6B' },
+]
 
 // ============================================
 // MAIN COMPONENT
@@ -117,26 +156,21 @@ export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
 
+  const prefersReducedMotion = useReducedMotion()
   const { displayText } = useTypingEffect(ROLES)
   const orbitRadius = useOrbitRadius()
-  const particles = useParticles()
-
-  // Fix hydration mismatch
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const particles = useParticles(!!prefersReducedMotion)
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cardRef.current) return
+    if (!cardRef.current || prefersReducedMotion) return
 
     const rect = cardRef.current.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
 
     setMousePosition({ x, y })
-  }, [])
+  }, [prefersReducedMotion])
 
   const handleMouseLeave = useCallback(() => {
     setMousePosition({ x: 0, y: 0 })
@@ -147,90 +181,10 @@ export default function Hero() {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
-  // SOCIAL ICONS - Inside component so we can use mounted state
-  const SOCIAL_ICONS = [
-    {
-      icon: FaGithub,
-      href: 'https://github.com/Sara12-2',
-      label: 'GitHub',
-      color: '#2C2C2C',
-      type: 'icon' as const,
-    },
-    {
-      icon: FaLinkedin,
-      href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/',
-      label: 'LinkedIn',
-      color: '#0A66C2',
-      type: 'icon' as const,
-    },
-    {
-      icon: SiLeetcode,
-      href: 'https://leetcode.com/u/Sara_34/',
-      label: 'LeetCode',
-      color: '#FFA116',
-      type: 'icon' as const,
-    },
-    {
-      icon: FaHackerrank,
-      href: 'https://www.hackerrank.com/profile/saramanzoor342',
-      label: 'HackerRank',
-      color: '#2EC866',
-      type: 'icon' as const,
-    },
-    {
-      icon: FaKaggle,
-      href: 'https://www.kaggle.com/sara765',
-      label: 'Kaggle',
-      color: '#20BEFF',
-      type: 'icon' as const,
-    },
-    {
-      icon: Mail,
-      href: 'mailto:saramanzoor76@gmail.com',
-      label: 'Email',
-      color: '#8B9A6B',
-      type: 'icon' as const,
-    },
-    {
-      icon: FaAward,
-      href: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
-      label: 'GSSoC',
-      color: '#8B5CF6',
-      type: 'icon' as const,
-    },
-    {
-      icon: devhatchLogo,
-      href: 'https://devhatchlabs.com',
-      label: 'DevHatch',
-      color: '#8B9A6B',
-      type: 'image' as const,
-    },
-  ]
-
-  // Don't render on server to avoid hydration issues
-  if (!mounted) {
-    return (
-      <section className="relative overflow-hidden min-h-screen flex items-center justify-center pt-20">
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <div className="h-8 w-32 bg-gray-200 rounded-full animate-pulse mx-auto lg:mx-0" />
-              <div className="h-12 w-64 bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
-              <div className="h-6 w-48 bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
-              <div className="h-16 w-full max-w-xl bg-gray-200 rounded-lg animate-pulse mt-4 mx-auto lg:mx-0" />
-              <div className="flex gap-4 mt-6 justify-center lg:justify-start">
-                <div className="h-12 w-32 bg-gray-200 rounded-xl animate-pulse" />
-                <div className="h-12 w-32 bg-gray-200 rounded-xl animate-pulse" />
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="w-[280px] h-[280px] rounded-full bg-gray-200 animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
+  // Orbit/ring rotation durations — effectively "paused" (very long duration) when reduced motion is preferred
+  const orbitDuration = prefersReducedMotion ? 0 : 24
+  const ringDurationSlow = prefersReducedMotion ? 0 : 45
+  const ringDurationSlower = prefersReducedMotion ? 0 : 60
 
   return (
     <section
@@ -255,29 +209,31 @@ export default function Hero() {
       />
 
       {/* ===== FLOATING PARTICLES ===== */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-[#8B9A6B]/20"
-            style={{
-              width: particle.size,
-              height: particle.size,
-              left: particle.x,
-              top: particle.y,
-            }}
-            animate={{
-              y: [-30, 30, -30],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-      </div>
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          {particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute rounded-full bg-[#8B9A6B]/20"
+              style={{
+                width: particle.size,
+                height: particle.size,
+                left: particle.x,
+                top: particle.y,
+              }}
+              animate={{
+                y: [-30, 30, -30],
+                opacity: [0.2, 0.8, 0.2],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* ===== MAIN CONTENT ===== */}
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -313,8 +269,8 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Building intelligent web applications that combine cutting-edge AI
-              with seamless user experiences.
+              🏆 Top 10 hackathon finisher building AI-powered web apps — from RAG chatbots
+              to production ML models — where clean full-stack engineering meets real intelligence.
             </p>
 
             {/* ===== CTAs ===== */}
@@ -343,7 +299,9 @@ export default function Hero() {
           <motion.div
             ref={cardRef}
             style={{
-              transform: `perspective(1200px)
+              transform: prefersReducedMotion
+                ? undefined
+                : `perspective(1200px)
                 rotateX(${mousePosition.y * 10}deg)
                 rotateY(${mousePosition.x * 10}deg)`,
               transition: '0.25s',
@@ -353,15 +311,8 @@ export default function Hero() {
             <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px]">
               {/* Outer Glow */}
               <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.35, 0.6, 0.35],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+                animate={prefersReducedMotion ? {} : { scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute inset-0 rounded-full bg-[#8B9A6B]/10 blur-3xl"
               />
 
@@ -370,57 +321,39 @@ export default function Hero() {
 
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{
-                  duration: 45,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                transition={{ duration: ringDurationSlow || 1, repeat: prefersReducedMotion ? 0 : Infinity, ease: 'linear' }}
                 className="absolute inset-3 sm:inset-4 rounded-full border border-dashed border-[#8B9A6B]/20"
               />
 
               <motion.div
                 animate={{ rotate: -360 }}
-                transition={{
-                  duration: 60,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                transition={{ duration: ringDurationSlower || 1, repeat: prefersReducedMotion ? 0 : Infinity, ease: 'linear' }}
                 className="absolute inset-[-15px] sm:inset-[-25px] rounded-full border border-[#8B9A6B]/10"
               />
 
               {/* ===== PROFILE IMAGE ===== */}
               <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 200,
-                }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 200 }}
                 className="absolute inset-10 sm:inset-14 rounded-full overflow-hidden border-[4px] sm:border-[5px] border-[#8B9A6B] bg-white shadow-[0_25px_80px_rgba(139,154,107,.25)]"
               >
-                <img
+                <Image
                   src="/images/profile.jpg"
                   alt="Sara Manzoor - Full Stack Developer"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                  onError={(e: any) => {
-                    e.target.src =
-                      'https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=600'
-                  }}
+                  fill
+                  priority
+                  sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
+                  className="object-cover"
                 />
               </motion.div>
 
               {/* ===== ORBIT ICONS ===== */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{
-                  duration: 24,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                transition={{ duration: orbitDuration || 1, repeat: prefersReducedMotion ? 0 : Infinity, ease: 'linear' }}
                 className="absolute inset-0"
               >
                 {SOCIAL_ICONS.map((social, index) => {
-                  const Icon = social.icon
                   const angle = (360 / SOCIAL_ICONS.length) * index
 
                   return (
@@ -438,11 +371,7 @@ export default function Hero() {
                     >
                       <motion.div
                         animate={{ rotate: -360 }}
-                        transition={{
-                          duration: 24,
-                          repeat: Infinity,
-                          ease: 'linear',
-                        }}
+                        transition={{ duration: orbitDuration || 1, repeat: prefersReducedMotion ? 0 : Infinity, ease: 'linear' }}
                       >
                         <motion.a
                           href={social.href}
@@ -465,11 +394,9 @@ export default function Hero() {
                               boxShadow: `0 8px 30px ${social.color}25`,
                             }}
                           >
-                            {/* ✅ FIXED: Proper type checking */}
                             {social.type === 'image' ? (
-                              // For images (devhatchLogo)
                               <img
-                                src={typeof Icon === 'object' && 'src' in Icon ? (Icon as any).src : '/images/Companies/devhatch.png'}
+                                src={social.src}
                                 alt={social.label}
                                 className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover"
                                 onError={(e) => {
@@ -477,17 +404,11 @@ export default function Hero() {
                                 }}
                               />
                             ) : (
-                              // For Lucide and React Icons - Render as component
-                              (() => {
-                                const IconComponent = Icon as any
-                                return (
-                                  <IconComponent
-                                    size={18}
-                                    className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]"
-                                    style={{ color: social.color }}
-                                  />
-                                )
-                              })()
+                              <social.icon
+                                size={18}
+                                className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]"
+                                style={{ color: social.color }}
+                              />
                             )}
                           </div>
 
@@ -525,54 +446,22 @@ export default function Hero() {
                 })}
               </motion.div>
 
-              {/* ===== FLOATING DOTS ===== */}
-              <motion.div
-                animate={{
-                  y: [0, -12, 0],
-                  scale: [1, 1.5, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                }}
-                className="absolute top-8 sm:top-10 right-12 sm:right-16 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#8B9A6B] shadow-lg shadow-[#8B9A6B]/40"
-              />
+              {/* ===== FLOATING DOTS (trimmed to 2) ===== */}
+              {!prefersReducedMotion && (
+                <>
+                  <motion.div
+                    animate={{ y: [0, -12, 0], scale: [1, 1.5, 1] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="absolute top-8 sm:top-10 right-12 sm:right-16 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#8B9A6B] shadow-lg shadow-[#8B9A6B]/40"
+                  />
 
-              <motion.div
-                animate={{
-                  y: [0, 10, 0],
-                  scale: [1, 1.4, 1],
-                }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                }}
-                className="absolute bottom-12 sm:bottom-16 left-8 sm:left-10 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#8B9A6B]/70"
-              />
-
-              <motion.div
-                animate={{
-                  scale: [1, 1.8, 1],
-                  opacity: [0.2, 0.7, 0.2],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                }}
-                className="absolute top-1/2 -left-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#8B9A6B]"
-              />
-
-              <motion.div
-                animate={{
-                  scale: [1, 1.8, 1],
-                  opacity: [0.2, 0.7, 0.2],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                }}
-                className="absolute top-1/2 -right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#8B9A6B]"
-              />
+                  <motion.div
+                    animate={{ y: [0, 10, 0], scale: [1, 1.4, 1] }}
+                    transition={{ duration: 2.8, repeat: Infinity }}
+                    className="absolute bottom-12 sm:bottom-16 left-8 sm:left-10 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#8B9A6B]/70"
+                  />
+                </>
+              )}
             </div>
           </motion.div>
         </div>
@@ -583,31 +472,17 @@ export default function Hero() {
         onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1 }}
         className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center group cursor-pointer"
         aria-label="Scroll to About section"
       >
-        <motion.span
-          animate={{
-            opacity: [0.4, 1, 0.4],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
-          className="text-[10px] sm:text-xs tracking-[0.35em] uppercase text-[#8B9A6B] mb-1.5 sm:mb-2"
-        >
+        <span className="text-[10px] sm:text-xs tracking-[0.35em] uppercase text-[#8B9A6B] mb-1.5 sm:mb-2">
           Explore
-        </motion.span>
+        </span>
 
         <motion.div
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 1.8,
-            repeat: Infinity,
-          }}
+          animate={prefersReducedMotion ? {} : { y: [0, 10, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity }}
           className="
             w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-lg
             border border-[#8B9A6B]/20 shadow-xl flex items-center justify-center

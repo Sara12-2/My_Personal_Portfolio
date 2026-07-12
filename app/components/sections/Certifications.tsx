@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion'
 import { Award, Sparkles, ExternalLink, Calendar, Code2, Brain, Database, Briefcase, Cloud, GitBranch, FileText } from 'lucide-react'
 
+// Shuffled certifications to mix up issuers
 const certifications = [
-  // ============ GOOGLE CERTIFICATES (8) ============
+  // Mix of different issuers
   {
     id: 1,
     title: 'Maximize Productivity with AI Tools',
@@ -17,78 +18,6 @@ const certifications = [
   },
   {
     id: 2,
-    title: 'Introduction to AI',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['AI Tools', 'AI Automation', 'Machine Learning'],
-    icon: Brain,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 3,
-    title: 'Foundation: Data, Data Everywhere',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['Data Science', 'Data Cleaning', 'Data Analytics'],
-    icon: Database,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 4,
-    title: 'Foundations of Data Science',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['Data Science', 'Pandas', 'Data Analysis'],
-    icon: Database,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 5,
-    title: 'Introduction to Git and GitHub',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['Git', 'GitHub', 'Version Control'],
-    icon: GitBranch,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 6,
-    title: 'The Nuts and Bolts of Machine Learning',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['ML Algorithms', 'Supervised Learning', 'Unsupervised Learning'],
-    icon: Brain,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 7,
-    title: 'Prompting Like a Pro',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['Content Creation', 'AI Tools', 'Prompt Engineering'],
-    icon: FileText,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-  {
-    id: 8,
-    title: 'Project Management',
-    issuer: 'Google',
-    date: '2025',
-    skills: ['Agile', 'Scrum', 'Project Planning'],
-    icon: Briefcase,
-    logo: '/images/certificates/google.png',
-    credentialLink: '#',
-  },
-
-  // ============ KAGGLE COURSES (4) ============
-  {
-    id: 9,
     title: 'Intro to Deep Learning',
     issuer: 'Kaggle',
     date: 'Aug 2025',
@@ -98,39 +27,7 @@ const certifications = [
     credentialLink: '#',
   },
   {
-    id: 10,
-    title: 'Intro to Machine Learning',
-    issuer: 'Kaggle',
-    date: 'Jul 2025',
-    skills: ['ML', 'Python', 'Scikit-learn'],
-    icon: Brain,
-    logo: '/images/certificates/kaggle.png',
-    credentialLink: '#',
-  },
-  {
-    id: 11,
-    title: 'Pandas',
-    issuer: 'Kaggle',
-    date: 'Jul 2025',
-    skills: ['Pandas', 'Data Manipulation', 'Python'],
-    icon: Database,
-    logo: '/images/certificates/kaggle.png',
-    credentialLink: '#',
-  },
-  {
-    id: 12,
-    title: 'Data Cleaning',
-    issuer: 'Kaggle',
-    date: 'Jul 2025',
-    skills: ['Data Cleaning', 'Pandas', 'Data Preprocessing'],
-    icon: Database,
-    logo: '/images/certificates/kaggle.png',
-    credentialLink: '#',
-  },
-
-  // ============ DATACAMP CERTIFICATES (3) ============
-  {
-    id: 13,
+    id: 3,
     title: 'APIs in Python',
     issuer: 'DataCamp',
     date: 'Aug 2025',
@@ -140,29 +37,7 @@ const certifications = [
     credentialLink: '#',
   },
   {
-    id: 14,
-    title: 'Prompt Engineering',
-    issuer: 'DataCamp',
-    date: 'Aug 2025',
-    skills: ['Prompt Engineering', 'AI Tools', 'Generative AI'],
-    icon: FileText,
-    logo: '/images/certificates/datacamp.png',
-    credentialLink: '#',
-  },
-  {
-    id: 15,
-    title: 'Supervised Learning with Scikit-learn',
-    issuer: 'DataCamp',
-    date: 'Aug 2025',
-    skills: ['Supervised Learning', 'Scikit-learn', 'Classification'],
-    icon: Brain,
-    logo: '/images/certificates/datacamp.png',
-    credentialLink: '#',
-  },
-
-  // ============ OTHER CERTIFICATES (7) ============
-  {
-    id: 16,
+    id: 4,
     title: 'Machine Learning',
     issuer: 'Innovista',
     date: 'Aug 2025',
@@ -172,7 +47,37 @@ const certifications = [
     credentialLink: '#',
   },
   {
-    id: 17,
+    id: 5,
+    title: 'Introduction to AI',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['AI Tools', 'AI Automation', 'Machine Learning'],
+    icon: Brain,
+    logo: '/images/certificates/google.png',
+    credentialLink: '#',
+  },
+  {
+    id: 6,
+    title: 'Intro to Machine Learning',
+    issuer: 'Kaggle',
+    date: 'Jul 2025',
+    skills: ['ML', 'Python', 'Scikit-learn'],
+    icon: Brain,
+    logo: '/images/certificates/kaggle.png',
+    credentialLink: '#',
+  },
+  {
+    id: 7,
+    title: 'Prompt Engineering',
+    issuer: 'DataCamp',
+    date: 'Aug 2025',
+    skills: ['Prompt Engineering', 'AI Tools', 'Generative AI'],
+    icon: FileText,
+    logo: '/images/certificates/datacamp.png',
+    credentialLink: '#',
+  },
+  {
+    id: 8,
     title: 'Basics of Machine Learning Algorithm',
     issuer: 'UniAthena',
     date: '2025',
@@ -182,28 +87,66 @@ const certifications = [
     credentialLink: '#',
   },
   {
-    id: 18,
-    title: 'Basics in Machine Learning',
-    issuer: 'UniAthena',
-    date: 'Jul 2025',
-    skills: ['Pandas', 'Python', 'Machine Learning'],
-    icon: Brain,
-    logo: '/images/certificates/uniathena.png',
+    id: 9,
+    title: 'Foundation: Data, Data Everywhere',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['Data Science', 'Data Cleaning', 'Data Analytics'],
+    icon: Database,
+    logo: '/images/certificates/google.png',
     credentialLink: '#',
   },
-  // Digital Dream Web certificate mein logo ko icon se replace karein
-{
-  id: 19,
-  title: 'Freelancing Course',
-  issuer: 'Digital Dream Web and Graphic',
-  date: '2025',
-  skills: ['Fiverr', 'Freelancing', 'Client Handling'],
-  icon: Briefcase,  // ✅ Icon use karein
-  // logo: '/images/certificates/digitaldream.png',  // ❌ Remove karein
-  credentialLink: '#',
-},
   {
-    id: 20,
+    id: 10,
+    title: 'Pandas',
+    issuer: 'Kaggle',
+    date: 'Jul 2025',
+    skills: ['Pandas', 'Data Manipulation', 'Python'],
+    icon: Database,
+    logo: '/images/certificates/kaggle.png',
+    credentialLink: '#',
+  },
+  {
+    id: 11,
+    title: 'Supervised Learning with Scikit-learn',
+    issuer: 'DataCamp',
+    date: 'Aug 2025',
+    skills: ['Supervised Learning', 'Scikit-learn', 'Classification'],
+    icon: Brain,
+    logo: '/images/certificates/datacamp.png',
+    credentialLink: '#',
+  },
+  {
+    id: 12,
+    title: 'Freelancing Course',
+    issuer: 'Digital Dream Web and Graphic',
+    date: '2025',
+    skills: ['Fiverr', 'Freelancing', 'Client Handling'],
+    icon: Briefcase,
+    credentialLink: '#',
+  },
+  {
+    id: 13,
+    title: 'Foundations of Data Science',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['Data Science', 'Pandas', 'Data Analysis'],
+    icon: Database,
+    logo: '/images/certificates/google.png',
+    credentialLink: '#',
+  },
+  {
+    id: 14,
+    title: 'Data Cleaning',
+    issuer: 'Kaggle',
+    date: 'Jul 2025',
+    skills: ['Data Cleaning', 'Pandas', 'Data Preprocessing'],
+    icon: Database,
+    logo: '/images/certificates/kaggle.png',
+    credentialLink: '#',
+  },
+  {
+    id: 15,
     title: 'Introduction to Cloud Computing & AWS',
     issuer: 'AWS Student Builder Group - University of Layyah',
     date: 'May 2026',
@@ -213,17 +156,17 @@ const certifications = [
     credentialLink: '#',
   },
   {
-    id: 21,
-    title: 'Introduction to Prompt Engineering',
-    issuer: 'Simplilearn',
-    date: 'Jul 2025',
-    skills: ['Prompt Engineering', 'AI Tools', 'Generative AI'],
-    icon: FileText,
-    logo: '/images/certificates/simplilearn.png',
+    id: 16,
+    title: 'Introduction to Git and GitHub',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['Git', 'GitHub', 'Version Control'],
+    icon: GitBranch,
+    logo: '/images/certificates/google.png',
     credentialLink: '#',
   },
   {
-    id: 22,
+    id: 17,
     title: 'Machine Learning Competition - Softec',
     issuer: 'FAST NUCES, Lahore Campus',
     date: '2025',
@@ -232,22 +175,8 @@ const certifications = [
     logo: '/images/certificates/fast.png',
     credentialLink: '#',
   },
-
-  // ============ UNIVERSITY OF LAYYAH (1) ============
   {
-    id: 23,
-    title: 'Finance Management Team – HELLO WORLD 2025',
-    issuer: 'University of Layyah',
-    date: 'Dec 2025',
-    skills: ['Finance Management', 'Budget Planning', 'Event Coordination', 'Team Collaboration'],
-    icon: Briefcase,
-    logo: '/images/companies/uol.png',
-    credentialLink: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/overlay/Honor/1753234015/treasury/',
-  },
-
-  // ============ ACADEMIC ACHIEVEMENTS (3) ============
-  {
-    id: 24,
+    id: 18,
     title: '2nd Position in ICS Examination',
     issuer: 'Board of Intermediate & Secondary Education (BISE) DG Khan',
     date: '2023',
@@ -255,6 +184,66 @@ const certifications = [
     icon: Award,
     logo: '/images/honors/bise-dg-khan.png',
     credentialLink: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/overlay/Honor/1988554966/treasury/',
+  },
+  {
+    id: 19,
+    title: 'The Nuts and Bolts of Machine Learning',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['ML Algorithms', 'Supervised Learning', 'Unsupervised Learning'],
+    icon: Brain,
+    logo: '/images/certificates/google.png',
+    credentialLink: '#',
+  },
+  {
+    id: 20,
+    title: 'Python (Basic)',
+    issuer: 'HackerRank',
+    date: 'Jun 2026',
+    skills: ['Python', 'Problem Solving', 'Programming Basics'],
+    icon: Code2,
+    logo: '/images/certificates/hackerrank.png',
+    credentialLink: '#',
+  },
+  {
+    id: 21,
+    title: 'Prompting Like a Pro',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['Content Creation', 'AI Tools', 'Prompt Engineering'],
+    icon: FileText,
+    logo: '/images/certificates/google.png',
+    credentialLink: '#',
+  },
+  {
+    id: 22,
+    title: 'Python',
+    issuer: 'Kaggle',
+    date: 'Jul 2026',
+    skills: ['Python', 'Programming Basics', 'Data Types'],
+    icon: Code2,
+    logo: '/images/certificates/kaggle.png',
+    credentialLink: '#',
+  },
+  {
+    id: 23,
+    title: 'Internship Completion Certificate — Web Development',
+    issuer: 'Afynix Digital',
+    date: 'Jun 2026',
+    skills: ['React.js', 'Web Development', 'Internship'],
+    icon: Briefcase,
+    logo: '/images/companies/afynix.png',
+    credentialLink: '#',
+  },
+  {
+    id: 24,
+    title: 'Finance Management Team – HELLO WORLD 2025',
+    issuer: 'University of Layyah',
+    date: 'Dec 2025',
+    skills: ['Finance Management', 'Budget Planning', 'Event Coordination', 'Team Collaboration'],
+    icon: Briefcase,
+    logo: '/images/companies/uol.png',
+    credentialLink: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/overlay/Honor/1753234015/treasury/',
   },
   {
     id: 25,
@@ -268,6 +257,36 @@ const certifications = [
   },
   {
     id: 26,
+    title: 'Project Management',
+    issuer: 'Google',
+    date: '2025',
+    skills: ['Agile', 'Scrum', 'Project Planning'],
+    icon: Briefcase,
+    logo: '/images/certificates/google.png',
+    credentialLink: '#',
+  },
+  {
+    id: 27,
+    title: 'Internship Completion Certificate — Machine Learning',
+    issuer: 'SAM AI Technologies',
+    date: 'May 2026',
+    skills: ['Machine Learning', 'Python', 'Internship'],
+    icon: Brain,
+    logo: '/images/companies/sam-ai.png',
+    credentialLink: '/certificates/sam-ai-certificate.pdf',
+  },
+  {
+    id: 28,
+    title: 'Basics in Machine Learning',
+    issuer: 'UniAthena',
+    date: 'Jul 2025',
+    skills: ['Pandas', 'Python', 'Machine Learning'],
+    icon: Brain,
+    logo: '/images/certificates/uniathena.png',
+    credentialLink: '#',
+  },
+  {
+    id: 29,
     title: 'E-Scotte Merit-Based Scholarship',
     issuer: 'Board of Intermediate & Secondary Education (BISE) Multan',
     date: '2023',
@@ -276,49 +295,15 @@ const certifications = [
     logo: '/images/honors/bise-multan.png',
     credentialLink: '#',
   },
-
-  // ============ SKILL BADGES (2) ============
-  {
-    id: 27,
-    title: 'Python (Basic)',
-    issuer: 'HackerRank',
-    date: 'Jun 2026',
-    skills: ['Python', 'Problem Solving', 'Programming Basics'],
-    icon: Code2,
-    logo: '/images/certificates/hackerrank.png',
-    credentialLink: '#',
-  },
-  {
-    id: 28,
-    title: 'Python',
-    issuer: 'Kaggle',
-    date: 'Jul 2026',
-    skills: ['Python', 'Programming Basics', 'Data Types'],
-    icon: Code2,
-    logo: '/images/certificates/kaggle.png',
-    credentialLink: '#',
-  },
-
-  // ============ INTERNSHIP COMPLETION CERTIFICATES (2) ============
-  {
-    id: 29,
-    title: 'Internship Completion Certificate — Web Development',
-    issuer: 'Afynix Digital',
-    date: 'Jun 2026',
-    skills: ['React.js', 'Web Development', 'Internship'],
-    icon: Briefcase,
-    logo: '/images/companies/afynix.png',
-    credentialLink: '#',
-  },
   {
     id: 30,
-    title: 'Internship Completion Certificate — Machine Learning',
-    issuer: 'SAM AI Technologies',
-    date: 'May 2026',
-    skills: ['Machine Learning', 'Python', 'Internship'],
-    icon: Brain,
-    logo: '/images/companies/sam-ai.png',
-    credentialLink: '/certificates/sam-ai-certificate.pdf',
+    title: 'Introduction to Prompt Engineering',
+    issuer: 'Simplilearn',
+    date: 'Jul 2025',
+    skills: ['Prompt Engineering', 'AI Tools', 'Generative AI'],
+    icon: FileText,
+    logo: '/images/certificates/simplilearn.png',
+    credentialLink: '#',
   },
 ]
 
@@ -366,10 +351,14 @@ export default function Certifications() {
               { label: 'DataCamp', value: certifications.filter(c => c.issuer === 'DataCamp').length, icon: Database },
               { label: 'Others', value: certifications.filter(c => !['Google', 'Kaggle', 'DataCamp'].includes(c.issuer)).length, icon: Briefcase },
             ].map((stat) => (
-              <div key={stat.label} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center">
+              <motion.div 
+                key={stat.label} 
+                className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:scale-105"
+                whileHover={{ y: -3 }}
+              >
                 <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
                 <div className="text-xs text-[#4A4A4A]">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -382,25 +371,29 @@ export default function Certifications() {
                   key={cert.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.03 }}
+                  transition={{ duration: 0.4, delay: index * 0.02 }}
                   viewport={{ once: true }}
-                  className="group bg-white/90 backdrop-blur-sm p-5 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                  className="group bg-white/90 backdrop-blur-sm p-5 rounded-2xl border border-[#8B9A6B]/10 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5 hover:border-[#8B9A6B]/30 cursor-pointer"
                 >
                   <div className="flex items-start gap-4">
-                    {/* Logo */}
-                    <div className="w-12 h-12 rounded-xl bg-white shadow-md border border-[#8B9A6B]/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    {/* Logo with hover effect */}
+                    <motion.div 
+                      className="w-12 h-12 rounded-xl bg-white shadow-md border border-[#8B9A6B]/10 flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:border-[#8B9A6B]/30 group-hover:scale-105"
+                      whileHover={{ rotate: [0, -5, 5, -5, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
                       {cert.logo ? (
-                        <img src={cert.logo} alt={cert.issuer} className="w-8 h-8 object-contain" />
+                        <img src={cert.logo} alt={cert.issuer} className="w-8 h-8 object-contain transition-all duration-300 group-hover:scale-110" />
                       ) : (
-                        <Icon className="w-6 h-6 text-[#8B9A6B]" />
+                        <Icon className="w-6 h-6 text-[#8B9A6B] transition-all duration-300 group-hover:scale-110" />
                       )}
-                    </div>
+                    </motion.div>
 
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-bold text-[#2C2C2C] group-hover:text-[#8B9A6B] transition-colors line-clamp-2">
                         {cert.title}
                       </h3>
-                      <p className="text-xs text-[#4A4A4A]">{cert.issuer}</p>
+                      <p className="text-xs text-[#4A4A4A] font-medium">{cert.issuer}</p>
                       {cert.date && (
                         <div className="flex items-center gap-1 mt-1 text-xs text-[#4A4A4A]/70">
                           <Calendar className="w-3 h-3 text-[#8B9A6B]" />
@@ -410,13 +403,20 @@ export default function Certifications() {
                     </div>
                   </div>
 
-                  {/* Skills */}
+                  {/* Skills with hover effects */}
                   {cert.skills && cert.skills.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/10">
-                      {cert.skills.slice(0, 4).map((skill) => (
-                        <span key={skill} className="text-[10px] px-2 py-1 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full border border-[#8B9A6B]/10">
+                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/10 group-hover:border-[#8B9A6B]/20 transition-colors duration-300">
+                      {cert.skills.slice(0, 4).map((skill, idx) => (
+                        <motion.span 
+                          key={skill} 
+                          className="text-[10px] px-2 py-1 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full border border-[#8B9A6B]/10 transition-all duration-300 hover:bg-[#8B9A6B] hover:text-white hover:scale-105 hover:border-[#8B9A6B] cursor-default"
+                          whileHover={{ y: -2 }}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: idx * 0.03 }}
+                        >
                           {skill}
-                        </span>
+                        </motion.span>
                       ))}
                       {cert.skills.length > 4 && (
                         <span className="text-[10px] px-2 py-1 bg-[#8B9A6B]/10 text-[#8B9A6B] rounded-full border border-[#8B9A6B]/10">
@@ -428,15 +428,16 @@ export default function Certifications() {
 
                   {/* Credential Link */}
                   {cert.credentialLink && cert.credentialLink !== '#' && (
-                    <a
+                    <motion.a
                       href={cert.credentialLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 mt-2 text-xs text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors"
+                      whileHover={{ x: 3 }}
                     >
                       <ExternalLink className="w-3 h-3" />
                       Show Credential
-                    </a>
+                    </motion.a>
                   )}
                 </motion.div>
               )

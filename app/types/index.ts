@@ -4,17 +4,33 @@ export interface Project {
   description: string
   image?: string
   tech: string[]
-  category: 'ai' | 'fullstack'
+  category: 'ai' | 'fullstack' | 'web'
   liveUrl?: string
   githubUrl?: string
 }
 
+export interface ExperienceProject {
+  name: string
+  link: string
+}
+
 export interface Experience {
   id: number
+  title: string
   company: string
-  role: string
-  duration: string
-  achievements: string[]
+  companyLink?: string
+  location: string
+  period: string
+  type: string
+  description: string[]
+  skills: string[]
+  color?: string
+  logo?: string
+  github?: string
+  live?: string
+  certificate?: string
+  lor?: string
+  projects?: ExperienceProject[]
 }
 
 export interface Testimonial {

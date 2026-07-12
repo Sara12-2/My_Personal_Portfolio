@@ -72,6 +72,9 @@ html { scroll-behavior: smooth; }
 
 /* ============================================ */
 /* FIX: Override Default Tailwind Green -> Olive */
+/* NOTE: This is a safety-net patch. The real fix is */
+/* finding & replacing any leftover bg-green-*/text-green-* */
+/* classes in components with the olive equivalents above. */
 /* ============================================ */
 
 .bg-green-50 { background-color: #F5F5F0 !important; }
@@ -106,22 +109,17 @@ html { scroll-behavior: smooth; }
 
 /* ============================================ */
 /* FIX: Button Text Visibility */
+/* NOTE: Removed the previous blanket `button { color: ... !important }` */
+/* rule — it was overriding correctly-styled buttons across the site. */
+/* Only the specific named variants below are patched now. */
 /* ============================================ */
 
-/* All buttons - ensure text is visible */
-button {
-  color: #2C2C2C !important;
-}
-
-button:hover {
-  color: #8B9A6B !important;
-}
-
 /* Primary buttons - olive background with white text */
-.btn-primary, 
+.btn-primary,
 button.bg-olive,
 a.bg-olive,
-[class*="bg-olive"] {
+button[class*="bg-olive"],
+a[class*="bg-olive"] {
   color: #FFFFFF !important;
   background-color: #8B9A6B !important;
 }
@@ -129,43 +127,30 @@ a.bg-olive,
 .btn-primary:hover,
 button.bg-olive:hover,
 a.bg-olive:hover,
-[class*="bg-olive"]:hover {
+button[class*="bg-olive"]:hover,
+a[class*="bg-olive"]:hover {
   background-color: #6B8A4A !important;
   color: #FFFFFF !important;
 }
 
-/* Force: Any text inside olive button should be white */
-.bg-olive *,
-button.bg-olive *,
-a.bg-olive *,
-[class*="bg-olive"] * {
+/* Force: text inside an olive button/link should be white — scoped to button/a only */
+button[class*="bg-olive"] *,
+a[class*="bg-olive"] * {
   color: #FFFFFF !important;
 }
 
-.bg-olive span,
-button.bg-olive span,
-a.bg-olive span,
-.bg-olive svg,
-button.bg-olive svg,
-a.bg-olive svg {
+button[class*="bg-olive"]:hover *,
+a[class*="bg-olive"]:hover * {
   color: #FFFFFF !important;
 }
 
-/* Force: Olive button hover - all children white */
-.bg-olive:hover *,
-button.bg-olive:hover *,
-a.bg-olive:hover *,
-[class*="bg-olive"]:hover * {
-  color: #FFFFFF !important;
-}
-
-/* Kill: Any green text on olive background */
-.bg-olive .text-green-500,
-.bg-olive .text-green-600,
-.bg-olive .text-green-700,
-button.bg-olive .text-green-500,
-button.bg-olive .text-green-600,
-button.bg-olive .text-green-700 {
+/* Kill: Any green text leaking onto an olive button */
+button[class*="bg-olive"] .text-green-500,
+button[class*="bg-olive"] .text-green-600,
+button[class*="bg-olive"] .text-green-700,
+a[class*="bg-olive"] .text-green-500,
+a[class*="bg-olive"] .text-green-600,
+a[class*="bg-olive"] .text-green-700 {
   color: #FFFFFF !important;
 }
 
@@ -213,7 +198,7 @@ button[class*="bg-dark"]:hover {
   color: #FFFFFF !important;
 }
 
-/* Override any conflicting styles */
+/* Explicit text-color utility overrides on buttons only */
 button[class*="text-white"] {
   color: #FFFFFF !important;
 }
@@ -262,54 +247,45 @@ button[class*="text-dark"] {
 /* ✅ FIX: GitHub Calendar - Olive Theme */
 /* ============================================ */
 
-/* Force GitHub Calendar to use Olive Theme */
 .react-github-calendar {
   font-family: inherit !important;
 }
 
-/* Calendar Container */
 .react-github-calendar .calendar {
   background: transparent !important;
 }
 
-/* All Calendar Days - Override Default Colors */
 .react-github-calendar .ContributionCalendar-day {
   border-radius: 3px !important;
   transition: all 0.2s ease !important;
   border: 1px solid transparent !important;
 }
 
-/* Level 0 - No contributions */
 .react-github-calendar .ContributionCalendar-day[data-level="0"] {
   background-color: #e8ece8 !important;
   border-color: #d5dcd5 !important;
 }
 
-/* Level 1 - Low contribution */
 .react-github-calendar .ContributionCalendar-day[data-level="1"] {
   background-color: #C5D4B5 !important;
   border-color: #b8c9a8 !important;
 }
 
-/* Level 2 - Medium contribution */
 .react-github-calendar .ContributionCalendar-day[data-level="2"] {
   background-color: #A8B89A !important;
   border-color: #9aab8c !important;
 }
 
-/* Level 3 - High contribution */
 .react-github-calendar .ContributionCalendar-day[data-level="3"] {
   background-color: #8B9A6B !important;
   border-color: #7d8c5e !important;
 }
 
-/* Level 4 - Very high contribution */
 .react-github-calendar .ContributionCalendar-day[data-level="4"] {
   background-color: #6B8A4A !important;
   border-color: #5d7a3e !important;
 }
 
-/* Calendar Day Hover - Olive Only */
 .react-github-calendar .ContributionCalendar-day:hover {
   transform: scale(1.25) !important;
   box-shadow: 0 0 0 2px #8B9A6B !important;
@@ -317,7 +293,6 @@ button[class*="text-dark"] {
   border-radius: 3px !important;
 }
 
-/* Tooltip on hover */
 .react-github-calendar .ContributionCalendar-day .tooltip {
   background: #2C2C2C !important;
   color: #FFFFFF !important;
@@ -327,21 +302,18 @@ button[class*="text-dark"] {
   border: 1px solid #8B9A6B !important;
 }
 
-/* Month Labels */
 .react-github-calendar .calendar .month-label {
   color: #2C2C2C !important;
   font-weight: 600 !important;
   font-size: 12px !important;
 }
 
-/* Day Labels (Mon, Wed, Fri) */
 .react-github-calendar .calendar .day-label {
   color: #4A4A4A !important;
   font-size: 10px !important;
   font-weight: 500 !important;
 }
 
-/* Legend */
 .react-github-calendar .legend {
   color: #4A4A4A !important;
   font-size: 11px !important;
@@ -351,7 +323,6 @@ button[class*="text-dark"] {
   color: #4A4A4A !important;
 }
 
-/* Loading Indicator */
 .react-github-calendar .loading {
   color: #8B9A6B !important;
   border-color: #8B9A6B !important;
@@ -362,7 +333,6 @@ button[class*="text-dark"] {
   border-top-color: #6B8A4A !important;
 }
 
-/* Error message */
 .react-github-calendar .error {
   color: #8B9A6B !important;
 }
@@ -371,16 +341,9 @@ button[class*="text-dark"] {
 /* FIX: Any Other Elements */
 /* ============================================ */
 
-/* Override default focus rings */
 *:focus-visible {
   outline-color: #8B9A6B !important;
   outline-offset: 2px;
-}
-
-/* Override default selection */
-::selection {
-  background: #8B9A6B !important;
-  color: #FFFFFF !important;
 }
 
 /* ✅ FIX: Only apply to normal links, not buttons */
@@ -408,21 +371,23 @@ a:not([class*="bg-"]):not([class*="btn-"]):hover {
 }
 
 /* ✅ GitHub Card - Olive Theme */
-.github-card { 
-  background: rgba(30, 59, 41, 0.4); 
-  border-radius: 16px; 
-  padding: 25px; 
-  border: 1px solid rgba(139, 154, 107, 0.2); 
-  text-align: center; 
-  transition: 0.3s; 
+/* FIX: was a near-black forest-green rgba(30,59,41,0.4) — replaced with an */
+/* olive-tinted light background that actually matches the rest of the site */
+.github-card {
+  background: rgba(139, 154, 107, 0.06);
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid rgba(139, 154, 107, 0.2);
+  text-align: center;
+  transition: 0.3s;
 }
-.github-card:hover { 
-  border-color: rgba(139, 154, 107, 0.5); 
-  transform: translateY(-3px); 
+.github-card:hover {
+  border-color: rgba(139, 154, 107, 0.5);
+  transform: translateY(-3px);
 }
-.github-card img { 
-  max-width: 100%; 
-  border-radius: 10px; 
+.github-card img {
+  max-width: 100%;
+  border-radius: 10px;
 }
 
 /* ✅ GitHub Activity Component Override */

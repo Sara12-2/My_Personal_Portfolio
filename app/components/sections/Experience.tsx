@@ -195,7 +195,7 @@ export default function Experience() {
           viewport={{ once: true }}
         >
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -215,109 +215,102 @@ export default function Experience() {
             </p>
           </div>
 
-          {/* Experience Grid - 2 per row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Experience Grid - 3 per row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl mx-auto">
             {experiences.map((exp, index) => {
               const Icon = exp.icon
 
               return (
                 <motion.div
                   key={exp.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true }}
-                  className="relative"
+                  className="relative h-full"
                 >
-                  <div className="group relative bg-white/40 backdrop-blur-xl p-6 rounded-3xl border border-white/50 ring-1 ring-[#8B9A6B]/5 shadow-[0_8px_32px_rgba(139,154,107,0.15)] hover:shadow-[0_20px_50px_rgba(139,154,107,0.28)] transition-all duration-500 hover:-translate-y-1.5 overflow-hidden h-full flex flex-col">
+                  <div className="group relative bg-white/40 backdrop-blur-xl p-5 rounded-2xl border border-white/50 ring-1 ring-[#8B9A6B]/5 shadow-[0_8px_32px_rgba(139,154,107,0.12)] hover:shadow-[0_20px_50px_rgba(139,154,107,0.25)] transition-all duration-500 hover:-translate-y-1.5 overflow-hidden h-full flex flex-col">
                     {/* Glass Shine Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent pointer-events-none" />
                     {/* Gradient Top Border */}
                     <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl transition-all duration-500 group-hover:h-1.5 bg-gradient-to-r from-[#8B9A6B]/40 via-[#8B9A6B] to-[#8B9A6B]/40" />
 
-                    {/* Header: Neuron Logo + Title + Badge */}
-                    <div className="flex items-start justify-between gap-3 pt-1">
-                      <div className="flex items-start gap-3">
-                        {/* Neuron-style Logo */}
-                        <div className="relative flex-shrink-0">
-                          <motion.div
-                            className="absolute -inset-1.5 rounded-full border border-[#8B9A6B]/40"
-                            animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
-                            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut', delay: index * 0.3 }}
-                          />
-                          <div className="relative w-14 h-14 rounded-full bg-white/40 backdrop-blur-xl shadow-[0_6px_18px_rgba(139,154,107,0.2)] border border-white/50 ring-1 ring-[#8B9A6B]/10 flex items-center justify-center overflow-hidden">
-                            {exp.logo ? (
-                              <img src={exp.logo} alt={exp.company} className="w-9 h-9 object-contain relative z-10" />
-                            ) : (
-                              <Icon className="w-7 h-7 text-[#8B9A6B] relative z-10" />
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-[#2C2C2C] transition-colors duration-300 group-hover:text-[#8B9A6B]">
-                            {exp.title}
-                          </h3>
-                          <a
-                            href={exp.companyLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium inline-flex items-center gap-1.5 text-sm group/link"
-                          >
-                            {exp.company}
-                            <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 transition-opacity" />
-                          </a>
+                    {/* Header: Logo + Title + Badge */}
+                    <div className="flex items-start gap-3">
+                      {/* Logo */}
+                      <div className="relative flex-shrink-0">
+                        <motion.div
+                          className="absolute -inset-1 rounded-full border border-[#8B9A6B]/30"
+                          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0, 0.3] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut', delay: index * 0.2 }}
+                        />
+                        <div className="relative w-10 h-10 rounded-full bg-white/40 backdrop-blur-xl shadow-[0_4px_12px_rgba(139,154,107,0.15)] border border-white/50 ring-1 ring-[#8B9A6B]/10 flex items-center justify-center overflow-hidden">
+                          {exp.logo ? (
+                            <img src={exp.logo} alt={exp.company} className="w-6 h-6 object-contain relative z-10" />
+                          ) : (
+                            <Icon className="w-5 h-5 text-[#8B9A6B] relative z-10" />
+                          )}
                         </div>
                       </div>
-                      <span className={`inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full border backdrop-blur-md font-medium whitespace-nowrap shadow-sm flex-shrink-0 ${TYPE_STYLES[exp.type]?.bg ?? 'bg-[#8B9A6B]/10'} ${TYPE_STYLES[exp.type]?.text ?? 'text-[#8B9A6B]'} ${TYPE_STYLES[exp.type]?.border ?? 'border-[#8B9A6B]/30'}`}>
+
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-bold text-[#2C2C2C] transition-colors duration-300 group-hover:text-[#8B9A6B] line-clamp-1">
+                          {exp.title}
+                        </h3>
+                        <a
+                          href={exp.companyLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium inline-flex items-center gap-1 group/link"
+                        >
+                          <span className="truncate max-w-[120px]">{exp.company}</span>
+                          <ExternalLink className="w-3 h-3 opacity-60 group-hover/link:opacity-100 transition-opacity flex-shrink-0" />
+                        </a>
+                      </div>
+
+                      <span className={`inline-flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full border backdrop-blur-md font-medium whitespace-nowrap flex-shrink-0 ${TYPE_STYLES[exp.type]?.bg ?? 'bg-[#8B9A6B]/10'} ${TYPE_STYLES[exp.type]?.text ?? 'text-[#8B9A6B]'} ${TYPE_STYLES[exp.type]?.border ?? 'border-[#8B9A6B]/30'}`}>
                         {(() => {
                           const TypeIcon = TYPE_STYLES[exp.type]?.icon ?? Briefcase
-                          return <TypeIcon className="w-3.5 h-3.5" />
+                          return <TypeIcon className="w-2.5 h-2.5" />
                         })()}
                         {exp.type}
                       </span>
                     </div>
 
                     {/* Meta Info */}
-                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-[#4A4A4A]">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4 text-[#8B9A6B]" />
+                    <div className="flex flex-wrap items-center gap-2 mt-2 text-xs text-[#4A4A4A]">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3 text-[#8B9A6B]" />
                         {exp.period}
                       </span>
-                      <span className="w-1 h-1 rounded-full bg-[#4A4A4A]/30" />
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4 text-[#8B9A6B]" />
-                        {exp.location}
+                      <span className="w-0.5 h-0.5 rounded-full bg-[#4A4A4A]/30" />
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-[#8B9A6B]" />
+                        <span className="truncate max-w-[100px]">{exp.location}</span>
                       </span>
                     </div>
 
-                    {/* Description */}
-                    <ul className="mt-4 space-y-2.5 text-[#4A4A4A] text-sm">
+                    {/* Description - Compact */}
+                    <ul className="mt-2 space-y-1 text-xs text-[#4A4A4A]">
                       {exp.description.map((item, i) => (
-                        <motion.li 
-                          key={i} 
-                          className="flex items-start gap-3"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: i * 0.05 }}
-                          viewport={{ once: true }}
-                        >
-                          <span className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 shadow-sm bg-[#8B9A6B]" />
-                          {item}
-                        </motion.li>
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full mt-1 flex-shrink-0 bg-[#8B9A6B]" />
+                          <span className="line-clamp-2">{item}</span>
+                        </li>
                       ))}
                     </ul>
 
-                    {/* Quick Action Icons - GitHub, Live, Certificate, LOR */}
-                    <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-[#8B9A6B]/10">
+                    {/* Quick Action Icons */}
+                    <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-[#8B9A6B]/10">
                       {exp.github && (
                         <a
                           href={exp.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                          className="flex items-center gap-1 text-[10px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
                         >
-                          <FolderGit2 className="w-4 h-4 text-[#8B9A6B]" />
-                          <span className="group-hover/btn:underline">GitHub</span>
+                          <FolderGit2 className="w-3 h-3 text-[#8B9A6B]" />
+                          GitHub
                         </a>
                       )}
 
@@ -326,10 +319,10 @@ export default function Experience() {
                           href={exp.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                          className="flex items-center gap-1 text-[10px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
                         >
-                          <Rocket className="w-4 h-4 text-[#8B9A6B]" />
-                          <span className="group-hover/btn:underline">Live</span>
+                          <Rocket className="w-3 h-3 text-[#8B9A6B]" />
+                          Live
                         </a>
                       )}
 
@@ -338,10 +331,10 @@ export default function Experience() {
                           href={exp.certificate}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                          className="flex items-center gap-1 text-[10px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
                         >
-                          <FileCheck className="w-4 h-4 text-[#8B9A6B]" />
-                          <span className="group-hover/btn:underline">Certificate</span>
+                          <FileCheck className="w-3 h-3 text-[#8B9A6B]" />
+                          Cert
                         </a>
                       )}
 
@@ -350,10 +343,10 @@ export default function Experience() {
                           href={exp.lor}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                          className="flex items-center gap-1 text-[10px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
                         >
-                          <FileBadge className="w-4 h-4 text-[#8B9A6B]" />
-                          <span className="group-hover/btn:underline">LOR</span>
+                          <FileBadge className="w-3 h-3 text-[#8B9A6B]" />
+                          LOR
                         </a>
                       )}
 
@@ -362,52 +355,62 @@ export default function Experience() {
                           href={exp.projects[0].link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors group/btn"
+                          className="flex items-center gap-1 text-[10px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
                         >
-                          <Eye className="w-4 h-4 text-[#8B9A6B]" />
-                          <span className="group-hover/btn:underline">{exp.projects.length} Projects</span>
+                          <Eye className="w-3 h-3 text-[#8B9A6B]" />
+                          {exp.projects.length} Projects
                         </a>
                       )}
                     </div>
 
-                    {/* Project Repo Links (Quick Access) */}
+                    {/* Project Repo Links - Compact */}
                     {exp.projects && exp.projects.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 mt-3">
-                        {exp.projects.map((project, idx) => (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {exp.projects.slice(0, 3).map((project, idx) => (
                           <a
                             key={idx}
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] px-2 py-1 bg-white/30 backdrop-blur-md hover:bg-[#8B9A6B]/15 border border-white/40 rounded-full text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
+                            className="text-[8px] px-1.5 py-0.5 bg-white/30 backdrop-blur-md hover:bg-[#8B9A6B]/15 border border-white/40 rounded-full text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors truncate max-w-[80px]"
                           >
                             {project.name}
                           </a>
                         ))}
+                        {exp.projects.length > 3 && (
+                          <span className="text-[8px] px-1.5 py-0.5 bg-white/30 backdrop-blur-md border border-white/40 rounded-full text-[#4A4A4A]">
+                            +{exp.projects.length - 3}
+                          </span>
+                        )}
                       </div>
                     )}
 
-                    {/* Skills */}
-                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#8B9A6B]/10 mt-auto">
-                      {exp.skills.map((skill) => (
+                    {/* Skills - Compact */}
+                    <div className="flex flex-wrap gap-1 mt-auto pt-2 border-t border-[#8B9A6B]/10">
+                      {exp.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
-                          className="text-xs px-3 py-1.5 backdrop-blur-md rounded-full border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10"
+                          className="text-[9px] px-2 py-0.5 backdrop-blur-md rounded-full border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10"
                         >
                           {skill}
                         </span>
                       ))}
+                      {exp.skills.length > 4 && (
+                        <span className="text-[9px] px-2 py-0.5 backdrop-blur-md rounded-full border shadow-sm bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10">
+                          +{exp.skills.length - 4}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Decorative Corner Accent - Mini Node Graph */}
-                    <svg className="absolute bottom-3 right-3 w-16 h-16 opacity-[0.18] pointer-events-none" viewBox="0 0 64 64" fill="none">
+                    {/* Decorative Corner Accent */}
+                    <svg className="absolute bottom-2 right-2 w-10 h-10 opacity-[0.12] pointer-events-none" viewBox="0 0 64 64" fill="none">
                       <line x1="10" y1="50" x2="30" y2="34" stroke="#8B9A6B" strokeWidth="1" />
                       <line x1="30" y1="34" x2="50" y2="16" stroke="#8B9A6B" strokeWidth="1" />
                       <line x1="30" y1="34" x2="46" y2="46" stroke="#8B9A6B" strokeWidth="1" />
-                      <circle cx="10" cy="50" r="2.5" fill="#8B9A6B" />
-                      <circle cx="30" cy="34" r="3" fill="#8B9A6B" />
-                      <circle cx="50" cy="16" r="2.5" fill="#8B9A6B" />
-                      <circle cx="46" cy="46" r="2" fill="#8B9A6B" />
+                      <circle cx="10" cy="50" r="2" fill="#8B9A6B" />
+                      <circle cx="30" cy="34" r="2.5" fill="#8B9A6B" />
+                      <circle cx="50" cy="16" r="2" fill="#8B9A6B" />
+                      <circle cx="46" cy="46" r="1.5" fill="#8B9A6B" />
                     </svg>
                   </div>
                 </motion.div>
@@ -421,7 +424,7 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
           >
             {[
               { label: 'Total Roles', value: experiences.length, icon: Briefcase },
@@ -431,18 +434,19 @@ export default function Experience() {
             ].map((stat) => {
               const StatIcon = stat.icon
               return (
-                <div 
+                <motion.div 
                   key={stat.label} 
-                  className="group bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-[#8B9A6B]/10 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="group bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  whileHover={{ scale: 1.02 }}
                 >
-                  <div className="flex items-center justify-center mb-2">
-                    <div className="p-2 rounded-full bg-[#8B9A6B]/10 group-hover:bg-[#8B9A6B]/20 transition-colors duration-300">
-                      <StatIcon className="w-5 h-5 text-[#8B9A6B]" />
+                  <div className="flex items-center justify-center mb-1.5">
+                    <div className="p-1.5 rounded-full bg-[#8B9A6B]/10 group-hover:bg-[#8B9A6B]/20 transition-colors duration-300">
+                      <StatIcon className="w-4 h-4 text-[#8B9A6B]" />
                     </div>
                   </div>
-                  <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
-                  <div className="text-sm text-[#4A4A4A]">{stat.label}</div>
-                </div>
+                  <div className="text-xl font-bold text-[#8B9A6B]">{stat.value}</div>
+                  <div className="text-xs text-[#4A4A4A]">{stat.label}</div>
+                </motion.div>
               )
             })}
           </motion.div>

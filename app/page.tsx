@@ -5,7 +5,6 @@ import Hero from './components/sections/Hero'
 import About from './components/sections/About'
 import Services from './components/sections/Services'
 import WorkWhyResume from './components/sections/WorkWhyResume'
-// import DevHatch from './components/sections/DevHatch'  // ← DELETE THIS LINE
 import Skills from './components/sections/Skill'
 import Projects from './components/sections/Projects'
 import Experience from './components/sections/Experience'
@@ -22,13 +21,12 @@ import Chatbot from './components/sections/Chatbot'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0A]">
+    <main className="min-h-screen bg-[#F5F5F0]">
       <Navigation />
       <Hero />
       <About />
       <Services />
       <WorkWhyResume />
-      {/* <DevHatch /> */}  {/* ← DELETE THIS LINE */}
       <Skills />
       <Projects />
       <Experience />
