@@ -525,7 +525,12 @@ export default function Chatbot() {
     const userMessage: Message = { id: Date.now().toString(), text: messageToSend, sender: 'user', timestamp: new Date() }
     const historyForApi = messages // snapshot before appending the new user message
     setMessages((prev) => [...prev, userMessage])
-    if (!voiceMessage) setInput('')
+    // FIX: always clear the input after sending, regardless of whether the
+    // message came from typing, a suggestion-card click, or voice input.
+    // Previously this only cleared when handleSend() was called with no
+    // argument — suggestion clicks pass the prompt through the same
+    // parameter used for voice messages, so the input stayed filled.
+    setInput('')
     setIsTyping(true)
     setThinkingIndex(0)
 

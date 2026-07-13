@@ -73,7 +73,7 @@ html { scroll-behavior: smooth; }
 /* ============================================ */
 /* FIX: Override Default Tailwind Green -> Olive */
 /* NOTE: This is a safety-net patch. The real fix is */
-/* finding & replacing any leftover bg-green-*/text-green-* */
+/* finding & replacing any leftover bg-green-* / text-green-* classes */
 /* classes in components with the olive equivalents above. */
 /* ============================================ */
 
@@ -124,7 +124,7 @@ html { scroll-behavior: smooth; }
 /* background + olive icon color to it at ALL times, not just on hover. */
 /* This is what made the Chatbot's header icons (Voice/Clear/Minimize/ */
 /* Close, which used hover:bg-white/20) render as blank white squares. */
-/* The same landmine existed for bg-olive/bg-dark/text-*/bg-transparent. */
+/* The same landmine existed for bg-olive, bg-dark, text-*, and bg-transparent. */
 /* Fixed by keeping only exact class-token selectors (`.bg-olive`, */
 /* `button.bg-white`, etc.), which only match a literal standalone */
 /* class, never a hover:-prefixed or opacity-modified variant. */
