@@ -82,7 +82,7 @@ const allSkills = [
   { id: 36, name: 'Jupyter Notebook', icon: SiJupyter, category: 'tools', color: '#F37626' },
   { id: 37, name: 'Google Colab', icon: SiGooglecolab, category: 'tools', color: '#F9AB00' },
   { id: 44, name: 'AWS', icon: Cloud, category: 'tools', color: '#FF9900' },
-  { id: 45, name: 'Framer Motion', icon: Layers, category: 'tools', color: '#8B9A6B' },
+
 ]
 
 // ============================================
