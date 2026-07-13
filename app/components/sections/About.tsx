@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform, Variants } from 'framer-motion'  // ← Variants import
+import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
@@ -8,40 +8,16 @@ import {
   Briefcase, 
   Code2, 
   Award, 
-  MapPin, 
   Sparkles, 
   ArrowRight 
 } from 'lucide-react'
 import profileImage from '@/public/images/profile.jpg'
 
-// ============================================
-// CONSTANTS
-// ============================================
-
 const STATS = [
-  { 
-    label: 'Experience', 
-    value: '1+', 
-    suffix: ' Year',
-    icon: Briefcase,
-  },
-  { 
-    label: 'Projects', 
-    value: '15+', 
-    suffix: '',
-    icon: Code2,
-  },
-  { 
-    label: 'Certificates', 
-    value: '30+', 
-    suffix: '',
-    icon: Award,
-  },
+  { label: 'Experience', value: '1+', suffix: ' Year', icon: Briefcase },
+  { label: 'Projects', value: '15+', suffix: '', icon: Code2 },
+  { label: 'Certificates', value: '26+', suffix: '', icon: Award },
 ]
-
-// ============================================
-// COMPONENT: Animated Counter
-// ============================================
 
 function AnimatedCounter({ target, suffix }: { target: string; suffix: string }) {
   const [count, setCount] = useState(0)
@@ -75,10 +51,6 @@ function AnimatedCounter({ target, suffix }: { target: string; suffix: string })
   )
 }
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
-
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
@@ -92,40 +64,17 @@ export default function About() {
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
   }
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 120,
-        damping: 25,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 25 } },
   }
 
   const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 80,
-        damping: 25,
-        duration: 0.7,
-      },
-    },
+    visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 80, damping: 25, duration: 0.7 } },
   }
 
   return (
@@ -136,74 +85,36 @@ export default function About() {
       aria-label="About Sara Manzoor"
     >
       {/* ===== DECORATIVE BACKGROUND ===== */}
-      
       <motion.div
-        animate={{
-          x: [0, 60, 0],
-          y: [0, -30, 0],
-          scale: [1, 1.08, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={{ x: [0, 60, 0], y: [0, -30, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/5 blur-[120px] pointer-events-none"
         aria-hidden="true"
       />
       
       <motion.div
-        animate={{
-          x: [0, -60, 0],
-          y: [0, 30, 0],
-          scale: [1, 1.08, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2,
-        }}
+        animate={{ x: [0, -60, 0], y: [0, 30, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/5 blur-[120px] pointer-events-none"
         aria-hidden="true"
       />
 
       <motion.div
-        animate={{
-          y: [0, -15, 0, 15, 0],
-          opacity: [0.2, 0.6, 0.2],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={{ y: [0, -15, 0, 15, 0], opacity: [0.2, 0.6, 0.2] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-[10%] left-[5%] w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#8B9A6B]/20"
         aria-hidden="true"
       />
       
       <motion.div
-        animate={{
-          y: [0, 15, 0, -15, 0],
-          opacity: [0.2, 0.6, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2,
-        }}
+        animate={{ y: [0, 15, 0, -15, 0], opacity: [0.2, 0.6, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         className="absolute bottom-[20%] right-[6%] w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#8B9A6B]/20"
         aria-hidden="true"
       />
 
       {/* ===== MAIN CONTENT ===== */}
-
-      <motion.div
-        ref={ref}
-        style={{ opacity }}
-        className="container mx-auto px-4 sm:px-6 relative z-10"
-      >
+      <motion.div ref={ref} style={{ opacity }} className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -211,7 +122,6 @@ export default function About() {
           className="max-w-5xl mx-auto"
         >
           {/* ===== SECTION HEADER ===== */}
-
           <motion.div variants={itemVariants} className="text-center mb-10 sm:mb-12">
             <motion.div
               initial={{ scale: 0 }}
@@ -228,14 +138,8 @@ export default function About() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C2C2C]">
               Know Me{' '}
               <motion.span
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
                 className="bg-gradient-to-r from-[#8B9A6B] via-[#6B7A5B] to-[#8B9A6B] bg-[length:200%] text-transparent bg-clip-text"
               >
                 Better
@@ -251,28 +155,16 @@ export default function About() {
           </motion.div>
 
           {/* ===== GRID ===== */}
-
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            
             {/* ===== LEFT - IMAGE ===== */}
-
-            <motion.div
-              variants={imageVariants}
-              className="relative flex justify-center"
-            >
+            <motion.div variants={imageVariants} className="relative flex justify-center">
               <div className="relative w-full max-w-[260px] sm:max-w-[300px]">
-                
-                {/* Glow */}
                 <motion.div
-                  animate={{
-                    scale: [1, 1.04, 1],
-                    opacity: [0.2, 0.4, 0.2],
-                  }}
+                  animate={{ scale: [1, 1.04, 1], opacity: [0.2, 0.4, 0.2] }}
                   transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                   className="absolute -inset-3 bg-[#8B9A6B]/10 rounded-2xl blur-2xl"
                 />
 
-                {/* Image */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300 }}
@@ -285,12 +177,10 @@ export default function About() {
                     priority
                     sizes="(max-width: 640px) 260px, 300px"
                     onError={(e: any) => {
-                      e.target.src =
-                        'https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=400'
+                      e.target.src = 'https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=400'
                     }}
                   />
                   
-                  {/* Hover Overlay */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
@@ -307,7 +197,6 @@ export default function About() {
                   </motion.div>
                 </motion.div>
 
-                {/* Badge */}
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
@@ -323,9 +212,7 @@ export default function About() {
             </motion.div>
 
             {/* ===== RIGHT - CONTENT ===== */}
-
             <motion.div variants={containerVariants} className="space-y-4 text-center lg:text-left">
-              
               <motion.div variants={itemVariants}>
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2C2C2C]">
                   I'm{' '}
@@ -333,10 +220,7 @@ export default function About() {
                 </h3>
               </motion.div>
 
-              <motion.p
-                variants={itemVariants}
-                className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
-              >
+              <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 I'm a <span className="text-[#8B9A6B] font-semibold">Full Stack Developer</span> and{' '}
                 <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> passionate about
                 building intelligent, scalable, and user-centric digital solutions. Currently serving as{' '}
@@ -344,10 +228,7 @@ export default function About() {
                 develop innovative software and explore how AI can solve real-world challenges.
               </motion.p>
 
-              <motion.p
-                variants={itemVariants}
-                className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
-              >
+              <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 My expertise spans full-stack development —{' '}
                 <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, MySQL</span>
                 {' '}— alongside{' '}
@@ -355,25 +236,14 @@ export default function About() {
                 with a growing focus on <span className="text-[#8B9A6B] font-medium">RAG and LLMs</span>.
               </motion.p>
 
-              <motion.p
-                variants={itemVariants}
-                className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed"
-              >
+              <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 I enjoy turning ideas into practical products — from business systems to AI-powered
                 applications — writing clean code, crafting meaningful experiences, and constantly
                 learning. Let's build something innovative together.
               </motion.p>
 
-              {/* ===== LOCATION ===== */}
-
-        
-
               {/* ===== STATS ===== */}
-
-              <motion.div
-                variants={itemVariants}
-                className="grid grid-cols-3 gap-2 max-w-[300px] sm:max-w-sm mx-auto lg:mx-0"
-              >
+              <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2 max-w-[300px] sm:max-w-sm mx-auto lg:mx-0">
                 {STATS.map((stat, index) => {
                   const Icon = stat.icon
                   return (
@@ -382,11 +252,7 @@ export default function About() {
                       initial={{ opacity: 0, y: 15, scale: 0.9 }}
                       animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 15, scale: 0.9 }}
                       transition={{ delay: 0.2 + index * 0.08, type: 'spring', stiffness: 150 }}
-                      whileHover={{
-                        y: -4,
-                        scale: 1.04,
-                        boxShadow: '0 12px 30px rgba(139, 154, 107, 0.12)',
-                      }}
+                      whileHover={{ y: -4, scale: 1.04, boxShadow: '0 12px 30px rgba(139, 154, 107, 0.12)' }}
                       className="group relative bg-white/80 backdrop-blur-sm rounded-xl p-2.5 sm:p-3 text-center border border-[#8B9A6B]/10 hover:border-[#8B9A6B]/30 transition-all duration-300 cursor-default overflow-hidden"
                     >
                       <motion.div
@@ -417,11 +283,7 @@ export default function About() {
               </motion.div>
 
               {/* ===== CTA ===== */}
-
-              <motion.div
-                variants={itemVariants}
-                className="pt-1 flex flex-wrap gap-3 justify-center lg:justify-start"
-              >
+              <motion.div variants={itemVariants} className="pt-1 flex flex-wrap gap-3 justify-center lg:justify-start">
                 <motion.a
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -441,14 +303,12 @@ export default function About() {
                   View Work
                 </motion.a>
               </motion.div>
-
             </motion.div>
           </div>
         </motion.div>
       </motion.div>
 
       {/* ===== BOTTOM DECORATION ===== */}
-
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}

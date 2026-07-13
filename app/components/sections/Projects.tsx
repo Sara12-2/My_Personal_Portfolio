@@ -257,7 +257,7 @@ export default function Projects() {
                 <motion.button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   suppressHydrationWarning
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 ${
@@ -286,99 +286,107 @@ export default function Projects() {
                   transition={{ duration: 0.4 }}
                   viewport={{ once: true }}
                   whileHover={{ 
-                    y: -8,
+                    y: -6,
                     transition: { duration: 0.3 }
                   }}
-                  className="group relative bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/50 ring-1 ring-[#8B9A6B]/10 shadow-[0_8px_32px_rgba(139,154,107,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(139,154,107,0.3)] hover:ring-[#8B9A6B]/30 h-full flex flex-col cursor-pointer"
+                  className="group relative bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#8B9A6B]/10 shadow-[0_4px_20px_rgba(139,154,107,0.08)] hover:shadow-[0_12px_40px_rgba(139,154,107,0.18)] h-full flex flex-col transition-all duration-300"
                 >
-                  {/* Glass Shine Overlay - Enhanced on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent pointer-events-none z-10 group-hover:opacity-75 transition-opacity duration-500" />
-                  
-                  {/* Gradient Top Border — tinted per project with animation */}
-                  <div 
-                    className="absolute top-0 left-0 right-0 h-1.5 z-20 transition-all duration-500 group-hover:h-2"
-                    style={{ background: `linear-gradient(90deg, ${project.color}40, ${project.color}, ${project.color}40)` }}
-                  />
-
-                  <div className="relative w-full h-52 bg-[#F5F5F0] overflow-hidden">
-                    {/* Image with zoom effect on hover */}
-                    {project.image ? (
-                      <div className="w-full h-full overflow-hidden">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
+                  {/* Browser Mockup Thumbnail */}
+                  <div className="w-full bg-[#F5F5F0]">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-[#8B9A6B]/10 m-3 transition-all duration-300 group-hover:shadow-xl group-hover:border-[#8B9A6B]/20">
+                      {/* Browser Chrome */}
+                      <div className="flex items-center gap-2 px-4 py-2.5 bg-[#F0EFEA] border-b border-[#E5E4DF]">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
+                        </div>
+                        <div className="flex-1 flex justify-center">
+                          <div className="px-4 py-0.5 bg-white/60 rounded-md text-[10px] text-[#8B9A6B]/50 font-mono truncate max-w-[150px]">
+                            {project.title.split(' — ')[0]}
+                          </div>
+                        </div>
                       </div>
-                    ) : (
-                      <div 
-                        className="w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-105"
-                        style={{ background: `linear-gradient(135deg, ${project.color}18, ${project.color}08)` }}
-                      >
-                        <Icon className="w-16 h-16 transition-all duration-500 group-hover:scale-110" style={{ color: `${project.color}40` }} />
+                      
+                      {/* Screenshot */}
+                      <div className="relative aspect-video bg-white overflow-hidden">
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]"
+                          />
+                        ) : (
+                          <div 
+                            className="w-full h-full flex items-center justify-center"
+                            style={{ background: `linear-gradient(135deg, ${project.color}12, ${project.color}06)` }}
+                          >
+                            <Icon className="w-12 h-12" style={{ color: `${project.color}30` }} />
+                          </div>
+                        )}
                       </div>
-                    )}
-
-                    {/* Permanent subtle bottom gradient for legibility */}
-                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
-
-                    {/* Colored icon badge — with hover animation */}
-                    <motion.div 
-                      className="absolute top-3 left-3 w-9 h-9 rounded-xl backdrop-blur-md border border-white/50 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-                      style={{ backgroundColor: `${project.color}25` }}
-                      whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Icon className="w-4.5 h-4.5 transition-all duration-300" style={{ color: project.color }} />
-                    </motion.div>
-
-                    <div className="absolute top-3 right-3">
-                      <span className="text-xs px-3 py-1.5 bg-white/80 backdrop-blur-md text-[#8B9A6B] rounded-full border border-white/50 shadow-sm font-medium transition-all duration-300 group-hover:bg-[#8B9A6B] group-hover:text-white group-hover:border-[#8B9A6B]">
-                        {categories.find(c => c.id === project.category)?.label || project.category}
-                      </span>
                     </div>
                   </div>
 
-                  <div className="relative p-6 flex flex-col flex-1">
-                    <h3 className="text-lg font-bold text-[#2C2C2C] transition-all duration-300 group-hover:text-[#8B9A6B] group-hover:translate-x-1">
+                  {/* Content - Bigger padding and spacing */}
+                  <div className="relative px-5 pb-5 pt-1 flex flex-col flex-1">
+                    {/* Category Badge + Icon */}
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] font-medium text-[#8B9A6B] bg-[#8B9A6B]/10 px-3 py-1 rounded-full border border-[#8B9A6B]/15">
+                        {categories.find(c => c.id === project.category)?.label || project.category}
+                      </span>
+                      <div 
+                        className="w-8 h-8 rounded-lg flex items-center justify-center"
+                        style={{ backgroundColor: `${project.color}12` }}
+                      >
+                        <Icon className="w-4 h-4" style={{ color: project.color }} />
+                      </div>
+                    </div>
+
+                    {/* ✅ Darker Project Title */}
+                    <h3 className="text-base font-bold text-[#1A1A1A] leading-tight group-hover:text-[#8B9A6B] transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-[#4A4A4A] text-sm leading-relaxed mt-2 line-clamp-3 transition-all duration-300 group-hover:text-[#2C2C2C]">
+                    
+                    {/* ✅ Description with more space */}
+                    <p className="text-[#4A4A4A] text-sm leading-relaxed mt-2 mb-1 line-clamp-2 flex-1">
                       {project.description}
                     </p>
 
-                    {/* Tech Stack - With hover animation */}
-                    <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-[#8B9A6B]/10 transition-all duration-300 group-hover:border-[#8B9A6B]/30">
-                      {project.tech.map((tech, index) => (
-                        <motion.span
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
+                      {project.tech.slice(0, 4).map((tech) => (
+                        <span
                           key={tech}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.05 }}
-                          className="text-[10px] px-2.5 py-1 backdrop-blur-md rounded-full border shadow-sm bg-[#8B9A6B]/10 text-[#8B9A6B] border-white/40 ring-1 ring-[#8B9A6B]/10 transition-all duration-300 hover:bg-[#8B9A6B] hover:text-white hover:scale-105 hover:ring-[#8B9A6B]/30 cursor-default"
+                          className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium"
                         >
                           {tech}
-                        </motion.span>
+                        </span>
                       ))}
+                      {project.tech.length > 4 && (
+                        <span className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium">
+                          +{project.tech.length - 4}
+                        </span>
+                      )}
                     </div>
 
-                    <div className="flex items-center gap-4 pt-4 mt-auto">
+                    {/* Buttons */}
+                    <div className="flex items-center gap-5 pt-3.5 mt-1 border-t border-[#8B9A6B]/6">
                       {hasLive ? (
                         <motion.a
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ x: 5 }}
+                          whileHover={{ x: 3 }}
                           whileTap={{ scale: 0.95 }}
-                          className="flex items-center gap-1.5 text-sm text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors font-medium group/link relative"
+                          className="flex items-center gap-1.5 text-sm font-medium text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors"
                         >
-                          <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover/link:rotate-[-10deg]" />
+                          <ExternalLink className="w-3.5 h-3.5" />
                           Live Demo
-                          <span className="inline-block transition-all duration-300 group-hover/link:translate-x-1 group-hover/link:opacity-100">→</span>
                         </motion.a>
                       ) : (
-                        <span className="flex items-center gap-1.5 text-sm text-[#4A4A4A]/50 font-medium">
-                          <ExternalLink className="w-4 h-4" />
+                        <span className="flex items-center gap-1.5 text-sm text-[#4A4A4A]/40 font-medium">
+                          <ExternalLink className="w-3.5 h-3.5" />
                           Live Demo
                         </span>
                       )}
@@ -386,12 +394,12 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ x: 5 }}
+                        whileHover={{ x: 3 }}
                         whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-1.5 text-sm text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors font-medium group/github"
+                        className="flex items-center gap-1.5 text-sm font-medium text-[#4A4A4A]/60 hover:text-[#8B9A6B] transition-colors"
                       >
-                        <FaGithub className="w-4 h-4 transition-transform duration-300 group-hover/github:rotate-[-10deg]" />
-                        <span>GitHub</span>
+                        <FaGithub className="w-3.5 h-3.5" />
+                        GitHub
                       </motion.a>
                     </div>
                   </div>
@@ -400,6 +408,7 @@ export default function Projects() {
             })}
           </div>
 
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -415,15 +424,13 @@ export default function Projects() {
             ].map((stat, index) => (
               <motion.div 
                 key={stat.label} 
-                className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/80 hover:shadow-lg hover:border-[#8B9A6B]/30 hover:scale-105"
+                className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/80 hover:shadow-lg hover:border-[#8B9A6B]/30"
                 whileHover={{ y: -3 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="text-2xl font-bold text-[#8B9A6B] transition-all duration-300 group-hover:scale-110">
-                  {stat.value}
-                </div>
+                <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
                 <div className="text-sm text-[#4A4A4A]">{stat.label}</div>
               </motion.div>
             ))}

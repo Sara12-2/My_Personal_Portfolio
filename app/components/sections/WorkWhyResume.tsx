@@ -173,7 +173,7 @@ export default function WorkWhyResume() {
           {/* ============================================
               SECTION 2: WHY HIRE ME
           ============================================ */}
-          <div className="mb-20">
+          <div>
             <div className="text-center mb-14">
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -214,79 +214,6 @@ export default function WorkWhyResume() {
                 )
               })}
             </div>
-          </div>
-
-          {/* ============================================
-              SECTION 3: RESUME CTA
-          ============================================ */}
-          <div>
-            <div className="text-center mb-14">
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full text-sm font-medium text-[#8B9A6B] mb-4"
-              >
-                <FileCheck className="w-4 h-4" />
-                Resume
-              </motion.span>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E]">
-                My <span className="text-[#8B9A6B]">Resume</span>
-              </h2>
-              <div className="w-20 h-1 bg-[#8B9A6B] mx-auto mt-4 rounded-full" />
-              <p className="text-[#4A4A4A] mt-4 max-w-2xl mx-auto text-sm">
-                Download my resume to see my complete professional journey, skills, and achievements.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.a
-                href="/resume.pdf"
-                download
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-[#8B9A6B]/20 hover:shadow-[#8B9A6B]/40"
-              >
-                <FileCheck className="w-5 h-5" />
-                Download Resume (PDF)
-                <ArrowRight className="w-5 h-5" />
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white/80 hover:bg-white border-2 border-[#8B9A6B] text-[#8B9A6B] rounded-xl transition-all duration-300 font-semibold"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Request Resume
-              </motion.a>
-            </div>
-
-            {/* ✅ Updated Resume Stats — Realistic */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              viewport={{ once: true }}
-              className="mt-10 flex flex-wrap justify-center gap-6"
-            >
-              {[
-                { label: 'Experience', value: '1+ Year', icon: Briefcase },
-                { label: 'Projects', value: '15+', icon: Code2 },
-                { label: 'Certifications', value: '30+', icon: Award },
-                { label: 'Internships', value: '3', icon: Users },
-              ].map((stat) => (
-                <div key={stat.label} className="flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-xl border border-[#8B9A6B]/10 shadow-sm">
-                  <stat.icon className="w-4 h-4 text-[#8B9A6B]" />
-                  <div>
-                    <div className="text-lg font-bold text-[#1E1E1E]">{stat.value}</div>
-                    <div className="text-[10px] text-[#4A4A4A]/50 uppercase tracking-wider">{stat.label}</div>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
 
             {/* Bottom CTA */}
             <motion.div
@@ -294,7 +221,7 @@ export default function WorkWhyResume() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-center mt-8"
+              className="text-center mt-10"
             >
               <p className="text-xs text-[#4A4A4A]/40 flex items-center justify-center gap-2">
                 <Coffee className="w-3 h-3" />

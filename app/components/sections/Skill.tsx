@@ -13,12 +13,12 @@ import {
   SiScikitlearn, SiVercel, SiNetlify,
   SiJupyter, SiGooglecolab, SiFlask,
   SiBootstrap, SiSqlite, SiPytorch,
-  SiLangchain
+  SiLangchain, SiKeras
 } from 'react-icons/si'
 import { 
   Brain, Server, Sparkles, 
   Cpu, Layout, Database, Terminal, Grid3x3,
-  Cloud, Layers, Zap, MessageSquare
+  Cloud, Layers, Zap, MessageSquare, BarChart3
 } from 'lucide-react'
 
 // ============================================
@@ -45,7 +45,7 @@ const allSkills = [
   { id: 38, name: 'SQL', icon: Database, category: 'backend', color: '#4479A1' },
   { id: 39, name: 'LangChain', icon: SiLangchain, category: 'backend', color: '#1C3C3C' },
 
-  // ============ AI / ML (18) ============
+  // ============ AI / ML (20) ============
   { id: 15, name: 'Scikit-learn', icon: SiScikitlearn, category: 'ai', color: '#F7931E' },
   { id: 16, name: 'Pandas', icon: SiPandas, category: 'ai', color: '#150458' },
   { id: 17, name: 'NumPy', icon: SiNumpy, category: 'ai', color: '#013243' },
@@ -58,9 +58,15 @@ const allSkills = [
   { id: 23, name: 'OpenCV', icon: Cpu, category: 'ai', color: '#5C3EE8' },
   { id: 24, name: 'YOLOv8', icon: Cpu, category: 'ai', color: '#00BFFF' },
   { id: 25, name: 'Deep Learning', icon: Brain, category: 'ai', color: '#8B5CF6' },
-  { id: 26, name: 'TensorFlow/Keras', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
+  // ✅ TensorFlow alag
+  { id: 26, name: 'TensorFlow', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
+  // ✅ Keras alag
+  { id: 46, name: 'Keras', icon: SiKeras, category: 'ai', color: '#D00000' },
   { id: 41, name: 'PyTorch', icon: SiPytorch, category: 'ai', color: '#EE4C2C' },
-  { id: 27, name: 'Matplotlib/Seaborn', icon: Brain, category: 'ai', color: '#8B9A6B' },
+  // ✅ Matplotlib alag
+  { id: 27, name: 'Matplotlib', icon: BarChart3, category: 'ai', color: '#11557C' },
+  // ✅ Seaborn alag
+  { id: 47, name: 'Seaborn', icon: BarChart3, category: 'ai', color: '#4C72B0' },
   { id: 28, name: 'EDA', icon: Brain, category: 'ai', color: '#8B9A6B' },
   { id: 42, name: 'Groq AI', icon: Zap, category: 'ai', color: '#F55036' },
   { id: 43, name: 'ChromaDB', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },

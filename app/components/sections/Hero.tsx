@@ -12,11 +12,6 @@ import {
   FaAward,
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
-import devhatchLogo from '@/public/images/Companies/devhatch.png'
-
-// ============================================
-// TYPES
-// ============================================
 
 type SocialIcon =
   | {
@@ -34,20 +29,15 @@ type SocialIcon =
       color: string
     }
 
-// ============================================
-// CONSTANTS
-// ============================================
-
 const ROLES = [
-  'Full Stack Developer',
-  'AI/ML Engineer',
+  'AI-Powered Full Stack Developer',
+  'Machine Learning Engineer',
+  'Building Intelligent Web Applications',
   'Computer Vision Engineer',
-  'NLP Engineer',
+  'Exploring LLMs & RAG',
 ]
 
-// ============================================
-// CUSTOM HOOK: Typing Effect
-// ============================================
+const TECH_HIGHLIGHTS = ['React', 'Next.js', 'Python', 'TensorFlow', 'Flask']
 
 const useTypingEffect = (roles: string[]) => {
   const [displayText, setDisplayText] = useState('')
@@ -80,10 +70,6 @@ const useTypingEffect = (roles: string[]) => {
   return { displayText }
 }
 
-// ============================================
-// CUSTOM HOOK: Orbit Radius (Responsive)
-// ============================================
-
 const useOrbitRadius = () => {
   const [radius, setRadius] = useState(180)
 
@@ -104,10 +90,6 @@ const useOrbitRadius = () => {
 
   return radius
 }
-
-// ============================================
-// CUSTOM HOOK: Particles (Responsive, reduced-motion aware)
-// ============================================
 
 const useParticles = (reduceMotion: boolean) => {
   const [particles, setParticles] = useState<
@@ -133,10 +115,6 @@ const useParticles = (reduceMotion: boolean) => {
   return particles
 }
 
-// ============================================
-// SOCIAL ICONS DATA
-// ============================================
-
 const SOCIAL_ICONS: SocialIcon[] = [
   { type: 'icon', icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
   { type: 'icon', icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
@@ -148,14 +126,11 @@ const SOCIAL_ICONS: SocialIcon[] = [
   { type: 'image', src: '/images/Companies/devhatch.png', href: 'https://devhatchlabs.com', label: 'DevHatch', color: '#8B9A6B' },
 ]
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
-
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null)
+  const [imgError, setImgError] = useState(false)
 
   const prefersReducedMotion = useReducedMotion()
   const { displayText } = useTypingEffect(ROLES)
@@ -164,11 +139,9 @@ export default function Hero() {
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!cardRef.current || prefersReducedMotion) return
-
     const rect = cardRef.current.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
-
     setMousePosition({ x, y })
   }, [prefersReducedMotion])
 
@@ -181,71 +154,44 @@ export default function Hero() {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
-  // Orbit/ring rotation durations — effectively "paused" (very long duration) when reduced motion is preferred
   const orbitDuration = prefersReducedMotion ? 0 : 24
   const ringDurationSlow = prefersReducedMotion ? 0 : 45
   const ringDurationSlower = prefersReducedMotion ? 0 : 60
 
   return (
     <section
+      id="home"
       className="relative overflow-hidden min-h-screen flex items-center justify-center pt-20"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* ===== BACKGROUND ===== */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#FAF8F5] via-[#F5F5F0] to-[#F8F6F0]" aria-hidden="true" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]" aria-hidden="true" />
+      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]" aria-hidden="true" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#8B9A6B]/5 blur-[160px]" aria-hidden="true" />
 
-      <div
-        className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B9A6B]/10 blur-[120px]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#8B9A6B]/5 blur-[160px]"
-        aria-hidden="true"
-      />
-
-      {/* ===== FLOATING PARTICLES ===== */}
       {!prefersReducedMotion && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           {particles.map((particle) => (
             <motion.div
               key={particle.id}
               className="absolute rounded-full bg-[#8B9A6B]/20"
-              style={{
-                width: particle.size,
-                height: particle.size,
-                left: particle.x,
-                top: particle.y,
-              }}
-              animate={{
-                y: [-30, 30, -30],
-                opacity: [0.2, 0.8, 0.2],
-              }}
-              transition={{
-                duration: particle.duration,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
+              style={{ width: particle.size, height: particle.size, left: particle.x, top: particle.y }}
+              animate={{ y: [-30, 30, -30], opacity: [0.2, 0.8, 0.2] }}
+              transition={{ duration: particle.duration, repeat: Infinity, ease: 'easeInOut' }}
             />
           ))}
         </div>
       )}
 
-      {/* ===== MAIN CONTENT ===== */}
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* ===== LEFT CONTENT ===== */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
-            {/* Open to Work Badge */}
             <div className="inline-flex items-center gap-2 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-6">
               <span className="w-2 h-2 rounded-full bg-[#8B9A6B] animate-pulse" />
               <span className="text-[#8B9A6B] font-semibold text-xs sm:text-sm tracking-wide">
@@ -253,13 +199,11 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Name */}
             <h1 className="flex flex-wrap justify-center lg:justify-start gap-1 text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2C2C2C] leading-tight tracking-tight">
               <span>Sara</span>
               <span className="text-[#8B9A6B] font-extrabold">Manzoor</span>
             </h1>
 
-            {/* Typing Effect */}
             <div className="min-h-[48px] sm:min-h-[56px] mt-3 sm:mt-4 flex items-center justify-center lg:justify-start">
               <span className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#4A4A4A]">
                 {displayText || 'Full Stack Developer'}
@@ -267,13 +211,23 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Subtitle */}
             <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              🏆 Top 10 hackathon finisher building AI-powered web apps — from RAG chatbots
-              to production ML models — where clean full-stack engineering meets real intelligence.
+              I build modern <span className="text-[#8B9A6B] font-semibold">full-stack web applications</span> and 
+              <span className="text-[#8B9A6B] font-semibold"> AI-powered systems</span> using cutting-edge technologies.
+              Turning <span className="text-[#8B9A6B] font-semibold">innovative ideas into impactful digital products</span>.
             </p>
 
-            {/* ===== CTAs ===== */}
+            <div className="flex flex-wrap gap-2 mt-4 sm:mt-5 justify-center lg:justify-start">
+              {TECH_HIGHLIGHTS.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs sm:text-sm px-3 py-1.5 rounded-full backdrop-blur-md bg-white/50 border border-[#8B9A6B]/25 text-[#4A4A4A] font-medium shadow-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
             <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center lg:justify-start">
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -295,28 +249,23 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* ===== RIGHT CONTENT - Image with Orbit Icons ===== */}
           <motion.div
             ref={cardRef}
             style={{
               transform: prefersReducedMotion
                 ? undefined
-                : `perspective(1200px)
-                rotateX(${mousePosition.y * 10}deg)
-                rotateY(${mousePosition.x * 10}deg)`,
+                : `perspective(1200px) rotateX(${mousePosition.y * 10}deg) rotateY(${mousePosition.x * 10}deg)`,
               transition: '0.25s',
             }}
             className="relative flex justify-center items-center"
           >
             <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px]">
-              {/* Outer Glow */}
               <motion.div
                 animate={prefersReducedMotion ? {} : { scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute inset-0 rounded-full bg-[#8B9A6B]/10 blur-3xl"
               />
 
-              {/* Decorative Rings */}
               <div className="absolute inset-6 sm:inset-8 rounded-full border border-[#8B9A6B]/15" />
 
               <motion.div
@@ -331,23 +280,33 @@ export default function Hero() {
                 className="absolute inset-[-15px] sm:inset-[-25px] rounded-full border border-[#8B9A6B]/10"
               />
 
-              {/* ===== PROFILE IMAGE ===== */}
               <motion.div
                 whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
                 transition={{ type: 'spring', stiffness: 200 }}
                 className="absolute inset-10 sm:inset-14 rounded-full overflow-hidden border-[4px] sm:border-[5px] border-[#8B9A6B] bg-white shadow-[0_25px_80px_rgba(139,154,107,.25)]"
               >
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Sara Manzoor - Full Stack Developer"
-                  fill
-                  priority
-                  sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
-                  className="object-cover"
-                />
+                {imgError ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=600"
+                    alt="Sara Manzoor - Full Stack Developer"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src="/images/profile.jpg"
+                    alt="Sara Manzoor - Full Stack Developer"
+                    fill
+                    priority
+                    fetchPriority="high"
+                    loading="eager"
+                    sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
+                    className="object-cover"
+                    onError={() => setImgError(true)}
+                  />
+                )}
               </motion.div>
 
-              {/* ===== ORBIT ICONS ===== */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: orbitDuration || 1, repeat: prefersReducedMotion ? 0 : Infinity, ease: 'linear' }}
@@ -361,11 +320,7 @@ export default function Hero() {
                       key={social.label}
                       className="absolute left-1/2 top-1/2"
                       style={{
-                        transform: `
-                          rotate(${angle}deg)
-                          translate(${orbitRadius}px)
-                          rotate(-${angle}deg)
-                        `,
+                        transform: `rotate(${angle}deg) translate(${orbitRadius}px) rotate(-${angle}deg)`,
                         transformOrigin: 'center',
                       }}
                     >
@@ -384,17 +339,11 @@ export default function Hero() {
                           aria-label={social.label}
                         >
                           <div
-                            className="
-                              w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14
-                              rounded-full backdrop-blur-xl bg-white/85
-                              border border-white shadow-xl flex items-center justify-center
-                              transition-all duration-300
-                            "
-                            style={{
-                              boxShadow: `0 8px 30px ${social.color}25`,
-                            }}
+                            className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full backdrop-blur-xl bg-white/85 border border-white shadow-xl flex items-center justify-center transition-all duration-300"
+                            style={{ boxShadow: `0 8px 30px ${social.color}25` }}
                           >
                             {social.type === 'image' ? (
+                              // eslint-disable-next-line @next/next/no-img-element
                               <img
                                 src={social.src}
                                 alt={social.label}
@@ -412,28 +361,18 @@ export default function Hero() {
                             )}
                           </div>
 
-                          {/* Glow Effect */}
                           <div
                             className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition duration-300 pointer-events-none"
                             style={{ background: social.color }}
                           />
 
-                          {/* Tooltip */}
                           <AnimatePresence>
                             {hoveredIcon === social.label && (
                               <motion.span
                                 initial={{ opacity: 0, scale: 0.9, y: 0 }}
                                 animate={{ opacity: 1, scale: 1, y: -4 }}
                                 exit={{ opacity: 0, scale: 0.9, y: 0 }}
-                                className={`
-                                  absolute top-12 xs:top-13 sm:top-14 md:top-16
-                                  whitespace-nowrap rounded-full
-                                  px-2.5 sm:px-3 py-0.5 sm:py-1
-                                  text-[10px] sm:text-xs font-medium
-                                  bg-[#8B9A6B] text-white
-                                  shadow-lg shadow-[#8B9A6B]/30
-                                  pointer-events-none
-                                `}
+                                className="absolute top-12 xs:top-13 sm:top-14 md:top-16 whitespace-nowrap rounded-full px-2.5 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium bg-[#8B9A6B] text-white shadow-lg shadow-[#8B9A6B]/30 pointer-events-none"
                               >
                                 {social.label}
                               </motion.span>
@@ -446,7 +385,6 @@ export default function Hero() {
                 })}
               </motion.div>
 
-              {/* ===== FLOATING DOTS (trimmed to 2) ===== */}
               {!prefersReducedMotion && (
                 <>
                   <motion.div
@@ -454,7 +392,6 @@ export default function Hero() {
                     transition={{ duration: 3, repeat: Infinity }}
                     className="absolute top-8 sm:top-10 right-12 sm:right-16 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#8B9A6B] shadow-lg shadow-[#8B9A6B]/40"
                   />
-
                   <motion.div
                     animate={{ y: [0, 10, 0], scale: [1, 1.4, 1] }}
                     transition={{ duration: 2.8, repeat: Infinity }}
@@ -467,7 +404,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ===== SCROLL INDICATOR ===== */}
       <motion.button
         onClick={scrollToAbout}
         initial={{ opacity: 0 }}
@@ -483,11 +419,7 @@ export default function Hero() {
         <motion.div
           animate={prefersReducedMotion ? {} : { y: [0, 10, 0] }}
           transition={{ duration: 1.8, repeat: Infinity }}
-          className="
-            w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-lg
-            border border-[#8B9A6B]/20 shadow-xl flex items-center justify-center
-            group-hover:bg-[#8B9A6B] transition-all duration-300
-          "
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-lg border border-[#8B9A6B]/20 shadow-xl flex items-center justify-center group-hover:bg-[#8B9A6B] transition-all duration-300"
         >
           <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-[#8B9A6B] group-hover:text-white transition-colors" />
         </motion.div>

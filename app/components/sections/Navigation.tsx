@@ -20,16 +20,12 @@ export default function Navigation() {
   const menuRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // Throttled scroll handler
   const handleScroll = useCallback(() => {
-    // Scroll effect
     setScrolled(window.scrollY > 50)
 
-    // Active section detection
     const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact']
     let current = 'home'
     
-    // Check if we're at the top
     if (window.scrollY < 200) {
       setActiveSection('home')
       return
@@ -39,7 +35,6 @@ export default function Navigation() {
       const element = document.getElementById(section)
       if (element) {
         const rect = element.getBoundingClientRect()
-        // Section is considered active when its top is near the viewport top
         if (rect.top <= 150 && rect.bottom >= 150) {
           current = section
           break
@@ -50,7 +45,6 @@ export default function Navigation() {
     setActiveSection(current)
   }, [])
 
-  // Throttle function
   const throttle = (func: Function, limit: number) => {
     let inThrottle: boolean
     return function(this: any, ...args: any[]) {
@@ -65,12 +59,11 @@ export default function Navigation() {
   useEffect(() => {
     const throttledScroll = throttle(handleScroll, 100)
     window.addEventListener('scroll', throttledScroll)
-    handleScroll() // Initial check
+    handleScroll()
     
     return () => window.removeEventListener('scroll', throttledScroll)
   }, [handleScroll])
 
-  // Handle hash on load
   useEffect(() => {
     if (window.location.hash) {
       const hash = window.location.hash.replace('#', '')
@@ -84,7 +77,6 @@ export default function Navigation() {
     }
   }, [])
 
-  // Handle resize - close mobile menu on desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isOpen) {
@@ -95,7 +87,6 @@ export default function Navigation() {
     return () => window.removeEventListener('resize', handleResize)
   }, [isOpen])
 
-  // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -107,7 +98,6 @@ export default function Navigation() {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [isOpen])
 
-  // Focus trap for mobile menu
   useEffect(() => {
     if (isOpen && menuRef.current) {
       const focusableElements = menuRef.current.querySelectorAll(
@@ -133,7 +123,6 @@ export default function Navigation() {
     }
   }, [isOpen])
 
-  // Handle smooth scroll
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     setIsOpen(false)
@@ -141,7 +130,6 @@ export default function Navigation() {
     if (href === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       setActiveSection('home')
-      // Update URL without hash
       window.history.pushState(null, '', '/')
       return
     }
@@ -151,12 +139,10 @@ export default function Navigation() {
       element.scrollIntoView({ behavior: 'smooth' })
       const sectionName = href.replace('#', '')
       setActiveSection(sectionName)
-      // Update URL hash
       window.history.pushState(null, '', href)
     }
   }
 
-  // Check if link is active
   const isActive = (href: string) => {
     if (href === '/') {
       return activeSection === 'home'
@@ -205,7 +191,6 @@ export default function Navigation() {
                   aria-current={active ? 'page' : undefined}
                 >
                   {link.name}
-                  {/* Only underline indicator - no dot */}
                   <span 
                     className={`absolute -bottom-1 left-0 h-[2px] bg-[#8B9A6B] transition-all duration-300 ${
                       active ? 'w-full' : 'w-0 group-hover:w-full'
@@ -225,10 +210,7 @@ export default function Navigation() {
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            <motion.div
-              animate={{ rotate: isOpen ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.3 }}>
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.div>
           </button>

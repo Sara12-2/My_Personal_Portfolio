@@ -10,21 +10,29 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sara Manzoor - Full Stack Developer & AI Engineer',
+    default: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
     template: '%s | Sara Manzoor',
   },
-  description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast. Building intelligent systems with AI and modern web technologies.',
+  description: 'Portfolio of Sara Manzoor - AI-Powered Full Stack Developer, ML Engineer & Computer Vision Specialist. Building intelligent web applications with AI and modern technologies.',
   keywords: [
     'Sara Manzoor',
+    'AI-Powered Full Stack Developer',
     'Full Stack Developer',
+    'Machine Learning Engineer',
     'AI Engineer',
-    'Machine Learning',
+    'Computer Vision Engineer',
+    'ML Engineer',
     'React Developer',
     'Next.js Developer',
     'Python Developer',
-    'ML Engineer',
+    'Flask Developer',
+    'AI/ML Developer',
+    'RAG Developer',
+    'LLM Developer',
     'Portfolio',
     'Pakistan',
+    'Web Developer',
+    'AI Solutions',
   ],
   authors: [{ name: 'Sara Manzoor' }],
   creator: 'Sara Manzoor',
@@ -38,8 +46,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Sara Manzoor - Full Stack Developer & AI Engineer',
-    description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast',
+    title: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
+    description: 'Portfolio of Sara Manzoor - Building intelligent web applications with AI, ML, Computer Vision, and modern full-stack technologies.',
     url: 'https://sara-portfolio.vercel.app',
     siteName: 'Sara Manzoor Portfolio',
     images: [
@@ -54,15 +62,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sara Manzoor - Full Stack Developer & AI Engineer',
-    description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast',
+    title: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
+    description: 'Portfolio of Sara Manzoor - Building intelligent web applications with AI, ML, Computer Vision, and modern full-stack technologies.',
     images: ['/images/og-image.png'],
   },
-  // ✅ Added: Verification for Google Search Console
-  verification: {
-    google: 'your-google-site-verification-code',
-  },
-  // ✅ Added: Alternates for canonical URL
+  // NOTE: Google Search Console verification removed — the previous value was a
+  // literal placeholder ('your-google-site-verification-code') that was never
+  // replaced with a real code, so it wasn't actually verifying anything.
+  // Add it back once you have a real verification string from Search Console:
+  // verification: { google: 'REAL_CODE_HERE' },
   alternates: {
     canonical: 'https://sara-portfolio.vercel.app',
   },
@@ -78,9 +86,10 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         {children}
         
-        {/* ✅ Toaster with Olive Theme */}
+        {/* Toaster with Olive Theme — positioned top-center to avoid overlapping
+            the chatbot's floating button, which also sits bottom-right */}
         <Toaster 
-          position="bottom-right"
+          position="top-center"
           toastOptions={{
             duration: 4000,
             style: {

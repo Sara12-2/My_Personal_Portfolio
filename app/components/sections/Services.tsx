@@ -6,26 +6,11 @@ import {
   Code2, 
   Brain, 
   Server, 
-  Layers, 
-  Lightbulb, 
-  Users,
   Sparkles,
   ArrowRight,
-  Monitor,
-  Database,
-  Rocket,
-  Trophy,
-  Globe,
-  Coffee,
-  Zap,
-  Cpu,
-  Layout,
-  Terminal,
-  Cloud,
-  Award,
   MessageCircle,
-  Heart,
-  Mail,
+  Award,
+  Coffee,
   CheckCircle2,
   Star,
   Palette,
@@ -115,12 +100,11 @@ export default function Services() {
 
   return (
     <section id="services" className="py-20 sm:py-24 md:py-32 bg-[#FAF8F5] relative overflow-hidden">
-      {/* Premium Background Decorations */}
+      {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#8B9A6B]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#8B9A6B]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#8B9A6B]/3 rounded-full blur-3xl pointer-events-none" />
       
-      {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(transparent_0%,_transparent_95%,_#8B9A6B_95%,_#8B9A6B_100%),_linear-gradient(90deg,_transparent_0%,_transparent_95%,_#8B9A6B_95%,_#8B9A6B_100%)] bg-[length:80px_80px] pointer-events-none" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
@@ -131,7 +115,7 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Open to Work Badge - Premium */}
+          {/* Open to Work Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -153,7 +137,7 @@ export default function Services() {
             </div>
           </motion.div>
 
-          {/* Section Header - Premium */}
+          {/* Section Header */}
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
@@ -171,7 +155,6 @@ export default function Services() {
               <span className="text-[#8B9A6B]">Expertise</span>
             </h2>
 
-            {/* ✅ Subtitle Added */}
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -183,7 +166,7 @@ export default function Services() {
             </motion.p>
           </div>
 
-          {/* Services Grid - Premium Cards */}
+          {/* Services Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, index) => {
               const Icon = service.icon
@@ -201,7 +184,6 @@ export default function Services() {
                   onHoverEnd={() => setHoveredId(null)}
                   className="group relative cursor-default"
                 >
-                  {/* Premium Card */}
                   <div 
                     className={`
                       relative bg-white/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 
@@ -212,7 +194,6 @@ export default function Services() {
                       }
                     `}
                   >
-                    {/* Animated Gradient Background */}
                     <div 
                       className={`
                         absolute inset-0 bg-gradient-to-br ${service.gradient}
@@ -220,35 +201,7 @@ export default function Services() {
                       `} 
                     />
 
-                    {/* Glowing Border Effect */}
-                    <div className={`
-                      absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                      bg-[radial-gradient(circle_at_top_right,rgba(139,154,107,0.08),transparent_60%)]
-                    `} />
-
-                    {/* Floating Particles */}
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                      <div className="flex gap-1">
-                        {[...Array(3)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="w-1 h-1 rounded-full bg-[#8B9A6B]/30"
-                            animate={{
-                              y: [0, -4, 0],
-                              opacity: [0.2, 0.8, 0.2],
-                            }}
-                            transition={{
-                              duration: 1.5,
-                              repeat: Infinity,
-                              delay: i * 0.3,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
                     <div className="relative z-10">
-                      {/* Icon with Premium Animation */}
                       <div className="relative mb-4 sm:mb-5">
                         <div className={`
                           absolute -inset-1 rounded-2xl bg-[#8B9A6B]/10 blur-xl
@@ -271,7 +224,6 @@ export default function Services() {
                         </div>
                       </div>
 
-                      {/* Title */}
                       <h3 className={`
                         text-base sm:text-lg md:text-xl font-bold transition-colors duration-300 mb-1.5 sm:mb-2
                         ${isHovered ? 'text-[#8B9A6B]' : 'text-[#1E1E1E]'}
@@ -279,18 +231,19 @@ export default function Services() {
                         {service.title}
                       </h3>
 
-                      {/* Description */}
                       <p className="text-xs sm:text-sm text-[#4A4A4A]/70 leading-relaxed mb-3 sm:mb-4">
                         {service.description}
                       </p>
 
-                      {/* Features List */}
+                      {/* FIX: added viewport={{ once: true }} so these no longer
+                          replay every time the card scrolls in/out of view */}
                       <div className="space-y-1 sm:space-y-1.5">
                         {service.features.map((feature, i) => (
                           <motion.div
                             key={i}
                             initial={{ opacity: 0, x: -10 }}
                             whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
                             transition={{ delay: i * 0.05 }}
                             className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-[#4A4A4A]/60"
                           >
@@ -299,8 +252,6 @@ export default function Services() {
                           </motion.div>
                         ))}
                       </div>
-
-                      {/* ❌ Dotted Line Removed */}
                     </div>
                   </div>
                 </motion.div>
@@ -308,7 +259,7 @@ export default function Services() {
             })}
           </div>
 
-          {/* Premium Collaboration Callout */}
+          {/* Collaboration Callout */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -331,7 +282,7 @@ export default function Services() {
             </div>
           </motion.div>
 
-          {/* Premium Call to Action */}
+          {/* Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -340,7 +291,7 @@ export default function Services() {
             className="text-center mt-8 sm:mt-12"
           >
             <p className="text-[#4A4A4A] mb-4 sm:mb-6 text-base sm:text-lg font-light tracking-wide">
-              Let's build something <span className="text-[#8B9A6B] font-medium">amazing</span> together. 🚀
+              Let's build something <span className="text-[#8B9A6B] font-medium">amazing</span> together. 
             </p>
             <motion.a
               href="#contact"
@@ -353,7 +304,6 @@ export default function Services() {
                 Let's Work Together
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.a>
           </motion.div>
         </motion.div>

@@ -114,101 +114,89 @@ html { scroll-behavior: smooth; }
 /* Only the specific named variants below are patched now. */
 /* ============================================ */
 
+/* ============================================ */
+/* IMPORTANT FIX: removed all `[class*="..."]` attribute */
+/* substring selectors below. They matched the RAW TEXT of the */
+/* class attribute, with no awareness of Tailwind's `hover:` prefix — */
+/* so a button with `hover:bg-white/20` (meant to apply bg-white ONLY */
+/* on hover) still contains the literal substring "bg-white", and the */
+/* old `button[class*="bg-white"]` rule force-applied a permanent white */
+/* background + olive icon color to it at ALL times, not just on hover. */
+/* This is what made the Chatbot's header icons (Voice/Clear/Minimize/ */
+/* Close, which used hover:bg-white/20) render as blank white squares. */
+/* The same landmine existed for bg-olive/bg-dark/text-*/bg-transparent. */
+/* Fixed by keeping only exact class-token selectors (`.bg-olive`, */
+/* `button.bg-white`, etc.), which only match a literal standalone */
+/* class, never a hover:-prefixed or opacity-modified variant. */
+/* ============================================ */
+
 /* Primary buttons - olive background with white text */
 .btn-primary,
 button.bg-olive,
-a.bg-olive,
-button[class*="bg-olive"],
-a[class*="bg-olive"] {
+a.bg-olive {
   color: #FFFFFF !important;
   background-color: #8B9A6B !important;
 }
 
 .btn-primary:hover,
 button.bg-olive:hover,
-a.bg-olive:hover,
-button[class*="bg-olive"]:hover,
-a[class*="bg-olive"]:hover {
+a.bg-olive:hover {
   background-color: #6B8A4A !important;
   color: #FFFFFF !important;
 }
 
 /* Force: text inside an olive button/link should be white — scoped to button/a only */
-button[class*="bg-olive"] *,
-a[class*="bg-olive"] * {
-  color: #FFFFFF !important;
-}
-
-button[class*="bg-olive"]:hover *,
-a[class*="bg-olive"]:hover * {
+button.bg-olive *,
+a.bg-olive * {
   color: #FFFFFF !important;
 }
 
 /* Kill: Any green text leaking onto an olive button */
-button[class*="bg-olive"] .text-green-500,
-button[class*="bg-olive"] .text-green-600,
-button[class*="bg-olive"] .text-green-700,
-a[class*="bg-olive"] .text-green-500,
-a[class*="bg-olive"] .text-green-600,
-a[class*="bg-olive"] .text-green-700 {
+button.bg-olive .text-green-500,
+button.bg-olive .text-green-600,
+button.bg-olive .text-green-700,
+a.bg-olive .text-green-500,
+a.bg-olive .text-green-600,
+a.bg-olive .text-green-700 {
   color: #FFFFFF !important;
 }
 
 /* Secondary buttons - white background with olive text */
 .btn-secondary,
-button.bg-white,
-button[class*="bg-white"] {
+button.bg-white {
   color: #8B9A6B !important;
   background-color: #FFFFFF !important;
   border: 1px solid #8B9A6B !important;
 }
 
 .btn-secondary:hover,
-button.bg-white:hover,
-button[class*="bg-white"]:hover {
+button.bg-white:hover {
   background-color: #F5F5F0 !important;
   color: #6B8A4A !important;
 }
 
 /* Ghost buttons - no background with olive text */
-.btn-ghost,
-button[class*="bg-transparent"] {
+.btn-ghost {
   color: #8B9A6B !important;
   background-color: transparent !important;
 }
 
-.btn-ghost:hover,
-button[class*="bg-transparent"]:hover {
+.btn-ghost:hover {
   color: #6B8A4A !important;
   background-color: rgba(139, 154, 107, 0.1) !important;
 }
 
 /* Dark buttons - dark background with white text */
 .btn-dark,
-button.bg-dark,
-button[class*="bg-dark"] {
+button.bg-dark {
   color: #FFFFFF !important;
   background-color: #2C2C2C !important;
 }
 
 .btn-dark:hover,
-button.bg-dark:hover,
-button[class*="bg-dark"]:hover {
+button.bg-dark:hover {
   background-color: #1A1A1A !important;
   color: #FFFFFF !important;
-}
-
-/* Explicit text-color utility overrides on buttons only */
-button[class*="text-white"] {
-  color: #FFFFFF !important;
-}
-
-button[class*="text-olive"] {
-  color: #8B9A6B !important;
-}
-
-button[class*="text-dark"] {
-  color: #2C2C2C !important;
 }
 
 /* ============================================ */

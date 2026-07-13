@@ -8,11 +8,8 @@ import {
   BookOpen, 
   Award, 
   Brain, 
-  Code2, 
-  Database, 
-  Globe,
-  MapPin,        // ✅ Added
-  ExternalLink   // ✅ Added
+  MapPin,
+  ExternalLink
 } from 'lucide-react'
 
 const education = [
@@ -22,14 +19,13 @@ const education = [
     institution: 'University of Layyah',
     institutionLink: 'https://www.linkedin.com/school/university-of-layyah/',
     year: '2024 – 2028',
-    gpa: 'A Grade',
+    gpa: 'CGPA: 4.0/4.0',
     location: 'Layyah, Pakistan',
     logo: '/images/companies/uol.png',
     courses: [
       'Programming Fundamentals',
       'Data Structures & Algorithms',
       'Database Management Systems',
-        
       'Software Engineering',
       'Operating Systems',
       'Computer Networks'

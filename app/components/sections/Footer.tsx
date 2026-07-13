@@ -25,7 +25,7 @@ import {
   FaLinkedin, 
   FaKaggle, 
   FaHackerrank,
-  FaWhatsapp
+  
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
 
@@ -78,12 +78,7 @@ export default function Footer() {
       label: 'HackerRank', 
       color: '#2EC866' 
     },
-    { 
-      icon: FaWhatsapp, 
-      href: 'https://wa.me/923164764391', 
-      label: 'WhatsApp', 
-      color: '#25D366' 
-    },
+    
     { 
       icon: Mail, 
       href: 'mailto:saramanzoor76@gmail.com', 
@@ -244,7 +239,7 @@ export default function Footer() {
 
                 {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  {['Next.js', 'React', 'Python', 'TypeScript', 'Tailwind', 'Framer'].map((tech) => (
+                  {['Next.js', 'React', 'Python','Flask','AI/ML'].map((tech) => (
                     <span key={tech} className="text-[8px] px-2 py-1 bg-[#8B9A6B]/5 border border-[#8B9A6B]/10 rounded-full text-[#4A4A4A]/40">
                       {tech}
                     </span>

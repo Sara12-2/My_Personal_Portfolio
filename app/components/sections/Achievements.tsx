@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Sparkles, Trophy, Medal, Star, Calendar, ExternalLink } from 'lucide-react'
+import { Award, Sparkles, Trophy, Medal, Star, Calendar } from 'lucide-react'
 
 const honors = [
   {
@@ -46,9 +46,9 @@ const honors = [
   },
 ]
 
-export default function Honors() {
+export default function Achievements() {
   return (
-    <section id="honors" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
+    <section id="achievements" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B9A6B]/5 rounded-full blur-3xl" />
@@ -145,8 +145,8 @@ export default function Honors() {
           >
             {[
               { label: 'Total Awards', value: honors.length, icon: Award },
-              { label: 'Position Holder', value: '1', icon: Trophy },
-              { label: 'Scholarships', value: '1', icon: Medal },
+              { label: 'Position Holder', value: honors.filter(h => h.type === 'Position Holder').length, icon: Trophy },
+              { label: 'Scholarships', value: honors.filter(h => h.type === 'Scholarship').length, icon: Medal },
             ].map((stat) => {
               const StatIcon = stat.icon
               return (
