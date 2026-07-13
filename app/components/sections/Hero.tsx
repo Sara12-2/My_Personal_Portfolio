@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { ChevronDown, Mail } from 'lucide-react'
+import { ChevronDown, Mail, Download } from 'lucide-react'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 import {
@@ -228,14 +228,18 @@ export default function Hero() {
               ))}
             </div>
 
+            {/* CHANGED: "Hire Me" replaced with a "Resume" button that
+                downloads /resume.png directly from the public folder. */}
             <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center lg:justify-start">
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="#contact"
-                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap"
+                href="/resume.png"
+                download="Sara_Manzoor_Resume.png"
+                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap inline-flex items-center justify-center gap-2"
               >
-                Hire Me
+                <Download className="w-4 h-4" />
+                Resume
               </motion.a>
 
               <motion.a
@@ -299,7 +303,6 @@ export default function Hero() {
                     fill
                     priority
                     fetchPriority="high"
-                    loading="eager"
                     sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
                     className="object-cover"
                     onError={() => setImgError(true)}

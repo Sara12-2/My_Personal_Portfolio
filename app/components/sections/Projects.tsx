@@ -196,7 +196,7 @@ const projects = [
     category: 'ai',
     tech: ['Python', 'Flask', 'SQLite', 'Pandas', 'Scikit-learn', 'NumPy'],
     live: '',
-    github: '#',
+    github: 'https://github.com/Sara12-2/Study_Smart_AI',
     image: '/images/projects/studysmart-ai.png',
     icon: BookOpen,
     color: '#4F8A5B',

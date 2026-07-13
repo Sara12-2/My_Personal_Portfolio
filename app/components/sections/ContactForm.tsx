@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Mail, 
   Phone, 
@@ -14,10 +14,134 @@ import {
   Loader2,
   Calendar,
   DollarSign,
-  MessageSquare
+  MessageSquare,
+  ChevronDown
 } from 'lucide-react'
-import { FaGithub, FaLinkedin} from 'react-icons/fa'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import toast from 'react-hot-toast'
+
+// ============================================
+// CUSTOM SELECT
+// FIX: native <select><option> dropdown lists have their hover/selected
+// color controlled by the OS/browser — Chrome doesn't allow overriding
+// it via CSS at all, Firefox only partially. That's why "Budget" etc.
+// showed a blue highlight that didn't match the olive theme. This
+// component renders the dropdown list ourselves (plain divs), so every
+// pixel of it — including hover state — follows the site's theme.
+// ============================================
+
+interface SelectOption {
+  value: string
+  label: string
+}
+
+const CustomSelect = ({
+  name,
+  value,
+  onChange,
+  options,
+  placeholder,
+  icon,
+}: {
+  name: string
+  value: string
+  onChange: (name: string, value: string) => void
+  options: SelectOption[]
+  placeholder: string
+  icon: React.ReactNode
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const selectedLabel = options.find((o) => o.value === value)?.label
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={`w-full pl-10 pr-9 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-left transition-all duration-300 ${
+          value ? 'text-[#2C2C2C]' : 'text-[#4A4A4A]/50'
+        }`}
+      >
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B9A6B]">{icon}</span>
+        {selectedLabel || placeholder}
+        <ChevronDown className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-30 mt-2 w-full max-h-64 overflow-y-auto bg-white border border-[#8B9A6B]/15 rounded-xl shadow-xl shadow-[#8B9A6B]/10 py-1.5"
+          >
+            {options.map((option) => (
+              <button
+                key={option.value || 'placeholder'}
+                type="button"
+                onClick={() => {
+                  onChange(name, option.value)
+                  setIsOpen(false)
+                }}
+                className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-150 ${
+                  option.value === value
+                    ? 'bg-[#8B9A6B] text-white font-medium'
+                    : 'text-[#2C2C2C] hover:bg-[#8B9A6B]/10'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+// ============================================
+// OPTIONS
+// ============================================
+
+const PROJECT_TYPE_OPTIONS: SelectOption[] = [
+  { value: 'fullstack', label: 'Full Stack Development' },
+  { value: 'ai', label: 'AI / Machine Learning' },
+  { value: 'frontend', label: 'Frontend Development' },
+  { value: 'backend', label: 'Backend Development' },
+  { value: 'consulting', label: 'Technical Consulting' },
+]
+
+const BUDGET_OPTIONS: SelectOption[] = [
+  { value: '5000-15000', label: '₨ 5,000 – ₨ 15,000' },
+  { value: '15000-30000', label: '₨ 15,000 – ₨ 30,000' },
+  { value: '30000-50000', label: '₨ 30,000 – ₨ 50,000' },
+  { value: '50000-100000', label: '₨ 50,000 – ₨ 100,000' },
+  { value: '100000-250000', label: '₨ 100,000 – ₨ 250,000' },
+  { value: '250000+', label: '₨ 250,000+' },
+  { value: 'negotiable', label: 'Negotiable' },
+]
+
+const TIMELINE_OPTIONS: SelectOption[] = [
+  { value: '1week', label: '1 Week (Urgent)' },
+  { value: '2weeks', label: '2 Weeks' },
+  { value: '1month', label: '1 Month' },
+  { value: '2-3months', label: '2-3 Months' },
+  { value: '3-6months', label: '3-6 Months' },
+  { value: 'flexible', label: 'Flexible' },
+]
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false)
@@ -58,7 +182,7 @@ export default function ContactForm() {
       })
 
       if (response.ok) {
-        toast.success('✅ Message sent successfully!')
+        toast.success(' Message sent successfully!')
         setFormData({
           name: '',
           email: '',
@@ -70,17 +194,21 @@ export default function ContactForm() {
           message: '',
         })
       } else {
-        toast.error('❌ Something went wrong. Please try again.')
+        toast.error(' Something went wrong. Please try again.')
       }
     } catch (error) {
-      toast.error('❌ Failed to send message. Please try again.')
+      toast.error(' Failed to send message. Please try again.')
     } finally {
       setLoading(false)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
@@ -176,14 +304,13 @@ export default function ContactForm() {
                   </motion.div>
                 </div>
 
-                {/* ✅ Social Links with react-icons */}
+                {/* Social Links */}
                 <div className="mt-6 pt-6 border-t border-[#8B9A6B]/10">
                   <p className="text-xs text-[#4A4A4A]/60 mb-3">Connect with me</p>
                   <div className="flex gap-3">
                     {[
                       { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub' },
                       { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn' },
-                     
                     ].map((social, i) => (
                       <motion.a
                         key={i}
@@ -293,61 +420,37 @@ export default function ContactForm() {
                   </div>
                 </div>
 
-                {/* Project Type */}
+                {/* Project Type — custom themed dropdown */}
                 <div className="mt-4">
-                  <select
+                  <CustomSelect
                     name="projectType"
                     value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
-                  >
-                    <option value="">Select Service Type</option>
-                    <option value="fullstack"> Full Stack Development</option>
-                    <option value="ai"> AI / Machine Learning</option>
-                    <option value="frontend"> Frontend Development</option>
-                    <option value="backend"> Backend Development</option>
-                    <option value="consulting"> Technical Consulting</option>
-                  </select>
+                    onChange={handleSelectChange}
+                    options={PROJECT_TYPE_OPTIONS}
+                    placeholder="Select Service Type"
+                    icon={<Building className="w-4 h-4" />}
+                  />
                 </div>
 
-                {/* Budget & Timeline */}
+                {/* Budget & Timeline — custom themed dropdowns */}
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                  <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
-                    <select
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
-                    >
-                      <option value="">Budget Range (PKR)</option>
-                      <option value="5000-15000">₨ 5,000 – ₨ 15,000</option>
-                      <option value="15000-30000">₨ 15,000 – ₨ 30,000</option>
-                      <option value="30000-50000">₨ 30,000 – ₨ 50,000</option>
-                      <option value="50000-100000">₨ 50,000 – ₨ 100,000</option>
-                      <option value="100000-250000">₨ 100,000 – ₨ 250,000</option>
-                      <option value="250000+">₨ 250,000+</option>
-                      <option value="negotiable"> Negotiable</option>
-                    </select>
-                  </div>
+                  <CustomSelect
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleSelectChange}
+                    options={BUDGET_OPTIONS}
+                    placeholder="Budget Range (PKR)"
+                    icon={<DollarSign className="w-4 h-4" />}
+                  />
 
-                  <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B9A6B]" />
-                    <select
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-[#F5F5F0] border border-[#8B9A6B]/10 rounded-xl focus:outline-none focus:border-[#8B9A6B] focus:ring-2 focus:ring-[#8B9A6B]/20 text-[#2C2C2C] appearance-none cursor-pointer transition-all duration-300"
-                    >
-                      <option value="">Project Timeline</option>
-                      <option value="1week"> 1 Week (Urgent)</option>
-                      <option value="2weeks"> 2 Weeks</option>
-                      <option value="1month"> 1 Month</option>
-                      <option value="2-3months"> 2-3 Months</option>
-                      <option value="3-6months"> 3-6 Months</option>
-                      <option value="flexible"> Flexible</option>
-                    </select>
-                  </div>
+                  <CustomSelect
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleSelectChange}
+                    options={TIMELINE_OPTIONS}
+                    placeholder="Project Timeline"
+                    icon={<Calendar className="w-4 h-4" />}
+                  />
                 </div>
 
                 {/* Message */}

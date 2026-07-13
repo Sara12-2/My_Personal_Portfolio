@@ -15,9 +15,7 @@ import {
   Sparkles,
   MessageCircle,
   Zap,
-  Award,
   Layers,
-  Terminal,
   Home
 } from 'lucide-react'
 import { 
@@ -25,7 +23,6 @@ import {
   FaLinkedin, 
   FaKaggle, 
   FaHackerrank,
-  
 } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
 
@@ -46,46 +43,38 @@ export default function Footer() {
     { icon: Globe, label: 'Remote Work', color: '#8B9A6B' },
   ]
 
-  // ✅ SOCIAL LINKS - Discord Removed
+  // Social Links
   const socialLinks = [
-    { 
-      icon: FaGithub, 
-      href: 'https://github.com/Sara12-2', 
-      label: 'GitHub', 
-      color: '#2C2C2C' 
-    },
-    { 
-      icon: FaLinkedin, 
-      href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', 
-      label: 'LinkedIn', 
-      color: '#0A66C2' 
-    },
-    { 
-      icon: FaKaggle, 
-      href: 'https://www.kaggle.com/sara765', 
-      label: 'Kaggle', 
-      color: '#20BEFF' 
-    },
-    { 
-      icon: SiLeetcode, 
-      href: 'https://leetcode.com/u/Sara_34/', 
-      label: 'LeetCode', 
-      color: '#FFA116' 
-    },
-    { 
-      icon: FaHackerrank, 
-      href: 'https://www.hackerrank.com/profile/saramanzoor342', 
-      label: 'HackerRank', 
-      color: '#2EC866' 
-    },
-    
-    { 
-      icon: Mail, 
-      href: 'mailto:saramanzoor76@gmail.com', 
-      label: 'Email', 
-      color: '#8B9A6B' 
-    },
+    { icon: FaGithub, href: 'https://github.com/Sara12-2', label: 'GitHub', color: '#2C2C2C' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sara-manzoor-3a8a56365/', label: 'LinkedIn', color: '#0A66C2' },
+    { icon: FaKaggle, href: 'https://www.kaggle.com/sara765', label: 'Kaggle', color: '#20BEFF' },
+    { icon: SiLeetcode, href: 'https://leetcode.com/u/Sara_34/', label: 'LeetCode', color: '#FFA116' },
+    { icon: FaHackerrank, href: 'https://www.hackerrank.com/profile/saramanzoor342', label: 'HackerRank', color: '#2EC866' },
+    { icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
   ]
+
+  // FIX: Quick Links now use the same smooth-scroll behavior as Navigation.tsx
+  // instead of a plain <a href> hard jump/reload, for a consistent UX.
+  const quickLinks = [
+    { label: 'Home', href: '/', icon: Home },
+    { label: 'Projects', href: '#projects', icon: Layers },
+    { label: 'Experience', href: '#experience', icon: Briefcase },
+    { label: 'Contact', href: '#contact', icon: MessageCircle },
+  ]
+
+  const handleQuickLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    if (href === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.history.pushState(null, '', '/')
+      return
+    }
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', href)
+    }
+  }
 
   return (
     <footer className="bg-[#F5F5F0] border-t border-[#8B9A6B]/10 py-12 relative overflow-hidden">
@@ -169,17 +158,13 @@ export default function Footer() {
                 Quick Links
               </h4>
               <div className="flex flex-col gap-2.5">
-                {[
-                  { label: 'Home', href: '/', icon: Home },
-                  { label: 'Projects', href: '#projects', icon: Layers },
-                  { label: 'Experience', href: '#experience', icon: Briefcase },
-                  { label: 'Contact', href: '#contact', icon: MessageCircle },
-                ].map((link) => {
+                {quickLinks.map((link) => {
                   const Icon = link.icon
                   return (
                     <motion.a
                       key={link.label}
                       href={link.href}
+                      onClick={(e) => handleQuickLinkClick(e, link.href)}
                       whileHover={{ x: 4 }}
                       className="flex items-center gap-2.5 text-sm text-[#4A4A4A]/70 hover:text-[#8B9A6B] transition-all duration-300"
                     >
@@ -216,9 +201,9 @@ export default function Footer() {
                   Available for remote collaborations, hackathons, and innovative projects.
                 </p>
 
-                {/* SOCIAL ICONS - No Discord */}
+                {/* SOCIAL ICONS */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {socialLinks.map((social, index) => (
+                  {socialLinks.map((social) => (
                     <motion.a
                       key={social.label}
                       href={social.href}
@@ -239,7 +224,7 @@ export default function Footer() {
 
                 {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  {['Next.js', 'React', 'Python','Flask','AI/ML'].map((tech) => (
+                  {['Next.js', 'React', 'Python', 'Flask', 'AI/ML'].map((tech) => (
                     <span key={tech} className="text-[8px] px-2 py-1 bg-[#8B9A6B]/5 border border-[#8B9A6B]/10 rounded-full text-[#4A4A4A]/40">
                       {tech}
                     </span>

@@ -523,20 +523,41 @@ export default function Chatbot() {
     stopSpeaking()
 
     const userMessage: Message = { id: Date.now().toString(), text: messageToSend, sender: 'user', timestamp: new Date() }
+    const historyForApi = messages // snapshot before appending the new user message
     setMessages((prev) => [...prev, userMessage])
     if (!voiceMessage) setInput('')
     setIsTyping(true)
     setThinkingIndex(0)
 
-    const delay = 500 + Math.random() * 1000
-    setTimeout(() => {
-      const response = getBotResponse(messageToSend)
-      const botMessage: Message = { id: (Date.now() + 1).toString(), text: response, sender: 'bot', timestamp: new Date() }
-      setMessages((prev) => [...prev, botMessage])
-      setIsTyping(false)
-      if (isVoiceEnabled) speakText(response)
-    }, delay)
-  }, [input, isVoiceEnabled, speakText, stopSpeaking])
+    let response: string
+
+    try {
+      // Real LLM call — the bot now actually reasons over Sara's full
+      // knowledge base instead of matching a fixed list of keywords.
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: messageToSend,
+          history: historyForApi.map((m) => ({ sender: m.sender, text: m.text })),
+        }),
+      })
+
+      if (!res.ok) throw new Error('API request failed')
+      const data = await res.json()
+      response = data.reply as string
+    } catch (err) {
+      // Offline/error fallback — keeps the bot functional (with the old
+      // keyword-matched answers) even if the API key is missing, the
+      // route isn't deployed yet, or the network call fails.
+      response = getBotResponse(messageToSend)
+    }
+
+    const botMessage: Message = { id: (Date.now() + 1).toString(), text: response, sender: 'bot', timestamp: new Date() }
+    setMessages((prev) => [...prev, botMessage])
+    setIsTyping(false)
+    if (isVoiceEnabled) speakText(response)
+  }, [input, isVoiceEnabled, speakText, stopSpeaking, messages])
 
   // Speech Recognition Setup
   useEffect(() => {

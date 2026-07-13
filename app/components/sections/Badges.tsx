@@ -15,7 +15,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/',
+    link: 'https://www.kaggle.com/sara765',
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/',
+    link: 'https://www.kaggle.com/sara765',
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/',
+    link: 'https://www.kaggle.com/sara765',
   },
 
   // ============ GSSOC 2026 BADGES (3) ============
@@ -50,7 +50,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/gssoc-2026.png',
-    link: 'https://gssoc.girlscript.tech/',
+    link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
   {
     id: 11,
@@ -61,7 +61,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/gssoc-2026.png',
-    link: 'https://gssoc.girlscript.tech/',
+    link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
   {
     id: 12,
@@ -72,7 +72,7 @@ const badges = [
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/gssoc-2026.png',
-    link: 'https://gssoc.girlscript.tech/',
+    link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
 
   // ============ GITHUB BADGE (1) ============
