@@ -225,7 +225,7 @@ export default function About() {
                 <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> passionate about
                 building intelligent, scalable, and user-centric digital solutions. Currently serving as{' '}
                 <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, where I
-                develop innovative software and explore how AI can solve real-world challenges.
+                Manage operations and Lead Development teams.
               </motion.p>
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">

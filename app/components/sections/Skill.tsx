@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { 
   FaReact, FaPython, FaGit, FaGithub,
-  FaJs, FaHtml5, FaCss3Alt, FaDatabase
+  FaJs, FaHtml5, FaCss3Alt, FaDatabase, FaNpm
 } from 'react-icons/fa'
 import {
   SiNextdotjs, SiTypescript, SiTailwindcss,
@@ -13,20 +13,21 @@ import {
   SiScikitlearn, SiVercel, SiNetlify,
   SiJupyter, SiGooglecolab, SiFlask,
   SiBootstrap, SiSqlite, SiPytorch,
-  SiLangchain, SiKeras
+  SiLangchain, SiKeras, SiFigma
 } from 'react-icons/si'
 import { 
   Brain, Server, Sparkles, 
   Cpu, Layout, Database, Terminal, Grid3x3,
-  Cloud, Layers, Zap, MessageSquare, BarChart3
+  Cloud, Layers, Zap, MessageSquare, BarChart3,
+  Eye, Code, GitBranch, Award
 } from 'lucide-react'
 
 // ============================================
-// ✅ VERIFIED SKILLS - Based on Real Projects
+// ✅ VERIFIED SKILLS - All Properly Numbered & Icons Assigned
 // ============================================
 
 const allSkills = [
-  // ============ FRONTEND (8) ============
+  // ============ FRONTEND (10) ============
   { id: 1, name: 'React.js', icon: FaReact, category: 'frontend', color: '#61DAFB' },
   { id: 2, name: 'Next.js', icon: SiNextdotjs, category: 'frontend', color: '#000000' },
   { id: 3, name: 'TypeScript', icon: SiTypescript, category: 'frontend', color: '#3178C6' },
@@ -35,54 +36,57 @@ const allSkills = [
   { id: 6, name: 'HTML5', icon: FaHtml5, category: 'frontend', color: '#E34F26' },
   { id: 7, name: 'CSS3', icon: FaCss3Alt, category: 'frontend', color: '#1572B6' },
   { id: 8, name: 'Bootstrap', icon: SiBootstrap, category: 'frontend', color: '#7952B3' },
+  { id: 9, name: 'Responsive Design', icon: Layout, category: 'frontend', color: '#06B6D4' },
+  { id: 10, name: 'Framer Motion', icon: Sparkles, category: 'frontend', color: '#0055FF' },
 
   // ============ BACKEND (7) ============
-  { id: 9, name: 'Python', icon: FaPython, category: 'backend', color: '#3776AB' },
-  { id: 10, name: 'Flask', icon: SiFlask, category: 'backend', color: '#000000' },
-  { id: 11, name: 'MySQL', icon: FaDatabase, category: 'backend', color: '#4479A1' },
-  { id: 12, name: 'SQLite', icon: SiSqlite, category: 'backend', color: '#003B57' },
-  { id: 13, name: 'REST APIs', icon: FaDatabase, category: 'backend', color: '#8B9A6B' },
-  { id: 38, name: 'SQL', icon: Database, category: 'backend', color: '#4479A1' },
-  { id: 39, name: 'LangChain', icon: SiLangchain, category: 'backend', color: '#1C3C3C' },
+  { id: 11, name: 'Python', icon: FaPython, category: 'backend', color: '#3776AB' },
+  { id: 12, name: 'Flask', icon: SiFlask, category: 'backend', color: '#000000' },
+  { id: 13, name: 'MySQL', icon: FaDatabase, category: 'backend', color: '#4479A1' },
+  { id: 14, name: 'SQLite', icon: SiSqlite, category: 'backend', color: '#003B57' },
+  { id: 15, name: 'REST APIs', icon: Server, category: 'backend', color: '#8B9A6B' },
+  { id: 16, name: 'SQL', icon: Database, category: 'backend', color: '#4479A1' },
+  { id: 17, name: 'Oracle', icon: Database, category: 'backend', color: '#F80000' },
 
-  // ============ AI / ML (20) ============
-  { id: 15, name: 'Scikit-learn', icon: SiScikitlearn, category: 'ai', color: '#F7931E' },
-  { id: 16, name: 'Pandas', icon: SiPandas, category: 'ai', color: '#150458' },
-  { id: 17, name: 'NumPy', icon: SiNumpy, category: 'ai', color: '#013243' },
-  { id: 18, name: 'XGBoost', icon: Cpu, category: 'ai', color: '#8B9A6B' },
-  { id: 19, name: 'LightGBM', icon: Cpu, category: 'ai', color: '#8B9A6B' },
-  { id: 20, name: 'SMOTE', icon: Brain, category: 'ai', color: '#8B9A6B' },
-  { id: 21, name: 'NLP', icon: Brain, category: 'ai', color: '#8B9A6B' },
-  { id: 40, name: 'NLTK', icon: Brain, category: 'ai', color: '#8B9A6B' },
-  { id: 22, name: 'Computer Vision', icon: Cpu, category: 'ai', color: '#8B9A6B' },
-  { id: 23, name: 'OpenCV', icon: Cpu, category: 'ai', color: '#5C3EE8' },
-  { id: 24, name: 'YOLOv8', icon: Cpu, category: 'ai', color: '#00BFFF' },
-  { id: 25, name: 'Deep Learning', icon: Brain, category: 'ai', color: '#8B5CF6' },
-  // ✅ TensorFlow alag
-  { id: 26, name: 'TensorFlow', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
-  // ✅ Keras alag
-  { id: 46, name: 'Keras', icon: SiKeras, category: 'ai', color: '#D00000' },
-  { id: 41, name: 'PyTorch', icon: SiPytorch, category: 'ai', color: '#EE4C2C' },
-  // ✅ Matplotlib alag
-  { id: 27, name: 'Matplotlib', icon: BarChart3, category: 'ai', color: '#11557C' },
-  // ✅ Seaborn alag
-  { id: 47, name: 'Seaborn', icon: BarChart3, category: 'ai', color: '#4C72B0' },
-  { id: 28, name: 'EDA', icon: Brain, category: 'ai', color: '#8B9A6B' },
-  { id: 42, name: 'Groq AI', icon: Zap, category: 'ai', color: '#F55036' },
-  { id: 43, name: 'ChromaDB', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
+  // ============ AI / ML (22) ============
+  { id: 18, name: 'Scikit-learn', icon: SiScikitlearn, category: 'ai', color: '#F7931E' },
+  { id: 19, name: 'Pandas', icon: SiPandas, category: 'ai', color: '#150458' },
+  { id: 20, name: 'NumPy', icon: SiNumpy, category: 'ai', color: '#013243' },
+  { id: 21, name: 'XGBoost', icon: Cpu, category: 'ai', color: '#EB5E28' },
+  { id: 22, name: 'LightGBM', icon: Cpu, category: 'ai', color: '#4285F4' },
+  { id: 23, name: 'SMOTE', icon: Brain, category: 'ai', color: '#8B9A6B' },
+  { id: 24, name: 'NLP', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
+  { id: 25, name: 'NLTK', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
+  { id: 26, name: 'Computer Vision', icon: Eye, category: 'ai', color: '#8B9A6B' },
+  { id: 27, name: 'OpenCV', icon: Eye, category: 'ai', color: '#5C3EE8' },
+  { id: 28, name: 'YOLOv8', icon: Eye, category: 'ai', color: '#00BFFF' },
+  { id: 29, name: 'Deep Learning', icon: Brain, category: 'ai', color: '#8B5CF6' },
+  { id: 30, name: 'LangChain', icon: SiLangchain, category: 'ai', color: '#1C3C3C' },
+  { id: 31, name: 'TensorFlow', icon: SiTensorflow, category: 'ai', color: '#FF6F00' },
+  { id: 32, name: 'Keras', icon: SiKeras, category: 'ai', color: '#D00000' },
+  { id: 33, name: 'PyTorch', icon: SiPytorch, category: 'ai', color: '#EE4C2C' },
+  { id: 34, name: 'Matplotlib', icon: BarChart3, category: 'ai', color: '#11557C' },
+  { id: 35, name: 'Seaborn', icon: BarChart3, category: 'ai', color: '#4C72B0' },
+  { id: 36, name: 'EDA', icon: BarChart3, category: 'ai', color: '#8B9A6B' },
+  { id: 37, name: 'Groq AI', icon: Zap, category: 'ai', color: '#F55036' },
+  { id: 38, name: 'ChromaDB', icon: Database, category: 'ai', color: '#8B9A6B' },
+  { id: 39, name: 'RAG Systems', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
+  { id: 40, name: 'Generative AI', icon: Sparkles, category: 'ai', color: '#8B9A6B' },
+  { id: 41, name: 'LLMs', icon: MessageSquare, category: 'ai', color: '#8B9A6B' },
 
-  // ============ TOOLS (11) ============
-  { id: 29, name: 'Git', icon: FaGit, category: 'tools', color: '#F05032' },
-  { id: 30, name: 'GitHub', icon: FaGithub, category: 'tools', color: '#181717' },
-  { id: 31, name: 'Vercel', icon: SiVercel, category: 'tools', color: '#000000' },
-  { id: 32, name: 'Netlify', icon: SiNetlify, category: 'tools', color: '#00C7B7' },
-  { id: 33, name: 'Chart.js', icon: Database, category: 'tools', color: '#FF6384' },
-  { id: 34, name: 'Streamlit', icon: Cloud, category: 'tools', color: '#FF4B4B' },
-  { id: 35, name: 'Cisco Packet Tracer', icon: Server, category: 'tools', color: '#1E90FF' },
-  { id: 36, name: 'Jupyter Notebook', icon: SiJupyter, category: 'tools', color: '#F37626' },
-  { id: 37, name: 'Google Colab', icon: SiGooglecolab, category: 'tools', color: '#F9AB00' },
-  { id: 44, name: 'AWS', icon: Cloud, category: 'tools', color: '#FF9900' },
-
+  // ============ TOOLS (12) ============
+  { id: 42, name: 'Git', icon: FaGit, category: 'tools', color: '#F05032' },
+  { id: 43, name: 'GitHub', icon: FaGithub, category: 'tools', color: '#181717' },
+  { id: 44, name: 'Vercel', icon: SiVercel, category: 'tools', color: '#000000' },
+  { id: 45, name: 'Netlify', icon: SiNetlify, category: 'tools', color: '#00C7B7' },
+  { id: 46, name: 'Chart.js', icon: BarChart3, category: 'tools', color: '#FF6384' },
+  { id: 47, name: 'Streamlit', icon: Cloud, category: 'tools', color: '#FF4B4B' },
+  { id: 48, name: 'Cisco Packet Tracer', icon: Server, category: 'tools', color: '#1E90FF' },
+  { id: 49, name: 'Jupyter', icon: SiJupyter, category: 'tools', color: '#F37626' },
+  { id: 50, name: 'Google Colab', icon: SiGooglecolab, category: 'tools', color: '#F9AB00' },
+  { id: 51, name: 'Kaggle', icon: Award, category: 'tools', color: '#20BEFF' },
+  { id: 52, name: 'Figma', icon: SiFigma, category: 'tools', color: '#F24E1E' },
+  { id: 53, name: 'npm', icon: FaNpm, category: 'tools', color: '#CB3837' },
 ]
 
 // ============================================
@@ -226,7 +230,7 @@ export default function SkillsFilter() {
           </h2>
           <div className="w-16 h-1 bg-[#8B9A6B] mx-auto mt-4 rounded-full" />
           <p className="mt-4 text-[#4A4A4A]/60 max-w-2xl mx-auto">
-            {allSkills.length}+ verified technologies across Frontend, Backend, AI/ML, and DevOps
+            {allSkills.length}+ verified technologies across Frontend, Backend and AI/ML
           </p>
         </motion.div>
 
