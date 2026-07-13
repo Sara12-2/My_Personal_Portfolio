@@ -87,6 +87,7 @@ const allSkills = [
   { id: 51, name: 'Kaggle', icon: Award, category: 'tools', color: '#20BEFF' },
   { id: 52, name: 'Figma', icon: SiFigma, category: 'tools', color: '#F24E1E' },
   { id: 53, name: 'npm', icon: FaNpm, category: 'tools', color: '#CB3837' },
+   { id: 54, name: 'VS Code', icon: Code, category: 'tools', color: '#007ACC' },
 ]
 
 // ============================================

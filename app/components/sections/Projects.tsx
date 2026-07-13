@@ -36,7 +36,7 @@ const projects = [
   {
     id: 8,
     title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
-    description: '🏆 Top 10 out of 23+ teams. Bilingual (English/Urdu) AI assistant for University of Layyah with role-based responses, voice I/O, and offline fallback across 16+ topics. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization).',
+    description: 'Bilingual (English/Urdu) AI assistant for University of Layyah with role-based responses, voice I/O, and offline fallback across 16+ topics. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization).',
     category: 'ai',
     tech: ['Python', 'Flask', 'Groq API (Llama 3 70B)', 'MySQL', 'BeautifulSoup4', 'JavaScript'],
     live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
