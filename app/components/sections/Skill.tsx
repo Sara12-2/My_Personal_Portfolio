@@ -36,7 +36,7 @@ const allSkills = [
   { id: 6, name: 'HTML5', icon: FaHtml5, category: 'frontend', color: '#E34F26' },
   { id: 7, name: 'CSS3', icon: FaCss3Alt, category: 'frontend', color: '#1572B6' },
   { id: 8, name: 'Bootstrap', icon: SiBootstrap, category: 'frontend', color: '#7952B3' },
-  { id: 9, name: 'Responsive Design', icon: Layout, category: 'frontend', color: '#06B6D4' },
+  { id: 9, name: 'Responsive Web', icon: Layout, category: 'frontend', color: '#06B6D4' },
   { id: 10, name: 'Framer Motion', icon: Sparkles, category: 'frontend', color: '#0055FF' },
 
   // ============ BACKEND (7) ============
@@ -81,7 +81,7 @@ const allSkills = [
   { id: 45, name: 'Netlify', icon: SiNetlify, category: 'tools', color: '#00C7B7' },
   { id: 46, name: 'Chart.js', icon: BarChart3, category: 'tools', color: '#FF6384' },
   { id: 47, name: 'Streamlit', icon: Cloud, category: 'tools', color: '#FF4B4B' },
-  { id: 48, name: 'Cisco Packet Tracer', icon: Server, category: 'tools', color: '#1E90FF' },
+  { id: 48, name: 'Cisco Packet', icon: Server, category: 'tools', color: '#1E90FF' },
   { id: 49, name: 'Jupyter', icon: SiJupyter, category: 'tools', color: '#F37626' },
   { id: 50, name: 'Google Colab', icon: SiGooglecolab, category: 'tools', color: '#F9AB00' },
   { id: 51, name: 'Kaggle', icon: Award, category: 'tools', color: '#20BEFF' },
