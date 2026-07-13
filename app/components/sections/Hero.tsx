@@ -16,7 +16,7 @@ import { SiLeetcode } from 'react-icons/si'
 type SocialIcon =
   | {
       type: 'icon'
-      icon: React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>
+      icon: React.ElementType
       href: string
       label: string
       color: string
