@@ -123,7 +123,7 @@ const SOCIAL_ICONS: SocialIcon[] = [
   { type: 'icon', icon: FaKaggle, href: 'https://www.kaggle.com/sara765', label: 'Kaggle', color: '#20BEFF' },
   { type: 'icon', icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
   { type: 'icon', icon: FaAward, href: 'https://gssoc.girlscript.tech/', label: 'GSSoC', color: '#8B5CF6' },
-  { type: 'image', src: '/images/Companies/devhatch.png', href: 'https://devhatchlabs.com', label: 'DevHatch', color: '#8B9A6B' },
+  { type: 'image', src: '/images/companies/devhatch.png', href: 'https://devhatchlabs.com', label: 'DevHatch', color: '#8B9A6B' },
 ]
 
 export default function Hero() {
