@@ -9,30 +9,23 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://my-personal-portfolio-five-zeta.vercel.app'),
   title: {
-    default: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
+    default: 'Sara Manzoor - Full Stack Developer & AI Engineer',
     template: '%s | Sara Manzoor',
   },
-  description: 'Portfolio of Sara Manzoor - AI-Powered Full Stack Developer, ML Engineer & Computer Vision Specialist. Building intelligent web applications with AI and modern technologies.',
+  description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast. Building intelligent systems with AI and modern web technologies.',
   keywords: [
     'Sara Manzoor',
-    'AI-Powered Full Stack Developer',
     'Full Stack Developer',
-    'Machine Learning Engineer',
     'AI Engineer',
-    'Computer Vision Engineer',
-    'ML Engineer',
+    'Machine Learning',
     'React Developer',
     'Next.js Developer',
     'Python Developer',
-    'Flask Developer',
-    'AI/ML Developer',
-    'RAG Developer',
-    'LLM Developer',
+    'ML Engineer',
     'Portfolio',
     'Pakistan',
-    'Web Developer',
-    'AI Solutions',
   ],
   authors: [{ name: 'Sara Manzoor' }],
   creator: 'Sara Manzoor',
@@ -46,9 +39,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
-    description: 'Portfolio of Sara Manzoor - Building intelligent web applications with AI, ML, Computer Vision, and modern full-stack technologies.',
-    url: 'https://sara-portfolio.vercel.app',
+    title: 'Sara Manzoor - Full Stack Developer & AI Engineer',
+    description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast',
+    url: 'https://my-personal-portfolio-five-zeta.vercel.app',
     siteName: 'Sara Manzoor Portfolio',
     images: [
       {
@@ -62,17 +55,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sara Manzoor - AI-Powered Full Stack Developer & ML Engineer',
-    description: 'Portfolio of Sara Manzoor - Building intelligent web applications with AI, ML, Computer Vision, and modern full-stack technologies.',
+    title: 'Sara Manzoor - Full Stack Developer & AI Engineer',
+    description: 'Portfolio of Sara Manzoor - Full Stack Developer, ML Engineer & AI Enthusiast',
     images: ['/images/og-image.png'],
   },
-  // NOTE: Google Search Console verification removed — the previous value was a
-  // literal placeholder ('your-google-site-verification-code') that was never
-  // replaced with a real code, so it wasn't actually verifying anything.
-  // Add it back once you have a real verification string from Search Console:
+  // NOTE: Google Search Console verification removed — add back once you
+  // have a real verification string from Search Console:
   // verification: { google: 'REAL_CODE_HERE' },
   alternates: {
-    canonical: 'https://sara-portfolio.vercel.app',
+    canonical: 'https://my-personal-portfolio-five-zeta.vercel.app',
   },
 }
 

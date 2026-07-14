@@ -232,7 +232,7 @@ export default function Hero() {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/resume.png"
+                href="/resume.pdf"
                 download="Sara_Manzoor_Resume.png"
                 className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap inline-flex items-center justify-center gap-2"
               >

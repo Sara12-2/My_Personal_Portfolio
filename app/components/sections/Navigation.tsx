@@ -13,6 +13,10 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ]
 
+// How long the mobile menu's collapse animation takes (must match the
+// AnimatePresence transition duration below).
+const MENU_CLOSE_ANIMATION_MS = 300
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -123,23 +127,45 @@ export default function Navigation() {
     }
   }, [isOpen])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    setIsOpen(false)
-    
+  // FIX: the actual scroll logic, pulled into its own function so it can
+  // be called either immediately (desktop, no menu to close) or after a
+  // delay (mobile, menu-close animation needs to finish first — see
+  // handleNavClick below for why this matters).
+  const performScroll = (href: string) => {
     if (href === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       setActiveSection('home')
       window.history.pushState(null, '', '/')
       return
     }
-    
+
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
       const sectionName = href.replace('#', '')
       setActiveSection(sectionName)
       window.history.pushState(null, '', href)
+    }
+  }
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+
+    // FIX: this was the bug. On mobile, closing the menu (setIsOpen(false))
+    // kicks off a ~300ms collapse animation. Calling scrollIntoView in the
+    // very same tick meant the browser calculated the scroll target while
+    // the page layout still included the menu's old (open) height — so the
+    // scroll either landed in the wrong place or silently did nothing.
+    // Desktop never hit this because there's no mobile menu to close, so
+    // the scroll always ran against a stable, already-correct layout.
+    // Fix: if the menu was open, wait for its close animation to finish
+    // before scrolling; if it wasn't open (desktop), scroll immediately
+    // as before.
+    if (isOpen) {
+      setIsOpen(false)
+      setTimeout(() => performScroll(href), MENU_CLOSE_ANIMATION_MS)
+    } else {
+      performScroll(href)
     }
   }
 
@@ -225,7 +251,7 @@ export default function Navigation() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: MENU_CLOSE_ANIMATION_MS / 1000, ease: 'easeInOut' }}
               className="md:hidden overflow-hidden border-t border-[#8B9A6B]/10"
               role="menu"
               aria-label="Mobile navigation"
