@@ -394,3 +394,41 @@ a:not([class*="bg-"]):not([class*="btn-"]):hover {
 #github .react-github-calendar .ContributionCalendar-day[data-level="4"] {
   background-color: #6B8A4A !important;
 }
+
+/* ============================================ */
+/* FIX: Mobile ghosting/trailing on scroll-triggered animations */
+/* ============================================ */
+/* Symptom: text and filter buttons visually "duplicate" as semi-transparent
+   stacked copies while scrolling on mobile (mainly Android Chrome), but
+   never on desktop. This is a known GPU compositing bug that happens when
+   Framer Motion's transform+opacity animations (used by whileInView across
+   this site) run on the same layer as heavy backdrop-blur elements —
+   mobile GPUs sometimes fail to fully repaint/clear the previous frame,
+   leaving a visible "ghost trail" behind as the element animates in.
+
+   Fix: force every animated element onto its own properly-composited GPU
+   layer so the browser repaints it cleanly instead of blending with
+   whatever was left behind. This is the standard fix for this exact class
+   of Android/mobile Chrome rendering bug. */
+
+section {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Reduce compositing load from decorative blurred background blobs on
+   mobile specifically — these are the heaviest contributor (many of them
+   stacked across a long scrolling page). Desktop keeps the full blur. */
+@media (max-width: 768px) {
+  .blur-3xl {
+    filter: blur(40px) !important;
+  }
+  .blur-\[120px\] {
+    filter: blur(60px) !important;
+  }
+  .blur-\[160px\] {
+    filter: blur(70px) !important;
+  }
+}
