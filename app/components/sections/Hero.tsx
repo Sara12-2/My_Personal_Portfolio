@@ -228,8 +228,6 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CHANGED: "Hire Me" replaced with a "Resume" button that
-                downloads /resume.png directly from the public folder. */}
             <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center lg:justify-start">
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -302,7 +300,6 @@ export default function Hero() {
                     alt="Sara Manzoor - Full Stack Developer"
                     fill
                     priority
-                    fetchPriority="high"
                     sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
                     className="object-cover"
                     onError={() => setImgError(true)}
