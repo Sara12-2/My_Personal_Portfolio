@@ -879,7 +879,7 @@ export default function Chatbot() {
   const handleQuickAction = (action: 'resume' | 'github' | 'email' | 'contact' | 'projects') => {
     switch (action) {
       case 'resume':
-        window.open('/resume.png', '_blank')
+        window.open('/resume.pdf', '_blank')
         break
       case 'github':
         window.open('https://github.com/Sara12-2', '_blank')

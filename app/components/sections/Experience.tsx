@@ -18,7 +18,32 @@ import {
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
-const experiences = [
+// FIX: explicit interface for the experiences array. Previously each
+// object literal had a slightly different shape (some had `github`, one
+// had `topIntern`, none had `live`), so TypeScript inferred a union type
+// per-object instead of one consistent shape — accessing `exp.live`
+// failed to compile because no single object in the union defined it.
+// Declaring every optional field up front fixes this for good, regardless
+// of which specific entries use them.
+interface ExperienceItem {
+  id: number
+  title: string
+  company: string
+  companyLink: string
+  location: string
+  period: string
+  type: string
+  description: string[]
+  skills: string[]
+  icon: any
+  color: string
+  logo?: string
+  github?: string
+  live?: string
+  topIntern?: boolean
+}
+
+const experiences: ExperienceItem[] = [
   {
     id: 1,
     title: 'Chief Operating Officer',
@@ -69,6 +94,8 @@ const experiences = [
     icon: Award,
     color: '#8B9A6B',
     logo: '/images/companies/fast-nuces.png',
+    // NOTE: an ML competition notebook has no live deployment — GitHub
+    // repo only, no "live" field (intentionally, not a bug).
     github: 'https://github.com/Sara12-2/High_Cost_Patient_prediction_Softtec_Competition_Project',
   },
   {
@@ -87,6 +114,11 @@ const experiences = [
     icon: Code2,
     color: '#8B9A6B',
     logo: '/images/companies/afynix.png',
+    // FIX: this internship's flagship output (TechNest) is actually live
+    // deployed, so its link is active here — matches the "only show a
+    // live link where something is genuinely deployed" rule.
+    github: 'https://github.com/Sara12-2/TechNest_Ecommerce_Website',
+    live: 'https://tech-nest-ecommerce.vercel.app/',
   },
   {
     id: 5,
@@ -104,7 +136,9 @@ const experiences = [
     icon: Brain,
     color: '#8B9A6B',
     logo: '/images/companies/sam-ai.png',
-    topIntern: true,  // ✅ Only SAM AI has this
+    topIntern: true,
+    // No github/live — these were internal proprietary models, no public
+    // deployment to link to. Link row simply won't render for this card.
   },
   {
     id: 6,
@@ -122,6 +156,8 @@ const experiences = [
     icon: Brain,
     color: '#8B9A6B',
     logo: '/images/companies/elevvo.png',
+    // No single flagship live deployment across 7 small ML notebooks —
+    // link row won't render here either.
   },
 ]
 
@@ -202,7 +238,6 @@ export default function Experience() {
                           <h3 className="text-sm font-bold text-[#1A1A1A] leading-tight">
                             {exp.title}
                           </h3>
-                          {/* ⭐ Clean Top Intern Badge - Only for SAM AI */}
                           {exp.topIntern && (
                             <motion.span
                               initial={{ opacity: 0, scale: 0.8 }}
@@ -258,7 +293,10 @@ export default function Experience() {
                       ))}
                     </ul>
 
-                    {/* Links - Only Softtec has GitHub link */}
+                    {/* Links — only rendered when a real GitHub repo or
+                        live deployment exists for this role. Nothing
+                        "disabled"/greyed shows for roles without one, so
+                        no dead-looking link ever appears on the card. */}
                     {(exp.github || exp.live) && (
                       <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-[#8B9A6B]/8">
                         {exp.github && (
