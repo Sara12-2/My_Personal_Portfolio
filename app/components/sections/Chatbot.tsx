@@ -3,25 +3,36 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  MessageCircle, X, Send, Bot, Sparkles, 
+  MessageCircle, X, Send, Sparkles, 
   User, Mic, MicOff, Copy, 
-  RefreshCw, Volume2, VolumeX, Minimize2, Maximize2,
+  Minimize2, Maximize2, ThumbsUp, ThumbsDown,
   Trash2, Briefcase, Code2, GraduationCap,
-  Award, FileText, Mail, Star, Volume1,
-  Check
+  Award, FileText, Mail, Star, ChevronDown,
+  Check, WifiOff, Download, ExternalLink, Calendar, Layers
 } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import toast from 'react-hot-toast'
 
 // ============================================
 // TYPES
 // ============================================
 
+interface ProjectCardInfo {
+  title: string
+  image: string
+  github: string
+  live?: string
+  tech: string[]
+}
+
 interface Message {
   id: string
   text: string
   sender: 'user' | 'bot'
   timestamp: Date
+  projectCards?: ProjectCardInfo[]
 }
 
 interface Suggestion {
@@ -29,6 +40,141 @@ interface Suggestion {
   label: string
   prompt: string
   description: string
+}
+
+// ============================================
+// PROJECT DATA — mirrors Projects.tsx (same images/links already in
+// public/images/projects/). Used to detect which project(s) a reply is
+// about and attach a rich card (image + GitHub + Live) instead of leaving
+// it as plain text.
+// ============================================
+
+const PROJECTS_DATA: (ProjectCardInfo & { matchKeys: string[] })[] = [
+  {
+    title: 'AURUM Finance Dashboard',
+    image: '/images/projects/aurum-dashboard.png',
+    github: 'https://github.com/Sara12-2/Expense_Tracer_Dashboard',
+    live: 'https://expense-tracer-dashboard.vercel.app/',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js'],
+    matchKeys: ['aurum'],
+  },
+  {
+    title: 'UoL AI Assistant',
+    image: '/images/projects/uol-ai-assistant.png',
+    github: 'https://github.com/Sara12-2/UoL-AI-Assistant-Hackathon-2026',
+    live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
+    tech: ['Python', 'Flask', 'Groq Llama 3 70B', 'MySQL'],
+    matchKeys: ['uol ai assistant', 'uol assistant'],
+  },
+  {
+    title: 'Grocery Store Website',
+    image: '/images/projects/grocery.png',
+    github: 'https://github.com/Sara12-2/Grocery_Store_Website-',
+    tech: ['Python', 'Flask', 'MySQL', 'JavaScript'],
+    matchKeys: ['grocery store', 'grocery'],
+  },
+  {
+    title: 'Apex Appointment Dashboard',
+    image: '/images/projects/apex-dashboard.png',
+    github: 'https://github.com/Sara12-2/Appointment_booking_Dashboard',
+    live: 'https://appointment-booking-dashboard-ten.vercel.app/',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'FullCalendar'],
+    matchKeys: ['apex appointment', 'apex dashboard'],
+  },
+  {
+    title: 'Softtec 2026 — High-Cost Patient Prediction',
+    image: '/images/projects/softtec.png',
+    github: 'https://github.com/Sara12-2/High_Cost_Patient_prediction_Softtec_Competition_Project',
+    tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn'],
+    matchKeys: ['softtec', 'high-cost patient', 'patient prediction'],
+  },
+  {
+    title: 'LuxEstate — Real Estate Landing Page',
+    image: '/images/projects/luxestate.png',
+    github: 'https://github.com/Sara12-2/luxury-real-estate-landing-page',
+    live: 'https://luxury-real-estate-landing-page-drk.vercel.app/',
+    tech: ['HTML5', 'Tailwind CSS', 'JavaScript'],
+    matchKeys: ['luxestate'],
+  },
+  {
+    title: 'Smart Cafeteria System',
+    image: '/images/projects/cafeteria.png',
+    github: 'https://github.com/Sara12-2/Smart_Cafeteria_Full_Stack_Website',
+    tech: ['Python', 'Flask', 'MySQL', 'Bootstrap'],
+    matchKeys: ['smart cafeteria', 'cafeteria'],
+  },
+  {
+    title: 'ASL Sign Language Recognition',
+    image: '/images/projects/asl.png',
+    github: 'https://github.com/Sara12-2/ASL_Sign_Language_Recognition',
+    tech: ['Python', 'TensorFlow', 'Keras', 'OpenCV'],
+    matchKeys: ['asl', 'sign language'],
+  },
+  {
+    title: 'SwiftEats — Food Delivery Landing Page',
+    image: '/images/projects/swifteats.png',
+    github: 'https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page',
+    live: 'https://restaurant-food-delivery-website-la.vercel.app/',
+    tech: ['HTML5', 'CSS3', 'JavaScript'],
+    matchKeys: ['swifteats'],
+  },
+  {
+    title: 'AI-Powered Resume Screening System',
+    image: '/images/projects/resume-screening.png',
+    github: 'https://github.com/Sara12-2/AI_Powered_Resume_Screening_system',
+    tech: ['Python', 'TensorFlow', 'Streamlit'],
+    matchKeys: ['resume screening'],
+  },
+  {
+    title: 'ARCWATCH — Premium Smartwatch Landing Page',
+    image: '/images/projects/arcwatch.png',
+    github: 'https://github.com/Sara12-2/Smart_Watch_Landing_Page',
+    live: 'https://smart-watch-landing-page-gules.vercel.app/',
+    tech: ['HTML5', 'CSS3', 'JavaScript'],
+    matchKeys: ['arcwatch'],
+  },
+  {
+    title: 'Smart Retail Shelf Monitoring',
+    image: '/images/projects/retail-shelf.png',
+    github: 'https://github.com/Sara12-2/Smart_Retail_Shelf_Monitoring_with_YOLOv8',
+    tech: ['Python', 'YOLOv8', 'OpenCV'],
+    matchKeys: ['smart retail', 'shelf monitoring'],
+  },
+  {
+    title: 'Mountain Car RL Agent',
+    image: '/images/projects/mountain-car.png',
+    github: 'https://github.com/Sara12-2/Mountain_Car_Reinforcement_learning_Agent',
+    tech: ['Python', 'Gymnasium', 'Q-Learning'],
+    matchKeys: ['mountain car'],
+  },
+  {
+    title: 'TechNest — Premium React E-Commerce',
+    image: '/images/projects/technest.png',
+    github: 'https://github.com/Sara12-2/TechNest_Ecommerce_Website',
+    live: 'https://tech-nest-ecommerce.vercel.app/',
+    tech: ['React', 'Vite', 'JavaScript'],
+    matchKeys: ['technest'],
+  },
+  {
+    title: 'StudySmart AI',
+    image: '/images/projects/studysmart-ai.png',
+    github: 'https://github.com/Sara12-2/Study_Smart_AI',
+    tech: ['Python', 'Flask', 'SQLite', 'Scikit-learn'],
+    matchKeys: ['studysmart'],
+  },
+]
+
+function detectMentionedProjects(text: string): ProjectCardInfo[] {
+  const lower = text.toLowerCase()
+  const matched: ProjectCardInfo[] = []
+  for (const project of PROJECTS_DATA) {
+    if (project.matchKeys.some((key) => lower.includes(key))) {
+      const { matchKeys, ...card } = project
+      matched.push(card)
+    }
+  }
+  // cap at 3 cards so one reply never floods the chat with images
+  return matched.slice(0, 3)
 }
 
 // ============================================
@@ -46,15 +192,20 @@ const SUGGESTIONS: Suggestion[] = [
   { icon: Mail, label: 'Contact', prompt: 'How to contact Sara?', description: 'Get in touch' },
 ]
 
-const THINKING_PHRASES = [
-  'Thinking...',
-  'Analyzing your question...',
-  'Searching through projects...',
-  'Preparing the best answer...',
+const VISIBLE_SUGGESTIONS_COUNT = 4
+
+const QUICK_ACTIONS = [
+  { icon: Download, label: 'Resume', action: 'resume' as const },
+  { icon: ExternalLink, label: 'GitHub', action: 'github' as const },
+  { icon: Mail, label: 'Email', action: 'email' as const },
+  { icon: Calendar, label: 'Contact', action: 'contact' as const },
+  { icon: Layers, label: 'Projects', action: 'projects' as const },
 ]
 
+const API_TIMEOUT_MS = 15000
+
 // ============================================
-// BOT KNOWLEDGE BASE
+// BOT KNOWLEDGE BASE (offline fallback only — primary answers come from /api/chat)
 // ============================================
 
 const botKnowledge = {
@@ -224,67 +375,138 @@ saramanzoor76@gmail.com
 
 Feel free to reach out anytime!`,
 
-  default: `Hello! I'm **Sara AI** — your personal assistant for all things Sara Manzoor.
+  default: `Hi! I'm Sara's personal assistant.
 
-I can help you with:
+I can help you:
 
-**About** — Learn about Sara's background
-**Experience** — View work history
-**Skills** — Tech stack & expertise
-**Projects** — Explore portfolio projects
-**Education** — Academic background
-**Certifications** — View achievements
-**Resume** — Resume summary
-**Services** — What Sara offers
-**Contact** — How to connect
+**Explore** — her background, skills, and experience
+**Browse** — her projects and certifications
+**Connect** — download her resume or reach out directly
 
-What would you like to know?`
+What would you like to do?`
 }
 
 // ============================================
-// COMPONENT: AI Avatar
+// COMPONENT: Avatar
 // ============================================
 
-const AIAvatar = ({ isSpeaking = false }: { isSpeaking?: boolean }) => (
-  <div className="relative flex-shrink-0">
-    <div className="relative w-8 h-8">
-      <div className={`absolute inset-0 rounded-full bg-[#8B9A6B]/20 blur-md transition-all duration-500 ${isSpeaking ? 'animate-pulse scale-110' : ''}`} />
-      <div className={`relative w-8 h-8 rounded-full bg-gradient-to-br from-[#8B9A6B] to-[#6B7A5B] flex items-center justify-center shadow-md shadow-[#8B9A6B]/30 ring-2 ring-white transition-transform duration-300 ${isSpeaking ? 'scale-105' : ''}`}>
-        <Bot className="w-4 h-4 text-white" />
+const BotAvatar = ({ size = 8 }: { size?: number }) => {
+  const px = size * 4
+  const [imgError, setImgError] = useState(false)
+
+  return (
+    <div className="relative flex-shrink-0" style={{ width: px, height: px }}>
+      <div className="absolute inset-0 rounded-full bg-[#8B9A6B]/20 blur-md" />
+      <div
+        className="relative rounded-full overflow-hidden ring-2 ring-white shadow-md shadow-[#8B9A6B]/30"
+        style={{ width: px, height: px }}
+      >
+        {imgError ? (
+          <div className="w-full h-full bg-gradient-to-br from-[#8B9A6B] to-[#5F7048] flex items-center justify-center">
+            <span className="text-white font-bold" style={{ fontSize: px * 0.32 }}>SM</span>
+          </div>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/images/profile.jpg"
+            alt="Sara Manzoor"
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        )}
       </div>
       <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#2ECC71] rounded-full border-2 border-white" />
     </div>
-  </div>
-)
+  )
+}
 
 const UserAvatar = () => (
-  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-[#8B9A6B] to-[#6B7A5B] flex items-center justify-center ring-2 ring-white shadow-sm">
+  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-[#6B7A5B] to-[#4A5A3D] flex items-center justify-center ring-2 ring-white shadow-sm">
     <User className="w-3.5 h-3.5 text-white" />
   </div>
 )
 
 // ============================================
-// COMPONENT: Header Icon Button (consistent touch-friendly hit area)
+// COMPONENT: Project Card
+// NEW — when a reply mentions a specific project, this renders below the
+// text: image thumbnail, tech tags, and GitHub/Live buttons, instead of
+// leaving it as a plain-text link.
+// ============================================
+
+const ProjectCard = ({ project }: { project: ProjectCardInfo }) => {
+  const [imgError, setImgError] = useState(false)
+
+  return (
+    <div className="w-full bg-[#FAF8F5] rounded-xl border border-[#8B9A6B]/15 overflow-hidden">
+      <div className="relative w-full h-28 bg-white">
+        {!imgError ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-[#8B9A6B]/5">
+            <Layers className="w-6 h-6 text-[#8B9A6B]/30" />
+          </div>
+        )}
+      </div>
+      <div className="p-2.5">
+        <p className="text-[12px] font-bold text-[#2C2C2C] leading-tight">{project.title}</p>
+        <div className="flex flex-wrap gap-1 mt-1.5">
+          {project.tech.slice(0, 3).map((t) => (
+            <span key={t} className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#8B9A6B]/10 text-[#8B9A6B] font-medium">
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-3 mt-2">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-[11px] font-medium text-[#4A4A4A] hover:text-[#8B9A6B] transition-colors"
+          >
+            <FaGithub className="w-3 h-3" />
+            GitHub
+          </a>
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-[11px] font-medium text-[#8B9A6B] hover:text-[#5F7048] transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// COMPONENT: Header Icon Button
 // ============================================
 
 const HeaderIconButton = ({
   onClick,
   title,
-  active = false,
   children,
 }: {
   onClick: () => void
   title: string
-  active?: boolean
   children: React.ReactNode
 }) => (
   <button
     onClick={onClick}
     title={title}
     aria-label={title}
-    className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors duration-200 ${
-      active ? 'bg-white/25 text-white' : 'text-white/85 hover:text-white hover:bg-white/15'
-    }`}
+    className="flex items-center justify-center w-8 h-8 rounded-lg text-white/85 hover:text-white hover:bg-white/15 transition-colors duration-200"
   >
     {children}
   </button>
@@ -292,15 +514,11 @@ const HeaderIconButton = ({
 
 // ============================================
 // COMPONENT: Message Actions
-// FIX: previously these icons used `opacity-0 group-hover:opacity-100`,
-// which meant they never appeared on touch devices (no hover state on
-// mobile) — the reported "icons not showing" bug. Now they're always
-// visible at reduced opacity and only strengthen on hover, so mobile
-// users can always see and tap them.
 // ============================================
 
-const MessageActions = ({ text, onRegenerate, onSpeak, isSpeaking }: any) => {
+const MessageActions = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false)
+  const [reaction, setReaction] = useState<'like' | 'dislike' | null>(null)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(text)
@@ -320,23 +538,19 @@ const MessageActions = ({ text, onRegenerate, onSpeak, isSpeaking }: any) => {
       </button>
 
       <button
-        onClick={onRegenerate}
-        aria-label="Regenerate response"
-        className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#8B9A6B]/10 transition-colors"
+        onClick={() => setReaction(reaction === 'like' ? null : 'like')}
+        aria-label="Like this answer"
+        className={`flex items-center justify-center w-6 h-6 rounded-md transition-colors ${reaction === 'like' ? 'bg-[#2ECC71]/15' : 'hover:bg-[#8B9A6B]/10'}`}
       >
-        <RefreshCw className="w-3.5 h-3.5 text-[#4A4A4A]/60" />
+        <ThumbsUp className={`w-3.5 h-3.5 ${reaction === 'like' ? 'fill-[#2ECC71] text-[#2ECC71]' : 'text-[#4A4A4A]/60'}`} />
       </button>
 
       <button
-        onClick={onSpeak}
-        aria-label={isSpeaking ? 'Stop speaking' : 'Speak message'}
-        className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#8B9A6B]/10 transition-colors"
+        onClick={() => setReaction(reaction === 'dislike' ? null : 'dislike')}
+        aria-label="Dislike this answer"
+        className={`flex items-center justify-center w-6 h-6 rounded-md transition-colors ${reaction === 'dislike' ? 'bg-red-100' : 'hover:bg-[#8B9A6B]/10'}`}
       >
-        {isSpeaking ? (
-          <Volume1 className="w-3.5 h-3.5 text-[#8B9A6B] animate-pulse" />
-        ) : (
-          <Volume2 className="w-3.5 h-3.5 text-[#4A4A4A]/60" />
-        )}
+        <ThumbsDown className={`w-3.5 h-3.5 ${reaction === 'dislike' ? 'fill-red-500 text-red-500' : 'text-[#4A4A4A]/60'}`} />
       </button>
     </div>
   )
@@ -346,9 +560,9 @@ const MessageActions = ({ text, onRegenerate, onSpeak, isSpeaking }: any) => {
 // COMPONENT: Typing Indicator
 // ============================================
 
-const TypingIndicator = ({ phrase }: { phrase: string }) => (
+const TypingIndicator = () => (
   <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-end gap-2 justify-start">
-    <AIAvatar />
+    <BotAvatar />
     <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md bg-white border border-[#8B9A6B]/10 shadow-sm">
       <div className="flex items-center gap-2.5">
         <div className="flex gap-1">
@@ -356,7 +570,7 @@ const TypingIndicator = ({ phrase }: { phrase: string }) => (
           <motion.span animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.15 }} className="w-1.5 h-1.5 rounded-full bg-[#8B9A6B]/70" />
           <motion.span animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.3 }} className="w-1.5 h-1.5 rounded-full bg-[#8B9A6B]/40" />
         </div>
-        <span className="text-xs text-[#4A4A4A]/60">{phrase}</span>
+        <span className="text-xs text-[#4A4A4A]/60">Checking…</span>
       </div>
     </div>
   </motion.div>
@@ -366,53 +580,64 @@ const TypingIndicator = ({ phrase }: { phrase: string }) => (
 // COMPONENT: Suggestion Cards
 // ============================================
 
-const SuggestionCards = ({ onSelect }: { onSelect: (prompt: string) => void }) => (
-  <div className="grid grid-cols-2 gap-2 mt-4 w-full">
-    {SUGGESTIONS.map((suggestion, index) => {
-      const Icon = suggestion.icon
-      return (
-        <motion.button
-          key={suggestion.label}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.04 }}
-          onClick={() => onSelect(suggestion.prompt)}
-          className="group flex items-center gap-2 p-2.5 bg-white hover:bg-[#8B9A6B]/5 active:bg-[#8B9A6B]/10 rounded-xl border border-[#8B9A6B]/10 hover:border-[#8B9A6B]/30 transition-colors duration-200 text-left"
-        >
-          <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#8B9A6B]/10 group-hover:bg-[#8B9A6B] transition-colors duration-200 flex-shrink-0">
-            <Icon className="w-3.5 h-3.5 text-[#8B9A6B] group-hover:text-white transition-colors duration-200" />
-          </div>
-          <div className="min-w-0">
-            <p className="text-xs font-semibold text-[#2C2C2C] truncate">{suggestion.label}</p>
-            <p className="text-[10px] text-[#4A4A4A]/50 truncate">{suggestion.description}</p>
-          </div>
-        </motion.button>
-      )
-    })}
-  </div>
-)
+const SuggestionCards = ({ onSelect }: { onSelect: (prompt: string) => void }) => {
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? SUGGESTIONS : SUGGESTIONS.slice(0, VISIBLE_SUGGESTIONS_COUNT)
+
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-2 gap-2 mt-4 w-full">
+        {visible.map((suggestion, index) => {
+          const Icon = suggestion.icon
+          return (
+            <motion.button
+              key={suggestion.label}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.03 }}
+              onClick={() => onSelect(suggestion.prompt)}
+              aria-label={`Ask about ${suggestion.label}: ${suggestion.description}`}
+              className="group flex items-center gap-2 p-2.5 bg-white hover:bg-[#8B9A6B]/5 active:bg-[#8B9A6B]/10 rounded-xl border border-[#8B9A6B]/10 hover:border-[#8B9A6B]/30 hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8B9A6B] transition-all duration-200 text-left"
+            >
+              <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-[#8B9A6B]/15 to-[#8B9A6B]/5 group-hover:from-[#8B9A6B] group-hover:to-[#6B7A5B] transition-all duration-200 flex-shrink-0">
+                <Icon className="w-3.5 h-3.5 text-[#8B9A6B] group-hover:text-white transition-colors duration-200" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold text-[#2C2C2C] truncate">{suggestion.label}</p>
+                <p className="text-[9px] text-[#4A4A4A]/50 truncate">{suggestion.description}</p>
+              </div>
+            </motion.button>
+          )
+        })}
+      </div>
+
+      <button
+        onClick={() => setShowAll((prev) => !prev)}
+        className="flex items-center gap-1 mx-auto mt-3 text-[11px] font-medium text-[#8B9A6B] hover:text-[#5F7048] transition-colors"
+      >
+        {showAll ? 'Show less' : 'Show more'}
+        <motion.span animate={{ rotate: showAll ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="w-3.5 h-3.5" />
+        </motion.span>
+      </button>
+    </div>
+  )
+}
 
 // ============================================
 // COMPONENT: Welcome Screen
 // ============================================
 
 const WelcomeScreen = ({ onSelect }: { onSelect: (prompt: string) => void }) => (
-  <div className="flex flex-col items-center justify-center h-full px-4 py-4 text-center">
-    <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#8B9A6B] to-[#6B7A5B] flex items-center justify-center shadow-lg shadow-[#8B9A6B]/25 mb-3">
-      <Bot className="w-7 h-7 text-white" />
-    </div>
+  <div className="flex flex-col items-center justify-center px-4 py-3 text-center">
+    <BotAvatar size={12} />
 
-    <h3 className="text-base font-bold text-[#2C2C2C]">Hi, I'm Sara AI</h3>
-    <p className="text-xs text-[#4A4A4A]/60 mt-1 max-w-[240px] leading-relaxed">
-      Ask me about Sara's experience, projects, skills, or career — or pick a topic below.
+    <h3 className="text-base font-bold text-[#2C2C2C] mt-3">Hi, I'm Sara's assistant</h3>
+    <p className="text-[11px] text-[#4A4A4A]/60 mt-1 max-w-[260px] leading-relaxed">
+      I can walk you through her work, hand you a copy of her resume, or connect you with her directly.
     </p>
 
     <SuggestionCards onSelect={onSelect} />
-
-    <div className="mt-4 flex items-center gap-1.5 text-[10px] text-[#4A4A4A]/30">
-      <Sparkles className="w-3 h-3 text-[#8B9A6B]" />
-      <span>Powered by Sara's knowledge base</span>
-    </div>
   </div>
 )
 
@@ -426,15 +651,15 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [thinkingIndex, setThinkingIndex] = useState(0)
   const [isListening, setIsListening] = useState(false)
   const [isSpeechSupported, setIsSpeechSupported] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
-  const [isVoiceEnabled, setIsVoiceEnabled] = useState(false)
-  const [isSpeaking, setIsSpeaking] = useState(false)
+  const [isOnline, setIsOnline] = useState(true)
+  const [usedFallbackOnce, setUsedFallbackOnce] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const toggleButtonRef = useRef<HTMLButtonElement>(null)
   const recognitionRef = useRef<any>(null)
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const latestInputRef = useRef('')
@@ -460,13 +685,17 @@ export default function Chatbot() {
   }, [isOpen])
 
   useEffect(() => {
-    if (isTyping) {
-      const interval = setInterval(() => {
-        setThinkingIndex((prev) => (prev + 1) % THINKING_PHRASES.length)
-      }, 1500)
-      return () => clearInterval(interval)
+    if (typeof window === 'undefined') return
+    setIsOnline(navigator.onLine)
+    const goOnline = () => setIsOnline(true)
+    const goOffline = () => setIsOnline(false)
+    window.addEventListener('online', goOnline)
+    window.addEventListener('offline', goOffline)
+    return () => {
+      window.removeEventListener('online', goOnline)
+      window.removeEventListener('offline', goOffline)
     }
-  }, [isTyping])
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
@@ -483,88 +712,90 @@ export default function Chatbot() {
     if (msg.includes('resume') || msg.includes('cv')) return botKnowledge.resume
     if (msg.includes('service') || msg.includes('offer') || msg.includes('help with')) return botKnowledge.services
     if (msg.includes('contact') || msg.includes('email') || msg.includes('connect') || msg.includes('reach')) return botKnowledge.contact
-    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) return "Hello! I'm your AI Assistant. How can I help you today? Feel free to ask about Sara's experience, projects, skills, or anything else!"
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) return "Hello! How can I help you today? Feel free to ask about Sara's experience, projects, skills, or anything else!"
     if (msg.includes('thanks') || msg.includes('thank')) return "You're welcome! Let me know if there's anything else I can help with."
     return botKnowledge.default
   }
 
-  const stopSpeaking = useCallback(() => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.cancel()
-      setIsSpeaking(false)
-    }
-  }, [])
+  const callChatApi = useCallback(async (message: string, history: Message[]): Promise<string> => {
+    const attempt = async (): Promise<string> => {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS)
 
-  const speakText = useCallback((text: string) => {
-    if (!isVoiceEnabled) return
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
       try {
-        window.speechSynthesis.cancel()
-        const utterance = new SpeechSynthesisUtterance(text)
-        utterance.rate = 0.85
-        utterance.pitch = 1
-        utterance.volume = 1
-        utterance.lang = 'en-US'
-        utterance.onstart = () => setIsSpeaking(true)
-        utterance.onend = () => setIsSpeaking(false)
-        utterance.onerror = () => setIsSpeaking(false)
-        window.speechSynthesis.speak(utterance)
-      } catch (e) {
-        setIsSpeaking(false)
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            history: history.map((m) => ({ sender: m.sender, text: m.text })),
+          }),
+          signal: controller.signal,
+        })
+        clearTimeout(timeoutId)
+
+        if (!res.ok) throw new Error(`API request failed (${res.status})`)
+        const data = await res.json()
+        if (!data.reply) throw new Error('Empty reply from API')
+        return data.reply as string
+      } catch (err) {
+        clearTimeout(timeoutId)
+        throw err
       }
     }
-  }, [isVoiceEnabled])
+
+    try {
+      return await attempt()
+    } catch (firstErr) {
+      try {
+        return await attempt()
+      } catch (secondErr) {
+        throw secondErr
+      }
+    }
+  }, [])
 
   const handleSend = useCallback(async (voiceMessage?: string) => {
     const messageToSend = voiceMessage || input
     if (!messageToSend.trim()) return
+    if (isTyping) return
 
     setShowWelcome(false)
-    stopSpeaking()
 
     const userMessage: Message = { id: Date.now().toString(), text: messageToSend, sender: 'user', timestamp: new Date() }
-    const historyForApi = messages // snapshot before appending the new user message
+    const historyForApi = messages
     setMessages((prev) => [...prev, userMessage])
-    // FIX: always clear the input after sending, regardless of whether the
-    // message came from typing, a suggestion-card click, or voice input.
-    // Previously this only cleared when handleSend() was called with no
-    // argument — suggestion clicks pass the prompt through the same
-    // parameter used for voice messages, so the input stayed filled.
     setInput('')
     setIsTyping(true)
-    setThinkingIndex(0)
 
     let response: string
 
     try {
-      // Real LLM call — the bot now actually reasons over Sara's full
-      // knowledge base instead of matching a fixed list of keywords.
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: messageToSend,
-          history: historyForApi.map((m) => ({ sender: m.sender, text: m.text })),
-        }),
-      })
-
-      if (!res.ok) throw new Error('API request failed')
-      const data = await res.json()
-      response = data.reply as string
+      response = await callChatApi(messageToSend, historyForApi)
     } catch (err) {
-      // Offline/error fallback — keeps the bot functional (with the old
-      // keyword-matched answers) even if the API key is missing, the
-      // route isn't deployed yet, or the network call fails.
       response = getBotResponse(messageToSend)
+      if (!usedFallbackOnce) {
+        toast.error("Couldn't reach the AI right now — answering from offline knowledge instead.")
+        setUsedFallbackOnce(true)
+      }
     }
 
-    const botMessage: Message = { id: (Date.now() + 1).toString(), text: response, sender: 'bot', timestamp: new Date() }
+    // NEW: detect which project(s) this reply is about and attach rich
+    // cards (image + GitHub + Live) instead of leaving it as plain text.
+    const projectCards = detectMentionedProjects(response)
+
+    const botMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      text: response,
+      sender: 'bot',
+      timestamp: new Date(),
+      projectCards: projectCards.length > 0 ? projectCards : undefined,
+    }
     setMessages((prev) => [...prev, botMessage])
     setIsTyping(false)
-    if (isVoiceEnabled) speakText(response)
-  }, [input, isVoiceEnabled, speakText, stopSpeaking, messages])
+  }, [input, isTyping, messages, callChatApi, usedFallbackOnce])
 
-  // Speech Recognition Setup
+  // Speech Recognition Setup — voice INPUT stays
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
@@ -598,17 +829,14 @@ export default function Chatbot() {
       if (recognitionRef.current) {
         try { recognitionRef.current.abort() } catch (e) {}
       }
-      if (typeof window !== 'undefined' && window.speechSynthesis) {
-        window.speechSynthesis.cancel()
-      }
       if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const toggleVoice = () => {
+  const toggleVoiceInput = () => {
     if (!isSpeechSupported) {
-      toast.error('Voice recognition is not supported in your browser. Please use Chrome or Edge.')
+      toast.error('Voice input is not supported in your browser. Please use Chrome or Edge.')
       return
     }
 
@@ -629,22 +857,14 @@ export default function Chatbot() {
     }
   }
 
-  const toggleVoiceOutput = useCallback(() => {
-    setIsVoiceEnabled((prev) => {
-      if (prev) stopSpeaking()
-      return !prev
-    })
-  }, [stopSpeaking])
-
   const clearChat = () => {
     setMessages([])
     setShowWelcome(true)
-    stopSpeaking()
   }
 
   const closeChat = () => {
     setIsOpen(false)
-    stopSpeaking()
+    setTimeout(() => toggleButtonRef.current?.focus(), 50)
   }
 
   useEffect(() => {
@@ -656,17 +876,42 @@ export default function Chatbot() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
+  const handleQuickAction = (action: 'resume' | 'github' | 'email' | 'contact' | 'projects') => {
+    switch (action) {
+      case 'resume':
+        window.open('/resume.png', '_blank')
+        break
+      case 'github':
+        window.open('https://github.com/Sara12-2', '_blank')
+        break
+      case 'email':
+        window.location.href = 'mailto:saramanzoor76@gmail.com'
+        break
+      case 'contact':
+        setIsOpen(false)
+        setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
+        break
+      case 'projects':
+        setIsOpen(false)
+        setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 200)
+        break
+    }
+  }
+
+  const canSend = (input.trim() || isListening) && !isTyping
+
   return (
     <>
       {/* Floating Chat Button */}
       <motion.button
+        ref={toggleButtonRef}
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
-        aria-label="Open chat with Sara AI"
+        aria-label="Open Sara's assistant"
         className={`fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[9999] ${isOpen ? 'hidden' : 'block'}`}
       >
-        <div className="relative p-3.5 bg-gradient-to-br from-[#8B9A6B] to-[#6B7A5B] rounded-full shadow-lg shadow-[#8B9A6B]/40">
+        <div className="relative p-3.5 bg-gradient-to-br from-[#8B9A6B] to-[#5F7048] rounded-full shadow-lg shadow-[#8B9A6B]/40">
           <MessageCircle className="w-5 h-5 text-white" />
           <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-[#2ECC71] rounded-full border-2 border-white" />
         </div>
@@ -676,44 +921,31 @@ export default function Chatbot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            role="dialog"
+            aria-label="Sara's assistant"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', damping: 26, stiffness: 320 } }}
             exit={{ opacity: 0, scale: 0.9, y: 20, transition: { duration: 0.15 } }}
-            className={`fixed z-[9999] bg-white rounded-2xl shadow-2xl shadow-[#8B9A6B]/20 border border-[#8B9A6B]/10 overflow-hidden flex flex-col
+            className={`fixed z-[9999] bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-[#8B9A6B]/25 border border-[#8B9A6B]/10 overflow-hidden flex flex-col
               bottom-0 right-0 left-0 top-0 sm:bottom-6 sm:right-6 sm:left-auto sm:top-auto
-              w-full sm:w-[380px] max-w-full
-              h-full sm:h-[560px] sm:max-h-[75vh]
+              w-full sm:w-[400px] max-w-full
+              h-full sm:h-[620px] sm:max-h-[80vh]
               transition-[height] duration-300
-              ${isMinimized ? 'sm:!h-[64px]' : ''}
+              ${isMinimized ? 'sm:!h-[68px]' : ''}
             `}
           >
             {/* Header */}
-            <div className="relative flex-shrink-0 px-4 py-3 bg-gradient-to-r from-[#8B9A6B] to-[#6B7A5B]">
+            <div className="relative flex-shrink-0 px-4 py-3 bg-gradient-to-r from-[#8B9A6B] to-[#5F7048] shadow-sm">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <AIAvatar isSpeaking={isSpeaking} />
+                <div className="flex items-center gap-3 min-w-0">
+                  <BotAvatar />
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-white font-semibold text-sm truncate">Sara AI</h4>
-                      <span className="hidden xs:inline px-1.5 py-0.5 bg-white/20 rounded-full text-[9px] text-white font-medium flex-shrink-0">
-                        v2.0
-                      </span>
-                    </div>
-                    <p className="text-white/70 text-[11px]">AI Portfolio Assistant</p>
+                    <h4 className="text-white font-semibold text-sm truncate">Sara's Assistant</h4>
+                    <p className="text-white/70 text-[11px]">Here to help you connect</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-0.5 flex-shrink-0">
-                  <HeaderIconButton onClick={toggleVoiceOutput} title={isVoiceEnabled ? 'Voice replies: on' : 'Voice replies: off'} active={isVoiceEnabled}>
-                    {isVoiceEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-                  </HeaderIconButton>
-
-                  {isSpeaking && (
-                    <HeaderIconButton onClick={stopSpeaking} title="Stop speaking">
-                      <VolumeX className="w-4 h-4 text-red-100" />
-                    </HeaderIconButton>
-                  )}
-
                   <HeaderIconButton onClick={clearChat} title="Clear chat">
                     <Trash2 className="w-4 h-4" />
                   </HeaderIconButton>
@@ -729,10 +961,35 @@ export default function Chatbot() {
               </div>
             </div>
 
+            {/* Offline banner */}
+            {!isOnline && (
+              <div className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-amber-50 border-b border-amber-200 text-amber-700 text-xs">
+                <WifiOff className="w-3.5 h-3.5 flex-shrink-0" />
+                <span>You're offline — I'll answer from saved knowledge until you're back online.</span>
+              </div>
+            )}
+
+            {/* Quick Actions Bar */}
+            <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-[#FAF8F5] border-b border-[#8B9A6B]/10 overflow-x-auto">
+              {QUICK_ACTIONS.map((qa) => {
+                const Icon = qa.icon
+                return (
+                  <button
+                    key={qa.label}
+                    onClick={() => handleQuickAction(qa.action)}
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white border border-[#8B9A6B]/15 text-[10px] font-medium text-[#4A4A4A] hover:border-[#8B9A6B]/40 hover:text-[#8B9A6B] hover:shadow-sm transition-all duration-200 flex-shrink-0"
+                  >
+                    <Icon className="w-3 h-3 text-[#8B9A6B]" />
+                    {qa.label}
+                  </button>
+                )
+              })}
+            </div>
+
             {/* Messages + Input */}
             {!isMinimized && (
               <>
-                <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3 bg-[#FAF8F5]">
+                <div className="flex-1 overflow-y-auto px-3.5 py-3 space-y-3 bg-gradient-to-b from-[#FAF8F5] to-[#F5F5F0]">
                   {showWelcome && messages.length === 0 ? (
                     <WelcomeScreen onSelect={(prompt) => {
                       setInput(prompt)
@@ -747,48 +1004,63 @@ export default function Chatbot() {
                         transition={{ duration: 0.25 }}
                         className={`flex items-end gap-2 group ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
-                        {msg.sender === 'bot' && <AIAvatar isSpeaking={isSpeaking} />}
+                        {msg.sender === 'bot' && <BotAvatar />}
 
-                        <div
-                          className={`max-w-[78%] px-3.5 py-2.5 rounded-2xl ${
-                            msg.sender === 'user'
-                              ? 'bg-[#8B9A6B] text-white rounded-br-md'
-                              : 'bg-white text-[#1E1E1E] border border-[#8B9A6B]/10 rounded-bl-md shadow-sm'
-                          }`}
-                        >
-                          <div className="text-[13px] leading-relaxed">
-                            <ReactMarkdown
-                              components={{
-                                strong: ({ children }) => (
-                                  <strong className={`font-semibold ${msg.sender === 'user' ? 'text-white' : 'text-[#8B9A6B]'}`}>{children}</strong>
-                                ),
-                                ul: ({ children }) => <ul className="list-disc pl-4 space-y-0.5 my-1">{children}</ul>,
-                                ol: ({ children }) => <ol className="list-decimal pl-4 space-y-0.5 my-1">{children}</ol>,
-                                li: ({ children }) => <li>{children}</li>,
-                                p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
-                              }}
-                            >
-                              {msg.text}
-                            </ReactMarkdown>
+                        <div className={`flex flex-col gap-2 max-w-[85%] ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
+                          <div
+                            className={`px-4 py-2.5 rounded-2xl ${
+                              msg.sender === 'user'
+                                ? 'bg-gradient-to-br from-[#8B9A6B] to-[#6B7A5B] text-white rounded-br-md shadow-md shadow-[#8B9A6B]/20'
+                                : 'bg-white text-[#1E1E1E] border border-[#8B9A6B]/10 rounded-bl-md shadow-sm'
+                            }`}
+                          >
+                            <div className="text-[13.5px] leading-relaxed">
+                              <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{
+                                  strong: ({ children }) => (
+                                    <strong className={`font-semibold ${msg.sender === 'user' ? 'text-white' : 'text-[#8B9A6B]'}`}>{children}</strong>
+                                  ),
+                                  ul: ({ children }) => <ul className="list-disc pl-4 space-y-0.5 my-1.5">{children}</ul>,
+                                  ol: ({ children }) => <ol className="list-decimal pl-4 space-y-0.5 my-1.5">{children}</ol>,
+                                  li: ({ children }) => <li>{children}</li>,
+                                  p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
+                                  table: ({ children }) => (
+                                    <div className="my-2 overflow-x-auto rounded-lg border border-[#8B9A6B]/15">
+                                      <table className="w-full text-left border-collapse text-[12px]">{children}</table>
+                                    </div>
+                                  ),
+                                  thead: ({ children }) => (
+                                    <thead className={msg.sender === 'user' ? 'bg-white/15' : 'bg-[#8B9A6B]/10'}>{children}</thead>
+                                  ),
+                                  tr: ({ children }) => (
+                                    <tr className={`border-b last:border-b-0 ${msg.sender === 'user' ? 'border-white/15' : 'border-[#8B9A6B]/10'}`}>{children}</tr>
+                                  ),
+                                  th: ({ children }) => (
+                                    <th className={`px-2.5 py-1.5 font-semibold ${msg.sender === 'user' ? 'text-white' : 'text-[#8B9A6B]'}`}>{children}</th>
+                                  ),
+                                  td: ({ children }) => <td className="px-2.5 py-1.5 align-top">{children}</td>,
+                                }}
+                              >
+                                {msg.text}
+                              </ReactMarkdown>
+                            </div>
+
+                            <span className={`block mt-1 text-[10px] ${msg.sender === 'user' ? 'text-white/60' : 'text-[#4A4A4A]/35'}`}>
+                              {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+
+                            {msg.sender === 'bot' && <MessageActions text={msg.text} />}
                           </div>
 
-                          <span className={`block mt-1 text-[10px] ${msg.sender === 'user' ? 'text-white/60' : 'text-[#4A4A4A]/35'}`}>
-                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </span>
-
-                          {msg.sender === 'bot' && (
-                            <MessageActions
-                              text={msg.text}
-                              onRegenerate={() => {
-                                const lastUserMsg = [...messages].reverse().find((m) => m.sender === 'user')
-                                if (lastUserMsg) {
-                                  stopSpeaking()
-                                  handleSend(lastUserMsg.text)
-                                }
-                              }}
-                              onSpeak={() => (isSpeaking ? stopSpeaking() : speakText(msg.text))}
-                              isSpeaking={isSpeaking}
-                            />
+                          {/* NEW: Project cards attached below the bubble when
+                              the reply is about a specific known project */}
+                          {msg.projectCards && msg.projectCards.length > 0 && (
+                            <div className={`grid gap-2 w-full ${msg.projectCards.length > 1 ? 'grid-cols-1' : 'grid-cols-1'}`} style={{ maxWidth: 260 }}>
+                              {msg.projectCards.map((project) => (
+                                <ProjectCard key={project.title} project={project} />
+                              ))}
+                            </div>
                           )}
                         </div>
 
@@ -797,19 +1069,20 @@ export default function Chatbot() {
                     ))
                   )}
 
-                  {isTyping && <TypingIndicator phrase={THINKING_PHRASES[thinkingIndex]} />}
+                  {isTyping && <TypingIndicator />}
 
                   <div ref={messagesEndRef} />
                 </div>
 
                 {/* Input Area */}
-                <div className="flex-shrink-0 px-3 py-3 bg-white border-t border-[#8B9A6B]/10">
+                <div className="flex-shrink-0 px-3.5 py-3 bg-white border-t border-[#8B9A6B]/10">
                   <div className="flex items-center gap-2">
                     {isSpeechSupported && (
                       <button
-                        onClick={toggleVoice}
+                        onClick={toggleVoiceInput}
+                        disabled={isTyping}
                         aria-label={isListening ? 'Stop listening' : 'Start voice input'}
-                        className={`flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0 transition-colors duration-200 ${
+                        className={`flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${
                           isListening ? 'bg-red-500 text-white' : 'bg-[#8B9A6B]/10 text-[#8B9A6B] hover:bg-[#8B9A6B]/20'
                         }`}
                       >
@@ -819,7 +1092,7 @@ export default function Chatbot() {
 
                     <div className="relative flex-1 min-w-0">
                       {isListening && (
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 pointer-events-none">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5 pointer-events-none">
                           <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                           <span className="text-[11px] text-red-500 font-medium">Listening…</span>
                         </div>
@@ -835,32 +1108,27 @@ export default function Chatbot() {
                             handleSend()
                           }
                         }}
-                        placeholder={isListening ? '' : 'Ask about Sara...'}
-                        className={`w-full h-10 px-3.5 border rounded-xl focus:outline-none focus:ring-2 text-sm transition-colors duration-200 ${
+                        placeholder={isListening ? '' : isTyping ? 'Just a moment…' : 'Ask me anything...'}
+                        disabled={isListening || isTyping}
+                        aria-label="Message input"
+                        className={`w-full h-10 px-4 border rounded-full focus:outline-none focus:ring-2 text-sm transition-colors duration-200 disabled:opacity-60 ${
                           isListening
                             ? 'bg-red-50 border-red-200 pl-24 text-red-700'
                             : 'bg-[#F5F5F0] border-[#8B9A6B]/20 focus:border-[#8B9A6B] focus:ring-[#8B9A6B]/15 text-[#1E1E1E]'
                         }`}
-                        disabled={isListening}
                       />
                     </div>
 
                     <button
                       onClick={() => handleSend()}
                       aria-label="Send message"
-                      disabled={!input.trim() && !isListening}
-                      className={`flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0 transition-colors duration-200 ${
-                        input.trim() || isListening ? 'bg-[#8B9A6B] hover:bg-[#6B7A5B]' : 'bg-[#8B9A6B]/20 cursor-not-allowed'
+                      disabled={!canSend}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0 transition-all duration-200 ${
+                        canSend ? 'bg-gradient-to-br from-[#8B9A6B] to-[#5F7048] hover:shadow-lg hover:shadow-[#8B9A6B]/30' : 'bg-[#8B9A6B]/20 cursor-not-allowed'
                       }`}
                     >
-                      <Send className={`w-4 h-4 ${input.trim() || isListening ? 'text-white' : 'text-[#8B9A6B]/40'}`} />
+                      <Send className={`w-4 h-4 ${canSend ? 'text-white' : 'text-[#8B9A6B]/40'}`} />
                     </button>
-                  </div>
-
-                  <div className="hidden sm:flex items-center justify-center gap-2 mt-2 text-[10px] text-[#4A4A4A]/30">
-                    <span>Enter to send</span>
-                    {isSpeechSupported && <span>· Tap mic to speak</span>}
-                    <span>· Esc to close</span>
                   </div>
                 </div>
               </>
