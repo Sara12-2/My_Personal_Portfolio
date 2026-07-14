@@ -130,7 +130,7 @@ public/
 ### Installation
 
 ```bash
-git clone https://github.com/Sara12-2/My_Personal_Portfolio.git
+git clone https://github.com/Sara12-2/My_Personal_Portfolio
 cd my-portfolio
 npm install
 ```
