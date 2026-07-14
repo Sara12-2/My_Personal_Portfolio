@@ -118,7 +118,7 @@ const experiences: ExperienceItem[] = [
     // deployed, so its link is active here — matches the "only show a
     // live link where something is genuinely deployed" rule.
     github: 'https://github.com/Sara12-2/TechNest_Ecommerce_Website',
-    live: 'https://tech-nest-ecommerce.vercel.app/',
+
   },
   {
     id: 5,
