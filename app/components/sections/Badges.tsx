@@ -4,137 +4,26 @@ import { motion } from 'framer-motion'
 import { Award, Sparkles, Calendar, ExternalLink } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
+// ============================================
+// BADGES - FULLY MIXED (Kaggle, GSSoC, GitHub)
+// ============================================
+
 const badges = [
-  // ============================================
-  // KAGGLE BADGES (11) - Mixed with others
-  // ============================================
+  // ============ KAGGLE ============
   {
     id: 1,
     title: '1 Year of Kaggle',
     issuer: 'Kaggle',
-    date: '2025',
+    date: 'July 2026',
     description: 'Celebrating 1 year of active participation on Kaggle',
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/kaggle.png',
     link: 'https://www.kaggle.com/sara765',
   },
+  // ============ GSSOC ============
   {
     id: 2,
-    title: 'Dataset Creator',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Actively contributing and sharing well-structured datasets for the data science community',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 3,
-    title: 'Getting Started Competitor',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'First official step into Kaggle competitions',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 4,
-    title: 'Community Competitor',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Engaged with the Kaggle community through competitions',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 5,
-    title: 'Python Coder',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Writing, running, debugging, and learning Python code',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 6,
-    title: 'Bookmarker',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Bookmarking useful notebooks and datasets for future reference',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 7,
-    title: 'Vampire',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Late night code runner and data vampire',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 8,
-    title: 'Learner',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Committed to continuous learning and skill development',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 9,
-    title: 'Student',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Kaggle community member and lifelong learner',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 10,
-    title: '7 Day Streak',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: '7 consecutive days of active participation on Kaggle',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-  {
-    id: 11,
-    title: 'Community Member',
-    issuer: 'Kaggle',
-    date: '2025',
-    description: 'Active member of the Kaggle community',
-    icon: null,
-    color: '#8B9A6B',
-    logo: '/images/certificates/kaggle.png',
-    link: 'https://www.kaggle.com/sara765',
-  },
-
-  // ============================================
-  // GSSOC 2026 BADGES (3)
-  // ============================================
-  {
-    id: 12,
     title: 'GSSoC 2026 Contributor',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -144,8 +33,33 @@ const badges = [
     logo: '/images/certificates/gssoc-2026.png',
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
+  // ============ KAGGLE ============
   {
-    id: 13,
+    id: 3,
+    title: 'Dataset Creator',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Actively contributing and sharing well-structured datasets for the data science community',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 4,
+    title: 'Getting Started Competitor',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'First official step into Kaggle competitions',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ GSSOC ============
+  {
+    id: 5,
     title: 'AI Agents Track',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -155,8 +69,57 @@ const badges = [
     logo: '/images/certificates/gssoc-2026.png',
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
+  // ============ KAGGLE ============
   {
-    id: 14,
+    id: 6,
+    title: 'Community Competitor',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Engaged with the Kaggle community through competitions',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 7,
+    title: 'Python Coder',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Writing, running, debugging, and learning Python code',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ GITHUB ============
+  {
+    id: 8,
+    title: 'Quickdraw',
+    issuer: 'GitHub',
+    date: 'Jun 13, 2026',
+    description: 'Closed an issue/pull request within 5 minutes of opening',
+    icon: FaGithub,
+    color: '#2C2C2C',
+    logo: null,
+    link: 'https://github.com/Sara12-2',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 9,
+    title: 'Bookmarker',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Bookmarking useful notebooks and datasets for future reference',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ GSSOC ============
+  {
+    id: 10,
     title: 'Open Source Track',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -166,20 +129,65 @@ const badges = [
     logo: '/images/certificates/gssoc-2026.png',
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
-
-  // ============================================
-  // GITHUB BADGE (1)
-  // ============================================
+  // ============ KAGGLE ============
+  {
+    id: 11,
+    title: 'Vampire',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Late night code runner and data vampire',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 12,
+    title: 'Learner',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Committed to continuous learning and skill development',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 13,
+    title: 'Student',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Kaggle community member and lifelong learner',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
+  {
+    id: 14,
+    title: '7 Day Streak',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: '7 consecutive days of active participation on Kaggle',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  // ============ KAGGLE ============
   {
     id: 15,
-    title: 'Quickdraw',
-    issuer: 'GitHub',
-    date: 'Jun 13, 2026',
-    description: 'Closed an issue/pull request within 5 minutes of opening',
-    icon: FaGithub,
-    color: '#2C2C2C',
-    logo: null,
-    link: 'https://github.com/Sara12-2',
+    title: 'Community Member',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Active member of the Kaggle community',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
   },
 ]
 
@@ -218,7 +226,7 @@ export default function Badges() {
             </p>
           </div>
 
-          {/* Stats - Updated with correct counts */}
+          {/* Stats */}
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
               { label: 'Total', value: badges.length, icon: Award },
@@ -233,7 +241,7 @@ export default function Badges() {
             ))}
           </div>
 
-          {/* Badges Grid - ALL MIXED TOGETHER */}
+          {/* Badges Grid - FULLY MIXED */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
             {badges.map((badge, index) => {
               const Icon = badge.icon

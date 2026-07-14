@@ -13,7 +13,8 @@ import {
   Users,
   FolderGit2,
   Rocket,
-  GitBranch
+  GitBranch,
+  Star
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
@@ -86,8 +87,6 @@ const experiences = [
     icon: Code2,
     color: '#8B9A6B',
     logo: '/images/companies/afynix.png',
-    github: 'https://github.com/Sara12-2/TechNest-Ecommerce',
-    live: 'https://tech-nest-ecommerce.vercel.app/',
   },
   {
     id: 5,
@@ -105,11 +104,7 @@ const experiences = [
     icon: Brain,
     color: '#8B9A6B',
     logo: '/images/companies/sam-ai.png',
-    projects: [
-      { name: 'Fraud Detection', link: 'https://github.com/Sara12-2/Credit-Card-Fraud-Detection' },
-      { name: 'Sentiment Analysis', link: 'https://github.com/Sara12-2/Sentiment-Analysis-Twitter-Airline' },
-      { name: 'Spam Detection', link: 'https://github.com/Sara12-2/Spam-SMS-Detection' },
-    ],
+    topIntern: true,  // ✅ Only SAM AI has this
   },
   {
     id: 6,
@@ -127,20 +122,12 @@ const experiences = [
     icon: Brain,
     color: '#8B9A6B',
     logo: '/images/companies/elevvo.png',
-    projects: [
-      { name: 'Student Score Prediction', link: 'https://github.com/Sara12-2/Student-Score-Prediction' },
-      { name: 'Customer Segmentation', link: 'https://github.com/Sara12-2/Mall-Customer-Segmentation' },
-      { name: 'Loan Approval Prediction', link: 'https://github.com/Sara12-2/Loan-Approval-Prediction' },
-      { name: 'Sales Forecasting', link: 'https://github.com/Sara12-2/Walmart-Sales-Forecasting' },
-      { name: 'Forest Cover Classification', link: 'https://github.com/Sara12-2/Forest-Cover-Type-Classification' },
-      { name: 'House Price Prediction', link: 'https://github.com/Sara12-2/House-Price-Prediction-Kaggle' },
-    ],
   },
 ]
 
 const TYPE_STYLES: Record<string, { icon: any; bg: string; text: string; border: string }> = {
   'Self-employed': { icon: Briefcase, bg: 'bg-[#8B9A6B]/10', text: 'text-[#8B9A6B]', border: 'border-[#8B9A6B]/30' },
-  'Internship': { icon: Award, bg: 'bg-[#6B8E9A]/10', text: 'text-[#5A7A85]', border: 'border-[#6B8E9A]/30' },
+  'Internship': { icon: Award, bg: 'bg-[#8B9A6B]/10', text: 'text-[#8B9A6B]', border: 'border-[#8B9A6B]/30' },
   'Open Source': { icon: GitBranch, bg: 'bg-[#9A7B6B]/10', text: 'text-[#8A6B57]', border: 'border-[#9A7B6B]/30' },
   'Competition': { icon: Award, bg: 'bg-[#B8952E]/10', text: 'text-[#9A7A1E]', border: 'border-[#B8952E]/30' },
 }
@@ -202,7 +189,7 @@ export default function Experience() {
 
                     {/* Header */}
                     <div className="flex items-start gap-3 mb-3">
-                      <div className="w-11 h-11 rounded-xl bg-[#8B9A6B]/8 border border-[#8B9A6B]/15 flex items-center justify-center overflow-hidden flex-shrink-0 transition-all duration-300 group-hover:border-[#8B9A6B]/30">
+                      <div className="w-11 h-11 rounded-xl bg-[#8B9A6B]/8 border border-[#8B9A6B]/15 flex items-center justify-center overflow-hidden flex-shrink-0 transition-all duration-300 group-hover:border-[#8B9A6B]/30 relative">
                         {exp.logo ? (
                           <img src={exp.logo} alt={exp.company} className="w-6 h-6 object-contain" />
                         ) : (
@@ -211,9 +198,24 @@ export default function Experience() {
                       </div>
 
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-bold text-[#1A1A1A] leading-tight">
-                          {exp.title}
-                        </h3>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="text-sm font-bold text-[#1A1A1A] leading-tight">
+                            {exp.title}
+                          </h3>
+                          {/* ⭐ Clean Top Intern Badge - Only for SAM AI */}
+                          {exp.topIntern && (
+                            <motion.span
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.3 }}
+                              viewport={{ once: true }}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F1C40F]/10 border border-[#F1C40F]/30 text-[9px] font-semibold text-[#8B6B1A]"
+                            >
+                              <Star className="w-3 h-3 fill-[#F1C40F] text-[#F1C40F]" />
+                              Top Intern
+                            </motion.span>
+                          )}
+                        </div>
                         <a
                           href={exp.companyLink}
                           target="_blank"
@@ -256,8 +258,8 @@ export default function Experience() {
                       ))}
                     </ul>
 
-                    {/* Links row — only real, role-specific links; capped at 2 */}
-                    {(exp.github || exp.live || (exp.projects && exp.projects.length > 0)) && (
+                    {/* Links - Only Softtec has GitHub link */}
+                    {(exp.github || exp.live) && (
                       <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-[#8B9A6B]/8">
                         {exp.github && (
                           <a
@@ -281,21 +283,10 @@ export default function Experience() {
                             Live
                           </a>
                         )}
-                        {exp.projects && exp.projects.length > 0 && (
-                          <a
-                            href={exp.projects[0].link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-xs font-medium text-[#4A4A4A]/60 hover:text-[#8B9A6B] transition-colors"
-                          >
-                            <FolderGit2 className="w-3.5 h-3.5" />
-                            {exp.projects.length} Projects
-                          </a>
-                        )}
                       </div>
                     )}
 
-                    {/* Skills — capped at 3, no overflow clutter */}
+                    {/* Skills — capped at 3 */}
                     <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
                       {exp.skills.slice(0, 3).map((skill) => (
                         <span

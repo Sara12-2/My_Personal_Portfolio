@@ -16,7 +16,7 @@ const testimonials = [
     title: 'Founder & CEO',
     company: 'DevHatch Labs',
     logo: '/images/companies/devhatch.png',
-    quote: 'Sara has been an incredible asset to DevHatch Labs. As our COO, she has transformed our operations, streamlined workflows, and built a culture of excellence. Her leadership and technical expertise are truly remarkable.',
+    quote: 'Working with Sara has been a great experience. She is reliable, eager to learn, and always approaches challenges with a positive attitude. Her consistency and technical growth have made her an important contributor at DevHatch Labs, and I look forward to seeing her achieve even greater success.',
     rating: 5,
     initials: 'SI',
     relationship: 'CEO & Co-founder',
@@ -54,6 +54,7 @@ const marqueeTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
 const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[number] }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <motion.div
@@ -61,7 +62,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[n
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3, type: 'spring', stiffness: 250 }}
-      className="relative flex-shrink-0 w-[320px] sm:w-[360px] mx-3"
+      className="relative flex-shrink-0 w-[320px] sm:w-[360px] mx-3 h-auto"
     >
       <div
         className={`relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 border transition-all duration-500 h-full flex flex-col overflow-hidden ${
@@ -85,10 +86,20 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[n
             ))}
           </div>
 
-          {/* Quote */}
-          <p className="text-sm text-[#1E1E1E] leading-relaxed text-center flex-1 line-clamp-4">
-            "{testimonial.quote}"
-          </p>
+          {/* Quote - Full text with expand/collapse for long quotes */}
+          <div className="text-sm text-[#1E1E1E] leading-relaxed text-center flex-1">
+            <p className={`${!isExpanded && testimonial.quote.length > 150 ? 'line-clamp-4' : ''}`}>
+              "{testimonial.quote}"
+            </p>
+            {testimonial.quote.length > 150 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-[#8B9A6B] text-xs font-medium mt-1 hover:underline focus:outline-none"
+              >
+                {isExpanded ? 'Show less' : 'Read more'}
+              </button>
+            )}
+          </div>
 
           <div className="my-4 h-px bg-gradient-to-r from-transparent via-[#8B9A6B]/25 to-transparent" />
 
@@ -132,11 +143,6 @@ export default function Testimonials() {
   const [isHovering, setIsHovering] = useState(false)
 
   const prefersReducedMotion = useReducedMotion()
-  // FIX (from the original marquee): only run the animation loop while the
-  // section is actually visible on screen. Previously the marquee ran
-  // forever via useAnimationFrame regardless of scroll position, which was
-  // a real contributor to scroll jank. `isInView` gates it so the frame
-  // loop does nothing (and costs nothing) once the user scrolls away.
   const isInView = useInView(sectionRef, { amount: 0.1 })
 
   useEffect(() => {
@@ -202,7 +208,6 @@ export default function Testimonials() {
 
         {/* Marquee */}
         {prefersReducedMotion ? (
-          // Reduced-motion fallback: static grid, no auto-scroll
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((t) => (
               <TestimonialCard key={t.id} testimonial={t} />
