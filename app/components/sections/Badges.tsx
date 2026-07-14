@@ -5,9 +5,22 @@ import { Award, Sparkles, Calendar, ExternalLink } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 const badges = [
-  // ============ KAGGLE BADGES (3) ============
+  // ============================================
+  // KAGGLE BADGES (11) - Mixed with others
+  // ============================================
   {
     id: 1,
+    title: '1 Year of Kaggle',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Celebrating 1 year of active participation on Kaggle',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 2,
     title: 'Dataset Creator',
     issuer: 'Kaggle',
     date: '2025',
@@ -19,6 +32,28 @@ const badges = [
   },
   {
     id: 3,
+    title: 'Getting Started Competitor',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'First official step into Kaggle competitions',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 4,
+    title: 'Community Competitor',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Engaged with the Kaggle community through competitions',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 5,
     title: 'Python Coder',
     issuer: 'Kaggle',
     date: '2025',
@@ -29,20 +64,77 @@ const badges = [
     link: 'https://www.kaggle.com/sara765',
   },
   {
-    id: 4,
-    title: 'Getting Started Competitor',
+    id: 6,
+    title: 'Bookmarker',
     issuer: 'Kaggle',
     date: '2025',
-    description: 'First official step into Kaggle competitions',
+    description: 'Bookmarking useful notebooks and datasets for future reference',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 7,
+    title: 'Vampire',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Late night code runner and data vampire',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 8,
+    title: 'Learner',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Committed to continuous learning and skill development',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 9,
+    title: 'Student',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Kaggle community member and lifelong learner',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 10,
+    title: '7 Day Streak',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: '7 consecutive days of active participation on Kaggle',
+    icon: null,
+    color: '#8B9A6B',
+    logo: '/images/certificates/kaggle.png',
+    link: 'https://www.kaggle.com/sara765',
+  },
+  {
+    id: 11,
+    title: 'Community Member',
+    issuer: 'Kaggle',
+    date: '2025',
+    description: 'Active member of the Kaggle community',
     icon: null,
     color: '#8B9A6B',
     logo: '/images/certificates/kaggle.png',
     link: 'https://www.kaggle.com/sara765',
   },
 
-  // ============ GSSOC 2026 BADGES (3) ============
+  // ============================================
+  // GSSOC 2026 BADGES (3)
+  // ============================================
   {
-    id: 10,
+    id: 12,
     title: 'GSSoC 2026 Contributor',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -53,7 +145,7 @@ const badges = [
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
   {
-    id: 11,
+    id: 13,
     title: 'AI Agents Track',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -64,7 +156,7 @@ const badges = [
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
   {
-    id: 12,
+    id: 14,
     title: 'Open Source Track',
     issuer: 'GS Labs by GS Group Foundation',
     date: '2026',
@@ -75,9 +167,11 @@ const badges = [
     link: 'https://gssoc.girlscript.org/profile/3104528d-f97e-48d6-822d-0a044f13a80a',
   },
 
-  // ============ GITHUB BADGE (1) ============
+  // ============================================
+  // GITHUB BADGE (1)
+  // ============================================
   {
-    id: 13,
+    id: 15,
     title: 'Quickdraw',
     issuer: 'GitHub',
     date: 'Jun 13, 2026',
@@ -124,13 +218,13 @@ export default function Badges() {
             </p>
           </div>
 
-          {/* Stats */}
+          {/* Stats - Updated with correct counts */}
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
               { label: 'Total', value: badges.length, icon: Award },
-              { label: 'Kaggle', value: badges.filter(b => b.issuer === 'Kaggle').length, icon: Award },
-              { label: 'GSSoC 2026', value: badges.filter(b => b.issuer === 'GS Labs by GS Group Foundation').length, icon: Award },
-              { label: 'GitHub', value: badges.filter(b => b.issuer === 'GitHub').length, icon: FaGithub },
+              { label: 'Kaggle', value: 11, icon: Award },
+              { label: 'GSSoC 2026', value: 3, icon: Award },
+              { label: 'GitHub', value: 1, icon: FaGithub },
             ].map((stat) => (
               <div key={stat.label} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center">
                 <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
@@ -139,7 +233,7 @@ export default function Badges() {
             ))}
           </div>
 
-          {/* Badges Grid */}
+          {/* Badges Grid - ALL MIXED TOGETHER */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
             {badges.map((badge, index) => {
               const Icon = badge.icon
@@ -148,7 +242,7 @@ export default function Badges() {
                   key={badge.id}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  transition={{ duration: 0.3, delay: index * 0.03 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -8, scale: 1.05 }}
                   className="relative group bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-[#8B9A6B]/10 shadow-lg hover:shadow-2xl hover:shadow-[#8B9A6B]/20 transition-all duration-300 text-center cursor-pointer"

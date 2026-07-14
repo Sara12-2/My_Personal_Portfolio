@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   ExternalLink, 
@@ -213,6 +213,19 @@ const categories = [
 export default function Projects() {
   const [filter, setFilter] = useState('all')
 
+  // FIX: on mobile/touch devices, browsers can simulate a "hover" state on
+  // tap. That simulated hover fights with Framer Motion's whileHover scale
+  // transform and the CSS `transition-all duration-300` color change
+  // happening at the same time — this is what caused the filter buttons
+  // to visibly "blink" on mobile. Real mouse hover on desktop never had
+  // this problem. Fix: only enable whileHover on devices that actually
+  // support real pointer hover, detected via the `(hover: hover)` media
+  // query.
+  const [canHover, setCanHover] = useState(false)
+  useEffect(() => {
+    setCanHover(window.matchMedia('(hover: hover)').matches)
+  }, [])
+
   const filteredProjects = filter === 'all' 
     ? projects 
     : projects.filter(p => p.category === filter)
@@ -257,7 +270,7 @@ export default function Projects() {
                 <motion.button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={canHover ? { scale: 1.05 } : undefined}
                   whileTap={{ scale: 0.95 }}
                   suppressHydrationWarning
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 ${
@@ -285,10 +298,7 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
                   viewport={{ once: true }}
-                  whileHover={{ 
-                    y: -6,
-                    transition: { duration: 0.3 }
-                  }}
+                  whileHover={canHover ? { y: -6, transition: { duration: 0.3 } } : undefined}
                   className="group relative bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#8B9A6B]/10 shadow-[0_4px_20px_rgba(139,154,107,0.08)] hover:shadow-[0_12px_40px_rgba(139,154,107,0.18)] h-full flex flex-col transition-all duration-300"
                 >
                   {/* Browser Mockup Thumbnail */}
@@ -328,9 +338,8 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Content - Bigger padding and spacing */}
+                  {/* Content */}
                   <div className="relative px-5 pb-5 pt-1 flex flex-col flex-1">
-                    {/* Category Badge + Icon */}
                     <div className="flex items-center justify-between mb-2.5">
                       <span className="text-[10px] font-medium text-[#8B9A6B] bg-[#8B9A6B]/10 px-3 py-1 rounded-full border border-[#8B9A6B]/15">
                         {categories.find(c => c.id === project.category)?.label || project.category}
@@ -343,17 +352,14 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* ✅ Darker Project Title */}
                     <h3 className="text-base font-bold text-[#1A1A1A] leading-tight group-hover:text-[#8B9A6B] transition-colors duration-300">
                       {project.title}
                     </h3>
                     
-                    {/* ✅ Description with more space */}
                     <p className="text-[#4A4A4A] text-sm leading-relaxed mt-2 mb-1 line-clamp-2 flex-1">
                       {project.description}
                     </p>
 
-                    {/* Tech Stack */}
                     <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
                       {project.tech.slice(0, 4).map((tech) => (
                         <span
@@ -370,14 +376,13 @@ export default function Projects() {
                       )}
                     </div>
 
-                    {/* Buttons */}
                     <div className="flex items-center gap-5 pt-3.5 mt-1 border-t border-[#8B9A6B]/6">
                       {hasLive ? (
                         <motion.a
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ x: 3 }}
+                          whileHover={canHover ? { x: 3 } : undefined}
                           whileTap={{ scale: 0.95 }}
                           className="flex items-center gap-1.5 text-sm font-medium text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors"
                         >
@@ -394,7 +399,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ x: 3 }}
+                        whileHover={canHover ? { x: 3 } : undefined}
                         whileTap={{ scale: 0.95 }}
                         className="flex items-center gap-1.5 text-sm font-medium text-[#4A4A4A]/60 hover:text-[#8B9A6B] transition-colors"
                       >
@@ -425,7 +430,7 @@ export default function Projects() {
               <motion.div 
                 key={stat.label} 
                 className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/80 hover:shadow-lg hover:border-[#8B9A6B]/30"
-                whileHover={{ y: -3 }}
+                whileHover={canHover ? { y: -3 } : undefined}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}

@@ -2,7 +2,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { 
   FaReact, FaPython, FaGit, FaGithub,
   FaJs, FaHtml5, FaCss3Alt, FaDatabase, FaNpm
@@ -87,7 +87,7 @@ const allSkills = [
   { id: 51, name: 'Kaggle', icon: Award, category: 'tools', color: '#20BEFF' },
   { id: 52, name: 'Figma', icon: SiFigma, category: 'tools', color: '#F24E1E' },
   { id: 53, name: 'npm', icon: FaNpm, category: 'tools', color: '#CB3837' },
-   { id: 54, name: 'VS Code', icon: Code, category: 'tools', color: '#007ACC' },
+  { id: 54, name: 'VS Code', icon: Code, category: 'tools', color: '#007ACC' },
 ]
 
 // ============================================
@@ -106,7 +106,7 @@ const categories = [
 // SKILL CARD COMPONENT
 // ============================================
 
-const SkillCard = ({ skill, index, isInView }: any) => {
+const SkillCard = ({ skill, index, isInView, canHover }: any) => {
   const Icon = skill.icon
   const [isHovered, setIsHovered] = useState(false)
 
@@ -121,11 +121,7 @@ const SkillCard = ({ skill, index, isInView }: any) => {
         stiffness: 200,
         damping: 15
       }}
-      whileHover={{ 
-        scale: 1.06,
-        y: -8,
-        transition: { duration: 0.25, type: 'spring', stiffness: 300 }
-      }}
+      whileHover={canHover ? { scale: 1.06, y: -8, transition: { duration: 0.25, type: 'spring', stiffness: 300 } } : undefined}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       className="group relative cursor-default"
@@ -205,6 +201,17 @@ export default function SkillsFilter() {
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [activeCategory, setActiveCategory] = useState('all')
 
+  // FIX: on mobile/touch devices, browsers can simulate a "hover" state on
+  // tap, which fights with Framer Motion's whileHover scale transform and
+  // the CSS `transition-all duration-300` color change happening at the
+  // same time — this is what caused the filter buttons (and skill cards)
+  // to visibly "blink" on mobile. Only enable whileHover on devices that
+  // actually support real pointer hover.
+  const [canHover, setCanHover] = useState(false)
+  useEffect(() => {
+    setCanHover(window.matchMedia('(hover: hover)').matches)
+  }, [])
+
   const filteredSkills = activeCategory === 'all' 
     ? allSkills 
     : allSkills.filter(s => s.category === activeCategory)
@@ -250,8 +257,9 @@ export default function SkillsFilter() {
               <motion.button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                whileHover={{ scale: 1.05 }}
+                whileHover={canHover ? { scale: 1.05 } : undefined}
                 whileTap={{ scale: 0.95 }}
+                suppressHydrationWarning
                 className={`
                   flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium
                   transition-all duration-300 border
@@ -288,6 +296,7 @@ export default function SkillsFilter() {
               skill={skill}
               index={index}
               isInView={isInView}
+              canHover={canHover}
             />
           ))}
         </motion.div>
