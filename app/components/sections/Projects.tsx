@@ -14,17 +14,55 @@ import {
   Coffee,
   ShoppingBag,
   Calendar,
+  Ticket,
+  FileText,
+  Package,
   Utensils,
-  Watch,
   BookOpen
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 const projects = [
   {
+    id: 3,
+    title: 'EventSphere Pro — Event Booking Platform',
+    description: 'Problem: small event organizers need real ticketing infrastructure — booking, seat tracking, revenue — but existing options are either an expensive platform or a form bolted onto a calendar. Solution: a multi-role (attendee/organizer/admin) booking platform with seat-locked bookings that can\'t overbook, JWT auth with httpOnly + CSRF-protected refresh cookies, and a revenue analytics panel. Result: 11 passing pytest tests, one-command Docker setup (PostgreSQL + Flask + React).',
+    category: 'fullstack',
+    tech: ['React', 'Flask', 'PostgreSQL', 'JWT Authentication', 'Docker'],
+    live: '',
+    github: 'https://github.com/Sara12-2/EventSphere-Pro',
+    image: '/images/projects/eventsphere.png',
+    icon: Ticket,
+    color: '#EC4899',
+  },
+  {
+    id: 4,
+    title: 'PaperMind AI — RAG-Powered PDF Q&A',
+    description: 'Problem: reading long research papers to find one fact is slow, and asking a general LLM instead risks a confident, hallucinated answer with no way to verify it. Solution: a RAG pipeline — PDFs split into page-aware chunks, embedded locally (zero-cost, no API calls), retrieved by cosine similarity, and answered by an LLM instructed to cite the exact page it used. Result: every answer grounded in the actual document, with inline page citations.',
+    category: 'ai',
+    tech: ['Next.js', 'Flask', 'Sentence Transformers', 'Groq API (Llama 3)', 'Python'],
+    live: '',
+    github: 'https://github.com/Sara12-2/PaperMind-AI',
+    image: '/images/projects/papermind.png',
+    icon: FileText,
+    color: '#0EA5E9',
+  },
+  {
+    id: 7,
+    title: 'StockFlow AI — Inventory Management SaaS',
+    description: 'Problem: small e-commerce teams outgrow spreadsheets for inventory but can\'t justify the cost or complexity of a full ERP system. Solution: a full-stack SaaS where every number that matters — forecasts, reorder quantities — is computed deterministically; an LLM is used only to narrate the trend, never to invent a figure. Real-time Socket.IO alerts, full RBAC. Result: 42 backend tests, CI pipeline, graceful degradation if Redis/Groq are unavailable.',
+    category: 'ai',
+    tech: ['Next.js', 'React', 'Flask', 'Redis', 'Docker', 'Groq API'],
+    live: 'https://drive.google.com/file/d/1HHUJQYC6oSzfxB-GVjuexE-uqA_HF_8g/view?usp=sharing',
+    github: 'https://github.com/Sara12-2/Full-Stack-Inventory-Management-SaaS-with-AI-Forecasting',
+    image: '/images/projects/stockflow.png',
+    icon: Package,
+    color: '#0D9488',
+  },
+  {
     id: 1,
     title: 'AURUM Finance Dashboard',
-    description: 'Premium enterprise-grade personal finance dashboard with real-time tracking, analytics, budgets, and dark/light mode.',
+    description: 'Problem: most personal finance tools demand a signup and subscription just to log an expense. Solution: a zero-backend, browser-based dashboard with full transaction CRUD, category budgets with color-coded alerts, multi-currency support, and CSV/JSON export — all persisted locally, no account required.',
     category: 'web',
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js', 'Font Awesome'],
     live: 'https://expense-tracer-dashboard.vercel.app/',
@@ -36,7 +74,7 @@ const projects = [
   {
     id: 8,
     title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
-    description: 'Bilingual (English/Urdu) AI assistant for University of Layyah with role-based responses, voice I/O, and offline fallback across 16+ topics. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization).',
+    description: 'Problem: students, applicants, and visitors had no quick way to get role-relevant answers about University of Layyah — information was scattered across static pages. Solution: a bilingual (English/Urdu) AI assistant grounded in real scraped university data, with role-based responses, voice I/O, and an offline keyword-fallback mode. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization). 🏅 Top 10 out of 23+ teams.',
     category: 'ai',
     tech: ['Python', 'Flask', 'Groq API (Llama 3 70B)', 'MySQL', 'BeautifulSoup4', 'JavaScript'],
     live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
@@ -48,7 +86,7 @@ const projects = [
   {
     id: 5,
     title: 'Grocery Store Website — Full-Stack E-commerce',
-    description: 'Complete full-stack grocery delivery platform with 42+ products, user authentication, admin dashboard, smart analytics, and delivery slot selection.',
+    description: 'Problem: small grocery businesses need an online storefront, but affordable e-commerce options rarely include real security or delivery logistics. Solution: a full-stack platform (42+ products) with bcrypt-hashed auth, login-attempt lockout, delivery-slot scheduling, and an admin analytics dashboard.',
     category: 'fullstack',
     tech: ['Python', 'Flask', 'MySQL', 'JavaScript', 'Chart.js'],
     live: '',
@@ -60,7 +98,7 @@ const projects = [
   {
     id: 22,
     title: 'Apex Appointment Dashboard',
-    description: 'Sophisticated appointment management dashboard for service businesses with calendar, client directory, and real-time analytics.',
+    description: 'Problem: small service businesses need appointment scheduling without paying for a heavyweight SaaS subscription. Solution: a single-file dashboard with a FullCalendar-powered schedule, full appointment CRUD, and dynamic accent-color theming — drop the file anywhere and it runs.',
     category: 'web',
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js', 'FullCalendar'],
     live: 'https://appointment-booking-dashboard-ten.vercel.app/',
@@ -72,7 +110,7 @@ const projects = [
   {
     id: 9,
     title: 'Softtec 2026 ML Competition — High-Cost Patient Prediction',
-    description: 'Binary classification model predicting healthcare members with high medical costs (>$30,000) using historical administrative data and ensemble learning (LightGBM + XGBoost).',
+    description: 'Problem: healthcare payers can\'t identify which members will become high-cost (>$30k/year) until the cost has already happened. Solution: a LightGBM + XGBoost ensemble on 336 engineered features, with the decision threshold tuned to maximize recall — catching over 82% of true high-cost members before costs occur. Result: 0.825 recall, Softtec 2026 ML Competition, FAST NUCES Lahore.',
     category: 'ai',
     tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn', 'Pandas'],
     live: '',
@@ -84,7 +122,7 @@ const projects = [
   {
     id: 23,
     title: 'LuxEstate — Real Estate Landing Page',
-    description: 'Premium luxury real estate landing page with interactive property listings, multi-currency support, mortgage calculator, wishlist, and animated statistics.',
+    description: 'Problem: real estate listings need to convert international buyers, but most landing pages show a single currency and no way to estimate real costs. Solution: an interactive landing page with live search/filter, a real-time mortgage calculator, and a multi-currency switcher (USD/AED/GBP).',
     category: 'web',
     tech: ['HTML5', 'Tailwind CSS', 'JavaScript', 'Chart.js', 'Font Awesome'],
     live: 'https://luxury-real-estate-landing-page-drk.vercel.app/',
@@ -96,7 +134,7 @@ const projects = [
   {
     id: 6,
     title: 'Smart Cafeteria System',
-    description: 'Complete full-stack cafeteria management system with user authentication, shopping cart, order management, reviews, coupons, and admin dashboard.',
+    description: 'Problem: campus/office cafeterias running orders manually leads to mistakes and no visibility into what\'s actually selling. Solution: a full-stack ordering system with role-based access, bcrypt-hashed auth, live order tracking, and a revenue analytics dashboard.',
     category: 'fullstack',
     tech: ['Python', 'Flask', 'MySQL', 'Bootstrap', 'Chart.js'],
     live: '',
@@ -108,7 +146,7 @@ const projects = [
   {
     id: 11,
     title: 'ASL Sign Language Recognition',
-    description: 'Deep learning CNN model for American Sign Language (ASL) hand sign recognition. Includes data preprocessing, augmentation, model training, and Tkinter GUI for image upload predictions.',
+    description: 'Problem: most people can\'t understand American Sign Language, creating a real communication barrier with no accessible, real-time translation tool. Solution: a CNN trained on class-balanced, augmented ASL image data, served through CLI, image upload, and live webcam inference — with horizontal flip intentionally disabled, since mirroring a hand sign changes its meaning.',
     category: 'ai',
     tech: ['Python', 'TensorFlow', 'Keras', 'OpenCV', 'Tkinter'],
     live: '',
@@ -118,45 +156,9 @@ const projects = [
     color: '#1E90FF',
   },
   {
-    id: 24,
-    title: 'SwiftEats — Food Delivery Landing Page',
-    description: 'Modern, interactive food delivery landing page with menu filtering, FAQ accordion, cart simulation, toast notifications, and smooth animations.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Lucide Icons', 'Google Fonts'],
-    live: 'https://restaurant-food-delivery-website-la.vercel.app/',
-    github: 'https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page',
-    image: '/images/projects/swifteats.png',
-    icon: Utensils,
-    color: '#F97316',
-  },
-  {
-    id: 12,
-    title: 'AI-Powered Resume Screening System',
-    description: 'NLP-based resume classification system using deep learning. Automatically categorizes resumes into job categories with TF-IDF vectorization, Keras model, and Streamlit dashboard.',
-    category: 'ai',
-    tech: ['Python', 'TensorFlow', 'Keras', 'Scikit-learn', 'Streamlit'],
-    live: '',
-    github: 'https://github.com/Sara12-2/AI_Powered_Resume_Screening_system',
-    image: '/images/projects/resume-screening.png',
-    icon: Brain,
-    color: '#2ECC71',
-  },
-  {
-    id: 25,
-    title: 'ARCWATCH — Premium Smartwatch Landing Page',
-    description: 'Modern smartwatch e-commerce landing page with glassmorphism, dynamic product rendering, shopping cart, wishlist, and dark/light themes.',
-    category: 'web',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Font Awesome', 'Google Fonts'],
-    live: 'https://smart-watch-landing-page-gules.vercel.app/',
-    github: 'https://github.com/Sara12-2/Smart_Watch_Landing_Page',
-    image: '/images/projects/arcwatch.png',
-    icon: Watch,
-    color: '#6366F1',
-  },
-  {
     id: 13,
     title: 'Smart Retail Shelf Monitoring with YOLOv8',
-    description: 'Real-time retail shelf monitoring system using YOLOv8 object detection. Detects products in video feed, counts them, and provides low-stock alerts via Tkinter GUI.',
+    description: 'Problem: manual shelf audits are slow and easy to skip, so stockouts often go unnoticed until a sale is lost. Solution: a real-time YOLOv8 detection pipeline that counts items per frame and triggers color-coded low-stock alerts — architected so the detection model can be swapped for a custom-trained, SKU-specific model with zero code changes.',
     category: 'ai',
     tech: ['Python', 'YOLOv8', 'OpenCV', 'Tkinter', 'Ultralytics'],
     live: '',
@@ -166,21 +168,9 @@ const projects = [
     color: '#F97316',
   },
   {
-    id: 16,
-    title: 'Mountain Car Agent (Q-Learning with Gymnasium)',
-    description: 'Reinforcement Learning agent using Q-Learning with epsilon-greedy exploration to solve MountainCar-v0 environment from OpenAI Gymnasium.',
-    category: 'ai',
-    tech: ['Python', 'Gymnasium', 'NumPy', 'Matplotlib', 'Q-Learning'],
-    live: '',
-    github: 'https://github.com/Sara12-2/Mountain_Car_Reinforcement_learning_Agent',
-    image: '/images/projects/mountain-car.png',
-    icon: Brain,
-    color: '#F97316',
-  },
-  {
     id: 2,
     title: 'TechNest — Premium React E-Commerce Website',
-    description: 'Modern e-commerce web application built with React and Vite. Features glassmorphism UI, dark/light mode, shopping cart, wishlist, and seamless checkout flow.',
+    description: 'Problem: small e-commerce businesses need a modern, engaging storefront to compete with bigger brands, but generic templates look dated. Solution: a React + Vite storefront with a glassmorphism UI, real-time search/category filtering, and persistent cart/wishlist management.',
     category: 'web',
     tech: ['React', 'Vite', 'JavaScript', 'CSS3', 'LocalStorage'],
     live: 'https://tech-nest-ecommerce.vercel.app/',
@@ -190,11 +180,23 @@ const projects = [
     color: '#8B5CF6',
   },
   {
+    id: 24,
+    title: 'SwiftEats — Food Delivery Landing Page',
+    description: 'Problem: restaurant startups need a premium, trustworthy landing page to convert visitors into orders without the cost of a full custom build. Solution: a fully responsive landing page with live menu filtering, an animated FAQ accordion, and scroll-triggered animations via the Intersection Observer API.',
+    category: 'web',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Lucide Icons', 'Google Fonts'],
+    live: 'https://restaurant-food-delivery-website-la.vercel.app/',
+    github: 'https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page',
+    image: '/images/projects/swifteats.png',
+    icon: Utensils,
+    color: '#F97316',
+  },
+  {
     id: 17,
     title: 'StudySmart AI — Intelligent Study Tracking System',
-    description: 'AI-powered study tracker that analyzes productivity patterns, detects optimal study hours, and delivers personalized recommendations. Includes pattern analysis, productivity predictions with confidence scoring, streak tracking, dark mode, multi-language support (EN/UR/HI), and SQLite + auto-backup data storage.',
-    category: 'ai',
-    tech: ['Python', 'Flask', 'SQLite', 'Pandas', 'Scikit-learn', 'NumPy'],
+    description: 'Problem: students rarely get real visibility into their own study habits — which hours, subjects, or conditions actually drive productivity. Solution: a study tracker using pandas/NumPy statistical analysis (Z-score anomaly detection, correlation, linear-trend forecasting — not trained ML models) to surface patterns and recommendations, shipped as both a Flask web app and a CLI sharing the same core engine.',
+    category: 'fullstack',
+    tech: ['Python', 'Flask', 'SQLite', 'Pandas', 'NumPy'],
     live: '',
     github: 'https://github.com/Sara12-2/Study_Smart_AI',
     image: '/images/projects/studysmart-ai.png',
@@ -213,14 +215,6 @@ const categories = [
 export default function Projects() {
   const [filter, setFilter] = useState('all')
 
-  // FIX: on mobile/touch devices, browsers can simulate a "hover" state on
-  // tap. That simulated hover fights with Framer Motion's whileHover scale
-  // transform and the CSS `transition-all duration-300` color change
-  // happening at the same time — this is what caused the filter buttons
-  // to visibly "blink" on mobile. Real mouse hover on desktop never had
-  // this problem. Fix: only enable whileHover on devices that actually
-  // support real pointer hover, detected via the `(hover: hover)` media
-  // query.
   const [canHover, setCanHover] = useState(false)
   useEffect(() => {
     setCanHover(window.matchMedia('(hover: hover)').matches)
