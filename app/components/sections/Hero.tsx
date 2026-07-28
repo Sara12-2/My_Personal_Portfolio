@@ -30,14 +30,13 @@ type SocialIcon =
     }
 
 const ROLES = [
-  'AI-Powered Full Stack Developer',
-  'Machine Learning Engineer',
-  'Building Intelligent Web Applications',
-  'Computer Vision Engineer',
-  'Exploring LLMs & RAG',
+  'Full Stack Developer & AI/ML Engineer',
+  'Building AI-Powered SaaS Platforms',
+  'RAG & LLM Systems Developer',
+  'COO @ DevHatch Labs',
 ]
 
-const TECH_HIGHLIGHTS = ['React', 'Next.js', 'Python', 'TensorFlow', 'Flask']
+const TECH_HIGHLIGHTS = ['React', 'Next.js', 'Flask', 'Python', 'RAG']
 
 const useTypingEffect = (roles: string[]) => {
   const [displayText, setDisplayText] = useState('')
@@ -195,7 +194,7 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2 bg-[#8B9A6B]/10 border border-[#8B9A6B]/20 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-6">
               <span className="w-2 h-2 rounded-full bg-[#8B9A6B] animate-pulse" />
               <span className="text-[#8B9A6B] font-semibold text-xs sm:text-sm tracking-wide">
-                Open To Work
+                Open to Work &amp; Freelance
               </span>
             </div>
 
@@ -204,17 +203,17 @@ export default function Hero() {
               <span className="text-[#8B9A6B] font-extrabold">Manzoor</span>
             </h1>
 
-            <div className="min-h-[48px] sm:min-h-[56px] mt-3 sm:mt-4 flex items-center justify-center lg:justify-start">
+            <div className="min-h-12 sm:min-h-14 mt-3 sm:mt-4 flex items-center justify-center lg:justify-start">
               <span className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#4A4A4A]">
-                {displayText || 'Full Stack Developer'}
+                {displayText || 'Full Stack Developer & AI/ML Engineer'}
                 <span className="inline-block w-0.5 h-5 sm:h-6 ml-0.5 bg-[#8B9A6B] animate-pulse" />
               </span>
             </div>
 
             <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              I build modern <span className="text-[#8B9A6B] font-semibold">full-stack web applications</span> and 
-              <span className="text-[#8B9A6B] font-semibold"> AI-powered systems</span> using cutting-edge technologies.
-              Turning <span className="text-[#8B9A6B] font-semibold">innovative ideas into impactful digital products</span>.
+              I build production-ready <span className="text-[#8B9A6B] font-semibold">full-stack web applications</span> and
+              <span className="text-[#8B9A6B] font-semibold"> AI-powered SaaS platforms</span> — from RAG-based tools to
+              real-time systems.
             </p>
 
             <div className="flex flex-wrap gap-2 mt-4 sm:mt-5 justify-center lg:justify-start">
@@ -233,8 +232,8 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="/resume.pdf"
-                download="Sara_Manzoor_Resume.png"
-                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap inline-flex items-center justify-center gap-2"
+                download="Sara_Manzoor_Resume.pdf"
+                className="flex-1 min-w-30 sm:min-w-35 max-w-45 sm:max-w-50 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#8B9A6B] hover:bg-[#6B7A5B] text-white font-semibold text-sm sm:text-base shadow-xl shadow-[#8B9A6B]/30 transition-all duration-300 text-center whitespace-nowrap inline-flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" />
                 Resume
@@ -244,7 +243,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#projects"
-                className="flex-1 min-w-[120px] sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl border-2 border-[#8B9A6B] text-[#8B9A6B] hover:bg-[#8B9A6B]/10 font-semibold text-sm sm:text-base transition-all duration-300 text-center whitespace-nowrap"
+                className="flex-1 min-w-30 sm:min-w-[140px] max-w-[180px] sm:max-w-[200px] px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl border-2 border-[#8B9A6B] text-[#8B9A6B] hover:bg-[#8B9A6B]/10 font-semibold text-sm sm:text-base transition-all duration-300 text-center whitespace-nowrap"
               >
                 View Projects
               </motion.a>
@@ -291,13 +290,13 @@ export default function Hero() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src="https://ui-avatars.com/api/?name=Sara+Manzoor&background=8B9A6B&color=fff&size=600"
-                    alt="Sara Manzoor - Full Stack Developer"
+                    alt="Sara Manzoor - Full Stack Developer & AI/ML Engineer"
                     className="w-full h-full object-cover"
                   />
                 ) : (
                   <Image
                     src="/images/profile.jpg"
-                    alt="Sara Manzoor - Full Stack Developer"
+                    alt="Sara Manzoor - Full Stack Developer & AI/ML Engineer"
                     fill
                     priority
                     sizes="(max-width: 480px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 400px, 480px"
