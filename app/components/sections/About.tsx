@@ -14,7 +14,7 @@ import {
 import profileImage from '@/public/images/profile.jpg'
 
 const STATS = [
-  { label: 'Experience', value: '1+', suffix: ' Year', icon: Briefcase },
+  { label: 'Roles', value: '6+', suffix: '', icon: Briefcase },
   { label: 'Projects', value: '15+', suffix: '', icon: Code2 },
   { label: 'Certificates', value: '26+', suffix: '', icon: Award },
 ]
@@ -205,7 +205,7 @@ export default function About() {
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-[#8B9A6B] animate-pulse" />
                   <span className="text-[8px] sm:text-[9px] font-semibold text-[#2C2C2C] whitespace-nowrap">
-                    Open to Work
+                    Open to Work &amp; Freelance
                   </span>
                 </motion.div>
               </div>
@@ -222,24 +222,26 @@ export default function About() {
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 I'm a <span className="text-[#8B9A6B] font-semibold">Full Stack Developer</span> and{' '}
-                <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> passionate about
-                building intelligent, scalable, and user-centric digital solutions. Currently serving as{' '}
-                <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, where I
-                Manage operations and Lead Development teams.
+                <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> currently serving as{' '}
+                <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, where I lead
+                development teams and manage full project delivery. Across 6 professional roles, I've
+                shipped 15+ live projects — including a healthcare ML model that placed in a national
+                competition and a RAG system built for grounded, cited AI answers.
               </motion.p>
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 My expertise spans full-stack development —{' '}
-                <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, MySQL</span>
+                <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, PostgreSQL/MySQL</span>
                 {' '}— alongside{' '}
                 <span className="text-[#8B9A6B] font-medium">Machine Learning, NLP &amp; Computer Vision</span>,
-                with a growing focus on <span className="text-[#8B9A6B] font-medium">RAG and LLMs</span>.
+                with hands-on experience building{' '}
+                <span className="text-[#8B9A6B] font-medium">RAG systems and LLM-powered applications</span>.
               </motion.p>
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
-                I enjoy turning ideas into practical products — from business systems to AI-powered
-                applications — writing clean code, crafting meaningful experiences, and constantly
-                learning. Let's build something innovative together.
+                I build the way I'd want software built if it were my own product: tested, documented,
+                and honestly scoped. Whether it's a full-stack SaaS platform or an AI feature that needs
+                to stay reliable in production, I focus on shipping things that actually work — not just demos.
               </motion.p>
 
               {/* ===== STATS ===== */}
