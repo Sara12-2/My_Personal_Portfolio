@@ -229,14 +229,14 @@ const categories = [
   { id: 'ai', label: 'AI/ML', icon: Brain },
 ]
 
-// Truncates a string to a target word count, adding an ellipsis if cut short.
-function truncateWords(text, wordCount) {
+// ✅ FIXED: Added TypeScript types
+function truncateWords(text: string, wordCount: number) {
   const words = text.split(' ')
   if (words.length <= wordCount) return text
   return words.slice(0, wordCount).join(' ') + '...'
 }
 
-function ProjectCard({ project, canHover }) {
+function ProjectCard({ project, canHover }: { project: any; canHover: boolean }) {
   const Icon = project.icon
   const hasLive = project.live && project.live !== ''
   const [expanded, setExpanded] = useState(false)
@@ -339,7 +339,7 @@ function ProjectCard({ project, canHover }) {
         </div>
 
         <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
-          {project.tech.slice(0, 4).map((tech) => (
+          {project.tech.slice(0, 4).map((tech: string) => (
             <span
               key={tech}
               className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium"
