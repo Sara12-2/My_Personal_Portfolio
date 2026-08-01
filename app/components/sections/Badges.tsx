@@ -189,9 +189,26 @@ const badges = [
     logo: '/images/certificates/kaggle.png',
     link: 'https://www.kaggle.com/sara765',
   },
+  // ============ GITHUB - NEW ============
+  {
+    id: 16,
+    title: 'Pair Extraordinaire',
+    issuer: 'GitHub',
+    date: 'Jul 16, 2026',
+    description: 'Coauthored commits on merged pull requests | Full-Stack-Inventory-Management-SaaS-with-AI-Forecasting#2 · Coauthored with @claude',
+    icon: FaGithub,
+    color: '#2C2C2C',
+    logo: null,
+    link: 'https://github.com/Sara12-2/Full-Stack-Inventory-Management-SaaS-with-AI-Forecasting/pull/2',
+  },
 ]
 
 export default function Badges() {
+  // Calculate stats dynamically
+  const kaggleCount = badges.filter(b => b.issuer === 'Kaggle').length
+  const gssocCount = badges.filter(b => b.issuer === 'GS Labs by GS Group Foundation').length
+  const githubCount = badges.filter(b => b.issuer === 'GitHub').length
+
   return (
     <section id="badges" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
       {/* Background Decorations */}
@@ -230,9 +247,9 @@ export default function Badges() {
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
               { label: 'Total', value: badges.length, icon: Award },
-              { label: 'Kaggle', value: 11, icon: Award },
-              { label: 'GSSoC 2026', value: 3, icon: Award },
-              { label: 'GitHub', value: 1, icon: FaGithub },
+              { label: 'Kaggle', value: kaggleCount, icon: Award },
+              { label: 'GSSoC 2026', value: gssocCount, icon: Award },
+              { label: 'GitHub', value: githubCount, icon: FaGithub },
             ].map((stat) => (
               <div key={stat.label} className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center">
                 <div className="text-2xl font-bold text-[#8B9A6B]">{stat.value}</div>
@@ -301,7 +318,7 @@ export default function Badges() {
                             className="inline-flex items-center gap-1 mt-2 text-[10px] text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors font-medium"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            View Profile <ExternalLink className="w-3 h-3" />
+                            View PR <ExternalLink className="w-3 h-3" />
                           </a>
                         )}
                       </div>

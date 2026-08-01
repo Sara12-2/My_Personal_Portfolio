@@ -9,9 +9,8 @@ import {
   FaLinkedin,
   FaHackerrank,
   FaKaggle,
-  FaAward,
 } from 'react-icons/fa'
-import { SiLeetcode } from 'react-icons/si'
+import { SiLeetcode, SiUpwork } from 'react-icons/si'
 
 type SocialIcon =
   | {
@@ -120,8 +119,8 @@ const SOCIAL_ICONS: SocialIcon[] = [
   { type: 'icon', icon: SiLeetcode, href: 'https://leetcode.com/u/Sara_34/', label: 'LeetCode', color: '#FFA116' },
   { type: 'icon', icon: FaHackerrank, href: 'https://www.hackerrank.com/profile/saramanzoor342', label: 'HackerRank', color: '#2EC866' },
   { type: 'icon', icon: FaKaggle, href: 'https://www.kaggle.com/sara765', label: 'Kaggle', color: '#20BEFF' },
+  { type: 'icon', icon: SiUpwork, href: 'https://www.upwork.com/freelancers/~01cd03378b5c5839e3?mp_source=share', label: 'Upwork', color: '#6FDA44' },
   { type: 'icon', icon: Mail, href: 'mailto:saramanzoor76@gmail.com', label: 'Email', color: '#8B9A6B' },
-  { type: 'icon', icon: FaAward, href: 'https://gssoc.girlscript.tech/', label: 'GSSoC', color: '#8B5CF6' },
   { type: 'image', src: '/images/companies/devhatch.png', href: 'https://devhatchlabs.com', label: 'DevHatch', color: '#8B9A6B' },
 ]
 

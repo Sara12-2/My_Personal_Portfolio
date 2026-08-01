@@ -16,7 +16,7 @@ import profileImage from '@/public/images/profile.jpg'
 const STATS = [
   { label: 'Roles', value: '6+', suffix: '', icon: Briefcase },
   { label: 'Projects', value: '15+', suffix: '', icon: Code2 },
-  { label: 'Certificates', value: '26+', suffix: '', icon: Award },
+  { label: 'Certificates', value: '29+', suffix: '', icon: Award },
 ]
 
 function AnimatedCounter({ target, suffix }: { target: string; suffix: string }) {
@@ -222,26 +222,23 @@ export default function About() {
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
                 I'm a <span className="text-[#8B9A6B] font-semibold">Full Stack Developer</span> and{' '}
-                <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> currently serving as{' '}
-                <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, where I lead
-                development teams and manage full project delivery. Across 6 professional roles, I've
-                shipped 15+ live projects — including a healthcare ML model that placed in a national
-                competition and a RAG system built for grounded, cited AI answers.
+                <span className="text-[#8B9A6B] font-semibold">AI/ML Engineer</span> passionate about 
+                building scalable web apps and intelligent software that solve real-world problems. 
+                I combine modern full-stack development with practical AI solutions, focusing on clean 
+                architecture, great UX, and long-term maintainability.
               </motion.p>
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
-                My expertise spans full-stack development —{' '}
-                <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, PostgreSQL/MySQL</span>
-                {' '}— alongside{' '}
-                <span className="text-[#8B9A6B] font-medium">Machine Learning, NLP &amp; Computer Vision</span>,
-                with hands-on experience building{' '}
-                <span className="text-[#8B9A6B] font-medium">RAG systems and LLM-powered applications</span>.
+                Currently <span className="text-[#8B9A6B] font-semibold">COO at DevHatch Labs</span>, 
+                I lead product strategy and technical development while exploring AI, RAG systems, 
+                and machine learning. I'm driven by creating impactful technology that helps businesses 
+                grow and delivers real value to users.
               </motion.p>
 
               <motion.p variants={itemVariants} className="text-sm sm:text-base text-[#4A4A4A] leading-relaxed">
-                I build the way I'd want software built if it were my own product: tested, documented,
-                and honestly scoped. Whether it's a full-stack SaaS platform or an AI feature that needs
-                to stay reliable in production, I focus on shipping things that actually work — not just demos.
+                Tech stack: <span className="text-[#8B9A6B] font-medium">React, Next.js, TypeScript, Flask, PostgreSQL</span>
+                {' '}· <span className="text-[#8B9A6B] font-medium">ML, NLP, Computer Vision</span>
+                {' '}· <span className="text-[#8B9A6B] font-medium">RAG &amp; LLMs</span>.
               </motion.p>
 
               {/* ===== STATS ===== */}

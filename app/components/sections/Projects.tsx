@@ -18,7 +18,9 @@ import {
   FileText,
   Package,
   Utensils,
-  BookOpen
+  BookOpen,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
@@ -26,7 +28,8 @@ const projects = [
   {
     id: 3,
     title: 'EventSphere Pro — Event Booking Platform',
-    description: 'Problem: small event organizers need real ticketing infrastructure — booking, seat tracking, revenue — but existing options are either an expensive platform or a form bolted onto a calendar. Solution: a multi-role (attendee/organizer/admin) booking platform with seat-locked bookings that can\'t overbook, JWT auth with httpOnly + CSRF-protected refresh cookies, and a revenue analytics panel. Result: 11 passing pytest tests, one-command Docker setup (PostgreSQL + Flask + React).',
+    problem: "small event organizers need real ticketing infrastructure — booking, seat tracking, revenue — but existing options are either an expensive platform or a form bolted onto a calendar.",
+    solution: "a multi-role (attendee/organizer/admin) booking platform with seat-locked bookings that can't overbook, JWT auth with httpOnly + CSRF-protected refresh cookies, and a revenue analytics panel. Result: 11 passing pytest tests, one-command Docker setup (PostgreSQL + Flask + React).",
     category: 'fullstack',
     tech: ['React', 'Flask', 'PostgreSQL', 'JWT Authentication', 'Docker'],
     live: '',
@@ -38,7 +41,8 @@ const projects = [
   {
     id: 4,
     title: 'PaperMind AI — RAG-Powered PDF Q&A',
-    description: 'Problem: reading long research papers to find one fact is slow, and asking a general LLM instead risks a confident, hallucinated answer with no way to verify it. Solution: a RAG pipeline — PDFs split into page-aware chunks, embedded locally (zero-cost, no API calls), retrieved by cosine similarity, and answered by an LLM instructed to cite the exact page it used. Result: every answer grounded in the actual document, with inline page citations.',
+    problem: "reading long research papers to find one fact is slow, and asking a general LLM instead risks a confident, hallucinated answer with no way to verify it.",
+    solution: "a RAG pipeline — PDFs split into page-aware chunks, embedded locally (zero-cost, no API calls), retrieved by cosine similarity, and answered by an LLM instructed to cite the exact page it used. Result: every answer grounded in the actual document, with inline page citations.",
     category: 'ai',
     tech: ['Next.js', 'Flask', 'Sentence Transformers', 'Groq API (Llama 3)', 'Python'],
     live: '',
@@ -50,7 +54,8 @@ const projects = [
   {
     id: 7,
     title: 'StockFlow AI — Inventory Management SaaS',
-    description: 'Problem: small e-commerce teams outgrow spreadsheets for inventory but can\'t justify the cost or complexity of a full ERP system. Solution: a full-stack SaaS where every number that matters — forecasts, reorder quantities — is computed deterministically; an LLM is used only to narrate the trend, never to invent a figure. Real-time Socket.IO alerts, full RBAC. Result: 42 backend tests, CI pipeline, graceful degradation if Redis/Groq are unavailable.',
+    problem: "small e-commerce teams outgrow spreadsheets for inventory but can't justify the cost or complexity of a full ERP system.",
+    solution: "a full-stack SaaS where every number that matters — forecasts, reorder quantities — is computed deterministically; an LLM is used only to narrate the trend, never to invent a figure. Real-time Socket.IO alerts, full RBAC. Result: 42 backend tests, CI pipeline, graceful degradation if Redis/Groq are unavailable.",
     category: 'ai',
     tech: ['Next.js', 'React', 'Flask', 'Redis', 'Docker', 'Groq API'],
     live: 'https://drive.google.com/file/d/1HHUJQYC6oSzfxB-GVjuexE-uqA_HF_8g/view?usp=sharing',
@@ -62,7 +67,8 @@ const projects = [
   {
     id: 1,
     title: 'AURUM Finance Dashboard',
-    description: 'Problem: most personal finance tools demand a signup and subscription just to log an expense. Solution: a zero-backend, browser-based dashboard with full transaction CRUD, category budgets with color-coded alerts, multi-currency support, and CSV/JSON export — all persisted locally, no account required.',
+    problem: "most personal finance tools demand a signup and subscription just to log an expense.",
+    solution: "a zero-backend, browser-based dashboard with full transaction CRUD, category budgets with color-coded alerts, multi-currency support, and CSV/JSON export — all persisted locally, no account required.",
     category: 'web',
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js', 'Font Awesome'],
     live: 'https://expense-tracer-dashboard.vercel.app/',
@@ -74,7 +80,8 @@ const projects = [
   {
     id: 8,
     title: 'UoL AI Assistant — South Punjab Generative AI Hackathon 2026',
-    description: 'Problem: students, applicants, and visitors had no quick way to get role-relevant answers about University of Layyah — information was scattered across static pages. Solution: a bilingual (English/Urdu) AI assistant grounded in real scraped university data, with role-based responses, voice I/O, and an offline keyword-fallback mode. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization). 🏅 Top 10 out of 23+ teams.',
+    problem: "students, applicants, and visitors had no quick way to get role-relevant answers about University of Layyah — information was scattered across static pages.",
+    solution: "a bilingual (English/Urdu) AI assistant grounded in real scraped university data, with role-based responses, voice I/O, and an offline keyword-fallback mode. Built with Groq Llama 3 70B, a 7-table MySQL schema, and production security (rate limiting, CORS, input sanitization). Top 10 out of 23+ teams.",
     category: 'ai',
     tech: ['Python', 'Flask', 'Groq API (Llama 3 70B)', 'MySQL', 'BeautifulSoup4', 'JavaScript'],
     live: 'https://uo-l-ai-assistant-hackathon-2026.vercel.app/',
@@ -86,7 +93,8 @@ const projects = [
   {
     id: 5,
     title: 'Grocery Store Website — Full-Stack E-commerce',
-    description: 'Problem: small grocery businesses need an online storefront, but affordable e-commerce options rarely include real security or delivery logistics. Solution: a full-stack platform (42+ products) with bcrypt-hashed auth, login-attempt lockout, delivery-slot scheduling, and an admin analytics dashboard.',
+    problem: "small grocery businesses need an online storefront, but affordable e-commerce options rarely include real security or delivery logistics.",
+    solution: "a full-stack platform (42+ products) with bcrypt-hashed auth, login-attempt lockout, delivery-slot scheduling, and an admin analytics dashboard.",
     category: 'fullstack',
     tech: ['Python', 'Flask', 'MySQL', 'JavaScript', 'Chart.js'],
     live: '',
@@ -98,7 +106,8 @@ const projects = [
   {
     id: 22,
     title: 'Apex Appointment Dashboard',
-    description: 'Problem: small service businesses need appointment scheduling without paying for a heavyweight SaaS subscription. Solution: a single-file dashboard with a FullCalendar-powered schedule, full appointment CRUD, and dynamic accent-color theming — drop the file anywhere and it runs.',
+    problem: "small service businesses need appointment scheduling without paying for a heavyweight SaaS subscription.",
+    solution: "a single-file dashboard with a FullCalendar-powered schedule, full appointment CRUD, and dynamic accent-color theming — drop the file anywhere and it runs.",
     category: 'web',
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js', 'FullCalendar'],
     live: 'https://appointment-booking-dashboard-ten.vercel.app/',
@@ -110,7 +119,8 @@ const projects = [
   {
     id: 9,
     title: 'Softtec 2026 ML Competition — High-Cost Patient Prediction',
-    description: 'Problem: healthcare payers can\'t identify which members will become high-cost (>$30k/year) until the cost has already happened. Solution: a LightGBM + XGBoost ensemble on 336 engineered features, with the decision threshold tuned to maximize recall — catching over 82% of true high-cost members before costs occur. Result: 0.825 recall, Softtec 2026 ML Competition, FAST NUCES Lahore.',
+    problem: "healthcare payers can't identify which members will become high-cost (>$30k/year) until the cost has already happened.",
+    solution: "a LightGBM + XGBoost ensemble on 336 engineered features, with the decision threshold tuned to maximize recall — catching over 82% of true high-cost members before costs occur. Result: 0.825 recall, Softtec 2026 ML Competition, FAST NUCES Lahore.",
     category: 'ai',
     tech: ['Python', 'LightGBM', 'XGBoost', 'Scikit-learn', 'Pandas'],
     live: '',
@@ -122,7 +132,8 @@ const projects = [
   {
     id: 23,
     title: 'LuxEstate — Real Estate Landing Page',
-    description: 'Problem: real estate listings need to convert international buyers, but most landing pages show a single currency and no way to estimate real costs. Solution: an interactive landing page with live search/filter, a real-time mortgage calculator, and a multi-currency switcher (USD/AED/GBP).',
+    problem: "real estate listings need to convert international buyers, but most landing pages show a single currency and no way to estimate real costs.",
+    solution: "an interactive landing page with live search/filter, a real-time mortgage calculator, and a multi-currency switcher (USD/AED/GBP).",
     category: 'web',
     tech: ['HTML5', 'Tailwind CSS', 'JavaScript', 'Chart.js', 'Font Awesome'],
     live: 'https://luxury-real-estate-landing-page-drk.vercel.app/',
@@ -134,7 +145,8 @@ const projects = [
   {
     id: 6,
     title: 'Smart Cafeteria System',
-    description: 'Problem: campus/office cafeterias running orders manually leads to mistakes and no visibility into what\'s actually selling. Solution: a full-stack ordering system with role-based access, bcrypt-hashed auth, live order tracking, and a revenue analytics dashboard.',
+    problem: "campus/office cafeterias running orders manually leads to mistakes and no visibility into what's actually selling.",
+    solution: "a full-stack ordering system with role-based access, bcrypt-hashed auth, live order tracking, and a revenue analytics dashboard.",
     category: 'fullstack',
     tech: ['Python', 'Flask', 'MySQL', 'Bootstrap', 'Chart.js'],
     live: '',
@@ -146,7 +158,8 @@ const projects = [
   {
     id: 11,
     title: 'ASL Sign Language Recognition',
-    description: 'Problem: most people can\'t understand American Sign Language, creating a real communication barrier with no accessible, real-time translation tool. Solution: a CNN trained on class-balanced, augmented ASL image data, served through CLI, image upload, and live webcam inference — with horizontal flip intentionally disabled, since mirroring a hand sign changes its meaning.',
+    problem: "most people can't understand American Sign Language, creating a real communication barrier with no accessible, real-time translation tool.",
+    solution: "a CNN trained on class-balanced, augmented ASL image data, served through CLI, image upload, and live webcam inference — with horizontal flip intentionally disabled, since mirroring a hand sign changes its meaning.",
     category: 'ai',
     tech: ['Python', 'TensorFlow', 'Keras', 'OpenCV', 'Tkinter'],
     live: '',
@@ -158,7 +171,8 @@ const projects = [
   {
     id: 13,
     title: 'Smart Retail Shelf Monitoring with YOLOv8',
-    description: 'Problem: manual shelf audits are slow and easy to skip, so stockouts often go unnoticed until a sale is lost. Solution: a real-time YOLOv8 detection pipeline that counts items per frame and triggers color-coded low-stock alerts — architected so the detection model can be swapped for a custom-trained, SKU-specific model with zero code changes.',
+    problem: "manual shelf audits are slow and easy to skip, so stockouts often go unnoticed until a sale is lost.",
+    solution: "a real-time YOLOv8 detection pipeline that counts items per frame and triggers color-coded low-stock alerts — architected so the detection model can be swapped for a custom-trained, SKU-specific model with zero code changes.",
     category: 'ai',
     tech: ['Python', 'YOLOv8', 'OpenCV', 'Tkinter', 'Ultralytics'],
     live: '',
@@ -170,7 +184,8 @@ const projects = [
   {
     id: 2,
     title: 'TechNest — Premium React E-Commerce Website',
-    description: 'Problem: small e-commerce businesses need a modern, engaging storefront to compete with bigger brands, but generic templates look dated. Solution: a React + Vite storefront with a glassmorphism UI, real-time search/category filtering, and persistent cart/wishlist management.',
+    problem: "small e-commerce businesses need a modern, engaging storefront to compete with bigger brands, but generic templates look dated.",
+    solution: "a React + Vite storefront with a glassmorphism UI, real-time search/category filtering, and persistent cart/wishlist management.",
     category: 'web',
     tech: ['React', 'Vite', 'JavaScript', 'CSS3', 'LocalStorage'],
     live: 'https://tech-nest-ecommerce.vercel.app/',
@@ -182,7 +197,8 @@ const projects = [
   {
     id: 24,
     title: 'SwiftEats — Food Delivery Landing Page',
-    description: 'Problem: restaurant startups need a premium, trustworthy landing page to convert visitors into orders without the cost of a full custom build. Solution: a fully responsive landing page with live menu filtering, an animated FAQ accordion, and scroll-triggered animations via the Intersection Observer API.',
+    problem: "restaurant startups need a premium, trustworthy landing page to convert visitors into orders without the cost of a full custom build.",
+    solution: "a fully responsive landing page with live menu filtering, an animated FAQ accordion, and scroll-triggered animations via the Intersection Observer API.",
     category: 'web',
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Lucide Icons', 'Google Fonts'],
     live: 'https://restaurant-food-delivery-website-la.vercel.app/',
@@ -194,7 +210,8 @@ const projects = [
   {
     id: 17,
     title: 'StudySmart AI — Intelligent Study Tracking System',
-    description: 'Problem: students rarely get real visibility into their own study habits — which hours, subjects, or conditions actually drive productivity. Solution: a study tracker using pandas/NumPy statistical analysis (Z-score anomaly detection, correlation, linear-trend forecasting — not trained ML models) to surface patterns and recommendations, shipped as both a Flask web app and a CLI sharing the same core engine.',
+    problem: "students rarely get real visibility into their own study habits — which hours, subjects, or conditions actually drive productivity.",
+    solution: "a study tracker using pandas/NumPy statistical analysis (Z-score anomaly detection, correlation, linear-trend forecasting — not trained ML models) to surface patterns and recommendations, shipped as both a Flask web app and a CLI sharing the same core engine.",
     category: 'fullstack',
     tech: ['Python', 'Flask', 'SQLite', 'Pandas', 'NumPy'],
     live: '',
@@ -212,6 +229,167 @@ const categories = [
   { id: 'ai', label: 'AI/ML', icon: Brain },
 ]
 
+// Truncates a string to a target word count, adding an ellipsis if cut short.
+function truncateWords(text, wordCount) {
+  const words = text.split(' ')
+  if (words.length <= wordCount) return text
+  return words.slice(0, wordCount).join(' ') + '...'
+}
+
+function ProjectCard({ project, canHover }) {
+  const Icon = project.icon
+  const hasLive = project.live && project.live !== ''
+  const [expanded, setExpanded] = useState(false)
+
+  const problemShort = truncateWords(project.problem, 10)
+  const solutionShort = truncateWords(project.solution, 10)
+  const needsToggle =
+    project.problem.split(' ').length > 10 || project.solution.split(' ').length > 10
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true }}
+      whileHover={canHover ? { y: -6, transition: { duration: 0.3 } } : undefined}
+      className="group relative bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#8B9A6B]/10 shadow-[0_4px_20px_rgba(139,154,107,0.08)] hover:shadow-[0_12px_40px_rgba(139,154,107,0.18)] h-full flex flex-col transition-all duration-300"
+    >
+      {/* Browser Mockup Thumbnail */}
+      <div className="w-full bg-[#F5F5F0]">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-[#8B9A6B]/10 m-3 transition-all duration-300 group-hover:shadow-xl group-hover:border-[#8B9A6B]/20">
+          {/* Browser Chrome */}
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-[#F0EFEA] border-b border-[#E5E4DF]">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
+            </div>
+            <div className="flex-1 flex justify-center">
+              <div className="px-4 py-0.5 bg-white/60 rounded-md text-[10px] text-[#8B9A6B]/50 font-mono truncate max-w-[150px]">
+                {project.title.split(' — ')[0]}
+              </div>
+            </div>
+          </div>
+
+          {/* Screenshot */}
+          <div className="relative aspect-video bg-white overflow-hidden">
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            ) : (
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ background: `linear-gradient(135deg, ${project.color}12, ${project.color}06)` }}
+              >
+                <Icon className="w-12 h-12" style={{ color: `${project.color}30` }} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative px-5 pb-5 pt-1 flex flex-col flex-1">
+        <div className="flex items-center justify-between mb-2.5">
+          <span className="text-[10px] font-medium text-[#8B9A6B] bg-[#8B9A6B]/10 px-3 py-1 rounded-full border border-[#8B9A6B]/15">
+            {categories.find((c) => c.id === project.category)?.label || project.category}
+          </span>
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: `${project.color}12` }}
+          >
+            <Icon className="w-4 h-4" style={{ color: project.color }} />
+          </div>
+        </div>
+
+        <h3 className="text-base font-bold text-[#1A1A1A] leading-tight group-hover:text-[#8B9A6B] transition-colors duration-300">
+          {project.title}
+        </h3>
+
+        {/* Problem / Solution */}
+        <div className="text-[#4A4A4A] text-sm leading-relaxed mt-2 mb-1 flex-1 space-y-1.5">
+          <p>
+            <span className="font-semibold text-[#2C2C2C]">Problem: </span>
+            {expanded ? project.problem : problemShort}
+          </p>
+          <p>
+            <span className="font-semibold text-[#2C2C2C]">Solution: </span>
+            {expanded ? project.solution : solutionShort}
+          </p>
+          {needsToggle && (
+            <button
+              onClick={() => setExpanded((prev) => !prev)}
+              className="inline-flex items-center gap-1 text-xs font-medium text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors pt-0.5"
+            >
+              {expanded ? (
+                <>
+                  Show less <ChevronUp className="w-3 h-3" />
+                </>
+              ) : (
+                <>
+                  Read more <ChevronDown className="w-3 h-3" />
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
+          {project.tech.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.tech.length > 4 && (
+            <span className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium">
+              +{project.tech.length - 4}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-5 pt-3.5 mt-1 border-t border-[#8B9A6B]/6">
+          {hasLive ? (
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={canHover ? { x: 3 } : undefined}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-1.5 text-sm font-medium text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              Live Demo
+            </motion.a>
+          ) : (
+            <span className="flex items-center gap-1.5 text-sm text-[#4A4A4A]/40 font-medium">
+              <ExternalLink className="w-3.5 h-3.5" />
+              Live Demo
+            </span>
+          )}
+          <motion.a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={canHover ? { x: 3 } : undefined}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-1.5 text-sm font-medium text-[#4A4A4A]/60 hover:text-[#8B9A6B] transition-colors"
+          >
+            <FaGithub className="w-3.5 h-3.5" />
+            GitHub
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Projects() {
   const [filter, setFilter] = useState('all')
 
@@ -220,9 +398,7 @@ export default function Projects() {
     setCanHover(window.matchMedia('(hover: hover)').matches)
   }, [])
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === filter)
+  const filteredProjects = filter === 'all' ? projects : projects.filter((p) => p.category === filter)
 
   return (
     <section id="projects" className="py-24 bg-[#F5F5F0] relative overflow-hidden">
@@ -281,130 +457,9 @@ export default function Projects() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project) => {
-              const Icon = project.icon
-              const hasLive = project.live && project.live !== ''
-              
-              return (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  viewport={{ once: true }}
-                  whileHover={canHover ? { y: -6, transition: { duration: 0.3 } } : undefined}
-                  className="group relative bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#8B9A6B]/10 shadow-[0_4px_20px_rgba(139,154,107,0.08)] hover:shadow-[0_12px_40px_rgba(139,154,107,0.18)] h-full flex flex-col transition-all duration-300"
-                >
-                  {/* Browser Mockup Thumbnail */}
-                  <div className="w-full bg-[#F5F5F0]">
-                    <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-[#8B9A6B]/10 m-3 transition-all duration-300 group-hover:shadow-xl group-hover:border-[#8B9A6B]/20">
-                      {/* Browser Chrome */}
-                      <div className="flex items-center gap-2 px-4 py-2.5 bg-[#F0EFEA] border-b border-[#E5E4DF]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
-                        </div>
-                        <div className="flex-1 flex justify-center">
-                          <div className="px-4 py-0.5 bg-white/60 rounded-md text-[10px] text-[#8B9A6B]/50 font-mono truncate max-w-[150px]">
-                            {project.title.split(' — ')[0]}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Screenshot */}
-                      <div className="relative aspect-video bg-white overflow-hidden">
-                        {project.image ? (
-                          <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]"
-                          />
-                        ) : (
-                          <div 
-                            className="w-full h-full flex items-center justify-center"
-                            style={{ background: `linear-gradient(135deg, ${project.color}12, ${project.color}06)` }}
-                          >
-                            <Icon className="w-12 h-12" style={{ color: `${project.color}30` }} />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative px-5 pb-5 pt-1 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-2.5">
-                      <span className="text-[10px] font-medium text-[#8B9A6B] bg-[#8B9A6B]/10 px-3 py-1 rounded-full border border-[#8B9A6B]/15">
-                        {categories.find(c => c.id === project.category)?.label || project.category}
-                      </span>
-                      <div 
-                        className="w-8 h-8 rounded-lg flex items-center justify-center"
-                        style={{ backgroundColor: `${project.color}12` }}
-                      >
-                        <Icon className="w-4 h-4" style={{ color: project.color }} />
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-bold text-[#1A1A1A] leading-tight group-hover:text-[#8B9A6B] transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-[#4A4A4A] text-sm leading-relaxed mt-2 mb-1 line-clamp-2 flex-1">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#8B9A6B]/8">
-                      {project.tech.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 4 && (
-                        <span className="text-[9px] px-2.5 py-1 rounded-full bg-[#8B9A6B]/8 text-[#8B9A6B] border border-[#8B9A6B]/10 font-medium">
-                          +{project.tech.length - 4}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-5 pt-3.5 mt-1 border-t border-[#8B9A6B]/6">
-                      {hasLive ? (
-                        <motion.a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={canHover ? { x: 3 } : undefined}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex items-center gap-1.5 text-sm font-medium text-[#8B9A6B] hover:text-[#6B7A5B] transition-colors"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          Live Demo
-                        </motion.a>
-                      ) : (
-                        <span className="flex items-center gap-1.5 text-sm text-[#4A4A4A]/40 font-medium">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          Live Demo
-                        </span>
-                      )}
-                      <motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={canHover ? { x: 3 } : undefined}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-1.5 text-sm font-medium text-[#4A4A4A]/60 hover:text-[#8B9A6B] transition-colors"
-                      >
-                        <FaGithub className="w-3.5 h-3.5" />
-                        GitHub
-                      </motion.a>
-                    </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} canHover={canHover} />
+            ))}
           </div>
 
           {/* Stats */}
@@ -417,12 +472,12 @@ export default function Projects() {
           >
             {[
               { label: 'Total Projects', value: projects.length },
-              { label: 'Web Apps', value: projects.filter(p => p.category === 'web').length },
-              { label: 'AI/ML', value: projects.filter(p => p.category === 'ai').length },
-              { label: 'Full Stack', value: projects.filter(p => p.category === 'fullstack').length },
+              { label: 'Web Apps', value: projects.filter((p) => p.category === 'web').length },
+              { label: 'AI/ML', value: projects.filter((p) => p.category === 'ai').length },
+              { label: 'Full Stack', value: projects.filter((p) => p.category === 'fullstack').length },
             ].map((stat, index) => (
-              <motion.div 
-                key={stat.label} 
+              <motion.div
+                key={stat.label}
                 className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-[#8B9A6B]/10 text-center transition-all duration-300 hover:bg-white/80 hover:shadow-lg hover:border-[#8B9A6B]/30"
                 whileHover={canHover ? { y: -3 } : undefined}
                 initial={{ opacity: 0, y: 20 }}

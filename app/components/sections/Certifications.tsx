@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Sparkles, Calendar, Code2, Brain, Database, Briefcase, Cloud, GitBranch, FileText } from 'lucide-react'
+import { Award, Sparkles, Calendar, Code2, Brain, Database, Briefcase, Cloud, GitBranch, FileText, MessageSquare, Users } from 'lucide-react'
 
 const certifications = [
+  // === EXISTING CERTIFICATES (1-26) ===
   { id: 1, title: 'Maximize Productivity with AI Tools', issuer: 'Google', date: '2026', skills: ['Generative AI', 'Gemini AI', 'AI Automation'], icon: Brain, logo: '/images/certificates/google.png' },
   { id: 2, title: 'Intro to Deep Learning', issuer: 'Kaggle', date: 'Aug 2025', skills: ['Deep Learning', 'Neural Networks', 'TensorFlow'], icon: Brain, logo: '/images/certificates/kaggle.png' },
   { id: 3, title: 'APIs in Python', issuer: 'DataCamp', date: 'Aug 2025', skills: ['APIs', 'Python', 'Data Fetching'], icon: Code2, logo: '/images/certificates/datacamp.png' },
@@ -30,6 +31,35 @@ const certifications = [
   { id: 24, title: 'Internship Completion Certificate — Machine Learning', issuer: 'SAM AI Technologies', date: 'May 2026', skills: ['Machine Learning', 'Python', 'Internship'], icon: Brain, logo: '/images/companies/sam-ai.png' },
   { id: 25, title: 'Basics in Machine Learning', issuer: 'UniAthena', date: 'Jul 2025', skills: ['Pandas', 'Python', 'Machine Learning'], icon: Brain, logo: '/images/certificates/uniathena.png' },
   { id: 26, title: 'Introduction to Prompt Engineering', issuer: 'Simplilearn', date: 'Jul 2025', skills: ['Prompt Engineering', 'AI Tools', 'Generative AI'], icon: FileText, logo: '/images/certificates/simplilearn.png' },
+
+  // === NEW CERTIFICATES (27-29) ===
+  { 
+    id: 27, 
+    title: 'Large Language Models (LLMs) Concepts', 
+    issuer: 'DataCamp', 
+    date: 'Jul 2026', 
+    skills: ['Large Language Models', 'LLM Concepts', 'Generative AI'], 
+    icon: MessageSquare, 
+    logo: '/images/certificates/datacamp.png' 
+  },
+  { 
+    id: 28, 
+    title: 'Natural Language Processing (NLP) in Python', 
+    issuer: 'DataCamp', 
+    date: 'Jul 2026', 
+    skills: ['NLP', 'Python', 'Text Processing', 'NLP Libraries'], 
+    icon: MessageSquare, 
+    logo: '/images/certificates/datacamp.png' 
+  },
+  { 
+    id: 29, 
+    title: 'Certificate of Participation — Career Readiness BootCamp', 
+    issuer: 'ACM Student Chapter, CUI Lahore', 
+    date: '2026', 
+    skills: ['LinkedIn', 'Resume Writing', 'Career Development'], 
+    icon: Users, 
+    logo: '/images/certificates/acm.png' 
+  },
 ]
 
 export default function Certifications() {
@@ -74,9 +104,8 @@ export default function Certifications() {
             </p>
           </div>
 
-          {/* ===== RESPONSIVE STATS - 5 Cards ===== */}
+          {/* Stats Cards */}
           <div className="max-w-4xl mx-auto mb-10 sm:mb-12">
-            {/* Grid: 3 cols on mobile, 5 cols on desktop */}
             <div className="grid grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
               {stats.map((stat, index) => {
                 const Icon = stat.icon
